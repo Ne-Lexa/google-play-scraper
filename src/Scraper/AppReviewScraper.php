@@ -108,7 +108,7 @@ class AppReviewScraper implements ResponseHandlerInterface
                     continue;
                 }
                 $nodeReviewLinkNode = $xpath->query(".//div[@class='review-link']", $reviewTextNode);
-                if ($nodeReviewLinkNode->count()) {
+                if ($nodeReviewLinkNode->length > 0) {
                     $reviewTextNode->removeChild($nodeReviewLinkNode->item(0));
                 }
                 $reviewText = trim($reviewTextNode->textContent);

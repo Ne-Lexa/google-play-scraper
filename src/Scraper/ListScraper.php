@@ -85,7 +85,7 @@ class ListScraper implements ResponseHandlerInterface
             {
                 $price = null;
                 $priceNode = $xpath->query('.//span[@class="display-price"]', $cardNode);
-                if ($priceNode->count()) {
+                if ($priceNode->length > 0) {
                     $price = trim($priceNode->item(0)->textContent);
                     if (empty($price)) {
                         $price = null;

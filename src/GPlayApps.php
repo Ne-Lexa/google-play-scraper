@@ -467,10 +467,10 @@ class GPlayApps
         $count = 0;
         try {
             do {
-                $reviews = $this->getAppReviews($requestApp, $page, $sort);
-                $countOnPage = count($reviews);
+                $reviewsOnPage = $this->getAppReviews($requestApp, $page, $sort);
+                $countOnPage = count($reviewsOnPage);
                 $count += $countOnPage;
-                $reviewsGroup[] = $reviews;
+                $reviewsGroup[] = $reviewsOnPage;
                 $page++;
             } while (
                 $countOnPage === /*google play limit on page*/ 40 &&
@@ -480,7 +480,10 @@ class GPlayApps
         } catch (\Throwable $e) {
             @trigger_error($e->getMessage(), E_USER_WARNING);
         }
-        $reviews = array_merge(...$reviewsGroup);
+        $reviews = [];
+        if (!empty($reviewsGroup)) {
+            $reviews = array_merge(...$reviewsGroup);
+        }
         if ($limit !== null) {
             $reviews = array_slice($reviews, 0, $limit);
         }
