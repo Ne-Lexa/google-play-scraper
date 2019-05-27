@@ -1,4 +1,4 @@
-# nelexa/google-play-scraper [![Build Status](https://secure.travis-ci.org/nelexa/google-play-scraper.png)](http://travis-ci.org/nelexa/google-play-scraper)
+# nelexa/google-play-scraper [![Build Status](https://secure.travis-ci.org/Ne-Lexa/google-play-scraper.png)](http://travis-ci.org/Ne-Lexa/google-play-scraper)
 Google Play apps PHP Scraper.
 
 [![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg)](https://packagist.org/packages/nelexa/google-play-scraper)
