@@ -1,0 +1,611 @@
+<?php
+declare(strict_types=1);
+
+namespace Nelexa\GPlay\Tests\Model;
+
+use Nelexa\GPlay\Model\GoogleImage;
+use PHPUnit\Framework\TestCase;
+
+class GoogleImageTest extends TestCase
+{
+    /**
+     * @dataProvider provideImages
+     *
+     * @param string $url
+     * @param string $actualUrl
+     * @param string $actualBestSizeUrl
+     */
+    public function testParseUrlImage(string $url, string $actualUrl, string $actualBestSizeUrl): void
+    {
+        $this->markAsRisky();
+
+        $googleImage = new GoogleImage($url);
+        $url = $googleImage->getUrl();
+        $bestSizeUrl = $googleImage->getBestSizeUrl();
+
+        $this->assertSame($url, $actualUrl);
+        $this->assertSame($bestSizeUrl, $actualBestSizeUrl);
+    }
+
+    public function provideImages(): array
+    {
+        return [
+            [
+                'https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ',
+                'https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ',
+                'https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ=s0',
+            ],
+            [
+                'https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ=s0-k-no',
+                'https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ=s0',
+                'https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ=s0',
+            ],
+            [
+                'https://lh3.googleusercontent.com/HANcKpgwKaXt380ZJKK8_YpZlGn0NcjY5os1GOJmRHQjn9x9iCz9C-_lZRUkgTHYOChGMcMuuw=w200-h300',
+                'https://lh3.googleusercontent.com/HANcKpgwKaXt380ZJKK8_YpZlGn0NcjY5os1GOJmRHQjn9x9iCz9C-_lZRUkgTHYOChGMcMuuw=w200-h300',
+                'https://lh3.googleusercontent.com/HANcKpgwKaXt380ZJKK8_YpZlGn0NcjY5os1GOJmRHQjn9x9iCz9C-_lZRUkgTHYOChGMcMuuw=s0',
+            ],
+
+            [
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s0/',
+            ],
+            [
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/w40/',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/w40/',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s0/',
+            ],
+            [
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/photo.jpg',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s0/',
+            ],
+            [
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s100-no/photo.jpg',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s100/',
+                'https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s0/',
+            ],
+
+            [
+                'https://lh3.googleusercontent.com/-khz-7NpZXic/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reKXLHM7Pk6A7iXGRNBP8HxB0Xs1Q/w48-h48-n-mo/photo.jpg',
+                'https://lh3.googleusercontent.com/-khz-7NpZXic/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reKXLHM7Pk6A7iXGRNBP8HxB0Xs1Q/w48-h48/',
+                'https://lh3.googleusercontent.com/-khz-7NpZXic/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reKXLHM7Pk6A7iXGRNBP8HxB0Xs1Q/s0/',
+            ],
+
+            [
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=k-no',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0',
+            ],
+            [
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0-b30-fv',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0-b30-fv',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0',
+            ],
+            [
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0-b30-fh',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0-b30-fh',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0',
+            ],
+            [
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s100-k-d-no',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s100',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0',
+            ],
+            [
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=w100-c',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=w100-c',
+                'https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0',
+            ],
+
+            [
+                'https://lh3.googleusercontent.com/proxy/3cI6bAx1WWTsIL5iPDRiPPknXImSb8xJtNuEUKGgXg8hWaGTY48kqGOdpOkLQJG1BGj3N6Y1Dc-6qvdfHoIdtk2PcwByKzpu3PkrsFIOXe-ePM9r9jPRL1lg9A=w720-h405',
+                'https://lh3.googleusercontent.com/proxy/3cI6bAx1WWTsIL5iPDRiPPknXImSb8xJtNuEUKGgXg8hWaGTY48kqGOdpOkLQJG1BGj3N6Y1Dc-6qvdfHoIdtk2PcwByKzpu3PkrsFIOXe-ePM9r9jPRL1lg9A=w720-h405',
+                'https://lh3.googleusercontent.com/proxy/3cI6bAx1WWTsIL5iPDRiPPknXImSb8xJtNuEUKGgXg8hWaGTY48kqGOdpOkLQJG1BGj3N6Y1Dc-6qvdfHoIdtk2PcwByKzpu3PkrsFIOXe-ePM9r9jPRL1lg9A=s0',
+            ],
+
+            [
+                'https://lh3.ggpht.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g',
+                'https://lh3.ggpht.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g',
+                'https://lh3.ggpht.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s0',
+            ],
+
+            [
+                'https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S=w0',
+                'https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S=w0',
+                'https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S=s0',
+            ],
+        ];
+    }
+
+    public function testSettersAndGetters(): void
+    {
+        $baseUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+        $imageUrl = $baseUrl . '=w515-h290';
+
+        $googleImage = new GoogleImage($imageUrl);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w515-h290');
+
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 515);
+        $this->assertSame($googleImage->getHeight(), 290);
+        $this->assertNull($googleImage->getBorder());
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w515-h290');
+
+        $googleImage->setSize(300);
+        $this->assertSame($googleImage->getSize(), 300);
+        $this->assertNull($googleImage->getWidth());
+        $this->assertNull($googleImage->getHeight());
+        $this->assertNull($googleImage->getBorder());
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=s300');
+
+        $googleImage->useOriginalSize();
+        $this->assertSame($googleImage->getSize(), 0);
+        $this->assertNull($googleImage->getWidth());
+        $this->assertNull($googleImage->getHeight());
+        $this->assertNull($googleImage->getBorder());
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=s0');
+
+        $googleImage->setWidth(500);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertNull($googleImage->getHeight());
+        $this->assertNull($googleImage->getBorder());
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500');
+
+        $googleImage->setHeight(400);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertSame($googleImage->getHeight(), 400);
+        $this->assertNull($googleImage->getBorder());
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400');
+
+        $googleImage->setBorder(10);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertSame($googleImage->getHeight(), 400);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-b10');
+
+        $googleImage->setSmartCrop(true);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertSame($googleImage->getHeight(), 400);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertTrue($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-p-b10');
+
+        $googleImage->setSquareCrop(true);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertSame($googleImage->getHeight(), 400);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertTrue($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10');
+
+        $googleImage->setVerticalFlip(true);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertSame($googleImage->getHeight(), 400);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertTrue($googleImage->isSquareCrop());
+        $this->assertTrue($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10-fv');
+
+        $googleImage->setHorizontalFlip(true);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 500);
+        $this->assertSame($googleImage->getHeight(), 400);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertTrue($googleImage->isSquareCrop());
+        $this->assertTrue($googleImage->isVerticalFlip());
+        $this->assertTrue($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10-fv-fh');
+
+        $googleImage->setSize(300);
+        $this->assertSame($googleImage->getSize(), 300);
+        $this->assertNull($googleImage->getWidth());
+        $this->assertNull($googleImage->getHeight());
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertTrue($googleImage->isSquareCrop());
+        $this->assertTrue($googleImage->isVerticalFlip());
+        $this->assertTrue($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=s300-c-b10-fv-fh');
+
+        $googleImage->setHeight(600);
+        $this->assertNull($googleImage->getSize());
+        $this->assertNull($googleImage->getWidth());
+        $this->assertSame($googleImage->getHeight(), 600);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertTrue($googleImage->isSquareCrop());
+        $this->assertTrue($googleImage->isVerticalFlip());
+        $this->assertTrue($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=h600-c-b10-fv-fh');
+
+        $googleImage->setSmartCrop(true);
+        $this->assertNull($googleImage->getSize());
+        $this->assertNull($googleImage->getWidth());
+        $this->assertSame($googleImage->getHeight(), 600);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertTrue($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertTrue($googleImage->isVerticalFlip());
+        $this->assertTrue($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=h600-b10-fv-fh');
+
+        $googleImage->setWidth(300);
+        $this->assertNull($googleImage->getSize());
+        $this->assertSame($googleImage->getWidth(), 300);
+        $this->assertSame($googleImage->getHeight(), 600);
+        $this->assertSame($googleImage->getBorder(), 10);
+        $this->assertTrue($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertTrue($googleImage->isVerticalFlip());
+        $this->assertTrue($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w300-h600-p-b10-fv-fh');
+
+        // test toString()
+        $this->assertEquals($googleImage, $baseUrl . '=w300-h600-p-b10-fv-fh');
+        $this->assertEquals($googleImage, $googleImage->__toString());
+        $this->assertEquals($googleImage, $googleImage->getUrl());
+
+        // reset
+        $googleImage->reset();
+        $this->assertNull($googleImage->getSize());
+        $this->assertNull($googleImage->getWidth());
+        $this->assertNull($googleImage->getHeight());
+        $this->assertNull($googleImage->getBorder());
+        $this->assertFalse($googleImage->isSmartCrop());
+        $this->assertFalse($googleImage->isSquareCrop());
+        $this->assertFalse($googleImage->isVerticalFlip());
+        $this->assertFalse($googleImage->isHorizontalFlip());
+        $this->assertSame($googleImage->getUrl(), $baseUrl);
+    }
+
+    public function testSize(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264-p', false);
+        $googleImage->setSize($size);
+        $url = $googleImage->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=s' . $size);
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo);
+
+        $this->assertContains($size, [$imageInfo[0], $imageInfo[1]]);
+    }
+
+    public function testSizeSmartCrop(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setSize($size)
+            ->setSmartCrop(true)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=s' . $size . '-p');
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $size);
+        $this->assertSame($imageInfo[1], $size);
+    }
+
+    public function testSizeSquareCrop(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setSize($size)
+            ->setSquareCrop(true)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=s' . $size . '-c');
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $size);
+        $this->assertSame($imageInfo[1], $size);
+    }
+
+    public function testWidth(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setWidth($size)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=w' . $size);
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $size);
+        $this->assertNotSame($imageInfo[1], $size);
+    }
+
+    public function testWidthSquareCrop(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setWidth($size)
+            ->setSquareCrop(true)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=w' . $size . '-c');
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $size);
+        $this->assertSame($imageInfo[1], $size);
+    }
+
+    public function testHeight(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setHeight($size)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=h' . $size);
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertNotSame($imageInfo[0], $size);
+        $this->assertSame($imageInfo[1], $size);
+    }
+
+    public function testHeightSquareCrop(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $size = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setHeight($size)
+            ->setSquareCrop(true)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=h' . $size . '-c');
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $size);
+        $this->assertSame($imageInfo[1], $size);
+    }
+
+    public function testWidthHeight(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/lwNbmbYSbFOQmVVVlMRHow9rpIcgAMnqfXRTQ6NUfvjJb6ZSXn_a7vouRuc7avmArmA';
+
+        $width = 300;
+        $height = 333;
+        $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
+        $url = $googleImage
+            ->setWidth($width)
+            ->setHeight($height)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=w' . $width . '-h' . $height);
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        if ($imageInfo[0] === $width) {
+            $this->assertNotSame($imageInfo[1], $height);
+        } elseif ($imageInfo[1] === $height) {
+            $this->assertNotSame($imageInfo[0], $width);
+        } else {
+            $this->fail('Error image ' . $url . '. Expected ' . $width . 'x' . $height . '. Actual: ' . $imageInfo[0] . 'x' . $imageInfo[1]);
+        }
+    }
+
+    public function testWidthHeightSmartCrop(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/nYhPnY2I-e9rpqnid9u9aAODz4C04OycEGxqHG5vxFnA35OGmLMrrUmhM9eaHKJ7liB-';
+
+        $width = 240;
+        $height = 320;
+        $googleImage = new GoogleImage($imageUrl . '=s180', false);
+        $url = $googleImage
+            ->setWidth($width)
+            ->setHeight($height)
+            ->setSmartCrop(true)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=w' . $width . '-h' . $height . '-p');
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $width);
+        $this->assertSame($imageInfo[1], $height);
+    }
+
+    public function testWidthHeightSquareCrop(): void
+    {
+        $this->markAsRisky();
+
+        $imageUrl = 'https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM';
+
+        $width = 200;
+        $height = 300;
+        $googleImage = new GoogleImage($imageUrl . '=w515-h290', false);
+        $url = $googleImage
+            ->setWidth($width)
+            ->setHeight($height)
+            ->setSquareCrop(true)
+            ->getUrl();
+
+        $this->assertSame($url, $imageUrl . '=w' . $width . '-h' . $height . '-c');
+
+        $imageInfo = @getimagesize($url);
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+
+        $this->assertSame($imageInfo[0], $width);
+        $this->assertSame($imageInfo[1], $height);
+    }
+
+    public function testUrlVariant(): void
+    {
+        $baseUrl = 'https://lh3.googleusercontent.com/-khz-7NpZXic/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reKXLHM7Pk6A7iXGRNBP8HxB0Xs1Q/';
+        $imageUrl = $baseUrl . 'w48-h48-n-mo/photo.jpg';
+
+        $googleImage = new GoogleImage($imageUrl);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w48-h48/');
+        $googleImage->reset();
+
+        $this->assertSame($googleImage->getUrl(), $baseUrl);
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 512);
+        $this->assertSame($imageInfo[1], 512);
+
+        $googleImage->setSize(300);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 's300/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 300);
+        $this->assertSame($imageInfo[1], 300);
+
+        $googleImage->setWidth(300);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 300);
+        $this->assertSame($imageInfo[1], 300);
+
+        $googleImage->setHeight(300);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h300/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 300);
+        $this->assertSame($imageInfo[1], 300);
+
+        $googleImage->setHeight(100);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 300);
+        $this->assertSame($imageInfo[1], 100);
+
+        $googleImage->setSquareCrop(true);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100-c/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 100);
+        $this->assertSame($imageInfo[1], 100);
+
+        $googleImage->setSmartCrop(true);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100-p/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 300);
+        $this->assertSame($imageInfo[1], 100);
+
+        $googleImage->setWidth(null);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'h100/');
+        $imageInfo = @getimagesize($googleImage->getUrl());
+        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        $this->assertSame($imageInfo[0], 100);
+        $this->assertSame($imageInfo[1], 100);
+
+        // no effect for avatar
+        $googleImage->setBorder(10);
+        $googleImage->setVerticalFlip(true);
+        $googleImage->setHorizontalFlip(true);
+        $this->assertSame($googleImage->getUrl(), $baseUrl . 'h100/');
+    }
+
+    public function testHashUrl(): void
+    {
+        $imageUrl = 'https://lh3.googleusercontent.com/nYhPnY2I-e9rpqnid9u9aAODz4C04OycEGxqHG5vxFnA35OGmLMrrUmhM9eaHKJ7liB-';
+
+        $image = new GoogleImage($imageUrl);
+
+        $algo = 'sha1';
+        $this->assertSame($image->getHashUrl(), '8c720ab622672d2324898aaff5dd381c');
+        $this->assertSame($image->getHashUrl($algo), '8e7fb0940b21b4f428974a252da484a835b10fb3');
+        $this->assertSame($image->getHashUrl($algo, 2), '8e/7f/8e7fb0940b21b4f428974a252da484a835b10fb3');
+        $this->assertSame($image->getHashUrl($algo, 2, 3), '8e7/fb0/8e7fb0940b21b4f428974a252da484a835b10fb3');
+        $this->assertSame($image->getHashUrl($algo, 3, 10), '8e7fb0940b/21b4f42897/4a252da484/8e7fb0940b21b4f428974a252da484a835b10fb3');
+        $this->assertSame($image->getHashUrl($algo, 100, 100), '8e7fb0/940b21/b4f428/974a25/2da484/a835b1/8e7fb0940b21b4f428974a252da484a835b10fb3');
+    }
+}
