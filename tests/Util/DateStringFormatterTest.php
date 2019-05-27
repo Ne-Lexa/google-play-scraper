@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Nelexa\GooglePlayScraper\Tests\Helper;
 
-use Nelexa\GPlay\Util\DateStringFormatterWithoutIntlExt;
+use Nelexa\GPlay\Util\DateStringFormatter;
 use Nelexa\GPlay\Util\LocaleHelper;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +18,7 @@ class DateStringFormatterTest extends TestCase
     public function testFormatted(string $actualDate, string $locale, string $releaseDate): void
     {
         if (extension_loaded('intl')) {
-            $dateTime = LocaleHelper::strToDateTime($locale, $releaseDate);
+            $dateTime = DateStringFormatter::formatted($locale, $releaseDate);
             $this->assertNotNull($dateTime);
             $this->assertEquals(
                 $dateTime->format('Y.m.d'),
@@ -27,7 +27,7 @@ class DateStringFormatterTest extends TestCase
             );
         }
 
-        $dateTime = DateStringFormatterWithoutIntlExt::formatted($locale, $releaseDate);
+        $dateTime = DateStringFormatter::formatted($locale, $releaseDate);
         $this->assertNotNull($dateTime);
         $this->assertEquals(
             $dateTime->format('Y.m.d'),

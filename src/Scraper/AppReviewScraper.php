@@ -9,6 +9,7 @@ use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\ReplyReview;
 use Nelexa\GPlay\Model\Review;
+use Nelexa\GPlay\Util\DateStringFormatter;
 use Nelexa\GPlay\Util\LocaleHelper;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -74,7 +75,7 @@ class AppReviewScraper implements ResponseHandlerInterface
                         continue;
                     }
                     $reviewDate = trim($reviewDateNode->textContent);
-                    $reviewDateTime = LocaleHelper::strToDateTime($locale, $reviewDate);
+                    $reviewDateTime = DateStringFormatter::formatted($locale, $reviewDate);
                 }
             }
             // avatar
@@ -124,7 +125,7 @@ class AppReviewScraper implements ResponseHandlerInterface
                         $replyDateNode = $xpath->query('.//span[@class="review-date"]', $replyNode)->item(0);
                         if ($replyDateNode !== null) {
                             $replyDate = trim($replyDateNode->textContent);
-                            $replyDateTime = LocaleHelper::strToDateTime($locale, $replyDate);
+                            $replyDateTime = DateStringFormatter::formatted($locale, $replyDate);
                         }
                     }
                     // reply text

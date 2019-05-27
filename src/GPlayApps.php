@@ -460,8 +460,7 @@ class GPlayApps
         $requestApp,
         ?SortEnum $sort = null,
         ?int $limit = null
-    ): array
-    {
+    ): array {
         $page = 0;
         $reviewsGroup = [];
         $count = 0;
@@ -787,8 +786,7 @@ class GPlayApps
         $developerId,
         ?string $locale = null,
         ?string $country = null
-    ): array
-    {
+    ): array {
         $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
         $country = $country ?? $this->defaultCountry;
         $developerId = $this->caseToDeveloperId($developerId);
@@ -850,8 +848,7 @@ class GPlayApps
         string $query,
         ?string $locale = null,
         ?string $country = null
-    ): array
-    {
+    ): array {
         $query = trim($query);
         if ($query === '') {
             return [];
@@ -872,8 +869,7 @@ class GPlayApps
                         self::REQ_PARAM_LOCALE => $locale,
                         self::REQ_PARAM_COUNTRY => $country,
                     ],
-                    HttpClient:: OPTION_HANDLER_RESPONSE => new class implements ResponseHandlerInterface
-                    {
+                    HttpClient:: OPTION_HANDLER_RESPONSE => new class implements ResponseHandlerInterface {
                         /**
                          * @param RequestInterface $request
                          * @param ResponseInterface $response
@@ -915,8 +911,7 @@ class GPlayApps
         ?PriceEnum $price = null,
         ?string $locale = null,
         ?string $country = null
-    ): array
-    {
+    ): array {
         $query = trim($query);
         if (empty($query)) {
             throw new \InvalidArgumentException('Search query missing');
@@ -984,8 +979,7 @@ class GPlayApps
         ?AgeEnum $age = null,
         ?string $locale = null,
         ?string $country = null
-    ): array
-    {
+    ): array {
         $limit = min(560, max(1, $limit));
         $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
         $country = $country ?? $this->defaultCountry;
@@ -1059,8 +1053,7 @@ class GPlayApps
         array $images,
         callable $destPathFn,
         bool $overwrite = false
-    ): array
-    {
+    ): array {
         $mapping = [];
         foreach ($images as $image) {
             if (!$image instanceof GoogleImage) {

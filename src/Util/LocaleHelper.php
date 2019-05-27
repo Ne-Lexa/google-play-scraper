@@ -6569,33 +6569,4 @@ class LocaleHelper
         return isset(self::DEPEND_ON_DEVICE_MESSAGES[$locale]) &&
             strcmp(self::DEPEND_ON_DEVICE_MESSAGES[$locale], $message) === 0;
     }
-
-    /**
-     * Convert a date as localized string to a DateTimeInterface object depending on locale.
-     *
-     * @param string $locale Locale
-     * @param string $dateText Release date of the application on Google Play
-     * @return \DateTimeInterface|null returns DateTimeInterface or null if error
-     */
-    public static function strToDateTime(string $locale, string $dateText): ?\DateTimeInterface
-    {
-        if (extension_loaded('intl')) {
-            /** @noinspection PhpComposerExtensionStubsInspection */
-            $formatter = new \IntlDateFormatter(
-                $locale,
-                \IntlDateFormatter::MEDIUM,
-                \IntlDateFormatter::NONE,
-                'UTC',
-                \IntlDateFormatter::TRADITIONAL
-            );
-            $timestamp = $formatter->parse($dateText);
-            if ($timestamp !== null) {
-                try {
-                    return new \DateTimeImmutable('@' . $timestamp);
-                } catch (\Exception $e) {
-                }
-            }
-        }
-        return DateStringFormatterWithoutIntlExt::formatted($locale, $dateText);
-    }
 }

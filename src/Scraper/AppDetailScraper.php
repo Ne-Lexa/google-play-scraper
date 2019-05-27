@@ -15,6 +15,7 @@ use Nelexa\GPlay\Model\HistogramRating;
 use Nelexa\GPlay\Model\ReplyReview;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
+use Nelexa\GPlay\Util\DateStringFormatter;
 use Nelexa\GPlay\Util\LocaleHelper;
 use Nelexa\GPlay\Util\ScraperUtil;
 use Psr\Http\Message\RequestInterface;
@@ -172,7 +173,7 @@ class AppDetailScraper implements ResponseHandlerInterface
         $contentRating = $scriptDataInfo[0][12][4][0];
         $released = null;
         if (isset($scriptDataInfo[0][12][36]) && $scriptDataInfo[0][12][36] !== null) {
-            $released = LocaleHelper::strToDateTime($locale, $scriptDataInfo[0][12][36]);
+            $released = DateStringFormatter::formatted($locale, $scriptDataInfo[0][12][36]);
         }
         try {
             $updated = !empty($scriptDataInfo[0][12][8][0]) ?

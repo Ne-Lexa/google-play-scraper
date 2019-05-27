@@ -4,7 +4,14 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Util;
 
-class DateStringFormatterWithoutIntlExt
+/**
+ * The class for converting a localized date to the \DateTimeInterface.
+ * It would be possible to use the php-intl library, but its different
+ * versions give different results.
+ *
+ * @package Nelexa\GPlay\Util
+ */
+class DateStringFormatter
 {
     private const MEDIUM_DATE_PATTERNS = [
         'af' => [
@@ -1147,11 +1154,11 @@ class DateStringFormatterWithoutIntlExt
     ];
 
     /**
-     * Formatting the release date of the application on Google Play without php-intl extension.
+     * Convert a date as localized string to a \DateTimeInterface object depending on locale.
      *
-     * @param string $locale Locale
-     * @param string $dateText Release date of the application on Google Play
-     * @return \DateTimeInterface|null returns DateTimeInterface or null if error
+     * @param string $locale locale
+     * @param string $dateText localized date
+     * @return \DateTimeInterface|null returns \DateTimeInterface or null if error
      */
     public static function formatted(string $locale, string $dateText): ?\DateTimeInterface
     {
