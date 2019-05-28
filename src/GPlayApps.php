@@ -254,13 +254,34 @@ class GPlayApps
             throw new \InvalidArgumentException('$requestApp is null');
         }
         if (is_string($requestApp)) {
-            $requestApp = new RequestApp($requestApp, $this->defaultLocale, $this->defaultCountry);
-        } elseif ($requestApp instanceof App) {
-            $requestApp = new RequestApp($requestApp->getId(), $requestApp->getLocale(), $this->defaultCountry);
-        } elseif (!$requestApp instanceof RequestApp) {
-            throw new \InvalidArgumentException('unsupport argument type');
+            return new RequestApp($requestApp, $this->defaultLocale, $this->defaultCountry);
+        }
+        if ($requestApp instanceof App) {
+            return new RequestApp($requestApp->getId(), $requestApp->getLocale(), $this->defaultCountry);
         }
         return $requestApp;
+    }
+
+    /**
+     * Returns detailed information about an application from the Google Play store
+     * for an array of locales. HTTP requests are executed in parallel.
+     *
+     * @param string|RequestApp|App $requestApp Application id (package name)
+     *     or object {@see RequestApp} or object {@see App}.
+     * @param string[] $locales array of locales
+     * @return AppDetail[] array of application detailed application by locale.
+     *     The array key is the locale.
+     * @throws GooglePlayException if the application is not exists or other HTTP error
+     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     */
+    public function getAppInLocales($requestApp, array $locales): array
+    {
+        $requestApp = $this->castToRequestApp($requestApp);
+        $requests = [];
+        foreach ($locales as $locale) {
+            $requests[$locale] = new RequestApp($requestApp->getId(), $locale, $requestApp->getCountry());
+        }
+        return $this->getApps($requests);
     }
 
     /**
@@ -276,48 +297,37 @@ class GPlayApps
      */
     public function getAppInAvailableLocales($requestApp): array
     {
-        $requestApp = $this->castToRequestApp($requestApp);
+        $list = $this->getAppInLocales($requestApp, LocaleHelper::SUPPORTED_LOCALES);
 
-        $requests = [];
-        foreach (LocaleHelper::SUPPORTED_LOCALES as $locale) {
-            $requests[$locale] = new RequestApp($requestApp->getId(), $locale, $this->defaultCountry);
-        }
-        $list = $this->getApps($requests);
-
-        $preferredLocale = null;
+        $preferredLocale = $list[self::DEFAULT_LOCALE];
         foreach ($list as $app) {
             if ($app->getTranslatedFromLanguage() !== null) {
                 $preferredLocale = $app->getTranslatedFromLanguage();
                 break;
             }
         }
-        if ($preferredLocale === null) {
-            $preferredLocale = $list[self::DEFAULT_LOCALE];
-        }
 
         $preferredApp = $list[$preferredLocale];
-        foreach ($list as $locale => $app) {
-            if ($preferredApp->getLocale() !== $locale && $preferredApp->equals($app)) {
-                // delete data with google translate machine translation
-                unset($list[$locale]);
-            }
-        }
-
-        foreach ($list as $locale => $app) {
-            if (($pos = strpos($locale, '_')) !== false) {
-                $rootLang = substr($locale, 0, $pos);
-                $rootLangLocale = LocaleHelper::getNormalizeLocale($rootLang);
-                if (
-                    $rootLangLocale !== $locale &&
-                    isset($list[$rootLangLocale]) &&
-                    $list[$rootLangLocale]->equals($app)
-                ) {
-                    // delete duplicate data,
-                    // for example, delete en_CA, en_IN, en_GB, en_ZA, if there is en_US and they are equals.
-                    unset($list[$locale]);
+        $list = array_filter($list, static function (AppDetail $app, string $locale) use ($preferredApp, $list) {
+            // deletes locales in which there is no translation added, but automatic translation by Google Translate is used.
+            if ($preferredApp->getLocale() === $locale || !$preferredApp->equals($app)) {
+                if (($pos = strpos($locale, '_')) !== false) {
+                    $rootLang = substr($locale, 0, $pos);
+                    $rootLangLocale = LocaleHelper::getNormalizeLocale($rootLang);
+                    if (
+                        $rootLangLocale !== $locale &&
+                        isset($list[$rootLangLocale]) &&
+                        $list[$rootLangLocale]->equals($app)
+                    ) {
+                        // delete duplicate data,
+                        // for example, delete en_CA, en_IN, en_GB, en_ZA, if there is en_US and they are equals.
+                        return false;
+                    }
                 }
+                return true;
             }
-        }
+            return false;
+        }, ARRAY_FILTER_USE_BOTH);
 
         // sorting array keys; the first key is the preferred locale
         uksort(
@@ -460,7 +470,8 @@ class GPlayApps
         $requestApp,
         ?SortEnum $sort = null,
         ?int $limit = null
-    ): array {
+    ): array
+    {
         $page = 0;
         $reviewsGroup = [];
         $count = 0;
@@ -646,7 +657,7 @@ class GPlayApps
      */
     public function getDeveloperInfo($developerId, ?string $locale = null): Developer
     {
-        $developerId = $this->caseToDeveloperId($developerId);
+        $developerId = $this->castToDeveloperId($developerId);
         if (!is_numeric($developerId)) {
             throw new GooglePlayException(sprintf('Developer "%s" does not have a personalized page on Google Play.', $developerId));
         }
@@ -674,21 +685,18 @@ class GPlayApps
      * @param string|int|Developer|App|AppDetail $developerId
      * @return string
      */
-    private function caseToDeveloperId($developerId): string
+    private function castToDeveloperId($developerId): string
     {
-        if (is_string($developerId)) {
-            return $developerId;
-        }
-        if (is_int($developerId)) {
-            return (string)$developerId;
-        }
         if ($developerId instanceof App) {
             return $developerId->getDeveloper()->getId();
         }
         if ($developerId instanceof Developer) {
             return $developerId->getId();
         }
-        throw new \InvalidArgumentException('The $developerId argument must contain the developer id or the application/developer object.');
+        if (is_int($developerId)) {
+            return (string)$developerId;
+        }
+        return $developerId;
     }
 
     /**
@@ -707,7 +715,7 @@ class GPlayApps
         }
         $locales = LocaleHelper::getNormalizeLocales($locales);
 
-        $id = $this->caseToDeveloperId($developerId);
+        $id = $this->castToDeveloperId($developerId);
         if (!is_numeric($id)) {
             throw new GooglePlayException(sprintf('Developer "%s" does not have a personalized page on Google Play.', $id));
         }
@@ -786,10 +794,11 @@ class GPlayApps
         $developerId,
         ?string $locale = null,
         ?string $country = null
-    ): array {
+    ): array
+    {
         $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
         $country = $country ?? $this->defaultCountry;
-        $developerId = $this->caseToDeveloperId($developerId);
+        $developerId = $this->castToDeveloperId($developerId);
 
         $httpClient = $this->getHttpClient();
         $query = [
@@ -848,7 +857,8 @@ class GPlayApps
         string $query,
         ?string $locale = null,
         ?string $country = null
-    ): array {
+    ): array
+    {
         $query = trim($query);
         if ($query === '') {
             return [];
@@ -869,7 +879,8 @@ class GPlayApps
                         self::REQ_PARAM_LOCALE => $locale,
                         self::REQ_PARAM_COUNTRY => $country,
                     ],
-                    HttpClient:: OPTION_HANDLER_RESPONSE => new class implements ResponseHandlerInterface {
+                    HttpClient:: OPTION_HANDLER_RESPONSE => new class implements ResponseHandlerInterface
+                    {
                         /**
                          * @param RequestInterface $request
                          * @param ResponseInterface $response
@@ -911,7 +922,8 @@ class GPlayApps
         ?PriceEnum $price = null,
         ?string $locale = null,
         ?string $country = null
-    ): array {
+    ): array
+    {
         $query = trim($query);
         if (empty($query)) {
             throw new \InvalidArgumentException('Search query missing');
@@ -979,7 +991,8 @@ class GPlayApps
         ?AgeEnum $age = null,
         ?string $locale = null,
         ?string $country = null
-    ): array {
+    ): array
+    {
         $limit = min(560, max(1, $limit));
         $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
         $country = $country ?? $this->defaultCountry;
@@ -1053,7 +1066,8 @@ class GPlayApps
         array $images,
         callable $destPathFn,
         bool $overwrite = false
-    ): array {
+    ): array
+    {
         $mapping = [];
         foreach ($images as $image) {
             if (!$image instanceof GoogleImage) {
@@ -1102,7 +1116,7 @@ class GPlayApps
                 $exceptionUrl = $mapping[$key];
                 foreach ($mapping as $destPath => $url) {
                     if (is_file($destPath)) {
-                        @unlink($destPath);
+                        /** @scrutinizer ignore-unhandled */ @unlink($destPath);
                     }
                 }
                 throw (new GooglePlayException($reason->getMessage(), $reason->getCode(), $reason))->setUrl($exceptionUrl);

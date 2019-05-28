@@ -210,6 +210,27 @@ class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
+    public function testGetAppInLocales(): void
+    {
+        $this->gplay->setConcurrency(6);
+
+        $appId = 'com.google.android.calculator';
+        $id = new RequestApp($appId, 'en', 'ru');
+        $locales = ['en', 'es', 'fr', 'ru', 'kk', 'uk', 'ar', 'zh-TW', 'zt-CN'];
+        $apps = $this->gplay->getAppInLocales($id, $locales);
+        $this->assertContainsOnlyInstancesOf(AppDetail::class, $apps);
+
+        $this->assertCount(count($locales), $apps);
+
+        foreach ($locales as $locale){
+            $this->assertArrayHasKey($locale, $apps);
+            $this->assertSame($apps[$locale]->getId(), $appId);
+        }
+    }
+
+    /**
+     * @throws GooglePlayException
+     */
     public function testGetAppInAvailableLocales(): void
     {
         $this->gplay->setConcurrency(10);
@@ -228,6 +249,8 @@ class GPlayAppsTest extends TestCase
         $this->assertArrayNotHasKey('th', $apps);
         $this->assertArrayNotHasKey('fr_FR', $apps);
         $this->assertArrayNotHasKey('fil', $apps);
+
+        dump($apps);
     }
 
     /**
