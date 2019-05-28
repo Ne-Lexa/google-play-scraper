@@ -240,12 +240,7 @@ class GoogleImage
             }
         }
 
-        if ($this->smartCrop && (
-            $this->size !== null ||
-                ($this->width !== null && $this->height !== null) ||
-                ($this->size === null && $this->width === null && $this->height === null)
-            )
-        ) {
+        if ($this->isValidSmartCrop()) {
             $params[] = self::PARAM_SMART_CROP;
         } elseif ($this->squareCrop) {
             $params[] = self::PARAM_SQUARE_CROP;
@@ -274,6 +269,18 @@ class GoogleImage
             return $this->url;
         }
         return $this->url . '=' . implode('-', $params);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isValidSmartCrop(): bool
+    {
+        return $this->smartCrop && (
+            $this->size !== null ||
+            ($this->width !== null && $this->height !== null) ||
+            ($this->size === null && $this->width === null && $this->height === null)
+        );
     }
 
     /**

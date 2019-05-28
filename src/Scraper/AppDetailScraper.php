@@ -24,7 +24,6 @@ use function GuzzleHttp\Psr7\parse_query;
 
 class AppDetailScraper implements ResponseHandlerInterface
 {
-
     /**
      * @param RequestInterface $request
      * @param ResponseInterface $response
@@ -33,15 +32,12 @@ class AppDetailScraper implements ResponseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response): AppDetail
     {
-        $url = $request->getUri()->__toString();
-        $urlComponents = parse_url($url);
-        $query = parse_query($urlComponents['query']);
+        $query = parse_query($request->getUri()->getQuery());
         $appId = $query[GPlayApps::REQ_PARAM_APP_ID];
-        $url = $urlComponents['scheme'] . '://'
-            . $urlComponents['host']
-            . $urlComponents['path']
-            . '?' . http_build_query([GPlayApps::REQ_PARAM_APP_ID => $appId]);
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
+        $url = GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
+                GPlayApps::REQ_PARAM_APP_ID => $appId,
+            ]);
 
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
@@ -52,19 +48,19 @@ class AppDetailScraper implements ResponseHandlerInterface
         $scriptDataReviews = [];
 
         foreach ($scriptData as $key => $scriptValue) {
-            if (isset($scriptValue[0][12][5][5][4][2])) {
+            if (isset($scriptValue[0][12][5][5][4][2])) { // ds:5
                 $scriptDataInfo = $scriptValue;
-            } elseif (isset($scriptValue[0][2][0][0][0][1][0][0])) {
+            } elseif (isset($scriptValue[0][2][0][0][0][1][0][0])) { // ds:3
                 $scriptDataPrice = $scriptValue;
             } elseif (isset($scriptValue[0][0][0])
                 && is_string($scriptValue[0][0][0])
-                && strpos($scriptValue[0][0][0], 'gp:') === 0) {
+                && strpos($scriptValue[0][0][0], 'gp:') === 0) { // ds:15
                 $scriptDataReviews = $scriptValue;
-            } elseif (isset($scriptValue[0][6][3][1])) {
+            } elseif (isset($scriptValue[0][6][3][1])) { // ds:7
                 $scriptDataRating = $scriptValue;
             } elseif (isset($scriptValue[0])
                 && is_string($scriptValue[0])
-                && count($scriptValue) === 3) {
+                && count($scriptValue) === 3) { // ds:8
                 $scriptDataVersion = $scriptValue;
             }
         }
@@ -82,16 +78,8 @@ class AppDetailScraper implements ResponseHandlerInterface
         $descriptionHTML = $scriptDataInfo[0][10][0][1];
         $description = ScraperUtil::html2text($descriptionHTML);
 
-        $developerPage = GPlayApps::GOOGLE_PLAY_URL . $scriptDataInfo[0][12][5][5][4][2];
-        $developerId = parse_query(parse_url($developerPage, PHP_URL_QUERY))['id'];
-        $developerName = $scriptDataInfo[0][12][5][1];
-        $developerEmail = $scriptDataInfo[0][12][5][2][0];
-        $developerWebsite = $scriptDataInfo[0][12][5][3][5][2];
-        $developerAddress = $scriptDataInfo[0][12][5][4][0];
-//        $developerInternalID = (int)$scriptDataInfo[0][12][5][0][0];
-
-        $genreId = $scriptDataInfo[0][12][13][0][2];
-        $genreName = $scriptDataInfo[0][12][13][0][0];
+        $developer = $this->extractDeveloper($scriptDataInfo);
+        $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
 
         $summary = empty($scriptDataInfo[0][10][1][1]) ?
             null :
@@ -136,16 +124,7 @@ class AppDetailScraper implements ResponseHandlerInterface
         $editorsChoice = !empty($scriptDataInfo[0][12][15][1][1]);
         $privacyPoliceUrl = $scriptDataInfo[0][12][7][2];
 
-        $familyGenreId = null;
-        $familyGenreName = null;
-        if (
-            isset($scriptDataInfo[0][12][13][1][0]) &&
-            $scriptDataInfo[0][12][13][1][0] !== null &&
-            $scriptDataInfo[0][12][13][1][2] !== null
-        ) {
-            $familyGenreId = (string)$scriptDataInfo[0][12][13][1][2];
-            $familyGenreName = (string)$scriptDataInfo[0][12][13][1][0];
-        }
+        $categoryFamily = $this->extractCategory($scriptDataInfo[0][12][13][1]??[]);
 
         $icon = empty($scriptDataInfo[0][12][1][3][2]) ?
             null :
@@ -155,20 +134,8 @@ class AppDetailScraper implements ResponseHandlerInterface
             null :
             new GoogleImage($scriptDataInfo[0][12][2][3][2]);
 
-        $screenshots = !empty($scriptDataInfo[0][12][0]) ? array_map(static function (array $v) {
-            return new GoogleImage($v[3][2]);
-        }, $scriptDataInfo[0][12][0]) : [];
-
-        $videoThumb = null;
-        $videoUrl = null;
-        if (
-            isset($scriptDataInfo[0][12][3][0][3][2]) &&
-            $scriptDataInfo[0][12][3][0][3][2] !== null &&
-            $scriptDataInfo[0][12][3][1][3][2] !== null
-        ) {
-            $videoThumb = (string)$scriptDataInfo[0][12][3][1][3][2];
-            $videoUrl = (string)$scriptDataInfo[0][12][3][0][3][2];
-        }
+        $screenshots = $this->extractScreenshots($scriptDataInfo);
+        $video = $this->extractVideo($scriptDataInfo);
 
         $contentRating = $scriptDataInfo[0][12][4][0];
         $released = null;
@@ -199,66 +166,117 @@ class AppDetailScraper implements ResponseHandlerInterface
 
         $reviews = $this->extractReviews($url, $scriptDataReviews);
 
-        $developerBuilder = Developer::newBuilder()
-            ->setId($developerId)
-            ->setUrl($developerPage)
-            ->setName($developerName)
-            ->setEmail($developerEmail)
-            ->setAddress($developerAddress)
-            ->setWebsite($developerWebsite);
+        return new AppDetail(
+            AppDetail::newBuilder()
+                ->setId($appId)
+                ->setLocale($locale)
+                ->setName($name)
+                ->setDescription($description)
+                ->setTranslated($translatedDescription, $translatedFromLanguage)
+                ->setSummary($summary)
+                ->setIcon($icon)
+                ->setHeaderImage($headerImage)
+                ->setScreenshots($screenshots)
+                ->setDeveloper($developer)
+                ->setCategory($category)
+                ->setCategoryFamily($categoryFamily)
+                ->setVideo($video)
+                ->setRecentChanges($recentChanges)
+                ->setEditorsChoice($editorsChoice)
+                ->setPrivacyPoliceUrl($privacyPoliceUrl)
+                ->setInstalls($installs)
+                ->setScore($score)
+                ->setRecentChanges($recentChanges)
+                ->setEditorsChoice($editorsChoice)
+                ->setPrivacyPoliceUrl($privacyPoliceUrl)
+                ->setInstalls($installs)
+                ->setScore($score)
+                ->setNumberVoters($numberVoters)
+                ->setHistogramRating($histogramRating)
+                ->setPrice($price)
+                ->setCurrency($currency)
+                ->setPriceText($priceText)
+                ->setOffersIAPCost($offersIAPCost)
+                ->setAdSupported($adSupported)
+                ->setAppSize($size)
+                ->setAppVersion($appVersion)
+                ->setAndroidVersion($androidVersion)
+                ->setMinAndroidVersion($minAndroidVersion)
+                ->setContentRating($contentRating)
+                ->setReleased($released)
+                ->setUpdated($updated)
+                ->setReviewsCount($reviewsCount)
+                ->setReviews($reviews)
+        );
+    }
 
-        $appBuilder = AppDetail::newBuilder()
-            ->setId($appId)
-            ->setLocale($locale)
-            ->setName($name)
-            ->setDescription($description)
-            ->setTranslated($translatedDescription, $translatedFromLanguage)
-            ->setSummary($summary)
-            ->setIcon($icon)
-            ->setHeaderImage($headerImage)
-            ->setScreenshots($screenshots)
-            ->setDeveloper(new Developer($developerBuilder))
-            ->setCategory(new Category(
-                $genreId,
-                $genreName
-            ))
-            ->setCategoryFamily(
-                $familyGenreId !== null && $familyGenreName !== null ?
-                    new Category($familyGenreId, $familyGenreName) :
-                    null
-            )
-            ->setVideo(
-                $videoThumb !== null && $videoUrl !== null ?
-                    new Video($videoThumb, $videoUrl) :
-                    null
-            )
-            ->setRecentChanges($recentChanges)
-            ->setEditorsChoice($editorsChoice)
-            ->setPrivacyPoliceUrl($privacyPoliceUrl)
-            ->setInstalls($installs)
-            ->setScore($score)
-            ->setRecentChanges($recentChanges)
-            ->setEditorsChoice($editorsChoice)
-            ->setPrivacyPoliceUrl($privacyPoliceUrl)
-            ->setInstalls($installs)
-            ->setScore($score)
-            ->setNumberVoters($numberVoters)
-            ->setHistogramRating($histogramRating)
-            ->setPrice($price)
-            ->setCurrency($currency)
-            ->setPriceText($priceText)
-            ->setOffersIAPCost($offersIAPCost)
-            ->setAdSupported($adSupported)
-            ->setAppSize($size)
-            ->setAppVersion($appVersion)
-            ->setAndroidVersion($androidVersion)
-            ->setMinAndroidVersion($minAndroidVersion)
-            ->setContentRating($contentRating)
-            ->setReleased($released)
-            ->setUpdated($updated)
-            ->setReviewsCount($reviewsCount)
-            ->setReviews($reviews);
-        return new AppDetail($appBuilder);
+    /**
+     * @param array $scriptDataInfo
+     * @return Developer
+     */
+    private function extractDeveloper(array $scriptDataInfo): Developer
+    {
+        $developerPage = GPlayApps::GOOGLE_PLAY_URL . $scriptDataInfo[0][12][5][5][4][2];
+        $developerId = parse_query(parse_url($developerPage, PHP_URL_QUERY))['id'];
+        $developerName = $scriptDataInfo[0][12][5][1];
+        $developerEmail = $scriptDataInfo[0][12][5][2][0];
+        $developerWebsite = $scriptDataInfo[0][12][5][3][5][2];
+        $developerAddress = $scriptDataInfo[0][12][5][4][0];
+//        $developerInternalID = (int)$scriptDataInfo[0][12][5][0][0];
+
+        return new Developer(
+            Developer::newBuilder()
+                ->setId($developerId)
+                ->setUrl($developerPage)
+                ->setName($developerName)
+                ->setEmail($developerEmail)
+                ->setAddress($developerAddress)
+                ->setWebsite($developerWebsite)
+        );
+    }
+
+    /**
+     * @param array $data
+     * @return Category|null
+     */
+    private function extractCategory(array $data): ?Category
+    {
+        if (isset($data[0]) && $data[0] !== null && $data[2] !== null) {
+            $genreId = (string)$data[2];
+            $genreName = (string)$data[0];
+            return new Category($genreId, $genreName);
+        }
+        return null;
+    }
+
+    /**
+     * @param array $scriptDataInfo
+     * @return GoogleImage[]
+     */
+    private function extractScreenshots(array $scriptDataInfo): array
+    {
+        return !empty($scriptDataInfo[0][12][0]) ? array_map(static function (array $v) {
+            return new GoogleImage($v[3][2]);
+        }, $scriptDataInfo[0][12][0]) : [];
+    }
+
+    /**
+     * @param array $scriptDataInfo
+     * @return Video|null
+     */
+    private function extractVideo(array $scriptDataInfo): ?Video
+    {
+        if (
+            isset($scriptDataInfo[0][12][3][0][3][2]) &&
+            $scriptDataInfo[0][12][3][0][3][2] !== null &&
+            $scriptDataInfo[0][12][3][1][3][2] !== null
+        ) {
+            $videoThumb = (string)$scriptDataInfo[0][12][3][1][3][2];
+            $videoUrl = (string)$scriptDataInfo[0][12][3][0][3][2];
+
+            return new Video($videoThumb, $videoUrl);
+        }
+        return null;
     }
 
     /**
@@ -285,7 +303,6 @@ class AppDetailScraper implements ResponseHandlerInterface
                 try {
                     $date = new \DateTimeImmutable('@' . $reviewData[5][0]);
                 } catch (\Exception $e) {
-                    $date = null;
                 }
             }
             $score = $reviewData[2] ?? 0;
@@ -302,7 +319,6 @@ class AppDetailScraper implements ResponseHandlerInterface
                         $replyText
                     );
                 } catch (\Exception $e) {
-                    $replyDate = null;
                 }
             }
 

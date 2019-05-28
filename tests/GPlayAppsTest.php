@@ -222,7 +222,7 @@ class GPlayAppsTest extends TestCase
 
         $this->assertCount(count($locales), $apps);
 
-        foreach ($locales as $locale){
+        foreach ($locales as $locale) {
             $this->assertArrayHasKey($locale, $apps);
             $this->assertSame($apps[$locale]->getId(), $appId);
         }
@@ -249,8 +249,6 @@ class GPlayAppsTest extends TestCase
         $this->assertArrayNotHasKey('th', $apps);
         $this->assertArrayNotHasKey('fr_FR', $apps);
         $this->assertArrayNotHasKey('fil', $apps);
-
-        dump($apps);
     }
 
     /**
@@ -483,9 +481,9 @@ class GPlayAppsTest extends TestCase
      */
     public function testSearch(): void
     {
-        $results = $this->gplay->search('Mario', 500, PriceEnum::ALL());
+        $results = $this->gplay->search('Mario', 140, PriceEnum::ALL());
         $this->assertNotEmpty($results);
-        $this->assertCount(GPlayApps::MAX_SEARCH_RESULTS, $results);
+        $this->assertCount(140, $results);
 
         $this->assertContainsOnlyInstancesOf(App::class, $results);
     }

@@ -26,7 +26,7 @@ class Review
      */
     private $avatar;
     /**
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     private $date;
     /**
@@ -50,7 +50,7 @@ class Review
      * @param string $userName
      * @param string $text
      * @param GoogleImage $avatar
-     * @param \DateTimeInterface $date
+     * @param \DateTimeInterface|null $date
      * @param int $score
      * @param int $likeCount
      * @param ReplyReview|null $reply
@@ -61,7 +61,7 @@ class Review
         string $userName,
         string $text,
         GoogleImage $avatar,
-        \DateTimeInterface $date,
+        ?\DateTimeInterface $date,
         int $score,
         int $likeCount = 0,
         ?ReplyReview $reply = null
@@ -120,7 +120,7 @@ class Review
     /**
      * @return \DateTimeInterface
      */
-    public function getDate(): \DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
