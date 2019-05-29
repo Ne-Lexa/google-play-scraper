@@ -9,17 +9,13 @@ cache:
         - vendor
         - $HOME/.composer/cache
 
-before_install:
-    - sudo apt-get update
-    - sudo apt-get install -y tor
-
 install:
     - travis_retry composer self-update && composer --version
     - travis_retry composer install --no-interaction
 
 script:
     - composer validate --no-check-lock
-    - vendor/bin/phpunit -c phpunit.xml --coverage-clover=coverage.clover
+    - vendor/bin/phpunit -c phpunit.xml --coverage-clover=coverage.clover --exclude-group proxy
 
 after_success:
     - wget https://scrutinizer-ci.com/ocular.phar

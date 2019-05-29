@@ -533,6 +533,7 @@ class GPlayAppsTest extends TestCase
 
     /**
      * @throws GooglePlayException
+     * @group proxy
      */
     public function testUseProxy(): void
     {
