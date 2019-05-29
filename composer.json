@@ -1,7 +1,7 @@
 {
     "name": "nelexa/google-play-scraper",
     "type": "library",
-    "description": "Google Play apps PHP scraper.",
+    "description": "PHP Scraper to extract application data from the Google Play store.",
     "keywords": [
         "google play",
         "scraper",

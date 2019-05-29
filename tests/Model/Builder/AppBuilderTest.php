@@ -31,11 +31,7 @@ class AppBuilderTest extends TestCase
             $this->assertStringContainsString('$id', $e->getMessage());
         }
 
-        $this->assertNull($builder->getUrl());
         $builder->setId($data['appId']);
-        $this->assertSame($builder->getUrl(), $data['appUrl']);
-
-        $builder->setUrl(null);
         try {
             new App($builder);
             $this->fail('$url is null');
@@ -390,11 +386,11 @@ class AppBuilderTest extends TestCase
         ];
     }
 
-
     public function testAppDetailEquals(): void
     {
         $builder = AppDetail::newBuilder()
             ->setId('com.test')
+            ->setUrl('https://play.google.com/store/apps/details?id=com.test')
             ->setName('test')
             ->setLocale('en_US')
             ->setDeveloper(new Developer(

@@ -23,17 +23,19 @@ use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\ImageInfo;
 use Nelexa\GPlay\Model\Permission;
 use Nelexa\GPlay\Model\Review;
+use Nelexa\GPlay\Request\PlayStoreUiRequest;
 use Nelexa\GPlay\Request\RequestApp;
 use Nelexa\GPlay\Scraper\AppDetailScraper;
-use Nelexa\GPlay\Scraper\AppReviewScraper;
 use Nelexa\GPlay\Scraper\CategoriesScraper;
-use Nelexa\GPlay\Scraper\DeveloperAppsScraper;
-use Nelexa\GPlay\Scraper\DeveloperPageScraper;
+use Nelexa\GPlay\Scraper\CategoryAppsScraper;
+use Nelexa\GPlay\Scraper\ClusterAppsScraper;
+use Nelexa\GPlay\Scraper\DeveloperInfoScraper;
 use Nelexa\GPlay\Scraper\ExistsAppScraper;
-use Nelexa\GPlay\Scraper\ListScraper;
+use Nelexa\GPlay\Scraper\FindDevAppsUrlScraper;
+use Nelexa\GPlay\Scraper\FindSimilarAppsUrlScraper;
 use Nelexa\GPlay\Scraper\PermissionScraper;
-use Nelexa\GPlay\Scraper\PlayStoreUiPagesScraper;
-use Nelexa\GPlay\Scraper\SimilarAppsScraper;
+use Nelexa\GPlay\Scraper\PlayStoreUiAppsScraper;
+use Nelexa\GPlay\Scraper\ReviewsScraper;
 use Nelexa\GPlay\Util\LocaleHelper;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -62,7 +64,7 @@ class GPlayApps
 
     public const REQ_PARAM_LOCALE = 'hl';
     public const REQ_PARAM_COUNTRY = 'gl';
-    public const REQ_PARAM_APP_ID = 'id';
+    public const REQ_PARAM_ID = 'id';
 
     /**
      * @var int
@@ -85,8 +87,9 @@ class GPlayApps
      */
     public function __construct(?string $defaultLocale = null, ?string $defaultCountry = null)
     {
-        $this->setDefaultLocale($defaultLocale ?? self::DEFAULT_LOCALE);
-        $this->setDefaultCountry($defaultCountry ?? self::DEFAULT_COUNTRY);
+        $this
+            ->setDefaultLocale($defaultLocale ?? self::DEFAULT_LOCALE)
+            ->setDefaultCountry($defaultCountry ?? self::DEFAULT_COUNTRY);
     }
 
     /**
@@ -135,8 +138,9 @@ class GPlayApps
      */
     public function setCache(?CacheInterface $cache, $cacheTtl = null): self
     {
-        $this->getHttpClient()->setCache($cache);
-        $this->getHttpClient()->setCacheTtl($cacheTtl);
+        $this->getHttpClient()
+            ->setCache($cache)
+            ->setCacheTtl($cacheTtl);
         return $this;
     }
 
@@ -145,7 +149,7 @@ class GPlayApps
      *
      * @return HttpClient
      */
-    public function getHttpClient(): HttpClient
+    protected function getHttpClient(): HttpClient
     {
         static $httpClient;
         if ($httpClient === null) {
@@ -176,6 +180,26 @@ class GPlayApps
     public function setProxy(?string $proxy): GPlayApps
     {
         $this->getHttpClient()->setProxy($proxy);
+        return $this;
+    }
+
+    /**
+     * @param float $connectTimeout
+     * @return GPlayApps
+     */
+    public function setConnectTimeout(float $connectTimeout): GPlayApps
+    {
+        $this->getHttpClient()->setConnectTimeout($connectTimeout);
+        return $this;
+    }
+
+    /**
+     * @param float $timeout
+     * @return GPlayApps
+     */
+    public function setTimeout(float $timeout): GPlayApps
+    {
+        $this->getHttpClient()->setTimeout($timeout);
         return $this;
     }
 
@@ -235,11 +259,7 @@ class GPlayApps
         $urls = [];
         foreach ($requestApps as $key => $requestApp) {
             $requestApp = $this->castToRequestApp($requestApp);
-            $urls[$key] = self::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
-                    self::REQ_PARAM_APP_ID => $requestApp->getId(),
-                    self::REQ_PARAM_LOCALE => $requestApp->getLocale(),
-                    self::REQ_PARAM_COUNTRY => $requestApp->getCountry(),
-                ]);
+            $urls[$key] = $requestApp->getFullUrl();
         }
         return $urls;
     }
@@ -354,18 +374,16 @@ class GPlayApps
     public function existsApp($requestApp): bool
     {
         $requestApp = $this->castToRequestApp($requestApp);
-        $url = self::GOOGLE_PLAY_APPS_URL . '/details';
 
         try {
-            return (bool)$this->getHttpClient()->request('HEAD', $url, [
-                RequestOptions::QUERY => [
-                    self::REQ_PARAM_APP_ID => $requestApp->getId(),
-                    self::REQ_PARAM_LOCALE => $requestApp->getLocale(),
-                    self::REQ_PARAM_COUNTRY => $requestApp->getCountry(),
-                ],
-                RequestOptions::HTTP_ERRORS => false,
-                HttpClient::OPTION_HANDLER_RESPONSE => new ExistsAppScraper(),
-            ]);
+            return (bool)$this->getHttpClient()->request(
+                'HEAD',
+                $requestApp->getFullUrl(),
+                [
+                    RequestOptions::HTTP_ERRORS => false,
+                    HttpClient::OPTION_HANDLER_RESPONSE => new ExistsAppScraper(),
+                ]
+            );
         } catch (GuzzleException $e) {
             return false;
         }
@@ -410,93 +428,50 @@ class GPlayApps
      *
      * @param string|RequestApp|App $requestApp Application id (package name)
      *     or object {@see RequestApp} or object {@see App}.
-     * @param int $page page number, starts with 0
+     * @param int $limit Maximum count of reviews. To extract all reviews,
+     *     specify -1. This can take a lot of time.
      * @param SortEnum|null $sort Sort reviews of the application.
      *     If null, then sort by the newest reviews.
      * @return Review[] App reviews
      * @throws GooglePlayException if the application is not exists or other HTTP error
-     *
      * @see SortEnum::NEWEST()       Sort by latest reviews.
      * @see SortEnum::HELPFULNESS()  Sort by helpful reviews.
      * @see SortEnum::RATING()       Sort by rating reviews.
      */
-    public function getAppReviews($requestApp, int $page = 0, ?SortEnum $sort = null): array
+    public function getAppReviews($requestApp, int $limit, ?SortEnum $sort = null): array
     {
         $requestApp = $this->castToRequestApp($requestApp);
         $sort = $sort ?? SortEnum::NEWEST();
-        $page = max(0, $page);
 
-        $url = self::GOOGLE_PLAY_URL . '/store/getreviews';
-        $formParams = [
-            self::REQ_PARAM_APP_ID => $requestApp->getId(),
-            self::REQ_PARAM_LOCALE => $requestApp->getLocale(),
-            'pageNum' => $page,
-            'reviewSortOrder' => $sort->value(),
-            'reviewType' => 0,
-            'xhr' => 1,
-        ];
+        $allCount = 0;
+        $token = null;
+        $allReviews = [];
+
+        $cacheTtl = $sort === SortEnum::NEWEST() ? \DateInterval::createFromDateString('5 min') : \DateInterval::createFromDateString('1 hour');
 
         try {
-            return $this->getHttpClient()->request(
-                'POST',
-                $url,
-                [
-                    RequestOptions::FORM_PARAMS => $formParams,
-                    HttpClient::OPTION_CACHE_TTL => \DateInterval::createFromDateString(SortEnum::NEWEST() ? '2 min' : '1 hour'),
-                    HttpClient::OPTION_HANDLER_RESPONSE => new AppReviewScraper(),
-                ]
-            );
+            do {
+                $count = $limit === -1 ?
+                    PlayStoreUiRequest::LIMIT_REVIEW_ON_PAGE :
+                    min(PlayStoreUiRequest::LIMIT_REVIEW_ON_PAGE, max($limit - $allCount, 1));
+
+                $request = PlayStoreUiRequest::getReviewsRequest($requestApp, $count, $sort, $token);
+
+                [$reviews, $token] = $this->getHttpClient()->send(
+                    $request,
+                    [
+                        HttpClient::OPTION_CACHE_TTL => $cacheTtl,
+                        HttpClient::OPTION_HANDLER_RESPONSE => new ReviewsScraper($requestApp),
+                    ]
+                );
+                $allCount += count($reviews);
+                $allReviews[] = $reviews;
+            } while ($token !== null && ($limit === -1 || $allCount < $limit));
         } catch (GuzzleException $e) {
             throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
         }
-    }
 
-    /**
-     * Get a list of all app reviews. The maximum number of reviews available
-     * for extraction is about 4480 reviews. This can take a long time.
-     *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @param SortEnum|null $sort Sort reviews of the application.
-     *     If null, then sort by the newest reviews.
-     * @param int|null $limit limit reviews
-     * @return Review[]
-     *
-     * @see SortEnum::NEWEST()       Sort by latest reviews.
-     * @see SortEnum::HELPFULNESS()  Sort by helpful reviews.
-     * @see SortEnum::RATING()       Sort by rating reviews.
-     */
-    public function getAppAllReviews(
-        $requestApp,
-        ?SortEnum $sort = null,
-        ?int $limit = null
-    ): array {
-        $page = 0;
-        $reviewsGroup = [];
-        $count = 0;
-        try {
-            do {
-                $reviewsOnPage = $this->getAppReviews($requestApp, $page, $sort);
-                $countOnPage = count($reviewsOnPage);
-                $count += $countOnPage;
-                $reviewsGroup[] = $reviewsOnPage;
-                $page++;
-            } while (
-                $countOnPage === /*google play limit on page*/ 40 &&
-                $page < /*google play limit pages*/ 112 &&
-                ($limit === null || $count < $limit)
-            );
-        } catch (\Throwable $e) {
-            @trigger_error($e->getMessage(), E_USER_WARNING);
-        }
-        $reviews = [];
-        if (!empty($reviewsGroup)) {
-            $reviews = array_merge(...$reviewsGroup);
-        }
-        if ($limit !== null) {
-            $reviews = array_slice($reviews, 0, $limit);
-        }
-        return $reviews;
+        return empty($allReviews) ? $allReviews : array_merge(...$allReviews);
     }
 
     /**
@@ -512,29 +487,77 @@ class GPlayApps
     {
         $requestApp = $this->castToRequestApp($requestApp);
         $limit = max(1, min($limit, self::MAX_SEARCH_RESULTS));
-        $params = [
-            self::REQ_PARAM_APP_ID => $requestApp->getId(),
-            self::REQ_PARAM_LOCALE => $requestApp->getLocale(),
-            self::REQ_PARAM_COUNTRY => $requestApp->getCountry(),
-        ];
-        $url = self::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query($params);
-        $httpClient = $this->getHttpClient();
         try {
-            return $httpClient->request(
+            /**
+             * @var string|null $similarAppsUrl
+             */
+            $similarAppsUrl = $this->getHttpClient()->request(
                 'GET',
-                $url,
+                $requestApp->getFullUrl(),
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new SimilarAppsScraper(
-                        $httpClient,
-                        $limit,
-                        $requestApp->getLocale(),
-                        $requestApp->getCountry()
-                    ),
+                    HttpClient::OPTION_HANDLER_RESPONSE => new FindSimilarAppsUrlScraper($requestApp),
                 ]
+            );
+            if ($similarAppsUrl === null) {
+                return [];
+            }
+            return $this->getAppsFromClusterPage(
+                $similarAppsUrl,
+                $requestApp->getLocale(),
+                $requestApp->getCountry(),
+                $limit
             );
         } catch (GuzzleException $e) {
             throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @param string $clusterPageUrl
+     * @param string $locale
+     * @param string $country
+     * @param int $limit
+     * @return App[]
+     * @throws GooglePlayException
+     */
+    private function getAppsFromClusterPage(
+        string $clusterPageUrl,
+        string $locale,
+        string $country,
+        int $limit
+    ): array {
+        try {
+            [$apps, $token] = $this->getHttpClient()->request(
+                'GET',
+                $clusterPageUrl,
+                [
+                    HttpClient::OPTION_HANDLER_RESPONSE => new ClusterAppsScraper(),
+                ]
+            );
+
+            $allCount = count($apps);
+            $allApps = [$apps];
+
+            while ($token !== null && ($limit === -1 || $allCount < $limit)) {
+                $count = $limit === -1 ?
+                    PlayStoreUiRequest::LIMIT_APPS_ON_PAGE :
+                    min(PlayStoreUiRequest::LIMIT_APPS_ON_PAGE, max($limit - $allCount, 1));
+
+                $request = PlayStoreUiRequest::getAppsRequest($locale, $country, $count, $token);
+
+                [$apps, $token] = $this->getHttpClient()->send(
+                    $request,
+                    [
+                        HttpClient::OPTION_HANDLER_RESPONSE => new PlayStoreUiAppsScraper(),
+                    ]
+                );
+                $allCount += count($apps);
+                $allApps[] = $apps;
+            }
+        } catch (GuzzleException $e) {
+            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+        }
+        return empty($allApps) ? $allApps : array_slice(array_merge(...$allApps), 0, $limit);
     }
 
     /**
@@ -669,10 +692,10 @@ class GPlayApps
                 $url,
                 [
                     RequestOptions::QUERY => [
-                        self::REQ_PARAM_APP_ID => $developerId,
+                        self::REQ_PARAM_ID => $developerId,
                         self::REQ_PARAM_LOCALE => $locale,
                     ],
-                    HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperPageScraper(),
+                    HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperInfoScraper(),
                 ]
             );
         } catch (GuzzleException $e) {
@@ -723,7 +746,7 @@ class GPlayApps
         $url = self::GOOGLE_PLAY_APPS_URL . '/dev';
         foreach ($locales as $locale) {
             $urls[$locale] = $url . '?' . http_build_query([
-                    self::REQ_PARAM_APP_ID => $id,
+                    self::REQ_PARAM_ID => $id,
                     self::REQ_PARAM_LOCALE => $locale,
                 ]);
         }
@@ -733,7 +756,7 @@ class GPlayApps
                 'GET',
                 $urls,
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperPageScraper(),
+                    HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperInfoScraper(),
                 ],
                 $this->concurrency
             );
@@ -798,48 +821,43 @@ class GPlayApps
         $country = $country ?? $this->defaultCountry;
         $developerId = $this->castToDeveloperId($developerId);
 
-        $httpClient = $this->getHttpClient();
         $query = [
-            self::REQ_PARAM_APP_ID => $developerId,
+            self::REQ_PARAM_ID => $developerId,
             self::REQ_PARAM_LOCALE => $locale,
             self::REQ_PARAM_COUNTRY => $country,
         ];
 
-        try {
-            if (is_numeric($developerId)) {
-                $url = self::GOOGLE_PLAY_APPS_URL . '/dev';
-                return $httpClient->request(
+        if (is_numeric($developerId)) {
+            $developerUrl = self::GOOGLE_PLAY_APPS_URL . '/dev?' . http_build_query($query);
+            try {
+                /**
+                 * @var string|null $developerUrl
+                 */
+                $developerUrl = $this->getHttpClient()->request(
                     'GET',
-                    $url,
+                    $developerUrl,
                     [
-                        RequestOptions::QUERY => $query,
-                        HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperAppsScraper(
-                            $httpClient,
-                            500,
-                            $locale,
-                            $country
-                        ),
+                        HttpClient::OPTION_HANDLER_RESPONSE => new FindDevAppsUrlScraper(),
                     ]
                 );
+                if ($developerUrl === null) {
+                    return [];
+                }
+                $developerUrl .= '&' . self::REQ_PARAM_LOCALE . '=' . urlencode($locale) .
+                    '&' . self::REQ_PARAM_COUNTRY . '=' . urlencode($country);
+            } catch (GuzzleException $e) {
+                throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
             }
-
-            $url = self::GOOGLE_PLAY_APPS_URL . '/developer';
-            return $httpClient->request(
-                'GET',
-                $url,
-                [
-                    RequestOptions::QUERY => $query,
-                    HttpClient::OPTION_HANDLER_RESPONSE => new PlayStoreUiPagesScraper(
-                        $httpClient,
-                        500,
-                        $locale,
-                        $country
-                    ),
-                ]
-            );
-        } catch (GuzzleException $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+        } else {
+            $developerUrl = self::GOOGLE_PLAY_APPS_URL . '/developer?' . http_build_query($query);
         }
+
+        return $this->getAppsFromClusterPage(
+            $developerUrl,
+            $locale,
+            $country,
+            1000
+        );
     }
 
     /**
@@ -923,13 +941,10 @@ class GPlayApps
         if (empty($query)) {
             throw new \InvalidArgumentException('Search query missing');
         }
-        if ($limit < 1) {
-            throw new \InvalidArgumentException('Invalid count');
-        }
+        $limit = min(max($limit, 1), self::MAX_SEARCH_RESULTS);
         $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
         $country = $country ?? $this->defaultCountry;
         $price = $price ?? PriceEnum::ALL();
-        $limit = min($limit, self::MAX_SEARCH_RESULTS);
 
         $params = [
             'c' => 'apps',
@@ -938,20 +953,9 @@ class GPlayApps
             'gl' => $country,
             'price' => $price->value(),
         ];
-        $url = self::GOOGLE_PLAY_URL . '/store/search?' . http_build_query($params);
+        $clusterPageUrl = self::GOOGLE_PLAY_URL . '/store/search?' . http_build_query($params);
 
-        $httpClient = $this->getHttpClient();
-        try {
-            return $httpClient->request(
-                'GET',
-                $url,
-                [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new PlayStoreUiPagesScraper($httpClient, $limit, $locale, $country),
-                ]
-            );
-        } catch (GuzzleException $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
-        }
+        return $this->getAppsFromClusterPage($clusterPageUrl, $locale, $country, $limit);
     }
 
     /**
@@ -1026,7 +1030,7 @@ class GPlayApps
                         RequestOptions::FORM_PARAMS => [
                             'start' => $offset,
                         ],
-                        HttpClient::OPTION_HANDLER_RESPONSE => new ListScraper(),
+                        HttpClient::OPTION_HANDLER_RESPONSE => new CategoryAppsScraper(),
                     ]
                 );
                 if ($slice > 0) {

@@ -66,7 +66,7 @@ class App
             throw new \InvalidArgumentException('$id cannot be null or empty. Solution: $appBuilder->setId(...);');
         }
         if (empty($this->url)) {
-            throw new \InvalidArgumentException('$url cannot be null or empty. Solution: $appBuilder->setId(...); or $appBuilder->setUrl(...);');
+            throw new \InvalidArgumentException('$url cannot be null or empty. Solution: $appBuilder->setUrl(...);');
         }
         if (empty($this->locale)) {
             throw new \InvalidArgumentException('$locale cannot be null or empty. Solution: $appBuilder->setLocale(...);');

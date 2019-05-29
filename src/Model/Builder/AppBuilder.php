@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Model\Builder;
 
-use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
@@ -173,7 +172,6 @@ class AppBuilder
     public function setId(string $id): AppBuilder
     {
         $this->id = $id;
-        $this->url = GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?id=' . $id;
         return $this;
     }
 

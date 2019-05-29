@@ -12,9 +12,10 @@ use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\HistogramRating;
-use Nelexa\GPlay\Model\ReplyReview;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
+use Nelexa\GPlay\Request\RequestApp;
+use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Nelexa\GPlay\Util\DateStringFormatter;
 use Nelexa\GPlay\Util\LocaleHelper;
 use Nelexa\GPlay\Util\ScraperUtil;
@@ -33,11 +34,10 @@ class AppDetailScraper implements ResponseHandlerInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response): AppDetail
     {
         $query = parse_query($request->getUri()->getQuery());
-        $appId = $query[GPlayApps::REQ_PARAM_APP_ID];
+        $appId = $query[GPlayApps::REQ_PARAM_ID];
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
-        $url = GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
-                GPlayApps::REQ_PARAM_APP_ID => $appId,
-            ]);
+        $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
+        $requestApp = new RequestApp($appId, $locale, $country);
 
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
@@ -71,7 +71,7 @@ class AppDetailScraper implements ResponseHandlerInterface
             $scriptDataPrice === null ||
             $scriptDataVersion === null
         ) {
-            throw (new GooglePlayException('Unable to get data for this application.'))->setUrl($url);
+            throw (new GooglePlayException('Unable to get data for this application.'))->setUrl($request->getUri()->__toString());
         }
 
         $name = $scriptDataInfo[0][0][0];
@@ -118,13 +118,13 @@ class AppDetailScraper implements ResponseHandlerInterface
             $androidVersion = null;
             $minAndroidVersion = null;
         } else {
-            $minAndroidVersion = preg_replace('~.*?(\d+(\.\d+)?).*~', '$1', $androidVersion);
+            $minAndroidVersion = preg_replace('~.*?(\d+(\.\d+)*).*~', '$1', $androidVersion);
         }
 
         $editorsChoice = !empty($scriptDataInfo[0][12][15][1][1]);
         $privacyPoliceUrl = $scriptDataInfo[0][12][7][2];
 
-        $categoryFamily = $this->extractCategory($scriptDataInfo[0][12][13][1]??[]);
+        $categoryFamily = $this->extractCategory($scriptDataInfo[0][12][13][1] ?? []);
 
         $icon = empty($scriptDataInfo[0][12][1][3][2]) ?
             null :
@@ -138,17 +138,8 @@ class AppDetailScraper implements ResponseHandlerInterface
         $video = $this->extractVideo($scriptDataInfo);
 
         $contentRating = $scriptDataInfo[0][12][4][0];
-        $released = null;
-        if (isset($scriptDataInfo[0][12][36]) && $scriptDataInfo[0][12][36] !== null) {
-            $released = DateStringFormatter::formatted($locale, $scriptDataInfo[0][12][36]);
-        }
-        try {
-            $updated = !empty($scriptDataInfo[0][12][8][0]) ?
-                new \DateTimeImmutable('@' . $scriptDataInfo[0][12][8][0])
-                : null;
-        } catch (\Exception $e) {
-            $updated = null;
-        }
+        $released = $this->extractReleaseDate($scriptDataInfo, $locale);
+        $updated = $this->extractUpdatedDate($scriptDataInfo);
 
         $recentChanges = empty($scriptDataInfo[0][12][6][1]) ?
             null :
@@ -164,11 +155,12 @@ class AppDetailScraper implements ResponseHandlerInterface
             $translatedDescription = ScraperUtil::html2text($scriptDataInfo[0][19][0][0][1]);
         }
 
-        $reviews = $this->extractReviews($url, $scriptDataReviews);
+        $reviews = $this->extractReviews($requestApp, $scriptDataReviews);
 
         return new AppDetail(
             AppDetail::newBuilder()
                 ->setId($appId)
+                ->setUrl($requestApp->getUrl())
                 ->setLocale($locale)
                 ->setName($name)
                 ->setDescription($description)
@@ -217,7 +209,7 @@ class AppDetailScraper implements ResponseHandlerInterface
     private function extractDeveloper(array $scriptDataInfo): Developer
     {
         $developerPage = GPlayApps::GOOGLE_PLAY_URL . $scriptDataInfo[0][12][5][5][4][2];
-        $developerId = parse_query(parse_url($developerPage, PHP_URL_QUERY))['id'];
+        $developerId = parse_query(parse_url($developerPage, PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
         $developerName = $scriptDataInfo[0][12][5][1];
         $developerEmail = $scriptDataInfo[0][12][5][2][0];
         $developerWebsite = $scriptDataInfo[0][12][5][3][5][2];
@@ -280,60 +272,45 @@ class AppDetailScraper implements ResponseHandlerInterface
     }
 
     /**
-     * @param string $appUrl
+     * @param array $scriptDataInfo
+     * @param string $locale
+     * @return \DateTimeInterface|null
+     */
+    private function extractReleaseDate(array $scriptDataInfo, string $locale): ?\DateTimeInterface
+    {
+        if (isset($scriptDataInfo[0][12][36])) {
+            return DateStringFormatter::formatted($locale, $scriptDataInfo[0][12][36]);
+        }
+        return null;
+    }
+
+    /**
+     * @param array $scriptDataInfo
+     * @return \DateTimeInterface|null
+     */
+    private function extractUpdatedDate(array $scriptDataInfo): ?\DateTimeInterface
+    {
+        if (isset($scriptDataInfo[0][12][8][0])) {
+            return DateStringFormatter::unixTimeToDateTime($scriptDataInfo[0][12][8][0]);
+        }
+        return null;
+    }
+
+    /**
+     * @param RequestApp $requestApp
      * @param array $scriptDataReviews
      * @param int $limit
      * @return Review[]
      */
-    private function extractReviews(string $appUrl, array $scriptDataReviews, int $limit = 4): array
+    private function extractReviews(RequestApp $requestApp, array $scriptDataReviews, int $limit = 4): array
     {
-        if (empty($scriptDataReviews)) {
+        if (empty($scriptDataReviews[0])) {
             return [];
         }
-        $reviews = [];
-        $count = min($limit, count($scriptDataReviews[0]));
-        for ($i = 0; $i < $count; $i++) {
-            $reviewData = $scriptDataReviews[0][$i];
-            $reviewId = $reviewData[0];
-            $reviewUrl = $appUrl . '&reviewId=' . urlencode($reviewId);
-            $userName = $reviewData[1][0];
-            $avatar = new GoogleImage($reviewData[1][1][3][2]);
-            $date = null;
-            if (isset($reviewData[5][0])) {
-                try {
-                    $date = new \DateTimeImmutable('@' . $reviewData[5][0]);
-                } catch (\Exception $e) {
-                }
-            }
-            $score = $reviewData[2] ?? 0;
-            $text = (string)($reviewData[4] ?? '');
-            $likeCount = $reviewData[6];
 
-            $reply = null;
-            if (isset($reviewData[7][1])) {
-                $replyText = $reviewData[7][1];
-                try {
-                    $replyDate = new \DateTimeImmutable('@' . $reviewData[7][2][0]);
-                    $reply = new ReplyReview(
-                        $replyDate,
-                        $replyText
-                    );
-                } catch (\Exception $e) {
-                }
-            }
-
-            $reviews[] = new Review(
-                $reviewId,
-                $reviewUrl,
-                $userName,
-                $text,
-                $avatar,
-                $date,
-                $score,
-                $likeCount,
-                $reply
-            );
-        }
-        return $reviews;
+        return ReviewsExtractor::extractReviews(
+            $requestApp,
+            array_slice($scriptDataReviews[0], 0, $limit)
+        );
     }
 }

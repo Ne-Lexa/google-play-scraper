@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Nelexa\GooglePlayScraper\Tests\Helper;
 
 use Nelexa\GPlay\Util\DateStringFormatter;
-use Nelexa\GPlay\Util\LocaleHelper;
 use PHPUnit\Framework\TestCase;
 
 class DateStringFormatterTest extends TestCase
@@ -39,7 +38,7 @@ class DateStringFormatterTest extends TestCase
     /**
      * @return array
      */
-    public function provideData():array
+    public function provideData(): array
     {
         return [
             // af

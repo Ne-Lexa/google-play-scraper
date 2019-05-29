@@ -250,6 +250,36 @@ class HttpClient extends Client
     }
 
     /**
+     * @param float $connectTimeout
+     * @return HttpClient
+     */
+    public function setConnectTimeout(float $connectTimeout): self
+    {
+        if ($connectTimeout < 0) {
+            throw new \InvalidArgumentException('negative connect timeout');
+        }
+        $config = $this->getConfig();
+        $config[RequestOptions::CONNECT_TIMEOUT] = $connectTimeout;
+        $this->setConfig($config);
+        return $this;
+    }
+
+    /**
+     * @param float $timeout
+     * @return HttpClient
+     */
+    public function setTimeout(float $timeout): self
+    {
+        if ($timeout < 0) {
+            throw new \InvalidArgumentException('negative timeout');
+        }
+        $config = $this->getConfig();
+        $config[RequestOptions::TIMEOUT] = $timeout;
+        $this->setConfig($config);
+        return $this;
+    }
+
+    /**
      * @param array $config
      */
     protected function mergeConfig(array $config): void

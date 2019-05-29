@@ -64,4 +64,26 @@ class RequestApp
     {
         return $this->country;
     }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
+                GPlayApps::REQ_PARAM_ID => $this->id,
+            ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullUrl(): string
+    {
+        return GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
+                GPlayApps::REQ_PARAM_ID => $this->id,
+                GPlayApps::REQ_PARAM_LOCALE => $this->locale,
+                GPlayApps::REQ_PARAM_COUNTRY => $this->country,
+            ]);
+    }
 }

@@ -278,9 +278,9 @@ class GoogleImage
     {
         return $this->smartCrop && (
             $this->size !== null ||
-            ($this->width !== null && $this->height !== null) ||
-            ($this->size === null && $this->width === null && $this->height === null)
-        );
+                ($this->width !== null && $this->height !== null) ||
+                ($this->size === null && $this->width === null && $this->height === null)
+            );
     }
 
     /**

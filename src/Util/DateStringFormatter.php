@@ -1184,13 +1184,28 @@ class DateStringFormatter
 
             $dateTime = \DateTimeImmutable::createFromFormat(
                 'Y.m.d',
-                $year . '.' . $month . '.' . $day
+                $year . '.' . $month . '.' . $day,
+                new \DateTimeZone('UTC')
             );
             if ($dateTime !== false) {
                 return $dateTime;
             }
         }
         return null;
+    }
+
+    /**
+     * @param string|int $unixTime
+     * @return \DateTimeInterface|null
+     */
+    public static function unixTimeToDateTime($unixTime): ?\DateTimeInterface
+    {
+        $dateTime = \DateTimeImmutable::createFromFormat(
+            'U',
+            (string)$unixTime,
+            new \DateTimeZone('UTC')
+        );
+        return $dateTime === false ? null : $dateTime;
     }
 
     /**

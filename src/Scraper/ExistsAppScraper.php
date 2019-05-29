@@ -9,7 +9,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class ExistsAppScraper implements ResponseHandlerInterface
 {
-
     /**
      * @param RequestInterface $request
      * @param ResponseInterface $response

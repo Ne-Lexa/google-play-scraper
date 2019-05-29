@@ -120,17 +120,18 @@ class HttpClientTest extends TestCase
 
     public function testMergeConfig(): void
     {
-        $client = new class extends HttpClient {
-            public function setTimeout(float $timeout): void
+        $client = new class extends HttpClient
+        {
+            public function setDebug(bool $debug): void
             {
-                $this->mergeConfig([RequestOptions::TIMEOUT => $timeout]);
+                $this->mergeConfig([RequestOptions::DEBUG => $debug]);
             }
         };
 
-        $defaultTimeout = $client->getConfig(RequestOptions::TIMEOUT);
-        $this->assertTrue($defaultTimeout > 0);
+        $debug = $client->getConfig(RequestOptions::DEBUG) ?? false;
+        $this->assertFalse($debug);
 
-        $client->setTimeout($defaultTimeout + 10);
-        $this->assertSame($defaultTimeout + 10, $client->getConfig(RequestOptions::TIMEOUT));
+        $client->setDebug(true);
+        $this->assertTrue($client->getConfig(RequestOptions::DEBUG));
     }
 }

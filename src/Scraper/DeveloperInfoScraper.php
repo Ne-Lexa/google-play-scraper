@@ -13,7 +13,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;
 
-class DeveloperPageScraper implements ResponseHandlerInterface
+class DeveloperInfoScraper implements ResponseHandlerInterface
 {
     /**
      * @param RequestInterface $request
@@ -26,11 +26,11 @@ class DeveloperPageScraper implements ResponseHandlerInterface
         $url = $request->getUri()->__toString();
         $urlComponents = parse_url($url);
         $query = parse_query($urlComponents['query']);
-        $developerId = $query[GPlayApps::REQ_PARAM_APP_ID];
+        $developerId = $query[GPlayApps::REQ_PARAM_ID];
         $url = $urlComponents['scheme'] . '://'
             . $urlComponents['host']
             . $urlComponents['path']
-            . '?' . http_build_query([GPlayApps::REQ_PARAM_APP_ID => $developerId]);
+            . '?' . http_build_query([GPlayApps::REQ_PARAM_ID => $developerId]);
 
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 

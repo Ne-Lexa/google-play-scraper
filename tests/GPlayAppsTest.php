@@ -321,25 +321,19 @@ class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testReviews(): void
+    public function testGetAppReviews(): void
     {
-        $reviews = $this->gplay->getAppReviews('com.google.android.googlequicksearchbox', 0, SortEnum::NEWEST());
-        $reviewsNext = $this->gplay->getAppReviews('com.google.android.googlequicksearchbox', 1, SortEnum::NEWEST());
-
-        $this->assertNotEmpty($reviews);
-        $this->assertNotEmpty($reviewsNext);
-
+        $reviews = $this->gplay->getAppReviews(
+            new RequestApp(
+                'com.google.android.webview',
+                $locale = 'zh_TW',
+                $country = 'cn'
+            ),
+            $limit = 555,
+            SortEnum::NEWEST()
+        );
+        $this->assertCount($limit, $reviews);
         $this->assertContainsOnlyInstancesOf(Review::class, $reviews);
-        $this->assertContainsOnlyInstancesOf(Review::class, $reviewsNext);
-
-        $this->assertNotEquals($reviews, $reviewsNext);
-    }
-
-    public function testAllReviews(): void
-    {
-        $allReviews = $this->gplay->getAppAllReviews('com.google.android.googlequicksearchbox', SortEnum::HELPFULNESS(), 300);
-        $this->assertCount(300, $allReviews);
-        $this->assertContainsOnlyInstancesOf(Review::class, $allReviews);
     }
 
     /**
@@ -481,9 +475,10 @@ class GPlayAppsTest extends TestCase
      */
     public function testSearch(): void
     {
-        $results = $this->gplay->search('Mario', 140, PriceEnum::ALL());
+        $limit = 222;
+        $results = $this->gplay->search('News', $limit, PriceEnum::ALL());
         $this->assertNotEmpty($results);
-        $this->assertCount(140, $results);
+        $this->assertCount($limit, $results);
 
         $this->assertContainsOnlyInstancesOf(App::class, $results);
     }
@@ -493,10 +488,10 @@ class GPlayAppsTest extends TestCase
      */
     public function testSimilarApps(): void
     {
-        $count = 70;
-        $similarApps = $this->gplay->getSimilarApps('com.google.android.apps.docs.editors.docs', $count);
+        $limit = 125;
+        $similarApps = $this->gplay->getSimilarApps('com.google.android.apps.docs.editors.docs', $limit);
         $this->assertNotEmpty($similarApps);
-        $this->assertCount($count, $similarApps);
+        $this->assertCount($limit, $similarApps);
         $this->assertContainsOnlyInstancesOf(App::class, $similarApps);
     }
 
@@ -526,14 +521,14 @@ class GPlayAppsTest extends TestCase
      */
     public function testDeveloperApps(): void
     {
-        $developerApps = $this->gplay->getDeveloperApps('5700313618786177705', 'ru_RU', 'by');
-        $developerApps2 = $this->gplay->getDeveloperApps('Google LLC', 'ru_RU', 'by');
+        $developerAppsById = $this->gplay->getDeveloperApps('5700313618786177705', 'ru_RU', 'by');
+        $developerAppsByName = $this->gplay->getDeveloperApps('Google LLC', 'ru_RU', 'by');
 
-        $this->assertNotEmpty($developerApps);
-        $this->assertNotEmpty($developerApps2);
+        $this->assertNotEmpty($developerAppsById);
+        $this->assertNotEmpty($developerAppsByName);
 
-        $this->assertContainsOnly(App::class, $developerApps);
-        $this->assertContainsOnly(App::class, $developerApps2);
+        $this->assertContainsOnly(App::class, $developerAppsById);
+        $this->assertContainsOnly(App::class, $developerAppsByName);
     }
 
     /**
@@ -551,8 +546,11 @@ class GPlayAppsTest extends TestCase
         $appId = 'com.google.android.googlequicksearchbox';
         $appDetail = $this->gplay
             ->setProxy($torProxy)
+            ->setTimeout(20.0)
+            ->setConnectTimeout(20.0)
             ->setCache(null)
             ->getApp($appId);
+
         $this->assertSame($appDetail->getId(), $appId);
     }
 
