@@ -44,7 +44,7 @@ class PlayStoreUiRequest
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
         $body = stream_for(http_build_query($formParams));
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 
     /**
@@ -73,6 +73,6 @@ class PlayStoreUiRequest
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
         $body = stream_for(http_build_query($formParams));
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 }
