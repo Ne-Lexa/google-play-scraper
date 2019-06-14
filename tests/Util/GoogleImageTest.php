@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Nelexa\GPlay\Tests\Model;
+namespace Nelexa\GPlay\Tests\Util;
 
 use Nelexa\GPlay\Model\GoogleImage;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +21,7 @@ class GoogleImageTest extends TestCase
 
         $googleImage = new GoogleImage($url);
         $url = $googleImage->getUrl();
-        $bestSizeUrl = $googleImage->getBestSizeUrl();
+        $bestSizeUrl = $googleImage->getOriginalSizeUrl();
 
         $this->assertSame($url, $actualUrl);
         $this->assertSame($bestSizeUrl, $actualBestSizeUrl);
@@ -115,6 +115,12 @@ class GoogleImageTest extends TestCase
                 'https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S=w0',
                 'https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S=w0',
                 'https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S=s0',
+            ],
+
+            [
+                'https://1.bp.blogspot.com/-gZoPZt6mOLQ/XMa2QFgXs6I/AAAAAAAACGs/wqldyhxSPX4PcttYLT1SB32O8-mbe5q7QCEwYBhgL/w100/top%2B40%2Bbest%2Btravel%2Bquotes.png',
+                'https://1.bp.blogspot.com/-gZoPZt6mOLQ/XMa2QFgXs6I/AAAAAAAACGs/wqldyhxSPX4PcttYLT1SB32O8-mbe5q7QCEwYBhgL/w100/',
+                'https://1.bp.blogspot.com/-gZoPZt6mOLQ/XMa2QFgXs6I/AAAAAAAACGs/wqldyhxSPX4PcttYLT1SB32O8-mbe5q7QCEwYBhgL/s0/',
             ],
         ];
     }
@@ -607,5 +613,31 @@ class GoogleImageTest extends TestCase
         $this->assertSame($image->getHashUrl($algo, 2, 3), '8e7/fb0/8e7fb0940b21b4f428974a252da484a835b10fb3');
         $this->assertSame($image->getHashUrl($algo, 3, 10), '8e7fb0940b/21b4f42897/4a252da484/8e7fb0940b21b4f428974a252da484a835b10fb3');
         $this->assertSame($image->getHashUrl($algo, 100, 100), '8e7fb0/940b21/b4f428/974a25/2da484/a835b1/8e7fb0940b21b4f428974a252da484a835b10fb3');
+    }
+
+    /**
+     * @dataProvider provideInvalidHostUrl
+     * @param string $url
+     */
+    public function testInvalidHostUrl(string $url): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Unsupported URL');
+
+        new GoogleImage($url);
+    }
+
+    /**
+     * @return array
+     */
+    public function provideInvalidHostUrl(): array
+    {
+        return [
+            [''],
+            ['https://i.ytimg.com/vi/2-BhzcS2UNw/maxresdefault.jpg'],
+            ['https://googleusercontent.com/nYhPnY2I-e9rpqnid9u9aAODz4C04OycEGxqHG5vxFnA35OGmLMrrUmhM9eaHKJ7liB-'],
+            ['https://ggpht.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g'],
+            ['https://bp.blogspot.com/-gZoPZt6mOLQ/XMa2QFgXs6I/AAAAAAAACGs/wqldyhxSPX4PcttYLT1SB32O8-mbe5q7QCEwYBhgL/w100/top%2B40%2Bbest%2Btravel%2Bquotes.png'],
+        ];
     }
 }

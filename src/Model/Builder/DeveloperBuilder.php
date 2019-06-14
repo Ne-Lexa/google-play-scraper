@@ -1,10 +1,21 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Model\Builder;
 
 use Nelexa\GPlay\Model\GoogleImage;
 
+/**
+ * Developer Builder.
+ *
+ * @internal
+ */
 class DeveloperBuilder
 {
     /**
@@ -28,13 +39,13 @@ class DeveloperBuilder
      */
     private $website;
     /**
-     * @var GoogleImage|null
+     * @var \Nelexa\GPlay\Model\GoogleImage|null
      */
     private $icon;
     /**
-     * @var GoogleImage|null
+     * @var \Nelexa\GPlay\Model\GoogleImage|null
      */
-    private $headerImage;
+    private $cover;
     /**
      * @var string|null
      */
@@ -155,18 +166,18 @@ class DeveloperBuilder
     /**
      * @return GoogleImage|null
      */
-    public function getHeaderImage(): ?GoogleImage
+    public function getCover(): ?GoogleImage
     {
-        return $this->headerImage;
+        return $this->cover;
     }
 
     /**
-     * @param GoogleImage|null $headerImage
+     * @param GoogleImage|null $cover
      * @return DeveloperBuilder
      */
-    public function setHeaderImage(?GoogleImage $headerImage): DeveloperBuilder
+    public function setCover(?GoogleImage $cover): DeveloperBuilder
     {
-        $this->headerImage = $headerImage;
+        $this->cover = $cover;
         return $this;
     }
 

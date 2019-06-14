@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
@@ -13,6 +19,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;
 
+/**
+ * @internal
+ */
 class DeveloperInfoScraper implements ResponseHandlerInterface
 {
     /**
@@ -50,7 +59,7 @@ class DeveloperInfoScraper implements ResponseHandlerInterface
 
         $name = $scriptDataInfo[0][0][0];
 
-        $headerImage = empty($scriptDataInfo[0][9][0][3][2]) ?
+        $cover = empty($scriptDataInfo[0][9][0][3][2]) ?
             null :
             new GoogleImage($scriptDataInfo[0][9][0][3][2]);
         $icon = empty($scriptDataInfo[0][9][1][3][2]) ?
@@ -67,7 +76,7 @@ class DeveloperInfoScraper implements ResponseHandlerInterface
                 ->setDescription($description)
                 ->setWebsite($developerSite)
                 ->setIcon($icon)
-                ->setHeaderImage($headerImage)
+                ->setCover($cover)
         );
     }
 }

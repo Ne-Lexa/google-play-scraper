@@ -1,90 +1,90 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Model;
 
-class ImageInfo
+/**
+ * Contains information about the image.
+ */
+class ImageInfo implements \JsonSerializable
 {
-    /**
-     * @var string
-     */
+    use JsonSerializableTrait;
+
+    /** @var string Image url. */
     private $url;
-    /**
-     * @var string
-     */
-    private $path;
-    /**
-     * @var string
-     */
+
+    /** @var string Local image filename. */
+    private $filename;
+
+    /** @var string Image mime-type. */
     private $mimeType;
-    /**
-     * @var string
-     */
+
+    /** @var string Image file extension. */
     private $extension;
-    /**
-     * @var int
-     */
+
+    /** @var int Image width. */
     private $width;
-    /**
-     * @var int
-     */
+
+    /** @var int Image height. */
     private $height;
-    /**
-     * @var int
-     */
+
+    /** @var int Image file size. */
     private $filesize;
 
     /**
-     * ImageInfo constructor.
+     * Creates an object with information about the image saved to disk.
      *
-     * @param string $url
-     * @param string $path
+     * @param string $url Image url.
+     * @param string $filename Local image filename.
      */
-    public function __construct(string $url, string $path)
+    public function __construct(string $url, string $filename)
     {
         $this->url = $url;
-        $imageInfo = getimagesize($path);
+        $imageInfo = getimagesize($filename);
         if (!$imageInfo) {
-            throw new \RuntimeException('Invalid image: ' . $path);
+            throw new \RuntimeException('Invalid image: ' . $filename);
         }
-        $this->path = $path;
+        $this->filename = $filename;
         $this->mimeType = $imageInfo['mime'];
+        [$this->width, $this->height, $imageType] = $imageInfo;
         $this->extension = str_replace(
             'jpeg',
             'jpg',
-            image_type_to_extension($imageInfo[2], false)
+            image_type_to_extension($imageType, false)
         );
-        $this->width = $imageInfo[0];
-        $this->height = $imageInfo[1];
-        $this->filesize = filesize($path);
+        $this->filesize = filesize($filename);
     }
 
     /**
-     * @return mixed
+     * Returns the url of the image.
+     *
+     * @return string Image url.
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
 
     /**
-     * @param mixed $url
+     * Returns the path to save the image file.
+     *
+     * @return string Image filename.
      */
-    public function setUrl($url): void
+    public function getFilename(): string
     {
-        $this->url = $url;
+        return $this->filename;
     }
 
     /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-
-    /**
-     * @return string
+     * Returns the mime type of the image.
+     *
+     * @return string Image mime-type.
      */
     public function getMimeType(): string
     {
@@ -92,7 +92,9 @@ class ImageInfo
     }
 
     /**
-     * @return string
+     * Returns the image file extension.
+     *
+     * @return string Image file extension.
      */
     public function getExtension(): string
     {
@@ -100,7 +102,9 @@ class ImageInfo
     }
 
     /**
-     * @return int
+     * Returns the width of the image.
+     *
+     * @return int Image width.
      */
     public function getWidth(): int
     {
@@ -108,7 +112,9 @@ class ImageInfo
     }
 
     /**
-     * @return int
+     * Returns the height of the image.
+     *
+     * @return int Image height.
      */
     public function getHeight(): int
     {
@@ -116,10 +122,29 @@ class ImageInfo
     }
 
     /**
-     * @return int
+     * Returns the size of the image file.
+     *
+     * @return int Image file size.
      */
     public function getFilesize(): int
     {
         return $this->filesize;
+    }
+
+    /**
+     * Returns class properties as an array.
+     *
+     * @return array Class properties as an array.
+     */
+    public function asArray(): array
+    {
+        return [
+            'url' => $this->url,
+            'path' => $this->filename,
+            'mimeType' => $this->mimeType,
+            'extension' => $this->extension,
+            'width' => $this->width,
+            'height' => $this->height,
+        ];
     }
 }

@@ -1,33 +1,39 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper\Extractor;
 
+use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\ReplyReview;
 use Nelexa\GPlay\Model\Review;
-use Nelexa\GPlay\Request\RequestApp;
 use Nelexa\GPlay\Util\DateStringFormatter;
 
+/**
+ * @internal
+ */
 class ReviewsExtractor
 {
     /**
-     * @param RequestApp $requestApp
+     * @param AppId $requestApp
      * @param array $data
      * @return array
      */
-    public static function extractReviews(RequestApp $requestApp, array $data): array
+    public static function extractReviews(AppId $requestApp, array $data): array
     {
         $reviews = [];
         foreach ($data as $reviewData) {
             $reviewId = $reviewData[0];
             $reviewUrl = $requestApp->getUrl() . '&reviewId=' . urlencode($reviewId);
             $userName = $reviewData[1][0];
-            $avatar = new GoogleImage($reviewData[1][1][3][2]);
-            $date = null;
-            if (isset($reviewData[5][0])) {
-                $date = DateStringFormatter::unixTimeToDateTime($reviewData[5][0]);
-            }
+            $avatar = (new GoogleImage($reviewData[1][1][3][2]))->setSize(64);
+            $date = DateStringFormatter::unixTimeToDateTime($reviewData[5][0]);
             $score = $reviewData[2] ?? 0;
             $text = (string)($reviewData[4] ?? '');
             $likeCount = $reviewData[6];

@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
@@ -10,6 +16,9 @@ use Nelexa\GPlay\Util\ScraperUtil;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @internal
+ */
 class CategoriesScraper implements ResponseHandlerInterface
 {
     private const CATEGORY_URL_PREFIX = '/store/apps/category/';

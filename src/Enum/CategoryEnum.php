@@ -2,69 +2,77 @@
 /** @noinspection PhpUnusedPrivateFieldInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Enum;
 
 use Nelexa\Enum;
 
 /**
- * @method static CategoryEnum GAME
- * @method static CategoryEnum FAMILY
- * @method static CategoryEnum ART_AND_DESIGN
- * @method static CategoryEnum AUTO_AND_VEHICLES
- * @method static CategoryEnum BEAUTY
- * @method static CategoryEnum BOOKS_AND_REFERENCE
- * @method static CategoryEnum BUSINESS
- * @method static CategoryEnum COMICS
- * @method static CategoryEnum COMMUNICATION
- * @method static CategoryEnum DATING
- * @method static CategoryEnum EDUCATION
- * @method static CategoryEnum ENTERTAINMENT
- * @method static CategoryEnum EVENTS
- * @method static CategoryEnum FINANCE
- * @method static CategoryEnum FOOD_AND_DRINK
- * @method static CategoryEnum HEALTH_AND_FITNESS
- * @method static CategoryEnum HOUSE_AND_HOME
- * @method static CategoryEnum LIBRARIES_AND_DEMO
- * @method static CategoryEnum LIFESTYLE
- * @method static CategoryEnum MAPS_AND_NAVIGATION
- * @method static CategoryEnum MEDICAL
- * @method static CategoryEnum MUSIC_AND_AUDIO
- * @method static CategoryEnum NEWS_AND_MAGAZINES
- * @method static CategoryEnum PARENTING
- * @method static CategoryEnum PERSONALIZATION
- * @method static CategoryEnum PHOTOGRAPHY
- * @method static CategoryEnum PRODUCTIVITY
- * @method static CategoryEnum SHOPPING
- * @method static CategoryEnum SOCIAL
- * @method static CategoryEnum SPORTS
- * @method static CategoryEnum TOOLS
- * @method static CategoryEnum TRAVEL_AND_LOCAL
- * @method static CategoryEnum VIDEO_PLAYERS
- * @method static CategoryEnum ANDROID_WEAR
- * @method static CategoryEnum WEATHER
- * @method static CategoryEnum GAME_ACTION
- * @method static CategoryEnum GAME_ADVENTURE
- * @method static CategoryEnum GAME_ARCADE
- * @method static CategoryEnum GAME_BOARD
- * @method static CategoryEnum GAME_CARD
- * @method static CategoryEnum GAME_CASINO
- * @method static CategoryEnum GAME_CASUAL
- * @method static CategoryEnum GAME_EDUCATIONAL
- * @method static CategoryEnum GAME_MUSIC
- * @method static CategoryEnum GAME_PUZZLE
- * @method static CategoryEnum GAME_RACING
- * @method static CategoryEnum GAME_ROLE_PLAYING
- * @method static CategoryEnum GAME_SIMULATION
- * @method static CategoryEnum GAME_SPORTS
- * @method static CategoryEnum GAME_STRATEGY
- * @method static CategoryEnum GAME_TRIVIA
- * @method static CategoryEnum GAME_WORD
- * @method static CategoryEnum FAMILY_ACTION
- * @method static CategoryEnum FAMILY_BRAINGAMES
- * @method static CategoryEnum FAMILY_CREATE
- * @method static CategoryEnum FAMILY_EDUCATION
- * @method static CategoryEnum FAMILY_MUSICVIDEO
- * @method static CategoryEnum FAMILY_PRETEND
+ * Contains all valid application category values.
+ *
+ * @method static CategoryEnum GAME() Returns the category id 'Games'.
+ * @method static CategoryEnum FAMILY() Returns the category id 'Family'.
+ * @method static CategoryEnum ART_AND_DESIGN() Returns the category id 'Art & Design'.
+ * @method static CategoryEnum AUTO_AND_VEHICLES() Returns the category id 'Auto & Vehicles'.
+ * @method static CategoryEnum BEAUTY() Returns the category id 'Beauty'.
+ * @method static CategoryEnum BOOKS_AND_REFERENCE() Returns the category id 'Books & Reference'.
+ * @method static CategoryEnum BUSINESS() Returns the category id 'Business'.
+ * @method static CategoryEnum COMICS() Returns the category id 'Comics'.
+ * @method static CategoryEnum COMMUNICATION() Returns the category id 'Communication'.
+ * @method static CategoryEnum DATING() Returns the category id 'Dating'.
+ * @method static CategoryEnum EDUCATION() Returns the category id 'Education'.
+ * @method static CategoryEnum ENTERTAINMENT() Returns the category id 'Entertainment'.
+ * @method static CategoryEnum EVENTS() Returns the category id 'Events'.
+ * @method static CategoryEnum FINANCE() Returns the category id 'Finance'.
+ * @method static CategoryEnum FOOD_AND_DRINK() Returns the category id 'Food & Drink'.
+ * @method static CategoryEnum HEALTH_AND_FITNESS() Returns the category id 'Health & Fitness'.
+ * @method static CategoryEnum HOUSE_AND_HOME() Returns the category id 'House & Home'.
+ * @method static CategoryEnum LIBRARIES_AND_DEMO() Returns the category id 'Libraries & Demo'.
+ * @method static CategoryEnum LIFESTYLE() Returns the category id 'Lifestyle'.
+ * @method static CategoryEnum MAPS_AND_NAVIGATION() Returns the category id 'Maps & Navigation'.
+ * @method static CategoryEnum MEDICAL() Returns the category id 'Medical'.
+ * @method static CategoryEnum MUSIC_AND_AUDIO() Returns the category id 'Music & Audio'.
+ * @method static CategoryEnum NEWS_AND_MAGAZINES() Returns the category id 'News & Magazines'.
+ * @method static CategoryEnum PARENTING() Returns the category id 'Parenting'.
+ * @method static CategoryEnum PERSONALIZATION() Returns the category id 'Personalization'.
+ * @method static CategoryEnum PHOTOGRAPHY() Returns the category id 'Photography'.
+ * @method static CategoryEnum PRODUCTIVITY() Returns the category id 'Productivity'.
+ * @method static CategoryEnum SHOPPING() Returns the category id 'Shopping'.
+ * @method static CategoryEnum SOCIAL() Returns the category id 'Social'.
+ * @method static CategoryEnum SPORTS() Returns the category id 'Sports'.
+ * @method static CategoryEnum TOOLS() Returns the category id 'Tools'.
+ * @method static CategoryEnum TRAVEL_AND_LOCAL() Returns the category id 'Travel & Local'.
+ * @method static CategoryEnum VIDEO_PLAYERS() Returns the category id 'Video Players & Editors'.
+ * @method static CategoryEnum ANDROID_WEAR() Returns the category id 'Wear OS by Google'.
+ * @method static CategoryEnum WEATHER() Returns the category id 'Weather'.
+ * @method static CategoryEnum GAME_ACTION() Returns the category id 'Action'.
+ * @method static CategoryEnum GAME_ADVENTURE() Returns the category id 'Adventure'.
+ * @method static CategoryEnum GAME_ARCADE() Returns the category id 'Arcade'.
+ * @method static CategoryEnum GAME_BOARD() Returns the category id 'Board'.
+ * @method static CategoryEnum GAME_CARD() Returns the category id 'Card'.
+ * @method static CategoryEnum GAME_CASINO() Returns the category id 'Casino'.
+ * @method static CategoryEnum GAME_CASUAL() Returns the category id 'Casual'.
+ * @method static CategoryEnum GAME_EDUCATIONAL() Returns the category id 'Educational'.
+ * @method static CategoryEnum GAME_MUSIC() Returns the category id 'Music'.
+ * @method static CategoryEnum GAME_PUZZLE() Returns the category id 'Puzzle'.
+ * @method static CategoryEnum GAME_RACING() Returns the category id 'Racing'.
+ * @method static CategoryEnum GAME_ROLE_PLAYING() Returns the category id 'Role Playing'.
+ * @method static CategoryEnum GAME_SIMULATION() Returns the category id 'Simulation'.
+ * @method static CategoryEnum GAME_SPORTS() Returns the category id 'Sports'.
+ * @method static CategoryEnum GAME_STRATEGY() Returns the category id 'Strategy'.
+ * @method static CategoryEnum GAME_TRIVIA() Returns the category id 'Trivia'.
+ * @method static CategoryEnum GAME_WORD() Returns the category id 'Word'.
+ * @method static CategoryEnum FAMILY_ACTION() Returns the category id 'Family Action & Adventure'.
+ * @method static CategoryEnum FAMILY_BRAINGAMES() Returns the category id 'Family Brain Games'.
+ * @method static CategoryEnum FAMILY_CREATE() Returns the category id 'Creativity'.
+ * @method static CategoryEnum FAMILY_EDUCATION() Returns the category id 'Education'.
+ * @method static CategoryEnum FAMILY_MUSICVIDEO() Returns the category id 'Family Music and Video'.
+ * @method static CategoryEnum FAMILY_PRETEND() Returns the category id 'Pretend play'.
  */
 class CategoryEnum extends Enum
 {

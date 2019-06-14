@@ -1,27 +1,36 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Http\ResponseHandlerInterface;
-use Nelexa\GPlay\Request\RequestApp;
+use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @internal
+ */
 class ReviewsScraper implements ResponseHandlerInterface
 {
     /**
-     * @var RequestApp
+     * @var AppId
      */
     private $requestApp;
 
     /**
      * ReviewsScraper constructor.
      *
-     * @param RequestApp $requestApp
+     * @param AppId $requestApp
      */
-    public function __construct(RequestApp $requestApp)
+    public function __construct(AppId $requestApp)
     {
         $this->requestApp = $requestApp;
     }

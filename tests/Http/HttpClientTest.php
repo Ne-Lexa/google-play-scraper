@@ -120,8 +120,7 @@ class HttpClientTest extends TestCase
 
     public function testMergeConfig(): void
     {
-        $client = new class extends HttpClient
-        {
+        $client = new class extends HttpClient {
             public function setDebug(bool $debug): void
             {
                 $this->mergeConfig([RequestOptions::DEBUG => $debug]);

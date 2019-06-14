@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Http\ResponseHandlerInterface;
@@ -8,6 +14,9 @@ use Nelexa\GPlay\Model\Permission;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * @internal
+ */
 class PermissionScraper implements ResponseHandlerInterface
 {
     /**

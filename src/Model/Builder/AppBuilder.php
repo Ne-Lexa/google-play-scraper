@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Model\Builder;
 
 use Nelexa\GPlay\Model\Category;
@@ -10,6 +16,11 @@ use Nelexa\GPlay\Model\HistogramRating;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
 
+/**
+ * App Builder.
+ *
+ * @internal
+ */
 class AppBuilder
 {
     /**
@@ -19,7 +30,11 @@ class AppBuilder
     /**
      * @var string|null
      */
-    private $url;
+    private $locale;
+    /**
+     * @var string|null
+     */
+    private $country;
     /**
      * @var string|null
      */
@@ -47,23 +62,15 @@ class AppBuilder
     /**
      * @var string|null
      */
-    private $locale;
-    /**
-     * @var string|null
-     */
     private $description;
     /**
      * @var string|null
      */
-    private $translatedDescription;
-    /**
-     * @var string|null
-     */
-    private $translatedFromLanguage;
+    private $translatedFromLocale;
     /**
      * @var GoogleImage|null
      */
-    private $headerImage;
+    private $cover;
     /**
      * @var GoogleImage[]
      */
@@ -119,11 +126,11 @@ class AppBuilder
     /**
      * @var bool
      */
-    private $adSupported = false;
+    private $containsAds = false;
     /**
      * @var string|null
      */
-    private $appSize;
+    private $size;
     /**
      * @var string|null
      */
@@ -151,7 +158,7 @@ class AppBuilder
     /**
      * @var int
      */
-    private $reviewsCount = 0;
+    private $numberReviews = 0;
     /**
      * @var Review[]
      */
@@ -176,21 +183,39 @@ class AppBuilder
     }
 
     /**
-     * @param string|null $url
+     * @return string|null
+     */
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    /**
+     * @param string|null $locale
      * @return AppBuilder
      */
-    public function setUrl(?string $url): AppBuilder
+    public function setLocale(?string $locale): AppBuilder
     {
-        $this->url = $url;
+        $this->locale = $locale;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getUrl(): ?string
+    public function getCountry(): ?string
     {
-        return $this->url;
+        return $this->country;
+    }
+
+    /**
+     * @param string|null $country
+     * @return AppBuilder
+     */
+    public function setCountry(?string $country): AppBuilder
+    {
+        $this->country = $country;
+        return $this;
     }
 
     /**
@@ -304,24 +329,6 @@ class AppBuilder
     /**
      * @return string|null
      */
-    public function getLocale(): ?string
-    {
-        return $this->locale;
-    }
-
-    /**
-     * @param string|null $locale
-     * @return AppBuilder
-     */
-    public function setLocale(?string $locale): AppBuilder
-    {
-        $this->locale = $locale;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
@@ -340,53 +347,36 @@ class AppBuilder
     /**
      * @return string|null
      */
-    public function getTranslatedDescription(): ?string
+    public function getTranslatedFromLocale(): ?string
     {
-        return $this->translatedDescription;
+        return $this->translatedFromLocale;
     }
 
     /**
-     * @return string|null
-     */
-    public function getTranslatedFromLanguage(): ?string
-    {
-        return $this->translatedFromLanguage;
-    }
-
-    /**
-     * @param string|null $translatedDescription
-     * @param string|null $translatedFromLanguage
+     * @param string|null $translatedFromLocale
      * @return AppBuilder
      */
-    public function setTranslated(
-        ?string $translatedDescription,
-        ?string $translatedFromLanguage
-    ): AppBuilder {
-        if ($translatedFromLanguage === null || $translatedDescription === null) {
-            $this->translatedDescription = null;
-            $this->translatedFromLanguage = null;
-        } else {
-            $this->translatedDescription = $translatedDescription;
-            $this->translatedFromLanguage = $translatedFromLanguage;
-        }
+    public function setTranslatedFromLocale(?string $translatedFromLocale): AppBuilder
+    {
+        $this->translatedFromLocale = $translatedFromLocale;
         return $this;
     }
 
     /**
      * @return GoogleImage|null
      */
-    public function getHeaderImage(): ?GoogleImage
+    public function getCover(): ?GoogleImage
     {
-        return $this->headerImage;
+        return $this->cover;
     }
 
     /**
-     * @param GoogleImage|null $headerImage
+     * @param GoogleImage|null $cover
      * @return AppBuilder
      */
-    public function setHeaderImage(?GoogleImage $headerImage): AppBuilder
+    public function setCover(?GoogleImage $cover): AppBuilder
     {
-        $this->headerImage = $headerImage;
+        $this->cover = $cover;
         return $this;
     }
 
@@ -640,36 +630,36 @@ class AppBuilder
     /**
      * @return bool
      */
-    public function isAdSupported(): bool
+    public function isContainsAds(): bool
     {
-        return $this->adSupported;
+        return $this->containsAds;
     }
 
     /**
-     * @param bool $adSupported
+     * @param bool $containsAds
      * @return AppBuilder
      */
-    public function setAdSupported(bool $adSupported): AppBuilder
+    public function setContainsAds(bool $containsAds): AppBuilder
     {
-        $this->adSupported = $adSupported;
+        $this->containsAds = $containsAds;
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getAppSize(): ?string
+    public function getSize(): ?string
     {
-        return $this->appSize;
+        return $this->size;
     }
 
     /**
-     * @param string|null $appSize
+     * @param string|null $size
      * @return AppBuilder
      */
-    public function setAppSize(?string $appSize): AppBuilder
+    public function setSize(?string $size): AppBuilder
     {
-        $this->appSize = $appSize;
+        $this->size = $size;
         return $this;
     }
 
@@ -784,18 +774,18 @@ class AppBuilder
     /**
      * @return int
      */
-    public function getReviewsCount(): int
+    public function getNumberReviews(): int
     {
-        return $this->reviewsCount;
+        return $this->numberReviews;
     }
 
     /**
-     * @param int $reviewsCount
+     * @param int $numberReviews
      * @return AppBuilder
      */
-    public function setReviewsCount(int $reviewsCount): AppBuilder
+    public function setNumberReviews(int $numberReviews): AppBuilder
     {
-        $this->reviewsCount = $reviewsCount;
+        $this->numberReviews = $numberReviews;
         return $this;
     }
 

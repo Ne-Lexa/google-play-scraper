@@ -27,9 +27,7 @@ class SaveGoogleImagesTest extends TestCase
     {
         parent::setUp();
         $this->destDirectory = sys_get_temp_dir() . '/gplay-screenshots';
-        $cache = new ArrayCache();
         $this->gplay = new GPlayApps();
-        $this->gplay->setCache($cache);
     }
 
     protected function tearDown()

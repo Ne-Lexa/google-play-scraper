@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay;
 
 use GuzzleHttp\Exception\GuzzleException;
@@ -14,17 +20,15 @@ use Nelexa\GPlay\Enum\PriceEnum;
 use Nelexa\GPlay\Enum\SortEnum;
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\Http\HttpClient;
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Model\App;
 use Nelexa\GPlay\Model\AppDetail;
+use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\ImageInfo;
 use Nelexa\GPlay\Model\Permission;
 use Nelexa\GPlay\Model\Review;
-use Nelexa\GPlay\Request\PlayStoreUiRequest;
-use Nelexa\GPlay\Request\RequestApp;
 use Nelexa\GPlay\Scraper\AppDetailScraper;
 use Nelexa\GPlay\Scraper\CategoriesScraper;
 use Nelexa\GPlay\Scraper\CategoryAppsScraper;
@@ -35,108 +39,83 @@ use Nelexa\GPlay\Scraper\FindDevAppsUrlScraper;
 use Nelexa\GPlay\Scraper\FindSimilarAppsUrlScraper;
 use Nelexa\GPlay\Scraper\PermissionScraper;
 use Nelexa\GPlay\Scraper\PlayStoreUiAppsScraper;
+use Nelexa\GPlay\Scraper\PlayStoreUiRequest;
 use Nelexa\GPlay\Scraper\ReviewsScraper;
+use Nelexa\GPlay\Scraper\SuggestScraper;
 use Nelexa\GPlay\Util\LocaleHelper;
-use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\SimpleCache\CacheInterface;
 
 /**
- * PHP Scraper to extract application data from the Google Play store.
- *
- * @package Nelexa\GPlay
- * @author Ne-Lexa
+ * Contains methods for extracting information from the Google Play store.
  */
 class GPlayApps
 {
-    /**
-     * @const Default locale
-     */
+    /** @var string default request locale */
     public const DEFAULT_LOCALE = 'en_US';
-    /**
-     * @const Default country
-     */
-    public const DEFAULT_COUNTRY = 'us'; // Affected price
 
+    /** @var string default request country */
+    public const DEFAULT_COUNTRY = 'us';
+
+    /** @var string Google Play base url */
     public const GOOGLE_PLAY_URL = 'https://play.google.com';
+
+    /** @var string Google Play apps url */
     public const GOOGLE_PLAY_APPS_URL = self::GOOGLE_PLAY_URL . '/store/apps';
+
+    /** @var int Maximum number of search results (Google limit). */
     public const MAX_SEARCH_RESULTS = 250;
 
+    /** @var int Limit for all available results. */
+    public const UNLIMIT = -1;
+
+    /** @internal */
     public const REQ_PARAM_LOCALE = 'hl';
+
+    /** @internal */
     public const REQ_PARAM_COUNTRY = 'gl';
+
+    /** @internal */
     public const REQ_PARAM_ID = 'id';
 
-    /**
-     * @var int
-     */
-    private $concurrency = 4;
-    /**
-     * @var string
-     */
-    private $defaultLocale;
-    /**
-     * @var string
-     */
-    private $defaultCountry;
+    /** @var int Limit of parallel HTTP requests */
+    protected $concurrency = 4;
+
+    /** @var string Locale (language) for HTTP requests to Google Play */
+    protected $locale;
+
+    /** @var string Country for HTTP requests to Google Play */
+    protected $country;
 
     /**
-     * GPlayApps constructor.
+     * Creates an object to retrieve data about Android applications from the Google Play store.
      *
-     * @param string $defaultLocale
-     * @param string $defaultCountry
+     * @param string $locale Locale (language) for HTTP requests to Google Play
+     *     or {@see \Nelexa\GPlay\GPlayApps::DEFAULT_LOCALE}.
+     * @param string $country Country for HTTP requests to Google Play
+     *     or {@see \Nelexa\GPlay\GPlayApps::DEFAULT_COUNTRY}.
+     *
+     * @see \Nelexa\GPlay\GPlayApps::DEFAULT_LOCALE Default locale
+     * @see \Nelexa\GPlay\GPlayApps::DEFAULT_COUNTRY Default country
      */
-    public function __construct(?string $defaultLocale = null, ?string $defaultCountry = null)
-    {
+    public function __construct(
+        string $locale = self::DEFAULT_LOCALE,
+        string $country = self::DEFAULT_COUNTRY
+    ) {
         $this
-            ->setDefaultLocale($defaultLocale ?? self::DEFAULT_LOCALE)
-            ->setDefaultCountry($defaultCountry ?? self::DEFAULT_COUNTRY);
+            ->setLocale($locale)
+            ->setCountry($country);
     }
-
-    /**
-     * @return string
-     */
-    public function getDefaultLocale(): string
-    {
-        return $this->defaultLocale;
-    }
-
-    /**
-     * @param string $defaultLocale
-     * @return GPlayApps
-     */
-    public function setDefaultLocale(string $defaultLocale): GPlayApps
-    {
-        $this->defaultLocale = LocaleHelper::getNormalizeLocale($defaultLocale);
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultCountry(): string
-    {
-        return $this->defaultCountry;
-    }
-
-    /**
-     * @param string $defaultCountry
-     * @return GPlayApps
-     */
-    public function setDefaultCountry(string $defaultCountry): GPlayApps
-    {
-        $this->defaultCountry = $defaultCountry;
-        return $this;
-    }
-
 
     /**
      * Sets caching for HTTP requests.
      *
-     * @param CacheInterface|null $cache PSR-16 Simple Cache instance
-     * @param \DateInterval|int|null $cacheTtl Optional. The TTL of cached data.
-     * @return GPlayApps
+     * @param CacheInterface|null $cache PSR-16 Simple Cache instance.
+     * @param \DateInterval|int|null $cacheTtl TTL cached data.
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
      */
-    public function setCache(?CacheInterface $cache, $cacheTtl = null): self
+    public function setCache(?CacheInterface $cache, $cacheTtl = null): GPlayApps
     {
         $this->getHttpClient()
             ->setCache($cache)
@@ -147,7 +126,7 @@ class GPlayApps
     /**
      * Returns an instance of HTTP client.
      *
-     * @return HttpClient
+     * @return HttpClient Http Client.
      */
     protected function getHttpClient(): HttpClient
     {
@@ -161,8 +140,9 @@ class GPlayApps
     /**
      * Sets the limit of concurrent HTTP requests.
      *
-     * @param int $concurrency maximum number of concurrent HTTP requests
-     * @return GPlayApps
+     * @param int $concurrency Maximum number of concurrent HTTP requests.
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
      */
     public function setConcurrency(int $concurrency): GPlayApps
     {
@@ -174,8 +154,10 @@ class GPlayApps
      * Sets proxy for outgoing HTTP requests.
      *
      * @param string|null $proxy Proxy url, ex. socks5://127.0.0.1:9050 or https://116.90.233.2:47348
-     * @return GPlayApps
-     * @see https://curl.haxx.se/libcurl/c/CURLOPT_PROXY.html
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
+     *
+     * @see https://curl.haxx.se/libcurl/c/CURLOPT_PROXY.html Description of proxy URL formats in CURL.
      */
     public function setProxy(?string $proxy): GPlayApps
     {
@@ -184,57 +166,49 @@ class GPlayApps
     }
 
     /**
-     * @param float $connectTimeout
-     * @return GPlayApps
-     */
-    public function setConnectTimeout(float $connectTimeout): GPlayApps
-    {
-        $this->getHttpClient()->setConnectTimeout($connectTimeout);
-        return $this;
-    }
-
-    /**
-     * @param float $timeout
-     * @return GPlayApps
-     */
-    public function setTimeout(float $timeout): GPlayApps
-    {
-        $this->getHttpClient()->setTimeout($timeout);
-        return $this;
-    }
-
-    /**
-     * Returns detailed information about an Android application from
-     * Google Play by its id (package name).
+     * Returns detailed information about the Android application from the Google Play store.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @return AppDetail Detailed information about the Android
-     *     application or exception.
-     * @throws GooglePlayException if the application is not exists or other HTTP error
+     * For information, you must specify the application ID (android package name).
+     * The application ID can be viewed in the Google Play store:
+     * `https://play.google.com/store/apps/details?id=XXXXXX` , where
+     * XXXXXX is the application id.
+     *
+     * Or it can be found in the APK file.
+     * ```shell
+     * aapt dump file.apk | grep package | awk '{print $2}' | sed s/name=//g | sed s/\'//g
+     * ```
+     *
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     *
+     * @return AppDetail Detailed information about the Android application or exception.
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
      */
-    public function getApp($requestApp): AppDetail
+    public function getApp($appId): AppDetail
     {
-        return $this->getApps([$requestApp])[0];
+        return $this->getApps([$appId])[0];
     }
 
     /**
      * Returns detailed information about many android packages.
      * HTTP requests are executed in parallel.
      *
-     * @param string[]|RequestApp[]|App[] $requestApps array of application ids or array of {@see RequestApp} or array
-     *     of {@see App}.
+     * @param string[]|AppId[] $appIds Array of application identifiers.
+     *
      * @return AppDetail[] An array of detailed information for each application.
      *     The keys of the returned array matches to the passed array.
-     * @throws GooglePlayException if the application is not exists or other HTTP error
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
+     *
      * @see GPlayApps::setConcurrency() To set the limit of parallel requests
      */
-    public function getApps(array $requestApps): array
+    public function getApps(array $appIds): array
     {
-        if (empty($requestApps)) {
+        if (empty($appIds)) {
             return [];
         }
-        $urls = $this->getRequestAppsUrlList($requestApps);
+        $urls = $this->getUrlListFromAppIds($appIds);
         try {
             return $this->getHttpClient()->requestAsyncPool(
                 'GET',
@@ -250,82 +224,111 @@ class GPlayApps
     }
 
     /**
-     * @param string[]|RequestApp[]|App[] $requestApps
-     * @return array
-     * @throws \InvalidArgumentException
+     * Returns an array of URLs for application identifiers.
+     *
+     * @param string[]|AppId[] $appIds Array of application identifiers.
+     *
+     * @return string[] Array of URL.
+     *
+     * @throws \InvalidArgumentException If application ID is empty.
      */
-    private function getRequestAppsUrlList(array $requestApps): array
+    protected function getUrlListFromAppIds(array $appIds): array
     {
         $urls = [];
-        foreach ($requestApps as $key => $requestApp) {
-            $requestApp = $this->castToRequestApp($requestApp);
-            $urls[$key] = $requestApp->getFullUrl();
+        foreach ($appIds as $key => $appId) {
+            $urls[$key] = $this->castToAppId($appId)->getFullUrl();
         }
         return $urls;
     }
 
     /**
-     * @param string|RequestApp|App $requestApp
-     * @return RequestApp
+     * Casts the application identifier to the {@see \Nelexa\GPlay\Model\AppId} type.
+     *
+     * @param string|AppId $appId Application ID.
+     *
+     * @return AppId Application identifier with an \Nelexa\GPlay\Model\AppId type.
+     *
+     * @throws \InvalidArgumentException If the application identifier is null or an invalid parameter is passed.
      */
-    private function castToRequestApp($requestApp): RequestApp
+    protected function castToAppId($appId): AppId
     {
-        if ($requestApp === null) {
-            throw new \InvalidArgumentException('$requestApp is null');
+        if ($appId === null) {
+            throw new \InvalidArgumentException('Application ID is null');
         }
-        if (is_string($requestApp)) {
-            return new RequestApp($requestApp, $this->defaultLocale, $this->defaultCountry);
+        if (is_string($appId)) {
+            return new AppId($appId, $this->locale, $this->country);
         }
-        if ($requestApp instanceof App) {
-            return new RequestApp($requestApp->getId(), $requestApp->getLocale(), $this->defaultCountry);
+        if ($appId instanceof AppId) {
+            return $appId;
         }
-        return $requestApp;
+        throw new \InvalidArgumentException(sprintf(
+            'The expected type for the $appId parameter is a string or %s.',
+            AppId::class
+        ));
     }
 
     /**
      * Returns detailed information about an application from the Google Play store
-     * for an array of locales. HTTP requests are executed in parallel.
+     * for an array of locales.
+     * HTTP requests are executed in parallel.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @param string[] $locales array of locales
-     * @return AppDetail[] array of application detailed application by locale.
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     * @param string[] $locales Array of locales for which to load information.
+     *
+     * @return AppDetail[] Array of application detailed application by locale.
      *     The array key is the locale.
-     * @throws GooglePlayException if the application is not exists or other HTTP error
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
+     *
+     * @see GPlayApps::setConcurrency() To set the limit of parallel requests.
      */
-    public function getAppInLocales($requestApp, array $locales): array
+    public function getAppInLocales($appId, array $locales): array
     {
-        $requestApp = $this->castToRequestApp($requestApp);
+        $appId = $this->castToAppId($appId);
         $requests = [];
         foreach ($locales as $locale) {
-            $requests[$locale] = new RequestApp($requestApp->getId(), $locale, $requestApp->getCountry());
+            $requests[$locale] = new AppId($appId->getId(), $locale, $appId->getCountry());
         }
         return $this->getApps($requests);
     }
 
     /**
      * Returns detailed information about the application in all
-     * available locales. HTTP requests are executed in parallel.
+     * available locales.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @return AppDetail[] An array with detailed information about the application on all available locales. The array
-     *     key is the locale.
-     * @throws GooglePlayException if the application is not exists or other HTTP error
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     * Information is returned only for the description loaded by the developer.
+     * All locales with automated translation from Google Translate will be ignored.
+     * HTTP requests are executed in parallel.
+     *
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     *
+     * @return AppDetail[] An array with detailed information about the application
+     *     on all available locales. The array key is the locale.
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
+     *
+     * @see \Nelexa\GPlay\GPlayApps::setConcurrency() To set the limit of parallel requests.
      */
-    public function getAppInAvailableLocales($requestApp): array
+    public function getAppInAvailableLocales($appId): array
     {
-        $list = $this->getAppInLocales($requestApp, LocaleHelper::SUPPORTED_LOCALES);
+        $list = $this->getAppInLocales($appId, LocaleHelper::SUPPORTED_LOCALES);
 
-        $preferredLocale = $list[self::DEFAULT_LOCALE];
+        $preferredLocale = self::DEFAULT_LOCALE;
         foreach ($list as $app) {
-            if ($app->getTranslatedFromLanguage() !== null) {
-                $preferredLocale = $app->getTranslatedFromLanguage();
+            if ($app->isAutoTranslatedDescription()) {
+                $preferredLocale = $app->getTranslatedFromLocale();
                 break;
             }
         }
+
+        /**
+         * @var AppDetail[] $list
+         */
+        $list = array_filter($list, static function (AppDetail $app) {
+            return !$app->isAutoTranslatedDescription();
+        });
 
         $preferredApp = $list[$preferredLocale];
         $list = array_filter($list, static function (AppDetail $app, string $locale) use ($preferredApp, $list) {
@@ -367,18 +370,19 @@ class GPlayApps
     /**
      * Checks if the specified application exists in the Google Play Store.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @return bool true if the application exists on the Google Play store, and false if not.
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     *
+     * @return bool Returns `true` if the application exists, or `false` if not.
      */
-    public function existsApp($requestApp): bool
+    public function existsApp($appId): bool
     {
-        $requestApp = $this->castToRequestApp($requestApp);
+        $appId = $this->castToAppId($appId);
 
         try {
             return (bool)$this->getHttpClient()->request(
                 'HEAD',
-                $requestApp->getFullUrl(),
+                $appId->getFullUrl(),
                 [
                     RequestOptions::HTTP_ERRORS => false,
                     HttpClient::OPTION_HANDLER_RESPONSE => new ExistsAppScraper(),
@@ -393,21 +397,23 @@ class GPlayApps
      * Checks if the specified applications exist in the Google Play store.
      * HTTP requests are executed in parallel.
      *
-     * @param string[]|RequestApp[]|App[] $requestApps array of application ids or array of {@see RequestApp} or array
-     *     of {@see App}.
-     * @return AppDetail[] Массив подробной информации для каждого приложения.
-     * Ключи возвращаемого массива соответствуют переданному массиву.
-     * @return bool[] An array of information about the existence of each application in the store Google Play. The
-     *     keys of the returned array matches to the passed array.
-     * @throws GooglePlayException
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     * @param string[]|AppId[] $appIds Array of application identifiers.
+     *     The keys of the returned array correspond to the transferred array.
+     *
+     * @return bool[] An array of information about the existence of each
+     *     application in the store Google Play. The keys of the returned
+     *     array matches to the passed array.
+     *
+     * @throws GooglePlayException If an HTTP error other than 404 is received.
+     *
+     * @see GPlayApps::setConcurrency() To set the limit of parallel requests.
      */
-    public function existsApps(array $requestApps): array
+    public function existsApps(array $appIds): array
     {
-        if (empty($requestApps)) {
+        if (empty($appIds)) {
             return [];
         }
-        $urls = $this->getRequestAppsUrlList($requestApps);
+        $urls = $this->getUrlListFromAppIds($appIds);
         try {
             return $this->getHttpClient()->requestAsyncPool(
                 'HEAD',
@@ -424,49 +430,54 @@ class GPlayApps
     }
 
     /**
-     * Returns an array with application reviews.
+     * Returns reviews of the Android app in the Google Play Store.
+     * Getting a lot of reviews can take a lot of time.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @param int $limit Maximum count of reviews. To extract all reviews,
-     *     specify -1. This can take a lot of time.
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     * @param int $limit Maximum number of reviews. To extract all
+     *     reviews, use {@see \Nelexa\GPlay\GPlayApps::UNLIMIT}.
      * @param SortEnum|null $sort Sort reviews of the application.
      *     If null, then sort by the newest reviews.
-     * @return Review[] App reviews
-     * @throws GooglePlayException if the application is not exists or other HTTP error
-     * @see SortEnum::NEWEST()       Sort by latest reviews.
-     * @see SortEnum::HELPFULNESS()  Sort by helpful reviews.
-     * @see SortEnum::RATING()       Sort by rating reviews.
+     *
+     * @return Review[] App reviews.
+     *
+     * @throws GooglePlayException if the application is not exists or other HTTP error.
+     *
+     * @see SortEnum::NEWEST() Contains all valid values ​​for the "sort" parameter.
+     * @see \Nelexa\GPlay\GPlayApps::UNLIMIT Limit for all results.
      */
-    public function getAppReviews($requestApp, int $limit, ?SortEnum $sort = null): array
+    public function getAppReviews($appId, int $limit = 100, ?SortEnum $sort = null): array
     {
-        $requestApp = $this->castToRequestApp($requestApp);
+        $appId = $this->castToAppId($appId);
         $sort = $sort ?? SortEnum::NEWEST();
 
         $allCount = 0;
         $token = null;
         $allReviews = [];
 
-        $cacheTtl = $sort === SortEnum::NEWEST() ? \DateInterval::createFromDateString('5 min') : \DateInterval::createFromDateString('1 hour');
+        $cacheTtl = $sort === SortEnum::NEWEST() ?
+            \DateInterval::createFromDateString('5 min') :
+            \DateInterval::createFromDateString('1 hour');
 
         try {
             do {
-                $count = $limit === -1 ?
+                $count = $limit === self::UNLIMIT ?
                     PlayStoreUiRequest::LIMIT_REVIEW_ON_PAGE :
                     min(PlayStoreUiRequest::LIMIT_REVIEW_ON_PAGE, max($limit - $allCount, 1));
 
-                $request = PlayStoreUiRequest::getReviewsRequest($requestApp, $count, $sort, $token);
+                $request = PlayStoreUiRequest::getReviewsRequest($appId, $count, $sort, $token);
 
                 [$reviews, $token] = $this->getHttpClient()->send(
                     $request,
                     [
                         HttpClient::OPTION_CACHE_TTL => $cacheTtl,
-                        HttpClient::OPTION_HANDLER_RESPONSE => new ReviewsScraper($requestApp),
+                        HttpClient::OPTION_HANDLER_RESPONSE => new ReviewsScraper($appId),
                     ]
                 );
                 $allCount += count($reviews);
                 $allReviews[] = $reviews;
-            } while ($token !== null && ($limit === -1 || $allCount < $limit));
+            } while ($token !== null && ($limit === self::UNLIMIT || $allCount < $limit));
         } catch (GuzzleException $e) {
             throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
         }
@@ -475,27 +486,32 @@ class GPlayApps
     }
 
     /**
-     * Returns a list of similar applications in the Google Play store.
+     * Returns an array of similar applications with basic information about
+     * them in the Google Play store.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @param int $limit limit of similar applications
-     * @return App[] array of applications with basic information
-     * @throws GooglePlayException if the application is not exists or other HTTP error
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     * @param int $limit The maximum number of similar applications. To extract all
+     *     similar applications, use {@see \Nelexa\GPlay\GPlayApps::UNLIMIT}.
+     *
+     * @return App[] An array of applications with basic information about them.
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
+     *
+     * @see GPlayApps::UNLIMIT Limit for all results.
      */
-    public function getSimilarApps($requestApp, int $limit = 50): array
+    public function getSimilarApps($appId, int $limit = 50): array
     {
-        $requestApp = $this->castToRequestApp($requestApp);
-        $limit = max(1, min($limit, self::MAX_SEARCH_RESULTS));
+        $appId = $this->castToAppId($appId);
         try {
             /**
              * @var string|null $similarAppsUrl
              */
             $similarAppsUrl = $this->getHttpClient()->request(
                 'GET',
-                $requestApp->getFullUrl(),
+                $appId->getFullUrl(),
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new FindSimilarAppsUrlScraper($requestApp),
+                    HttpClient::OPTION_HANDLER_RESPONSE => new FindSimilarAppsUrlScraper($appId),
                 ]
             );
             if ($similarAppsUrl === null) {
@@ -503,8 +519,8 @@ class GPlayApps
             }
             return $this->getAppsFromClusterPage(
                 $similarAppsUrl,
-                $requestApp->getLocale(),
-                $requestApp->getCountry(),
+                $appId->getLocale(),
+                $appId->getCountry(),
                 $limit
             );
         } catch (GuzzleException $e) {
@@ -513,19 +529,29 @@ class GPlayApps
     }
 
     /**
-     * @param string $clusterPageUrl
-     * @param string $locale
-     * @param string $country
-     * @param int $limit
-     * @return App[]
-     * @throws GooglePlayException
+     * Returns a list of applications with basic information.
+     *
+     * @param string $clusterPageUrl Cluster page URL.
+     * @param string $locale Locale.
+     * @param string $country Country.
+     * @param int $limit Maximum number of applications. To extract all
+     *     applications, use {@see \Nelexa\GPlay\GPlayApps::UNLIMIT}.
+     *
+     * @return App[] Array of applications with basic information about them.
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
+     *
+     * @see GPlayApps::UNLIMIT Limit for all results.
      */
-    private function getAppsFromClusterPage(
+    protected function getAppsFromClusterPage(
         string $clusterPageUrl,
         string $locale,
         string $country,
         int $limit
     ): array {
+        if ($limit < self::UNLIMIT || $limit === 0) {
+            throw new \InvalidArgumentException(sprintf('Invalid limit: %d', $limit));
+        }
         try {
             [$apps, $token] = $this->getHttpClient()->request(
                 'GET',
@@ -538,8 +564,8 @@ class GPlayApps
             $allCount = count($apps);
             $allApps = [$apps];
 
-            while ($token !== null && ($limit === -1 || $allCount < $limit)) {
-                $count = $limit === -1 ?
+            while ($token !== null && ($limit === self::UNLIMIT || $allCount < $limit)) {
+                $count = $limit === self::UNLIMIT ?
                     PlayStoreUiRequest::LIMIT_APPS_ON_PAGE :
                     min(PlayStoreUiRequest::LIMIT_APPS_ON_PAGE, max($limit - $allCount, 1));
 
@@ -557,20 +583,29 @@ class GPlayApps
         } catch (GuzzleException $e) {
             throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
         }
-        return empty($allApps) ? $allApps : array_slice(array_merge(...$allApps), 0, $limit);
+        if (empty($allApps)) {
+            return $allApps;
+        }
+        $allApps = array_merge(...$allApps);
+        if ($limit !== self::UNLIMIT) {
+            $allApps = array_slice($allApps, 0, $limit);
+        }
+        return $allApps;
     }
 
     /**
      * Returns a list of permissions for the application.
      *
-     * @param string|RequestApp|App $requestApp Application id (package name)
-     *     or object {@see RequestApp} or object {@see App}.
-     * @return Permission[] list of permissions for the application
-     * @throws GooglePlayException
+     * @param string|AppId $appId Application ID (Android package name) as
+     *     a string or {@see \Nelexa\GPlay\Model\AppId} object.
+     *
+     * @return Permission[] Array of permissions for the application.
+     *
+     * @throws GooglePlayException If the application is not exists or other HTTP error.
      */
-    public function getPermissions($requestApp): array
+    public function getPermissions($appId): array
     {
-        $requestApp = $this->castToRequestApp($requestApp);
+        $appId = $this->castToAppId($appId);
 
         $url = self::GOOGLE_PLAY_URL . '/store/xhr/getdoc?authuser=0';
         try {
@@ -579,8 +614,8 @@ class GPlayApps
                 $url,
                 [
                     RequestOptions::FORM_PARAMS => [
-                        'ids' => $requestApp->getId(),
-                        self::REQ_PARAM_LOCALE => $requestApp->getLocale(),
+                        'ids' => $appId->getId(),
+                        self::REQ_PARAM_LOCALE => $appId->getLocale(),
                         'xhr' => 1,
                     ],
                     HttpClient::OPTION_HANDLER_RESPONSE => new PermissionScraper(),
@@ -592,16 +627,14 @@ class GPlayApps
     }
 
     /**
-     * Returns a list of application categories from the Google Play store.
+     * Returns an array of application categories from the Google Play store.
      *
-     * @param string|null $locale site locale or default locale used
-     * @return Category[] list of application categories
-     * @throws GooglePlayException caused by HTTP error
+     * @return Category[] Array of application categories.
+     *
+     * @throws GooglePlayException If HTTP error is received.
      */
-    public function getCategories(?string $locale = null): array
+    public function getCategories(): array
     {
-        $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
-
         $url = self::GOOGLE_PLAY_APPS_URL;
         try {
             return $this->getHttpClient()->request(
@@ -609,7 +642,7 @@ class GPlayApps
                 $url,
                 [
                     RequestOptions::QUERY => [
-                        self::REQ_PARAM_LOCALE => $locale,
+                        self::REQ_PARAM_LOCALE => $this->locale,
                     ],
                     HttpClient::OPTION_HANDLER_RESPONSE => new CategoriesScraper(),
                 ]
@@ -620,13 +653,16 @@ class GPlayApps
     }
 
     /**
-     * Returns a list of application categories from the Google Play store for the locale array.
+     * Returns an array of application categories from the Google Play store for the locale array.
      * HTTP requests are executed in parallel.
      *
-     * @param string[] $locales array of locales
-     * @return Category[][] list of application categories by locale
-     * @throws GooglePlayException caused by HTTP error
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     * @param string[] $locales Array of locales.
+     *
+     * @return Category[][] Array of application categories by locale.
+     *
+     * @throws GooglePlayException If HTTP error is received.
+     *
+     * @see GPlayApps::setConcurrency() To set the limit of parallel requests.
      */
     public function getCategoriesInLocales(array $locales): array
     {
@@ -658,11 +694,13 @@ class GPlayApps
     }
 
     /**
-     * Returns a list of categories from the Google Play store for all available locales.
+     * Returns an array of categories from the Google Play store for all available locales.
      *
-     * @return Category[][] list of application categories by locale
-     * @throws GooglePlayException caused by HTTP error
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     * @return Category[][] Array of application categories by locale.
+     *
+     * @throws GooglePlayException If HTTP error is received.
+     *
+     * @see GPlayApps::setConcurrency() To set the limit of parallel requests.
      */
     public function getCategoriesInAvailableLocales(): array
     {
@@ -672,19 +710,26 @@ class GPlayApps
     /**
      * Returns information about the developer: name, icon, cover, description and website address.
      *
-     * @param string|int|Developer|App|AppDetail $developerId developer identifier or object containing it
-     * @param string|null $locale site locale or default locale used
-     * @return Developer information about the developer
-     * @throws GooglePlayException caused by HTTP error
+     * @param string|Developer|App $developerId Developer id as
+     *     string, {@see \Nelexa\GPlay\Model\Developer} or {@see \Nelexa\GPlay\Model\App} object.
+     *
+     * @return Developer Information about the application developer.
+     *
+     * @throws GooglePlayException If HTTP error is received.
+     *
+     * @see GPlayApps::getDeveloperInfoInLocales() Returns information about the developer for
+     *     the locale array.
      */
-    public function getDeveloperInfo($developerId, ?string $locale = null): Developer
+    public function getDeveloperInfo($developerId): Developer
     {
         $developerId = $this->castToDeveloperId($developerId);
         if (!is_numeric($developerId)) {
-            throw new GooglePlayException(sprintf('Developer "%s" does not have a personalized page on Google Play.', $developerId));
+            throw new GooglePlayException(sprintf(
+                'Developer "%s" does not have a personalized page on Google Play.',
+                $developerId
+            ));
         }
 
-        $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
         $url = self::GOOGLE_PLAY_APPS_URL . '/dev';
         try {
             return $this->getHttpClient()->request(
@@ -693,7 +738,7 @@ class GPlayApps
                 [
                     RequestOptions::QUERY => [
                         self::REQ_PARAM_ID => $developerId,
-                        self::REQ_PARAM_LOCALE => $locale,
+                        self::REQ_PARAM_LOCALE => $this->locale,
                     ],
                     HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperInfoScraper(),
                 ]
@@ -724,11 +769,19 @@ class GPlayApps
     /**
      * Returns information about the developer for the locale array.
      *
-     * @param string|int|Developer|App|AppDetail $developerId developer identifier or object containing it
-     * @param string[] $locales array of locales
-     * @return Developer[] list of developer by locale
-     * @throws GooglePlayException caused by HTTP error
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     * @param string|Developer|App $developerId Developer id as
+     *     string, {@see \Nelexa\GPlay\Model\Developer} or {@see \Nelexa\GPlay\Model\App} object.
+     *
+     * @param string[] $locales Array of locales
+     *
+     * @return Developer[] An array with information about the application developer
+     *     for each requested locale.
+     *
+     * @throws GooglePlayException If HTTP error is received.
+     *
+     * @see GPlayApps::setConcurrency() To set the limit of parallel requests.
+     * @see GPlayApps::getDeveloperInfo() Returns information about the developer: name,
+     *     icon, cover, description and website address.
      */
     public function getDeveloperInfoInLocales($developerId, array $locales = []): array
     {
@@ -739,7 +792,10 @@ class GPlayApps
 
         $id = $this->castToDeveloperId($developerId);
         if (!is_numeric($id)) {
-            throw new GooglePlayException(sprintf('Developer "%s" does not have a personalized page on Google Play.', $id));
+            throw new GooglePlayException(sprintf(
+                'Developer "%s" does not have a personalized page on Google Play.',
+                $id
+            ));
         }
 
         $urls = [];
@@ -766,65 +822,24 @@ class GPlayApps
     }
 
     /**
-     * Returns information about the developer for all available locales.
+     * Returns an array of developer apps with basic information about them
+     *     from the Google Play store.
      *
-     * @param string|int|Developer|App|AppDetail $developerId developer identifier or object containing it
-     * @return Developer[] list of developer by locale
-     * @throws GooglePlayException caused by HTTP error
-     * @see GPlayApps::setConcurrency() To set the limit of parallel requests
+     * @param string|Developer|App $developerId Developer id as
+     *     string, {@see \Nelexa\GPlay\Model\Developer} or {@see \Nelexa\GPlay\Model\App} object.
+     *
+     * @return App[] Array of applications with basic information about them.
+     *
+     * @throws GooglePlayException If HTTP error is received.
      */
-    public function getDeveloperInfoInAvailableLocales(int $developerId): array
+    public function getDeveloperApps($developerId): array
     {
-        $list = $this->getDeveloperInfoInLocales($developerId, LocaleHelper::SUPPORTED_LOCALES);
-
-        $preferredLocale = self::DEFAULT_LOCALE;
-
-        $preferredInfo = $list[$preferredLocale];
-        $list = array_filter($list, static function (Developer $info, string $locale) use ($preferredInfo, $preferredLocale) {
-            return $locale === $preferredLocale || $preferredInfo->equals($info);
-        }, ARRAY_FILTER_USE_BOTH);
-
-        foreach ($list as $locale => $info) {
-            if (($pos = strpos($locale, '_')) !== false) {
-                $rootLang = substr($locale, 0, $pos);
-                $rootLangLocale = LocaleHelper::getNormalizeLocale($rootLang);
-                if (
-                    $rootLangLocale !== $locale &&
-                    isset($list[$rootLangLocale]) &&
-                    $list[$rootLangLocale]->equals($info)
-                ) {
-                    // delete duplicate data,
-                    // for example, delete en_CA, en_IN, en_GB, en_ZA, if there is en_US and they are equals.
-                    unset($list[$locale]);
-                }
-            }
-        }
-
-        return $list;
-    }
-
-    /**
-     * Returns a list of developer applications in the Google Play store.
-     *
-     * @param string|int|Developer|App|AppDetail $developerId developer identifier or object containing it
-     * @param string|null $locale locale or default locale used
-     * @param string|null $country country or default country used
-     * @return App[] array of applications with basic information
-     * @throws GooglePlayException caused by HTTP error
-     */
-    public function getDeveloperApps(
-        $developerId,
-        ?string $locale = null,
-        ?string $country = null
-    ): array {
-        $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
-        $country = $country ?? $this->defaultCountry;
         $developerId = $this->castToDeveloperId($developerId);
 
         $query = [
             self::REQ_PARAM_ID => $developerId,
-            self::REQ_PARAM_LOCALE => $locale,
-            self::REQ_PARAM_COUNTRY => $country,
+            self::REQ_PARAM_LOCALE => $this->locale,
+            self::REQ_PARAM_COUNTRY => $this->country,
         ];
 
         if (is_numeric($developerId)) {
@@ -843,8 +858,8 @@ class GPlayApps
                 if ($developerUrl === null) {
                     return [];
                 }
-                $developerUrl .= '&' . self::REQ_PARAM_LOCALE . '=' . urlencode($locale) .
-                    '&' . self::REQ_PARAM_COUNTRY . '=' . urlencode($country);
+                $developerUrl .= '&' . self::REQ_PARAM_LOCALE . '=' . urlencode($this->locale) .
+                    '&' . self::REQ_PARAM_COUNTRY . '=' . urlencode($this->country);
             } catch (GuzzleException $e) {
                 throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
             }
@@ -854,32 +869,27 @@ class GPlayApps
 
         return $this->getAppsFromClusterPage(
             $developerUrl,
-            $locale,
-            $country,
-            1000
+            $this->locale,
+            $this->country,
+            self::UNLIMIT
         );
     }
 
     /**
      * Returns the Google Play search suggests.
      *
-     * @param string $query search query
-     * @param string|null $locale locale or default locale used
-     * @param string|null $country country or default country used
-     * @return string[] array with search suggest
-     * @throws GooglePlayException caused by HTTP error
+     * @param string $query Search query.
+     *
+     * @return string[] Array containing search suggestions.
+     *
+     * @throws GooglePlayException If HTTP error is received.
      */
-    public function getSuggest(
-        string $query,
-        ?string $locale = null,
-        ?string $country = null
-    ): array {
+    public function getSearchSuggestions(string $query): array
+    {
         $query = trim($query);
         if ($query === '') {
             return [];
         }
-        $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
-        $country = $country ?? $this->defaultCountry;
 
         $url = 'https://market.android.com/suggest/SuggRequest';
         try {
@@ -891,23 +901,10 @@ class GPlayApps
                         'json' => 1,
                         'c' => 3,
                         'query' => $query,
-                        self::REQ_PARAM_LOCALE => $locale,
-                        self::REQ_PARAM_COUNTRY => $country,
+                        self::REQ_PARAM_LOCALE => $this->locale,
+                        self::REQ_PARAM_COUNTRY => $this->country,
                     ],
-                    HttpClient:: OPTION_HANDLER_RESPONSE => new class implements ResponseHandlerInterface {
-                        /**
-                         * @param RequestInterface $request
-                         * @param ResponseInterface $response
-                         * @return mixed
-                         */
-                        public function __invoke(RequestInterface $request, ResponseInterface $response)
-                        {
-                            $json = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-                            return array_map(static function (array $v) {
-                                return $v['s'];
-                            }, $json);
-                        }
-                    },
+                    HttpClient:: OPTION_HANDLER_RESPONSE => new SuggestScraper(),
                 ]
             );
         } catch (GuzzleException $e) {
@@ -918,94 +915,85 @@ class GPlayApps
     /**
      * Returns a list of applications from the Google Play store for a search query.
      *
-     * @param string $query search query
-     * @param int $limit limit
-     * @param PriceEnum|null $price free, paid or both applications
-     * @param string|null $locale locale or default locale used
-     * @param string|null $country country or default country used
-     * @return App[] array of applications with basic information
-     * @throws GooglePlayException caused by HTTP error
+     * @param string $query Search query.
+     * @param int $limit The limit on the number of search results.
+     * @param PriceEnum|null $price Price category or `null`.
      *
-     * @see PriceEnum::ALL()
-     * @see PriceEnum::FREE()
-     * @see PriceEnum::PAID()
+     * @return App[] Array of applications with basic information about them.
+     *
+     * @throws GooglePlayException If HTTP error is received.
+     *
+     * @see PriceEnum Contains all valid values ​​for the "price" parameter.
+     * @see GPlayApps::UNLIMIT Limit for all available results.
+     * @see GPlayApps::MAX_SEARCH_RESULTS Maximum number of search results (Google limit).
      */
     public function search(
         string $query,
         int $limit = 50,
-        ?PriceEnum $price = null,
-        ?string $locale = null,
-        ?string $country = null
+        ?PriceEnum $price = null
     ): array {
         $query = trim($query);
         if (empty($query)) {
             throw new \InvalidArgumentException('Search query missing');
         }
-        $limit = min(max($limit, 1), self::MAX_SEARCH_RESULTS);
-        $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
-        $country = $country ?? $this->defaultCountry;
         $price = $price ?? PriceEnum::ALL();
 
         $params = [
             'c' => 'apps',
             'q' => $query,
-            'hl' => $locale,
-            'gl' => $country,
+            'hl' => $this->locale,
+            'gl' => $this->country,
             'price' => $price->value(),
         ];
         $clusterPageUrl = self::GOOGLE_PLAY_URL . '/store/search?' . http_build_query($params);
 
-        return $this->getAppsFromClusterPage($clusterPageUrl, $locale, $country, $limit);
+        return $this->getAppsFromClusterPage($clusterPageUrl, $this->locale, $this->country, $limit);
     }
 
     /**
-     * Gets a list of apps from the Google Play store for category and collection.
+     * Returns a list of applications with basic information from the category and
+     * collection of the Google Play store.
      *
-     * @param CategoryEnum|null $category application category or null
-     * @param CollectionEnum $collection коллекция приложения
-     * @param int $limit application limit
-     * @param AgeEnum|null $age
-     * @param string|null $locale locale or default locale used
-     * @param string|null $country country or default country used
-     * @return App[] array of applications with basic information
-     * @throws GooglePlayException caused by HTTP error
+     * @param string|Category|CategoryEnum|null $category Application category as
+     *     string, {@see \Nelexa\GPlay\Model\Category}, {@see \Nelexa\GPlay\Enum\CategoryEnum}
+     *     or `null`.
+     * @param CollectionEnum|string $collection Application collection.
+     * @param int $limit The limit on the number of results.
+     * @param AgeEnum|null $age Age restrictions or `null`.
      *
-     * @see CategoryEnum
+     * @return App[] Array of applications with basic information about them.
      *
-     * @see CollectionEnum::TOP_FREE()  Top Free
-     * @see CollectionEnum::TOP_PAID()  Top Paid
-     * @see CollectionEnum::NEW_FREE()  Top New Free
-     * @see CollectionEnum::NEW_PAID()  Top New Paid
-     * @see CollectionEnum::GROSSING()  Top Grossing
-     * @see CollectionEnum::TRENDING()  Trending Apps
+     * @throws GooglePlayException If HTTP error is received.
      *
-     * @see AgeEnum::FIVE_UNDER()       Ages 5 and under
-     * @see AgeEnum::SIX_EIGHT()        Ages 6-8
-     * @see AgeEnum::NINE_UP()          Ages 9 & Up
+     * @see CategoryEnum Contains all valid application category values.
+     * @see CollectionEnum Contains all valid application collection values.
+     * @see AgeEnum Contains all valid values ​​for the age parameter.
+     * @see GPlayApps::getCategories() Returns an array of application categories from the Google Play store.
      */
     public function getAppsByCategory(
-        ?CategoryEnum $category,
-        CollectionEnum $collection,
+        $category,
+        $collection,
         int $limit = 60,
-        ?AgeEnum $age = null,
-        ?string $locale = null,
-        ?string $country = null
+        ?AgeEnum $age = null
     ): array {
-        $limit = min(560, max(1, $limit));
-        $locale = LocaleHelper::getNormalizeLocale($locale ?? $this->defaultLocale);
-        $country = $country ?? $this->defaultCountry;
+        $maxOffset = 500;
+        $limitOnPage = 60;
+        $maxResults = $maxOffset + $limitOnPage;
+
+        $limit = $limit === self::UNLIMIT ? $maxResults : min($maxResults, max(1, $limit));
+        $collection = (string)$collection;
 
         $url = self::GOOGLE_PLAY_APPS_URL . '';
         if ($category !== null) {
-            $url .= '/category/' . $category->value();
+            $url .= '/category/' . $this->castToCategoryId($category);
         }
-        $url .= '/collection/' . $collection->value();
+        $url .= '/collection/' . $collection;
 
         $offset = 0;
 
         $queryParams = [
-            self::REQ_PARAM_LOCALE => $locale,
-            self::REQ_PARAM_COUNTRY => $country,
+            self::REQ_PARAM_LOCALE => $this->locale,
+            self::REQ_PARAM_COUNTRY => $this->country,
         ];
         if ($age !== null) {
             $queryParams['age'] = $age->value();
@@ -1016,11 +1004,11 @@ class GPlayApps
         $slice = 0;
         try {
             do {
-                if ($offset > 500) {
-                    $slice = $offset - 500;
-                    $offset = 500;
+                if ($offset > $maxOffset) {
+                    $slice = $offset - $maxOffset;
+                    $offset = $maxOffset;
                 }
-                $queryParams['num'] = min($limit - $offset + $slice, 60);
+                $queryParams['num'] = min($limit - $offset + $slice, $limitOnPage);
 
                 $result = $this->getHttpClient()->request(
                     'POST',
@@ -1040,7 +1028,7 @@ class GPlayApps
                 $countResults += $countResult;
                 $results[] = $result;
                 $offset += $countResult;
-            } while ($countResult === 60 && $countResults < $limit);
+            } while ($countResult === $limitOnPage && $countResults < $limit);
         } catch (GuzzleException $e) {
             throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
         }
@@ -1050,19 +1038,39 @@ class GPlayApps
     }
 
     /**
+     * @param Category|CategoryEnum|string $category
+     * @return string
+     */
+    private function castToCategoryId($category): string
+    {
+        if ($category instanceof CategoryEnum) {
+            return $category->value();
+        }
+        if ($category instanceof Category) {
+            return $category->getId();
+        }
+        return (string)$category;
+    }
+
+    /**
      * Asynchronously saves images from googleusercontent.com and similar URLs to disk.
+     *
      * Before use, you can set the parameters of the width-height of images.
      *
-     * @param GoogleImage[] $images
-     * @param callable $destPathFn The function to which the GoogleImage object is passed and you must return
-     *     the full output. path to save this file. File extension can be omitted.
-     *     It will be automatically installed.
-     * @param bool $overwrite Overwrite files
-     * @return ImageInfo[]
+     * @param GoogleImage[] $images Array of {@see \Nelexa\GPlay\Model\GoogleImage} objects.
+     * @param callable $destPathCallback The function to which the {@see \Nelexa\GPlay\Model\GoogleImage}
+     *     object is passed and you must return the full output. path to save this file. File
+     *     extension can be omitted. It will be automatically installed.
+     * @param bool $overwrite Overwrite files if exists.
+     *
+     * @return ImageInfo[] Returns an array with information about saved images.
+     *
+     * @see GoogleImage Contains a link to the image, allows you to customize its size and download it.
+     * @see ImageInfo Contains information about the image.
      */
     public function saveGoogleImages(
         array $images,
-        callable $destPathFn,
+        callable $destPathCallback,
         bool $overwrite = false
     ): array {
         $mapping = [];
@@ -1070,7 +1078,7 @@ class GPlayApps
             if (!$image instanceof GoogleImage) {
                 throw new \InvalidArgumentException('An array of ' . GoogleImage::class . ' objects is expected.');
             }
-            $destPath = $destPathFn($image);
+            $destPath = $destPathCallback($image);
             $mapping[$destPath] = $image->getUrl();
         }
 
@@ -1121,5 +1129,77 @@ class GPlayApps
         ]))->promise()->wait();
 
         return $imageInfoList;
+    }
+
+    /**
+     * Returns the locale (language) of the requests.
+     *
+     * @return string Locale (language) for HTTP requests to Google Play.
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Sets the locale (language) of requests.
+     *
+     * @param string $locale Locale (language) for HTTP requests to Google Play.
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
+     */
+    public function setLocale(string $locale): GPlayApps
+    {
+        $this->locale = LocaleHelper::getNormalizeLocale($locale);
+        return $this;
+    }
+
+    /**
+     * Returns the country of the requests.
+     *
+     * @return string Country for HTTP requests to Google Play.
+     */
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+
+    /**
+     * Sets the country of requests.
+     *
+     * @param string $country Country for HTTP requests to Google Play.
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
+     */
+    public function setCountry(string $country): GPlayApps
+    {
+        $this->country = !empty($country) ? $country : self::DEFAULT_COUNTRY;
+        return $this;
+    }
+
+    /**
+     * Sets the number of seconds to wait when trying to connect to the server.
+     *
+     * @param float $connectTimeout Connection timeout in seconds, for example 3.14. Use 0 to wait indefinitely.
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
+     */
+    public function setConnectTimeout(float $connectTimeout): GPlayApps
+    {
+        $this->getHttpClient()->setConnectTimeout($connectTimeout);
+        return $this;
+    }
+
+    /**
+     * Sets the timeout of the request in second.
+     *
+     * @param float $timeout Waiting timeout in seconds, for example 3.14. Use 0 to wait indefinitely.
+     *
+     * @return GPlayApps Returns an object of its own class to support the call chain.
+     */
+    public function setTimeout(float $timeout): GPlayApps
+    {
+        $this->getHttpClient()->setTimeout($timeout);
+        return $this;
     }
 }

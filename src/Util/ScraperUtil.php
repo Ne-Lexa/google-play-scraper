@@ -1,8 +1,17 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Util;
 
+/**
+ * @internal
+ */
 class ScraperUtil
 {
     /**
@@ -28,16 +37,27 @@ class ScraperUtil
 
     /**
      * @param string $html
+     * @return \DOMDocument
+     */
+    public static function createDomDocument(string $html): \DOMDocument
+    {
+        $doc = new \DOMDocument();
+        $internalErrors = libxml_use_internal_errors(true);
+        if (!$doc->loadHTML('<?xml encoding="utf-8"?>' . $html)) {
+            throw new
+            \RuntimeException('error load html: ' . $html);
+        }
+        libxml_use_internal_errors($internalErrors);
+        return $doc;
+    }
+
+    /**
+     * @param string $html
      * @return string
      */
     public static function html2text(string $html): string
     {
-        $doc = new \DOMDocument();
-        $internalErrors = libxml_use_internal_errors(true);
-        if (!$doc->loadHTML('<?xml encoding="utf-8" ?>' . $html)) {
-            throw new \RuntimeException('error load html: ' . $html);
-        }
-        libxml_use_internal_errors($internalErrors);
+        $doc = self::createDomDocument($html);
         $text = self::convertDomNodeToText($doc);
         $text = preg_replace('/\n{3,}/', "\n\n", trim($text));
         return trim($text);

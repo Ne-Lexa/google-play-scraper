@@ -1,12 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
- */
-
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Http\ResponseHandlerInterface;
@@ -16,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @internal
  */
-class ExistsAppScraper implements ResponseHandlerInterface
+class SuggestScraper implements ResponseHandlerInterface
 {
     /**
      * @param RequestInterface $request
@@ -25,6 +19,9 @@ class ExistsAppScraper implements ResponseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response)
     {
-        return $response->getStatusCode() < 300;
+        $json = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        return array_map(static function (array $v) {
+            return $v['s'];
+        }, $json);
     }
 }

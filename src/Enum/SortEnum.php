@@ -2,28 +2,36 @@
 /** @noinspection PhpUnusedPrivateFieldInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Enum;
 
 use Nelexa\Enum;
 
 /**
- * @method static SortEnum HELPFULNESS
- * @method static SortEnum NEWEST
- * @method static SortEnum RATING
+ * Contains all valid values ​​for the "sort" parameter.
+ *
+ * @method static SortEnum HELPFULNESS() Returns the value of the sorting of reviews by helpfulness.
+ * @method static SortEnum NEWEST() Returns the value of the sorting of reviews by newest.
+ * @method static SortEnum RATING() Returns the value of the sorting of reviews by rating.
  */
 class SortEnum extends Enum
 {
     private const
         /**
-         * Most helpful first
+         * @var int Most helpful first
          */
         HELPFULNESS = 1,
         /**
-         * Newest
+         * @var int Newest
          */
         NEWEST = 2,
         /**
-         * Rating
+         * @var int Rating
          */
         RATING = 3;
 }

@@ -36,9 +36,8 @@
         }
     },
     "require-dev": {
-        "ext-gd": "*",
         "phpunit/phpunit": "^6.0 | ^7.0",
-        "symfony/cache": "^4.0",
+        "symfony/cache": "^4.3",
         "symfony/var-dumper": "^4.0",
         "symfony/var-exporter": "^4.0"
     },

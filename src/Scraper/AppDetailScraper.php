@@ -2,19 +2,25 @@
 /** @noinspection MultiAssignmentUsageInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Model\AppDetail;
+use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\HistogramRating;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
-use Nelexa\GPlay\Request\RequestApp;
 use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Nelexa\GPlay\Util\DateStringFormatter;
 use Nelexa\GPlay\Util\LocaleHelper;
@@ -23,6 +29,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;
 
+/**
+ * @internal
+ */
 class AppDetailScraper implements ResponseHandlerInterface
 {
     /**
@@ -34,11 +43,116 @@ class AppDetailScraper implements ResponseHandlerInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response): AppDetail
     {
         $query = parse_query($request->getUri()->getQuery());
-        $appId = $query[GPlayApps::REQ_PARAM_ID];
+
+        $id = $query[GPlayApps::REQ_PARAM_ID];
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
         $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
-        $requestApp = new RequestApp($appId, $locale, $country);
 
+        [
+            $scriptDataInfo,
+            $scriptDataRating,
+            $scriptDataPrice,
+            $scriptDataVersion,
+            $scriptDataReviews,
+        ] = $this->getScriptData($request, $response);
+
+        $name = $scriptDataInfo[0][0][0];
+        $description = $this->extractDescription($scriptDataInfo);
+        $translatedFromLocale = $this->extractTranslatedFromLocale($scriptDataInfo, $locale);
+        $developer = $this->extractDeveloper($scriptDataInfo);
+        $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
+        $summary = $this->extractSummary($scriptDataInfo);
+        $installs = $scriptDataInfo[0][12][9][2] ?? 0;
+        $score = (float)($scriptDataRating[0][6][0][1] ?? 0);
+        $numberVoters = (int)($scriptDataRating[0][6][2][1] ?? 0);
+        $numberReviews = (int)($scriptDataRating[0][6][3][1] ?? 0);
+        $histogramRating = $this->extractHistogramRating($scriptDataRating);
+        $price = $this->extractPrice($scriptDataPrice);
+        $currency = $scriptDataPrice[0][2][0][0][0][1][0][1];
+        $priceText = $scriptDataPrice[0][2][0][0][0][1][0][2] ?: null;
+        $offersIAPCost = $scriptDataInfo[0][12][12][0] ?? null;
+        $containsAds = (bool)$scriptDataInfo[0][12][14][0];
+
+        [$size, $appVersion, $androidVersion] = $scriptDataVersion;
+        if (LocaleHelper::isDependOnDevice($locale, $size)) {
+            $size = null;
+        }
+        if (LocaleHelper::isDependOnDevice($locale, $appVersion)) {
+            $appVersion = null;
+        }
+        if (LocaleHelper::isDependOnDevice($locale, $androidVersion)) {
+            $androidVersion = null;
+            $minAndroidVersion = null;
+        } else {
+            $minAndroidVersion = preg_replace('~.*?(\d+(\.\d+)*).*~', '$1', $androidVersion);
+        }
+
+        $editorsChoice = !empty($scriptDataInfo[0][12][15][1][1]);
+        $privacyPoliceUrl = $scriptDataInfo[0][12][7][2] ?? '';
+        $categoryFamily = $this->extractCategory($scriptDataInfo[0][12][13][1] ?? []);
+        $icon = $this->extractIcon($scriptDataInfo);
+        $cover = $this->extractCover($scriptDataInfo);
+        $screenshots = $this->extractScreenshots($scriptDataInfo);
+        $video = $this->extractVideo($scriptDataInfo);
+        $contentRating = $scriptDataInfo[0][12][4][0] ?? '';
+        $released = $this->extractReleaseDate($scriptDataInfo, $locale);
+        $updated = $this->extractUpdatedDate($scriptDataInfo);
+        $recentChanges = $this->extractRecentChanges($scriptDataInfo);
+        $reviews = $this->extractReviews(new AppId($id, $locale, $country), $scriptDataReviews);
+
+        return new AppDetail(
+            AppDetail::newBuilder()
+                ->setId($id)
+                ->setLocale($locale)
+                ->setCountry($country)
+                ->setName($name)
+                ->setDescription($description)
+                ->setTranslatedFromLocale($translatedFromLocale)
+                ->setSummary($summary)
+                ->setIcon($icon)
+                ->setCover($cover)
+                ->setScreenshots($screenshots)
+                ->setDeveloper($developer)
+                ->setCategory($category)
+                ->setCategoryFamily($categoryFamily)
+                ->setVideo($video)
+                ->setRecentChanges($recentChanges)
+                ->setEditorsChoice($editorsChoice)
+                ->setPrivacyPoliceUrl($privacyPoliceUrl)
+                ->setInstalls($installs)
+                ->setScore($score)
+                ->setRecentChanges($recentChanges)
+                ->setEditorsChoice($editorsChoice)
+                ->setPrivacyPoliceUrl($privacyPoliceUrl)
+                ->setInstalls($installs)
+                ->setScore($score)
+                ->setNumberVoters($numberVoters)
+                ->setHistogramRating($histogramRating)
+                ->setPrice($price)
+                ->setCurrency($currency)
+                ->setPriceText($priceText)
+                ->setOffersIAPCost($offersIAPCost)
+                ->setContainsAds($containsAds)
+                ->setSize($size)
+                ->setAppVersion($appVersion)
+                ->setAndroidVersion($androidVersion)
+                ->setMinAndroidVersion($minAndroidVersion)
+                ->setContentRating($contentRating)
+                ->setReleased($released)
+                ->setUpdated($updated)
+                ->setNumberReviews($numberReviews)
+                ->setReviews($reviews)
+        );
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @return array
+     * @throws GooglePlayException
+     */
+    private function getScriptData(RequestInterface $request, ResponseInterface $response): array
+    {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
         $scriptDataInfo = null;
@@ -73,133 +187,46 @@ class AppDetailScraper implements ResponseHandlerInterface
         ) {
             throw (new GooglePlayException('Unable to get data for this application.'))->setUrl($request->getUri()->__toString());
         }
+        return [$scriptDataInfo, $scriptDataRating, $scriptDataPrice, $scriptDataVersion, $scriptDataReviews];
+    }
 
-        $name = $scriptDataInfo[0][0][0];
-        $descriptionHTML = $scriptDataInfo[0][10][0][1];
-        $description = ScraperUtil::html2text($descriptionHTML);
-
-        $developer = $this->extractDeveloper($scriptDataInfo);
-        $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
-
-        $summary = empty($scriptDataInfo[0][10][1][1]) ?
-            null :
-            ScraperUtil::html2text($scriptDataInfo[0][10][1][1]);
-
-        $installs = $scriptDataInfo[0][12][9][2] ?? 0;
-        $score = (float)($scriptDataRating[0][6][0][1] ?? 0);
-        $numberVoters = (int)($scriptDataRating[0][6][2][1] ?? 0);
-        $reviewsCount = (int)($scriptDataRating[0][6][3][1] ?? 0);
-        $histogram = $scriptDataRating[0][6][1] ?? null;
-
-        $histogramRating = new HistogramRating(
-            $histogram[5][1] ?? 0,
-            $histogram[4][1] ?? 0,
-            $histogram[3][1] ?? 0,
-            $histogram[2][1] ?? 0,
-            $histogram[1][1] ?? 0
-        );
-
-        $price = isset($scriptDataPrice[0][2][0][0][0][1][0][0]) ?
-            (float)($scriptDataPrice[0][2][0][0][0][1][0][0] / 1000000) :
-            0;
-        $currency = $scriptDataPrice[0][2][0][0][0][1][0][1];
-        $priceText = $scriptDataPrice[0][2][0][0][0][1][0][2] ?: 'Free';
-        $offersIAPCost = $scriptDataInfo[0][12][12][0] ?? null;
-        $adSupported = (bool)$scriptDataInfo[0][12][14][0];
-
-        [$size, $appVersion, $androidVersion] = $scriptDataVersion;
-        if (LocaleHelper::isDependOnDevice($locale, $size)) {
-            $size = null;
-        }
-        if (LocaleHelper::isDependOnDevice($locale, $appVersion)) {
-            $appVersion = null;
-        }
-        if (LocaleHelper::isDependOnDevice($locale, $androidVersion)) {
-            $androidVersion = null;
-            $minAndroidVersion = null;
-        } else {
-            $minAndroidVersion = preg_replace('~.*?(\d+(\.\d+)*).*~', '$1', $androidVersion);
-        }
-
-        $editorsChoice = !empty($scriptDataInfo[0][12][15][1][1]);
-        $privacyPoliceUrl = $scriptDataInfo[0][12][7][2];
-
-        $categoryFamily = $this->extractCategory($scriptDataInfo[0][12][13][1] ?? []);
-
-        $icon = empty($scriptDataInfo[0][12][1][3][2]) ?
-            null :
-            new GoogleImage($scriptDataInfo[0][12][1][3][2]);
-
-        $headerImage = empty($scriptDataInfo[0][12][2][3][2]) ?
-            null :
-            new GoogleImage($scriptDataInfo[0][12][2][3][2]);
-
-        $screenshots = $this->extractScreenshots($scriptDataInfo);
-        $video = $this->extractVideo($scriptDataInfo);
-
-        $contentRating = $scriptDataInfo[0][12][4][0];
-        $released = $this->extractReleaseDate($scriptDataInfo, $locale);
-        $updated = $this->extractUpdatedDate($scriptDataInfo);
-
-        $recentChanges = empty($scriptDataInfo[0][12][6][1]) ?
-            null :
-            ScraperUtil::html2text($scriptDataInfo[0][12][6][1]);
-
-        $translatedFromLanguage = null;
-        $translatedDescription = null;
-        if (isset($scriptDataInfo[0][19][1])) {
-            $translatedFromLanguage = LocaleHelper::findPreferredLanguage(
+    /**
+     * @param $scriptDataInfo
+     * @param string $locale
+     * @return string|null
+     */
+    private function extractTranslatedFromLocale(array $scriptDataInfo, string $locale): ?string
+    {
+        return isset($scriptDataInfo[0][19][1]) ?
+            LocaleHelper::findPreferredLanguage(
                 $locale,
                 $scriptDataInfo[0][19][1]
-            );
-            $translatedDescription = ScraperUtil::html2text($scriptDataInfo[0][19][0][0][1]);
+            ) :
+            null;
+    }
+
+    /**
+     * @param array $scriptDataInfo
+     * @return string
+     */
+    private function extractDescription(array $scriptDataInfo): string
+    {
+        if (isset($scriptDataInfo[0][19][0][0][1])) {
+            return ScraperUtil::html2text($scriptDataInfo[0][19][0][0][1]);
         }
 
-        $reviews = $this->extractReviews($requestApp, $scriptDataReviews);
+        return ScraperUtil::html2text($scriptDataInfo[0][10][0][1]);
+    }
 
-        return new AppDetail(
-            AppDetail::newBuilder()
-                ->setId($appId)
-                ->setUrl($requestApp->getUrl())
-                ->setLocale($locale)
-                ->setName($name)
-                ->setDescription($description)
-                ->setTranslated($translatedDescription, $translatedFromLanguage)
-                ->setSummary($summary)
-                ->setIcon($icon)
-                ->setHeaderImage($headerImage)
-                ->setScreenshots($screenshots)
-                ->setDeveloper($developer)
-                ->setCategory($category)
-                ->setCategoryFamily($categoryFamily)
-                ->setVideo($video)
-                ->setRecentChanges($recentChanges)
-                ->setEditorsChoice($editorsChoice)
-                ->setPrivacyPoliceUrl($privacyPoliceUrl)
-                ->setInstalls($installs)
-                ->setScore($score)
-                ->setRecentChanges($recentChanges)
-                ->setEditorsChoice($editorsChoice)
-                ->setPrivacyPoliceUrl($privacyPoliceUrl)
-                ->setInstalls($installs)
-                ->setScore($score)
-                ->setNumberVoters($numberVoters)
-                ->setHistogramRating($histogramRating)
-                ->setPrice($price)
-                ->setCurrency($currency)
-                ->setPriceText($priceText)
-                ->setOffersIAPCost($offersIAPCost)
-                ->setAdSupported($adSupported)
-                ->setAppSize($size)
-                ->setAppVersion($appVersion)
-                ->setAndroidVersion($androidVersion)
-                ->setMinAndroidVersion($minAndroidVersion)
-                ->setContentRating($contentRating)
-                ->setReleased($released)
-                ->setUpdated($updated)
-                ->setReviewsCount($reviewsCount)
-                ->setReviews($reviews)
-        );
+    /**
+     * @param $scriptDataInfo
+     * @return string|null
+     */
+    private function extractSummary(array $scriptDataInfo): ?string
+    {
+        return empty($scriptDataInfo[0][10][1][1]) ?
+            null :
+            ScraperUtil::html2text($scriptDataInfo[0][10][1][1]);
     }
 
     /**
@@ -239,6 +266,54 @@ class AppDetailScraper implements ResponseHandlerInterface
             return new Category($genreId, $genreName);
         }
         return null;
+    }
+
+    /**
+     * @param array $scriptDataRating
+     * @return HistogramRating
+     */
+    private function extractHistogramRating(array $scriptDataRating): HistogramRating
+    {
+        return new HistogramRating(
+            $scriptDataRating[0][6][1][5][1] ?? 0,
+            $scriptDataRating[0][6][1][4][1] ?? 0,
+            $scriptDataRating[0][6][1][3][1] ?? 0,
+            $scriptDataRating[0][6][1][2][1] ?? 0,
+            $scriptDataRating[0][6][1][1][1] ?? 0
+        );
+    }
+
+    /**
+     * @param $scriptDataPrice
+     * @return float
+     */
+    protected function extractPrice(array $scriptDataPrice): ?float
+    {
+        return isset($scriptDataPrice[0][2][0][0][0][1][0][0]) ?
+            (float)($scriptDataPrice[0][2][0][0][0][1][0][0] / 1000000) :
+            0.0;
+    }
+
+    /**
+     * @param array $scriptDataInfo
+     * @return GoogleImage|null
+     */
+    protected function extractIcon(array $scriptDataInfo): ?GoogleImage
+    {
+        return empty($scriptDataInfo[0][12][1][3][2]) ?
+            null :
+            new GoogleImage($scriptDataInfo[0][12][1][3][2]);
+    }
+
+    /**
+     * @param array $scriptDataInfo
+     * @return GoogleImage|null
+     */
+    protected function extractCover(array $scriptDataInfo): ?GoogleImage
+    {
+        return empty($scriptDataInfo[0][12][2][3][2]) ?
+            null :
+            new GoogleImage($scriptDataInfo[0][12][2][3][2]);
     }
 
     /**
@@ -297,19 +372,30 @@ class AppDetailScraper implements ResponseHandlerInterface
     }
 
     /**
-     * @param RequestApp $requestApp
+     * @param $scriptDataInfo
+     * @return string|null
+     */
+    protected function extractRecentChanges($scriptDataInfo): ?string
+    {
+        return empty($scriptDataInfo[0][12][6][1]) ?
+            null :
+            ScraperUtil::html2text($scriptDataInfo[0][12][6][1]);
+    }
+
+    /**
+     * @param AppId $appId
      * @param array $scriptDataReviews
      * @param int $limit
      * @return Review[]
      */
-    private function extractReviews(RequestApp $requestApp, array $scriptDataReviews, int $limit = 4): array
+    private function extractReviews(AppId $appId, array $scriptDataReviews, int $limit = 4): array
     {
         if (empty($scriptDataReviews[0])) {
             return [];
         }
 
         return ReviewsExtractor::extractReviews(
-            $requestApp,
+            $appId,
             array_slice($scriptDataReviews[0], 0, $limit)
         );
     }

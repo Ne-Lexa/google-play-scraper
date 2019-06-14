@@ -2,6 +2,12 @@
 /** @noinspection PhpUnusedPrivateMethodInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Util;
 
 /**
@@ -9,7 +15,7 @@ namespace Nelexa\GPlay\Util;
  * It would be possible to use the php-intl library, but its different
  * versions give different results.
  *
- * @package Nelexa\GPlay\Util
+ * @internal
  */
 class DateStringFormatter
 {

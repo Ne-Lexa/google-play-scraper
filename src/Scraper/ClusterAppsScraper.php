@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\GPlayApps;
@@ -11,6 +17,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;
 
+/**
+ * @internal
+ */
 class ClusterAppsScraper implements ResponseHandlerInterface
 {
     /**
@@ -33,11 +42,13 @@ class ClusterAppsScraper implements ResponseHandlerInterface
             return [[], null];
         }
 
-        $locale = parse_query($request->getUri()->getQuery())[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
+        $query = parse_query($request->getUri()->getQuery());
+        $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
+        $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
         $apps = [];
         foreach ($scriptDataInfo[0][1][0][0][0] as $data) {
-            $apps[] = AppsExtractor::extractApp($data, $locale);
+            $apps[] = AppsExtractor::extractApp($data, $locale, $country);
         }
 
         $nextToken = $scriptDataInfo[0][1][0][0][7][1] ?? null;

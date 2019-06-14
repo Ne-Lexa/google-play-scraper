@@ -2,6 +2,12 @@
 /** @noinspection PhpDocRedundantThrowsInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Http;
 
 use GuzzleHttp\Client;
@@ -17,6 +23,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\SimpleCache\CacheInterface;
 use function GuzzleHttp\Promise\each_limit_all;
 
+/**
+ * HTTP client.
+ *
+ * @internal
+ */
 class HttpClient extends Client
 {
     public const OPTION_HANDLER_RESPONSE = 'handler_response';

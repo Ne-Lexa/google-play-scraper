@@ -1,14 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace Nelexa\GPlay\Request;
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
+namespace Nelexa\GPlay\Scraper;
 
 use GuzzleHttp\Psr7\Request;
 use Nelexa\GPlay\Enum\SortEnum;
 use Nelexa\GPlay\GPlayApps;
+use Nelexa\GPlay\Model\AppId;
 use Psr\Http\Message\RequestInterface;
 use function GuzzleHttp\Psr7\stream_for;
 
+/**
+ * @internal
+ */
 class PlayStoreUiRequest
 {
     public const LIMIT_REVIEW_ON_PAGE = 199;
@@ -18,13 +28,13 @@ class PlayStoreUiRequest
     private const RPC_ID_APPS = 'qnKhOb';
 
     /**
-     * @param RequestApp $requestApp
+     * @param AppId $requestApp
      * @param int $count
      * @param SortEnum $sort
      * @param string|null $token
      * @return RequestInterface
      */
-    public static function getReviewsRequest(RequestApp $requestApp, int $count, SortEnum $sort, ?string $token = null): RequestInterface
+    public static function getReviewsRequest(AppId $requestApp, int $count, SortEnum $sort, ?string $token = null): RequestInterface
     {
         $limit = min(self::LIMIT_REVIEW_ON_PAGE, max(1, $count));
         $queryParams = [

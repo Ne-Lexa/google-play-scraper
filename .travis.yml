@@ -15,7 +15,7 @@ install:
 
 script:
     - composer validate --no-check-lock
-    - vendor/bin/phpunit -c phpunit.xml --coverage-clover=coverage.clover --exclude-group proxy
+    - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover --exclude-group proxy
 
 after_success:
     - wget https://scrutinizer-ci.com/ocular.phar

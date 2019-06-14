@@ -26,41 +26,41 @@ class AppBuilderTest extends TestCase
 
         try {
             new App($builder);
-            $this->fail('$id is null');
+            $this->fail('Application ID is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$id', $e->getMessage());
+            $this->assertStringContainsString('Application ID cannot be null or empty', $e->getMessage());
         }
 
         $builder->setId($data['appId']);
         try {
             new App($builder);
-            $this->fail('$url is null');
+            $this->fail('Locale is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$url', $e->getMessage());
-        }
-
-        $builder->setUrl($data['appUrl']);
-        try {
-            new App($builder);
-            $this->fail('$locale is null');
-        } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$locale', $e->getMessage());
+            $this->assertStringContainsString('Locale cannot be null or empty', $e->getMessage());
         }
 
         $builder->setLocale($data['locale']);
         try {
             new App($builder);
-            $this->fail('$name is null');
+            $this->fail('Country is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$name', $e->getMessage());
+            $this->assertStringContainsString('Country cannot be null or empty', $e->getMessage());
+        }
+
+        $builder->setCountry($data['country']);
+        try {
+            new App($builder);
+            $this->fail('Application name is null or empty');
+        } catch (\InvalidArgumentException $e) {
+            $this->assertStringContainsString('application name cannot be null or empty', $e->getMessage());
         }
 
         $builder->setName($data['appName']);
         try {
             new App($builder);
-            $this->fail('$developer is null');
+            $this->fail('Developer is null');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$developer', $e->getMessage());
+            $this->assertStringContainsString('developer cannot be null', $e->getMessage());
         }
 
         $developer = new Developer(
@@ -73,9 +73,9 @@ class AppBuilderTest extends TestCase
         $builder->setDeveloper($developer);
         try {
             new App($builder);
-            $this->fail('$icon is null');
+            $this->fail('Application icon is null');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$icon', $e->getMessage());
+            $this->assertStringContainsString('Application icon cannot be null', $e->getMessage());
         }
 
         $icon = new GoogleImage($data['iconUrl']);
@@ -119,17 +119,17 @@ class AppBuilderTest extends TestCase
         // AppDetail
         try {
             new AppDetail($builder);
-            $this->fail('$description is null or empty');
+            $this->fail('Application description is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$description', $e->getMessage());
+            $this->assertStringContainsString('Application description cannot be null or empty', $e->getMessage());
         }
 
         $builder->setDescription($data['description']);
         try {
             new AppDetail($builder);
-            $this->fail('$screenshots are empty');
+            $this->fail('Screenshots are empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$screenshots', $e->getMessage());
+            $this->assertStringContainsString('Screenshots', $e->getMessage());
         }
 
         foreach ($data['screenshots'] as $screenshot) {
@@ -144,9 +144,9 @@ class AppBuilderTest extends TestCase
 
         try {
             new AppDetail($builder);
-            $this->fail('$category is null');
+            $this->fail('Application category is null');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('$category', $e->getMessage());
+            $this->assertStringContainsString('Application category cannot be null', $e->getMessage());
         }
 
         $category = new Category($data['categoryId'], $data['categoryName']);
@@ -163,9 +163,8 @@ class AppBuilderTest extends TestCase
         $this->assertSame($appDetail->getCategory()->getName(), $data['categoryName']);
         $this->assertFalse($appDetail->getCategory()->isFamilyCategory());
 
-        $this->assertNull($appDetail->getTranslatedDescription());
-        $this->assertNull($appDetail->getTranslatedFromLanguage());
-        $this->assertNull($appDetail->getHeaderImage());
+        $this->assertNull($appDetail->getTranslatedFromLocale());
+        $this->assertNull($appDetail->getCover());
         $this->assertNull($appDetail->getPrivacyPoliceUrl());
         $this->assertNull($appDetail->getCategoryFamily());
         $this->assertNull($appDetail->getVideo());
@@ -180,16 +179,16 @@ class AppBuilderTest extends TestCase
         $this->assertSame($appDetail->getPrice(), 0.0);
         $this->assertSame($appDetail->getCurrency(), 'USD');
         $this->assertNull($appDetail->getOffersIAPCost());
-        $this->assertFalse($appDetail->isOffersIAP());
-        $this->assertFalse($appDetail->isAdSupported());
-        $this->assertNull($appDetail->getAppSize());
+        $this->assertFalse($appDetail->isContainsIAP());
+        $this->assertFalse($appDetail->isContainsAds());
+        $this->assertNull($appDetail->getSize());
         $this->assertNull($appDetail->getAppVersion());
         $this->assertNull($appDetail->getAndroidVersion());
         $this->assertNull($appDetail->getMinAndroidVersion());
         $this->assertNull($appDetail->getContentRating());
         $this->assertNull($appDetail->getReleased());
         $this->assertNull($appDetail->getUpdated());
-        $this->assertSame($appDetail->getReviewsCount(), 0);
+        $this->assertSame($appDetail->getNumberReviews(), 0);
         $this->assertIsArray($appDetail->getReviews());
         $this->assertEmpty($appDetail->getReviews());
 
@@ -205,8 +204,8 @@ class AppBuilderTest extends TestCase
 
         $builder
             ->setDeveloper($developer)
-            ->setTranslated($data['translatedDescription'], $data['translatedFromLanguage'])
-            ->setHeaderImage($data['headerImage'])
+            ->setTranslatedFromLocale($data['translatedFromLocale'])
+            ->setCover($data['cover'])
             ->setPrivacyPoliceUrl($data['privacyPoliceUrl'])
             ->setCategoryFamily($categoryFamily)
             ->setVideo($video)
@@ -219,15 +218,15 @@ class AppBuilderTest extends TestCase
             ->setCurrency($data['currency'])
             ->setPriceText($data['priceTextEur'])
             ->setOffersIAPCost($data['offersIAPCost'])
-            ->setAdSupported($data['adSupported'])
-            ->setAppSize($data['appSize'])
+            ->setContainsAds($data['containsAds'])
+            ->setSize($data['size'])
             ->setAppVersion($data['appVersion'])
             ->setAndroidVersion($data['androidVersion'])
             ->setMinAndroidVersion($data['minAndroidVersion'])
             ->setContentRating($data['contentRating'])
             ->setReleased($data['released'])
             ->setUpdated($data['updated'])
-            ->setReviewsCount($data['reviewsCount'])
+            ->setNumberReviews($data['numberReviews'])
             ->setReviews($data['reviews']);
 
         $appDetail = new AppDetail($builder);
@@ -237,50 +236,39 @@ class AppBuilderTest extends TestCase
         $this->assertSame($appDetail->getDeveloper()->getAddress(), $data['developerAddress']);
         $this->assertSame($appDetail->getDeveloper()->getWebsite(), $data['developerSite']);
         $this->assertNull($appDetail->getDeveloper()->getDescription());
-        $this->assertNull($appDetail->getDeveloper()->getHeaderImage());
+        $this->assertNull($appDetail->getDeveloper()->getCover());
         $this->assertNull($appDetail->getDeveloper()->getIcon());
 
-        $this->assertSame($appDetail->getTranslatedDescription(), $data['translatedDescription']);
-        $this->assertSame($appDetail->getTranslatedFromLanguage(), $data['translatedFromLanguage']);
-        $this->assertSame($appDetail->getHeaderImage(), $data['headerImage']);
+        $this->assertSame($appDetail->getTranslatedFromLocale(), $data['translatedFromLocale']);
+        $this->assertSame($appDetail->getCover(), $data['cover']);
         $this->assertSame($appDetail->getPrivacyPoliceUrl(), $data['privacyPoliceUrl']);
         $this->assertSame($appDetail->getCategoryFamily(), $categoryFamily);
         $this->assertSame($appDetail->getCategoryFamily()->getId(), $data['categoryFamilyId']);
         $this->assertSame($appDetail->getCategoryFamily()->getName(), $data['categoryFamilyName']);
         $this->assertTrue($appDetail->getCategoryFamily()->isFamilyCategory());
         $this->assertSame($appDetail->getVideo(), $video);
-        $this->assertSame($appDetail->getVideo()->getThumb(), $data['videoThumbUrl']);
-        $this->assertSame($appDetail->getVideo()->getUrl(), $data['videoUrl']);
+        $this->assertSame($appDetail->getVideo()->getImageUrl(), $data['videoThumbUrl']);
+        $this->assertSame($appDetail->getVideo()->getVideoUrl(), $data['videoUrl']);
         $this->assertSame($appDetail->getVideo()->getYoutubeId(), $data['youtubeId']);
         $this->assertSame($appDetail->getRecentChanges(), $data['recentChanges']);
         $this->assertSame($appDetail->isEditorsChoice(), $data['editorChoice']);
         $this->assertSame($appDetail->getInstalls(), $data['installs']);
         $this->assertSame($appDetail->getNumberVoters(), $data['numberVoters']);
         $this->assertSame($appDetail->getHistogramRating(), $data['histogramRating']);
-
-        $this->assertSame(
-            $appDetail->getHistogramRating()->__toString(),
-            "⭐⭐⭐⭐⭐ {$appDetail->getHistogramRating()->getFiveStars()}\n" .
-            "⭐⭐⭐⭐  {$appDetail->getHistogramRating()->getFourStars()}\n" .
-            "⭐⭐⭐   {$appDetail->getHistogramRating()->getThreeStars()}\n" .
-            "⭐⭐    {$appDetail->getHistogramRating()->getTwoStars()}\n" .
-            "⭐     {$appDetail->getHistogramRating()->getOneStar()}"
-        );
-
         $this->assertSame($appDetail->getPrice(), $data['price']);
         $this->assertSame($appDetail->getCurrency(), $data['currency']);
         $this->assertSame($appDetail->getPriceText(), $data['priceTextEur']);
         $this->assertSame($appDetail->getOffersIAPCost(), $data['offersIAPCost']);
-        $this->assertTrue($appDetail->isOffersIAP());
-        $this->assertTrue($appDetail->isAdSupported());
-        $this->assertSame($appDetail->getAppSize(), $data['appSize']);
+        $this->assertTrue($appDetail->isContainsIAP());
+        $this->assertTrue($appDetail->isContainsAds());
+        $this->assertSame($appDetail->getSize(), $data['size']);
         $this->assertSame($appDetail->getAppVersion(), $data['appVersion']);
         $this->assertSame($appDetail->getAndroidVersion(), $data['androidVersion']);
         $this->assertSame($appDetail->getMinAndroidVersion(), $data['minAndroidVersion']);
         $this->assertSame($appDetail->getContentRating(), $data['contentRating']);
         $this->assertSame($appDetail->getReleased(), $data['released']);
         $this->assertSame($appDetail->getUpdated(), $data['updated']);
-        $this->assertSame($appDetail->getReviewsCount(), $data['reviewsCount']);
+        $this->assertSame($appDetail->getNumberReviews(), $data['numberReviews']);
         $this->assertSame($appDetail->getReviews(), $data['reviews']);
     }
 
@@ -294,6 +282,8 @@ class AppBuilderTest extends TestCase
             [
                 [
                     'appId' => 'com.test',
+                    'locale' => 'en_US',
+                    'country' => 'us',
                     'appUrl' => 'https://play.google.com/store/apps/details?id=com.test',
                     'appName' => 'Test',
                     'iconUrl' => 'https://lh3.googleusercontent.com/DKoidc0T3T1KvYC2stChcX9zwmjKj1pgmg3hXzGBDQXM8RG_7JjgiuS0CLOh8DUa7as=s180',
@@ -306,7 +296,6 @@ class AppBuilderTest extends TestCase
                     'summary' => 'tested application',
                     'score' => 4.235324,
                     'priceText' => '$0.99',
-                    'locale' => 'en_US',
                     'description' => 'Description du test',
                     'screenshots' => [
                         new GoogleImage('https://lh3.ggpht.com/ueLFEoDXfL5ng9SeWLqstSw4GLAXyLgDSym5JKykOHpv_s0sm2HHHI_d2dAC_ugDyw=w720-h310'),
@@ -319,9 +308,8 @@ class AppBuilderTest extends TestCase
                         '-33 months',
                         new \DateTimeZone('UTC')
                     ),
-                    'translatedDescription' => 'Test description',
-                    'translatedFromLanguage' => 'fr_FR',
-                    'headerImage' => new GoogleImage('https://lh3.googleusercontent.com/_X0MDs89e-vT-xHIfPWnx3ws1brEhC8v1cx3cuwubc9EYDIav3h2ickpUJJfWm1UBqg'),
+                    'translatedFromLocale' => 'fr_FR',
+                    'cover' => new GoogleImage('https://lh3.googleusercontent.com/_X0MDs89e-vT-xHIfPWnx3ws1brEhC8v1cx3cuwubc9EYDIav3h2ickpUJJfWm1UBqg'),
                     'privacyPoliceUrl' => 'https://www.example.com/privacy.html',
                     'categoryFamilyId' => 'FAMILY_CREATE',
                     'categoryFamilyName' => 'Creativity',
@@ -343,8 +331,8 @@ class AppBuilderTest extends TestCase
                     'currency' => 'EUR',
                     'priceTextEur' => '€0.99',
                     'offersIAPCost' => '€1.89 per item',
-                    'adSupported' => true,
-                    'appSize' => '7.4M',
+                    'containsAds' => true,
+                    'size' => '7.4M',
                     'appVersion' => '1.0.2',
                     'androidVersion' => '4.1 and up',
                     'minAndroidVersion' => '4.1',
@@ -353,7 +341,7 @@ class AppBuilderTest extends TestCase
                         '-3 days 30 min',
                         new \DateTimeZone('UTC')
                     ),
-                    'reviewsCount' => 15266,
+                    'numberReviews' => 15266,
                     'reviews' => [
                         new Review(
                             'gp:XXXXXXXXXXX',
@@ -390,9 +378,9 @@ class AppBuilderTest extends TestCase
     {
         $builder = AppDetail::newBuilder()
             ->setId('com.test')
-            ->setUrl('https://play.google.com/store/apps/details?id=com.test')
             ->setName('test')
             ->setLocale('en_US')
+            ->setCountry('us')
             ->setDeveloper(new Developer(
                 Developer::newBuilder()
                     ->setId('010101101010')

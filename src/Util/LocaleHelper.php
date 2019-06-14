@@ -2,6 +2,12 @@
 /** @noinspection SpellCheckingInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Util;
 
 class LocaleHelper

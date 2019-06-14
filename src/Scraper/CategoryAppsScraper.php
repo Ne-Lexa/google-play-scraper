@@ -1,6 +1,12 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ * @link     https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
@@ -14,6 +20,9 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;
 
+/**
+ * @internal
+ */
 class CategoryAppsScraper implements ResponseHandlerInterface
 {
     /**
@@ -24,14 +33,16 @@ class CategoryAppsScraper implements ResponseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response)
     {
-        $locale = parse_query($request->getUri()->getQuery())[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
+        $query = parse_query($request->getUri()->getQuery());
+        $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
+        $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
         $xpath = $this->getXPath($response);
         $cardNodes = $xpath->query("//div[@class and contains(concat(' ', normalize-space(@class), ' '), ' card ') and @data-docid]");
 
         $apps = [];
         foreach ($cardNodes as $cardNode) {
-            $apps[] = $this->extractApps($request, $xpath, $cardNode, $locale);
+            $apps[] = $this->extractApps($request, $xpath, $cardNode, $locale, $country);
         }
         return $apps;
     }
@@ -42,14 +53,8 @@ class CategoryAppsScraper implements ResponseHandlerInterface
      */
     private function getXPath(ResponseInterface $response): \DOMXPath
     {
-        $doc = new \DOMDocument();
-        $internalErrors = libxml_use_internal_errors(true);
-        if (!$doc->loadHTML('<?xml encoding="utf-8" ?>' . $response->getBody()->getContents())) {
-            throw new \RuntimeException('error load html');
-        }
-        libxml_use_internal_errors($internalErrors);
-
-        return new \DOMXPath($doc);
+        $domDocument = ScraperUtil::createDomDocument($response->getBody()->getContents());
+        return new \DOMXPath($domDocument);
     }
 
     /**
@@ -57,6 +62,7 @@ class CategoryAppsScraper implements ResponseHandlerInterface
      * @param \DOMXPath $xpath
      * @param \DOMElement $cardNode
      * @param string $locale
+     * @param string $country
      * @return App
      * @throws GooglePlayException
      */
@@ -64,7 +70,8 @@ class CategoryAppsScraper implements ResponseHandlerInterface
         RequestInterface $request,
         \DOMXPath $xpath,
         \DOMElement $cardNode,
-        string $locale
+        string $locale,
+        string $country
     ): App {
         {
             $appId = $cardNode->getAttribute('data-docid');
@@ -76,7 +83,6 @@ class CategoryAppsScraper implements ResponseHandlerInterface
                 throw (new GooglePlayException('Error parse app list'))
                     ->setUrl($request->getUri()->__toString());
             }
-            $url = GPlayApps::GOOGLE_PLAY_URL . $nodeTitle->attributes->getNamedItem('href')->textContent;
             $name = trim($nodeTitle->attributes->getNamedItem('title')->textContent);
         }
 
@@ -89,8 +95,8 @@ class CategoryAppsScraper implements ResponseHandlerInterface
         return new App(
             App::newBuilder()
                 ->setId($appId)
-                ->setUrl($url)
                 ->setLocale($locale)
+                ->setCountry($country)
                 ->setName($name)
                 ->setSummary($summary)
                 ->setDeveloper($developer)
@@ -154,7 +160,11 @@ class CategoryAppsScraper implements ResponseHandlerInterface
             throw (new GooglePlayException('Error parse app list icon node'))
                 ->setUrl($request->getUri()->__toString());
         }
-        $icon = new GoogleImage('https:' . $iconNode->textContent);
+        $iconSrc = $iconNode->textContent;
+        if (strpos($iconSrc, '//') === 0) {
+            $iconSrc = 'https:' . $iconSrc;
+        }
+        $icon = new GoogleImage($iconSrc);
         $icon->reset();
         return $icon;
     }
