@@ -50,7 +50,7 @@ class ClusterPageScraper implements ResponseHandlerInterface, Tokenable
             $developerId = parse_query(parse_url($developerPage, PHP_URL_QUERY))[GPlayApps::REQ_PARAM_APP_ID];
             $price = $data[7][0][3][2][1][0][2] ?? null;
             $summary = $data[4][1][1][1][1];
-            $score = $data[6][0][2][1][1];
+            $score = (float) $data[6][0][2][1][1];
 
             $apps[] = new App(
                 App::newBuilder()
