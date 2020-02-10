@@ -31,6 +31,8 @@ class PlayStoreUiRequest
 
     private const RPC_ID_APPS = 'qnKhOb';
 
+    private const RPC_ID_PERMISSIONS = 'xdSrCf';
+
     /**
      * @param AppId       $requestApp
      * @param int         $count
@@ -91,6 +93,36 @@ class PlayStoreUiRequest
         $url = GPlayApps::GOOGLE_PLAY_URL . '/_/PlayStoreUi/data/batchexecute?' . http_build_query($queryParams);
         $formParams = [
             'f.req' => '[[["' . self::RPC_ID_APPS . '","[[null,[[10,[10,' . $limit . ']],true,null,[1]],null,\\"' . $token . '\\"]]",null,"generic"]]]',
+        ];
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
+        ];
+        $body = stream_for(http_build_query($formParams));
+
+        return new Request('POST', $url, $headers, $body);
+    }
+
+    /**
+     * @param AppId $requestApp
+     *
+     * @throws \Exception
+     *
+     * @return RequestInterface
+     */
+    public static function getPermissionsRequest(AppId $requestApp): RequestInterface
+    {
+        $queryParams = [
+            'rpcids' => self::RPC_ID_PERMISSIONS,
+            GPlayApps::REQ_PARAM_LOCALE => $requestApp->getLocale(),
+            GPlayApps::REQ_PARAM_COUNTRY => $requestApp->getCountry(),
+            'soc-app' => 121,
+            'soc-platform' => 1,
+            'soc-device' => 1,
+        ];
+        $url = GPlayApps::GOOGLE_PLAY_URL . '/_/PlayStoreUi/data/batchexecute?' . http_build_query($queryParams);
+        $formParams = [
+            'f.req' => '[[["' . self::RPC_ID_PERMISSIONS . '","[[null,[\"' .
+                $requestApp->getId() . '\",7],[]]]",null,"1"]]]',
         ];
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',

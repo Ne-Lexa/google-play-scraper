@@ -664,18 +664,13 @@ class GPlayApps
     {
         $appId = $this->castToAppId($appId);
 
-        $url = self::GOOGLE_PLAY_URL . '/store/xhr/getdoc?authuser=0';
-
         try {
-            return $this->getHttpClient()->request(
-                'POST',
-                $url,
+
+            $request = PlayStoreUiRequest::getPermissionsRequest($appId);
+
+            return $this->getHttpClient()->send(
+                $request,
                 [
-                    RequestOptions::FORM_PARAMS => [
-                        'ids' => $appId->getId(),
-                        self::REQ_PARAM_LOCALE => $appId->getLocale(),
-                        'xhr' => 1,
-                    ],
                     HttpClient::OPTION_HANDLER_RESPONSE => new PermissionScraper(),
                 ]
             );

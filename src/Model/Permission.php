@@ -21,25 +21,28 @@ class Permission implements \JsonSerializable
     /** @var string Permission label. */
     private $label;
 
-    /** @var string Permission description. */
-    private $description;
+    /** @var GoogleImage */
+    private $icon;
+
+    /** @var string[] Permissions. */
+    private $permissions;
 
     /**
-     * Creates an object with information about one of the permissions of the Android application.
+     * Permission constructor.
      *
-     * @param string $label       permission label
-     * @param string $description permission description
+     * @param string      $label
+     * @param GoogleImage $icon
+     * @param string[]    $permissions
      */
-    public function __construct(string $label, string $description)
+    public function __construct(string $label, GoogleImage $icon, array $permissions)
     {
         $this->label = $label;
-        $this->description = $description;
+        $this->icon = $icon;
+        $this->permissions = $permissions;
     }
 
     /**
-     * Returns permission label.
-     *
-     * @return string permission label
+     * @return string
      */
     public function getLabel(): string
     {
@@ -47,13 +50,19 @@ class Permission implements \JsonSerializable
     }
 
     /**
-     * Returns permission description.
-     *
-     * @return string permission description
+     * @return GoogleImage
      */
-    public function getDescription(): string
+    public function getIcon(): GoogleImage
     {
-        return $this->description;
+        return $this->icon;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPermissions(): array
+    {
+        return $this->permissions;
     }
 
     /**
@@ -65,7 +74,8 @@ class Permission implements \JsonSerializable
     {
         return [
             'label' => $this->label,
-            'description' => $this->description,
+            'icon' => $this->icon->getUrl(),
+            'permissions' => $this->permissions,
         ];
     }
 }

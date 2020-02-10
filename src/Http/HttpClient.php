@@ -15,7 +15,6 @@ namespace Nelexa\GPlay\Http;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\ConnectException;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
@@ -27,6 +26,9 @@ use function GuzzleHttp\Promise\each_limit_all;
 
 /**
  * HTTP client.
+ *
+ * @method ResponseInterface|object|array request($method, $uri = '', array $options = [])
+ * @method ResponseInterface|object|array send(RequestInterface $request, array $options = [])
  *
  * @internal
  */
@@ -41,7 +43,7 @@ class HttpClient extends Client
     public const OPTION_CACHE_KEY = 'cache_key';
 
     /** @internal */
-    private const CACHE_KEY = 'gplay.v1.%s.%s';
+    private const CACHE_KEY = 'gplay.v2.%s.%s';
 
     /**
      * Number of attempts with HTTP error (except 404).
@@ -202,7 +204,7 @@ class HttpClient extends Client
                 RequestOptions::HEADERS => [
                     'Accept-Encoding' => 'gzip',
                     'Accept-Language' => 'en',
-                    'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0',
+                    'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
                     'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                     'Connection' => 'keep-alive',
                 ],
@@ -382,8 +384,6 @@ class HttpClient extends Client
      * @param iterable $urls
      * @param array    $options
      * @param int      $concurrency
-     *
-     * @throws GuzzleException
      *
      * @return array
      */
