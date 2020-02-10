@@ -23,23 +23,12 @@ use Nelexa\Enum;
  */
 class AgeEnum extends Enum
 {
-    private const
-        /**
-         * @var string Ages 5 and under
-         */
-        FIVE_UNDER = 'AGE_RANGE1';
+    /** @var string Ages 5 and under */
+    private const FIVE_UNDER = 'AGE_RANGE1';
 
-    private const
+    /** @var string Ages 6-8 */
+    private const SIX_EIGHT = 'AGE_RANGE2';
 
-        /**
-         * @var string Ages 6-8
-         */
-        SIX_EIGHT = 'AGE_RANGE2';
-
-    private const
-
-        /**
-         * @var string Ages 9 & Up
-         */
-        NINE_UP = 'AGE_RANGE3';
+    /** @var string Ages 9 & Up */
+    private const NINE_UP = 'AGE_RANGE3';
 }

@@ -21,14 +21,15 @@ use GuzzleHttp\Middleware;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\SimpleCache\CacheInterface;
 use function GuzzleHttp\Promise\each_limit_all;
 
 /**
  * HTTP client.
  *
- * @method ResponseInterface|object|array request($method, $uri = '', array $options = [])
- * @method ResponseInterface|object|array send(RequestInterface $request, array $options = [])
+ * @method ResponseInterface|array|object request(string $method, string|UriInterface $uri = '', array $options = [])
+ * @method ResponseInterface|array|object send(RequestInterface $request, array $options = [])
  *
  * @internal
  */
@@ -105,7 +106,7 @@ class HttpClient extends Client
                                         }
                                         $hashes[$func] = $content;
                                     } catch (\ReflectionException $e) {
-                                        throw new \RuntimeException($e->getMessage(), $e->getCode(), $e);
+                                        throw new \RuntimeException($e->getMessage(), 1, $e);
                                     }
                                 }
                                 $handlerHash = (string) $hashes[$func];
@@ -354,7 +355,7 @@ class HttpClient extends Client
             }
             $property->setValue($this, $config);
         } catch (\ReflectionException $e) {
-            throw new \RuntimeException($e->getMessage(), $e->getCode(), $e);
+            throw new \RuntimeException($e->getMessage(), 1, $e);
         }
     }
 

@@ -26,44 +26,21 @@ use Nelexa\Enum;
  */
 class CollectionEnum extends Enum
 {
-    private const
-        /**
-         * @var string Top Free
-         */
-        TOP_FREE = 'topselling_free';
+    /** @var string Top Free */
+    private const TOP_FREE = 'topselling_free';
 
-    private const
+    /** @var string Top Paid */
+    private const TOP_PAID = 'topselling_paid';
 
-        /**
-         * @var string Top Paid
-         */
-        TOP_PAID = 'topselling_paid';
+    /** @var string Top New Free */
+    private const NEW_FREE = 'topselling_new_free';
 
-    private const
+    /** @var string Top New Paid */
+    private const NEW_PAID = 'topselling_new_paid';
 
-        /**
-         * @var string Top New Free
-         */
-        NEW_FREE = 'topselling_new_free';
+    /** @var string Top Grossing */
+    private const GROSSING = 'topgrossing';
 
-    private const
-
-        /**
-         * @var string Top New Paid
-         */
-        NEW_PAID = 'topselling_new_paid';
-
-    private const
-
-        /**
-         * @var string Top Grossing
-         */
-        GROSSING = 'topgrossing';
-
-    private const
-
-        /**
-         * @var string Trending Apps
-         */
-        TRENDING = 'movers_shakers';
+    /** @var string Trending Apps */
+    private const TRENDING = 'movers_shakers';
 }

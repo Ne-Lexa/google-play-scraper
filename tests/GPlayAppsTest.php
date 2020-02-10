@@ -373,17 +373,22 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetAppReviews(): void
     {
+        $appId = new AppId(
+            'com.google.android.webview',
+            $locale = 'zh_TW',
+            $country = 'cn'
+        );
         $reviews = $this->gplay->getAppReviews(
-            new AppId(
-                'com.google.android.webview',
-                $locale = 'zh_TW',
-                $country = 'cn'
-            ),
+            $appId,
             $limit = 555,
             SortEnum::NEWEST()
         );
         self::assertCount($limit, $reviews);
         self::assertContainsOnlyInstancesOf(Review::class, $reviews);
+
+        $firstActualReview = $reviews[0];
+        $expectedReview = $this->gplay->getAppReviewById($appId, $firstActualReview->getId());
+        self::assertEquals($expectedReview, $firstActualReview);
     }
 
     /**

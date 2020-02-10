@@ -39,6 +39,7 @@ use Nelexa\GPlay\Scraper\DeveloperInfoScraper;
 use Nelexa\GPlay\Scraper\ExistsAppScraper;
 use Nelexa\GPlay\Scraper\FindDevAppsUrlScraper;
 use Nelexa\GPlay\Scraper\FindSimilarAppsUrlScraper;
+use Nelexa\GPlay\Scraper\AppSpecificReviewScraper;
 use Nelexa\GPlay\Scraper\PermissionScraper;
 use Nelexa\GPlay\Scraper\PlayStoreUiAppsScraper;
 use Nelexa\GPlay\Scraper\PlayStoreUiRequest;
@@ -234,7 +235,7 @@ class GPlayApps
                 $this->concurrency
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -263,31 +264,15 @@ class GPlayApps
      *
      * @param string|AppId $appId application ID
      *
-     * @throws \InvalidArgumentException if the application identifier is null
-     *                                   or an invalid parameter is passed
-     *
      * @return AppId application ID such as {@see AppId}
      */
     protected function castToAppId($appId): AppId
     {
-        if ($appId === null) {
-            throw new \InvalidArgumentException('Application ID is null');
-        }
-
         if (\is_string($appId)) {
             return new AppId($appId, $this->locale, $this->country);
         }
 
-        if ($appId instanceof AppId) {
-            return $appId;
-        }
-
-        throw new \InvalidArgumentException(
-            sprintf(
-                'The expected type for the $appId parameter is a string or %s.',
-                AppId::class
-            )
-        );
+        return $appId;
     }
 
     /**
@@ -347,7 +332,7 @@ class GPlayApps
 
         foreach ($list as $app) {
             if ($app->isAutoTranslatedDescription()) {
-                $preferredLocale = $app->getTranslatedFromLocale();
+                $preferredLocale = (string) $app->getTranslatedFromLocale();
                 break;
             }
         }
@@ -362,6 +347,9 @@ class GPlayApps
             }
         );
 
+        if (!isset($list[$preferredLocale])) {
+            throw new \RuntimeException('No key ' . $preferredLocale);
+        }
         $preferredApp = $list[$preferredLocale];
         $list = array_filter(
             $list,
@@ -469,7 +457,7 @@ class GPlayApps
                 $this->concurrency
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -525,10 +513,41 @@ class GPlayApps
                 $allReviews[] = $reviews;
             } while ($token !== null && ($limit === self::UNLIMIT || $allCount < $limit));
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
 
         return empty($allReviews) ? $allReviews : array_merge(...$allReviews);
+    }
+
+    /**
+     * @param        $appId
+     * @param string $reviewId
+     *
+     * @throws GooglePlayException
+     *
+     * @return Review
+     */
+    public function getAppReviewById($appId, string $reviewId): Review
+    {
+        $appId = $this->castToAppId($appId);
+
+        try {
+            return $this->getHttpClient()->request(
+                'GET',
+                self::GOOGLE_PLAY_APPS_URL . '/details',
+                [
+                    RequestOptions::QUERY => [
+                        self::REQ_PARAM_ID => $appId->getId(),
+                        self::REQ_PARAM_LOCALE => $appId->getLocale(),
+                        self::REQ_PARAM_COUNTRY => $appId->getCountry(),
+                        'reviewId' => $reviewId,
+                    ],
+                    HttpClient::OPTION_HANDLER_RESPONSE => new AppSpecificReviewScraper($appId),
+                ]
+            );
+        } catch (\Throwable $e) {
+            throw new GooglePlayException($e->getMessage(), 1, $e);
+        }
     }
 
     /**
@@ -575,7 +594,7 @@ class GPlayApps
                 $limit
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -633,7 +652,7 @@ class GPlayApps
                 $allApps[] = $apps;
             }
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
 
         if (empty($allApps)) {
@@ -665,7 +684,6 @@ class GPlayApps
         $appId = $this->castToAppId($appId);
 
         try {
-
             $request = PlayStoreUiRequest::getPermissionsRequest($appId);
 
             return $this->getHttpClient()->send(
@@ -675,7 +693,7 @@ class GPlayApps
                 ]
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -704,7 +722,7 @@ class GPlayApps
                 ]
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -750,7 +768,7 @@ class GPlayApps
                 $this->concurrency
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -813,7 +831,7 @@ class GPlayApps
                 ]
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -897,7 +915,7 @@ class GPlayApps
                 $this->concurrency
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -945,7 +963,7 @@ class GPlayApps
                 $developerUrl .= '&' . self::REQ_PARAM_LOCALE . '=' . urlencode($this->locale) .
                     '&' . self::REQ_PARAM_COUNTRY . '=' . urlencode($this->country);
             } catch (\Throwable $e) {
-                throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+                throw new GooglePlayException($e->getMessage(), 1, $e);
             }
         } else {
             $developerUrl = self::GOOGLE_PLAY_APPS_URL . '/developer?' . http_build_query($query);
@@ -996,7 +1014,7 @@ class GPlayApps
                 ]
             );
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
     }
 
@@ -1126,7 +1144,7 @@ class GPlayApps
                 $offset += $countResult;
             } while ($countResult === $limitOnPage && $countResults < $limit);
         } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            throw new GooglePlayException($e->getMessage(), 1, $e);
         }
         $results = array_merge(...$results);
 

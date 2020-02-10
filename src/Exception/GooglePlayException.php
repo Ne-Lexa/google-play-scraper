@@ -33,7 +33,7 @@ class GooglePlayException extends \Exception
     {
         parent::__construct($message, $code, $previous);
 
-        if (($previous instanceof RequestException) && $previous->getRequest() !== null) {
+        if ($previous instanceof RequestException) {
             $this->url = $previous->getRequest()->getUri()->__toString();
         }
     }

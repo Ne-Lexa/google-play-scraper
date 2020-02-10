@@ -657,7 +657,7 @@ class GoogleImage
             if (is_file($destPath)) {
                 unlink($destPath);
             }
-            $ge = new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            $ge = new GooglePlayException($e->getMessage(), 1, $e);
             $ge->setUrl($url);
 
             throw $ge;
@@ -746,7 +746,7 @@ class GoogleImage
 
             return $response->getBody()->getContents();
         } catch (\Throwable $e) {
-            $ge = new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            $ge = new GooglePlayException($e->getMessage(), 1, $e);
             $ge->setUrl($url);
 
             throw $ge;

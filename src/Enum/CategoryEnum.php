@@ -78,177 +78,119 @@ use Nelexa\Enum;
  */
 class CategoryEnum extends Enum
 {
-    private const
-        GAME = 'GAME';
+    private const GAME = 'GAME';
 
-    private const
-        FAMILY = 'FAMILY';
+    private const FAMILY = 'FAMILY';
 
-    private const
-        ART_AND_DESIGN = 'ART_AND_DESIGN';
+    private const ART_AND_DESIGN = 'ART_AND_DESIGN';
 
-    private const
-        AUTO_AND_VEHICLES = 'AUTO_AND_VEHICLES';
+    private const AUTO_AND_VEHICLES = 'AUTO_AND_VEHICLES';
 
-    private const
-        BEAUTY = 'BEAUTY';
+    private const BEAUTY = 'BEAUTY';
 
-    private const
-        BOOKS_AND_REFERENCE = 'BOOKS_AND_REFERENCE';
+    private const BOOKS_AND_REFERENCE = 'BOOKS_AND_REFERENCE';
 
-    private const
-        BUSINESS = 'BUSINESS';
+    private const BUSINESS = 'BUSINESS';
 
-    private const
-        COMICS = 'COMICS';
+    private const COMICS = 'COMICS';
 
-    private const
-        COMMUNICATION = 'COMMUNICATION';
+    private const COMMUNICATION = 'COMMUNICATION';
 
-    private const
-        DATING = 'DATING';
+    private const DATING = 'DATING';
 
-    private const
-        EDUCATION = 'EDUCATION';
+    private const EDUCATION = 'EDUCATION';
 
-    private const
-        ENTERTAINMENT = 'ENTERTAINMENT';
+    private const ENTERTAINMENT = 'ENTERTAINMENT';
 
-    private const
-        EVENTS = 'EVENTS';
+    private const EVENTS = 'EVENTS';
 
-    private const
-        FINANCE = 'FINANCE';
+    private const FINANCE = 'FINANCE';
 
-    private const
-        FOOD_AND_DRINK = 'FOOD_AND_DRINK';
+    private const FOOD_AND_DRINK = 'FOOD_AND_DRINK';
 
-    private const
-        HEALTH_AND_FITNESS = 'HEALTH_AND_FITNESS';
+    private const HEALTH_AND_FITNESS = 'HEALTH_AND_FITNESS';
 
-    private const
-        HOUSE_AND_HOME = 'HOUSE_AND_HOME';
+    private const HOUSE_AND_HOME = 'HOUSE_AND_HOME';
 
-    private const
-        LIBRARIES_AND_DEMO = 'LIBRARIES_AND_DEMO';
+    private const LIBRARIES_AND_DEMO = 'LIBRARIES_AND_DEMO';
 
-    private const
-        LIFESTYLE = 'LIFESTYLE';
+    private const LIFESTYLE = 'LIFESTYLE';
 
-    private const
-        MAPS_AND_NAVIGATION = 'MAPS_AND_NAVIGATION';
+    private const MAPS_AND_NAVIGATION = 'MAPS_AND_NAVIGATION';
 
-    private const
-        MEDICAL = 'MEDICAL';
+    private const MEDICAL = 'MEDICAL';
 
-    private const
-        MUSIC_AND_AUDIO = 'MUSIC_AND_AUDIO';
+    private const MUSIC_AND_AUDIO = 'MUSIC_AND_AUDIO';
 
-    private const
-        NEWS_AND_MAGAZINES = 'NEWS_AND_MAGAZINES';
+    private const NEWS_AND_MAGAZINES = 'NEWS_AND_MAGAZINES';
 
-    private const
-        PARENTING = 'PARENTING';
+    private const PARENTING = 'PARENTING';
 
-    private const
-        PERSONALIZATION = 'PERSONALIZATION';
+    private const PERSONALIZATION = 'PERSONALIZATION';
 
-    private const
-        PHOTOGRAPHY = 'PHOTOGRAPHY';
+    private const PHOTOGRAPHY = 'PHOTOGRAPHY';
 
-    private const
-        PRODUCTIVITY = 'PRODUCTIVITY';
+    private const PRODUCTIVITY = 'PRODUCTIVITY';
 
-    private const
-        SHOPPING = 'SHOPPING';
+    private const SHOPPING = 'SHOPPING';
 
-    private const
-        SOCIAL = 'SOCIAL';
+    private const SOCIAL = 'SOCIAL';
 
-    private const
-        SPORTS = 'SPORTS';
+    private const SPORTS = 'SPORTS';
 
-    private const
-        TOOLS = 'TOOLS';
+    private const TOOLS = 'TOOLS';
 
-    private const
-        TRAVEL_AND_LOCAL = 'TRAVEL_AND_LOCAL';
+    private const TRAVEL_AND_LOCAL = 'TRAVEL_AND_LOCAL';
 
-    private const
-        VIDEO_PLAYERS = 'VIDEO_PLAYERS';
+    private const VIDEO_PLAYERS = 'VIDEO_PLAYERS';
 
-    private const
-        ANDROID_WEAR = 'ANDROID_WEAR';
+    private const ANDROID_WEAR = 'ANDROID_WEAR';
 
-    private const
-        WEATHER = 'WEATHER';
+    private const WEATHER = 'WEATHER';
 
-    private const
-        GAME_ACTION = 'GAME_ACTION';
+    private const GAME_ACTION = 'GAME_ACTION';
 
-    private const
-        GAME_ADVENTURE = 'GAME_ADVENTURE';
+    private const GAME_ADVENTURE = 'GAME_ADVENTURE';
 
-    private const
-        GAME_ARCADE = 'GAME_ARCADE';
+    private const GAME_ARCADE = 'GAME_ARCADE';
 
-    private const
-        GAME_BOARD = 'GAME_BOARD';
+    private const GAME_BOARD = 'GAME_BOARD';
 
-    private const
-        GAME_CARD = 'GAME_CARD';
+    private const GAME_CARD = 'GAME_CARD';
 
-    private const
-        GAME_CASINO = 'GAME_CASINO';
+    private const GAME_CASINO = 'GAME_CASINO';
 
-    private const
-        GAME_CASUAL = 'GAME_CASUAL';
+    private const GAME_CASUAL = 'GAME_CASUAL';
 
-    private const
-        GAME_EDUCATIONAL = 'GAME_EDUCATIONAL';
+    private const GAME_EDUCATIONAL = 'GAME_EDUCATIONAL';
 
-    private const
-        GAME_MUSIC = 'GAME_MUSIC';
+    private const GAME_MUSIC = 'GAME_MUSIC';
 
-    private const
-        GAME_PUZZLE = 'GAME_PUZZLE';
+    private const GAME_PUZZLE = 'GAME_PUZZLE';
 
-    private const
-        GAME_RACING = 'GAME_RACING';
+    private const GAME_RACING = 'GAME_RACING';
 
-    private const
-        GAME_ROLE_PLAYING = 'GAME_ROLE_PLAYING';
+    private const GAME_ROLE_PLAYING = 'GAME_ROLE_PLAYING';
 
-    private const
-        GAME_SIMULATION = 'GAME_SIMULATION';
+    private const GAME_SIMULATION = 'GAME_SIMULATION';
 
-    private const
-        GAME_SPORTS = 'GAME_SPORTS';
+    private const GAME_SPORTS = 'GAME_SPORTS';
 
-    private const
-        GAME_STRATEGY = 'GAME_STRATEGY';
+    private const GAME_STRATEGY = 'GAME_STRATEGY';
 
-    private const
-        GAME_TRIVIA = 'GAME_TRIVIA';
+    private const GAME_TRIVIA = 'GAME_TRIVIA';
 
-    private const
-        GAME_WORD = 'GAME_WORD';
+    private const GAME_WORD = 'GAME_WORD';
 
-    private const
-        FAMILY_ACTION = 'FAMILY_ACTION';
+    private const FAMILY_ACTION = 'FAMILY_ACTION';
 
-    private const
-        FAMILY_BRAINGAMES = 'FAMILY_BRAINGAMES';
+    private const FAMILY_BRAINGAMES = 'FAMILY_BRAINGAMES';
 
-    private const
-        FAMILY_CREATE = 'FAMILY_CREATE';
+    private const FAMILY_CREATE = 'FAMILY_CREATE';
 
-    private const
-        FAMILY_EDUCATION = 'FAMILY_EDUCATION';
+    private const FAMILY_EDUCATION = 'FAMILY_EDUCATION';
 
-    private const
-        FAMILY_MUSICVIDEO = 'FAMILY_MUSICVIDEO';
+    private const FAMILY_MUSICVIDEO = 'FAMILY_MUSICVIDEO';
 
-    private const
-        FAMILY_PRETEND = 'FAMILY_PRETEND';
+    private const FAMILY_PRETEND = 'FAMILY_PRETEND';
 }
