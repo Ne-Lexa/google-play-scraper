@@ -1,21 +1,28 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Nelexa\GPlay\Tests\Helper;
+namespace Nelexa\GPlay\Tests\Util;
 
 use Nelexa\GPlay\Util\LocaleHelper;
 use PHPUnit\Framework\TestCase;
 
-class NormalizeLanguageTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class NormalizeLanguageTest extends TestCase
 {
     /**
      * @dataProvider providerIcuLocales
+     *
      * @param string $srcLocale
      * @param string $destLocale
      */
     public function testNormalizeLanguage(string $srcLocale, string $destLocale): void
     {
-        $this->assertEquals(LocaleHelper::getNormalizeLocale($srcLocale), $destLocale);
+        self::assertEquals(LocaleHelper::getNormalizeLocale($srcLocale), $destLocale);
     }
 
     /**

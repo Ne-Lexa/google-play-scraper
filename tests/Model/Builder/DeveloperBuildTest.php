@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nelexa\GPlay\Tests\Model\Builder;
@@ -7,15 +8,24 @@ use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use PHPUnit\Framework\TestCase;
 
-class DeveloperBuildTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class DeveloperBuildTest extends TestCase
 {
     public function testBuilder(): void
     {
         $developerId = '11111111111111111';
         $developerUrl = 'https://play.google.com/apps/dev?id=11111111111111111';
         $developerName = 'Test developer';
-        $developerIcon = new GoogleImage('https://lh3.googleusercontent.com/n5g1OHEQH0icjrImRZCvXfWEqo7FWN-Jg9tH9n18Ryntv3XxPx-Shd3BQmcp16nyXS0');
-        $developerCover = new GoogleImage('https://lh3.googleusercontent.com/LdtfXXzkEBDOqlGpHefUy0SlGL1X07sYAmmAEyFtuaiNwfHwjqqgKTAzRKDgNDi3PQ');
+        $developerIcon = new GoogleImage(
+            'https://lh3.googleusercontent.com/n5g1OHEQH0icjrImRZCvXfWEqo7FWN-Jg9tH9n18Ryntv3XxPx-Shd3BQmcp16nyXS0'
+        );
+        $developerCover = new GoogleImage(
+            'https://lh3.googleusercontent.com/LdtfXXzkEBDOqlGpHefUy0SlGL1X07sYAmmAEyFtuaiNwfHwjqqgKTAzRKDgNDi3PQ'
+        );
         $developerWebsite = 'https://www.example.com';
         $developerDescription = 'Developer description apps';
         $developerEmail = 'dev@example.com';
@@ -25,39 +35,41 @@ class DeveloperBuildTest extends TestCase
 
         try {
             new Developer($builder);
-            $this->fail('Developer id is null or empty');
+            self::fail('Developer id is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Developer id', $e->getMessage());
+            self::assertStringContainsString('Developer id', $e->getMessage());
         }
 
         $builder->setId($developerId);
+
         try {
             new Developer($builder);
-            $this->fail('Developer page url is null or empty');
+            self::fail('Developer page url is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Developer url', $e->getMessage());
+            self::assertStringContainsString('Developer url', $e->getMessage());
         }
 
         $builder->setUrl($developerUrl);
+
         try {
             new Developer($builder);
-            $this->fail('Developer name is null or empty');
+            self::fail('Developer name is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Developer name', $e->getMessage());
+            self::assertStringContainsString('Developer name', $e->getMessage());
         }
 
         $builder->setName($developerName);
 
         $developer = new Developer($builder);
-        $this->assertSame($developer->getId(), $developerId);
-        $this->assertSame($developer->getUrl(), $developerUrl);
-        $this->assertSame($developer->getName(), $developerName);
-        $this->assertNull($developer->getIcon());
-        $this->assertNull($developer->getCover());
-        $this->assertNull($developer->getAddress());
-        $this->assertNull($developer->getEmail());
-        $this->assertNull($developer->getWebsite());
-        $this->assertNull($developer->getDescription());
+        self::assertSame($developer->getId(), $developerId);
+        self::assertSame($developer->getUrl(), $developerUrl);
+        self::assertSame($developer->getName(), $developerName);
+        self::assertNull($developer->getIcon());
+        self::assertNull($developer->getCover());
+        self::assertNull($developer->getAddress());
+        self::assertNull($developer->getEmail());
+        self::assertNull($developer->getWebsite());
+        self::assertNull($developer->getDescription());
 
         $builder
             ->setIcon($developerIcon)
@@ -65,14 +77,15 @@ class DeveloperBuildTest extends TestCase
             ->setWebsite($developerWebsite)
             ->setDescription($developerDescription)
             ->setEmail($developerEmail)
-            ->setAddress($developerAddress);
+            ->setAddress($developerAddress)
+        ;
 
         $developer = new Developer($builder);
-        $this->assertSame($developer->getIcon(), $developerIcon);
-        $this->assertSame($developer->getCover(), $developerCover);
-        $this->assertSame($developer->getWebsite(), $developerWebsite);
-        $this->assertSame($developer->getDescription(), $developerDescription);
-        $this->assertSame($developer->getEmail(), $developerEmail);
-        $this->assertSame($developer->getAddress(), $developerAddress);
+        self::assertSame($developer->getIcon(), $developerIcon);
+        self::assertSame($developer->getCover(), $developerCover);
+        self::assertSame($developer->getWebsite(), $developerWebsite);
+        self::assertSame($developer->getDescription(), $developerDescription);
+        self::assertSame($developer->getEmail(), $developerEmail);
+        self::assertSame($developer->getAddress(), $developerAddress);
     }
 }

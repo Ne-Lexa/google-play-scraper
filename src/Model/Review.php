@@ -1,21 +1,25 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
+
 /**
  * Contains review of application on Google Play store.
  *
- * @see \Nelexa\GPlay\GPlayApps::getAppReviews() Returns reviews
- *     of the Android app in the Google Play Store.
- * @see \Nelexa\GPlay\GPlayApps::getApps() Returns detailed
- *     information about many android packages.
+ * @see GPlayApps::getAppReviews() Returns reviews of the Android app
+ *     in the Google Play store.
+ * @see GPlayApps::getApps() Returns detailed information about many
+ *     android packages.
  */
 class Review implements \JsonSerializable
 {
@@ -51,15 +55,15 @@ class Review implements \JsonSerializable
     /**
      * Constructs a Reply.
      *
-     * @param string $id review id
-     * @param string $url review url
-     * @param string $userName review author
-     * @param string $text review text
-     * @param GoogleImage $avatar author's avatar
-     * @param \DateTimeInterface|null $date review date
-     * @param int $score review score
-     * @param int $likeCount the number of likes reviews
-     * @param ReplyReview|null $reply reply review
+     * @param string                  $id        review id
+     * @param string                  $url       review url
+     * @param string                  $userName  review author
+     * @param string                  $text      review text
+     * @param GoogleImage             $avatar    author's avatar
+     * @param \DateTimeInterface|null $date      review date
+     * @param int                     $score     review score
+     * @param int                     $likeCount the number of likes reviews
+     * @param ReplyReview|null        $reply     reply review
      */
     public function __construct(
         string $id,
@@ -176,7 +180,7 @@ class Review implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

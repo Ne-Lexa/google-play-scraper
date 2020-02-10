@@ -1,20 +1,24 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
+
 /**
- * Contains the developer’s reply to a review in the Google Play Store.
+ * Contains the developer’s reply to a review in the Google Play store.
  *
- * @see \Nelexa\GPlay\Model\Review Contains review of application on Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getAppReviews() Returns reviews of the
- *     Android app in the Google Play Store.
+ * @see Review Contains review of application on Google Play store.
+ * @see GPlayApps::getAppReviews() Returns reviews of the
+ *     Android app in the Google Play store.
  */
 class ReplyReview implements \JsonSerializable
 {
@@ -30,8 +34,8 @@ class ReplyReview implements \JsonSerializable
      * Creates an object with information about the developer’s response
      * to a review of an application in the Google Play store.
      *
-     * @param \DateTimeInterface $date Reply date.
-     * @param string $text Reply text.
+     * @param \DateTimeInterface $date reply date
+     * @param string             $text reply text
      */
     public function __construct(\DateTimeInterface $date, string $text)
     {
@@ -42,7 +46,7 @@ class ReplyReview implements \JsonSerializable
     /**
      * Returns reply date.
      *
-     * @return \DateTimeInterface Reply date.
+     * @return \DateTimeInterface reply date
      */
     public function getDate(): \DateTimeInterface
     {
@@ -52,7 +56,7 @@ class ReplyReview implements \JsonSerializable
     /**
      * Returns reply text.
      *
-     * @return string Reply text.
+     * @return string reply text
      */
     public function getText(): string
     {
@@ -62,7 +66,7 @@ class ReplyReview implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

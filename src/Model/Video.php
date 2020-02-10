@@ -1,22 +1,26 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
+
 /**
  * Contains promo video data.
  *
- * @see \Nelexa\GPlay\GPlayApps::getApps() Returns detailed information about
+ * @see GPlayApps::getApps() Returns detailed information about
  *     many android packages.
- * @see \Nelexa\GPlay\GPlayApps::getAppInLocales() Returns detailed information
+ * @see GPlayApps::getAppInLocales() Returns detailed information
  *     about an application from the Google Play store for an array of locales.
- * @see \Nelexa\GPlay\GPlayApps::getAppInAvailableLocales() Returns detailed
+ * @see GPlayApps::getAppInAvailableLocales() Returns detailed
  *     information about the application in all available locales.
  */
 class Video implements \JsonSerializable
@@ -32,8 +36,8 @@ class Video implements \JsonSerializable
     /**
      * Creates an object with information about the promo video for Android application.
      *
-     * @param string $imageUrl Video thumbnail url.
-     * @param string $videoUrl Video url.
+     * @param string $imageUrl video thumbnail url
+     * @param string $videoUrl video url
      */
     public function __construct(string $imageUrl, string $videoUrl)
     {
@@ -44,7 +48,7 @@ class Video implements \JsonSerializable
     /**
      * Returns the video thumbnail url.
      *
-     * @return string Image url.
+     * @return string image url
      */
     public function getImageUrl(): string
     {
@@ -54,7 +58,7 @@ class Video implements \JsonSerializable
     /**
      * Returns the video url.
      *
-     * @return string Video url.
+     * @return string video url
      */
     public function getVideoUrl(): string
     {
@@ -64,20 +68,25 @@ class Video implements \JsonSerializable
     /**
      * Returns a YouTube id.
      *
-     * @return string|null YouTube ID or `null` if the video is not from YouTube.
+     * @return string|null youTube ID or `null` if the video is not from YouTube
      */
     public function getYoutubeId(): ?string
     {
-        if (preg_match('~^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*~', $this->videoUrl, $match)) {
+        if (preg_match(
+            '~^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*~',
+            $this->videoUrl,
+            $match
+        )) {
             return $match[1];
         }
+
         return null;
     }
 
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

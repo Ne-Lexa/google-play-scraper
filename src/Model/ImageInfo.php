@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
@@ -40,13 +42,14 @@ class ImageInfo implements \JsonSerializable
     /**
      * Creates an object with information about the image saved to disk.
      *
-     * @param string $url Image url.
-     * @param string $filename Local image filename.
+     * @param string $url      image url
+     * @param string $filename local image filename
      */
     public function __construct(string $url, string $filename)
     {
         $this->url = $url;
         $imageInfo = getimagesize($filename);
+
         if (!$imageInfo) {
             throw new \RuntimeException('Invalid image: ' . $filename);
         }
@@ -64,7 +67,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the url of the image.
      *
-     * @return string Image url.
+     * @return string image url
      */
     public function getUrl(): string
     {
@@ -74,7 +77,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the path to save the image file.
      *
-     * @return string Image filename.
+     * @return string image filename
      */
     public function getFilename(): string
     {
@@ -84,7 +87,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the mime type of the image.
      *
-     * @return string Image mime-type.
+     * @return string image mime-type
      */
     public function getMimeType(): string
     {
@@ -94,7 +97,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the image file extension.
      *
-     * @return string Image file extension.
+     * @return string image file extension
      */
     public function getExtension(): string
     {
@@ -104,7 +107,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the width of the image.
      *
-     * @return int Image width.
+     * @return int image width
      */
     public function getWidth(): int
     {
@@ -114,7 +117,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the height of the image.
      *
-     * @return int Image height.
+     * @return int image height
      */
     public function getHeight(): int
     {
@@ -124,7 +127,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns the size of the image file.
      *
-     * @return int Image file size.
+     * @return int image file size
      */
     public function getFilesize(): int
     {
@@ -134,7 +137,7 @@ class ImageInfo implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

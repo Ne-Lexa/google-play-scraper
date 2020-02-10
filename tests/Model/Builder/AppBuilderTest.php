@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nelexa\GPlay\Tests\Model\Builder;
@@ -14,10 +15,16 @@ use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
 use PHPUnit\Framework\TestCase;
 
-class AppBuilderTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class AppBuilderTest extends TestCase
 {
     /**
      * @dataProvider provideAppBuilderData
+     *
      * @param array $data
      */
     public function testAppBuilder(array $data): void
@@ -26,41 +33,45 @@ class AppBuilderTest extends TestCase
 
         try {
             new App($builder);
-            $this->fail('Application ID is null or empty');
+            self::fail('Application ID is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Application ID cannot be null or empty', $e->getMessage());
+            self::assertStringContainsString('Application ID cannot be null or empty', $e->getMessage());
         }
 
         $builder->setId($data['appId']);
+
         try {
             new App($builder);
-            $this->fail('Locale is null or empty');
+            self::fail('Locale is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Locale cannot be null or empty', $e->getMessage());
+            self::assertStringContainsString('Locale cannot be null or empty', $e->getMessage());
         }
 
         $builder->setLocale($data['locale']);
+
         try {
             new App($builder);
-            $this->fail('Country is null or empty');
+            self::fail('Country is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Country cannot be null or empty', $e->getMessage());
+            self::assertStringContainsString('Country cannot be null or empty', $e->getMessage());
         }
 
         $builder->setCountry($data['country']);
+
         try {
             new App($builder);
-            $this->fail('Application name is null or empty');
+            self::fail('Application name is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('application name cannot be null or empty', $e->getMessage());
+            self::assertStringContainsString('application name cannot be null or empty', $e->getMessage());
         }
 
         $builder->setName($data['appName']);
+
         try {
             new App($builder);
-            $this->fail('Developer is null');
+            self::fail('Developer is null');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('developer cannot be null', $e->getMessage());
+            self::assertStringContainsString('developer cannot be null', $e->getMessage());
         }
 
         $developer = new Developer(
@@ -71,11 +82,12 @@ class AppBuilderTest extends TestCase
         );
 
         $builder->setDeveloper($developer);
+
         try {
             new App($builder);
-            $this->fail('Application icon is null');
+            self::fail('Application icon is null');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Application icon cannot be null', $e->getMessage());
+            self::assertStringContainsString('Application icon cannot be null', $e->getMessage());
         }
 
         $icon = new GoogleImage($data['iconUrl']);
@@ -83,114 +95,116 @@ class AppBuilderTest extends TestCase
 
         $app = new App($builder);
 
-        $this->assertInstanceOf(App::class, $app);
+        self::assertInstanceOf(App::class, $app);
 
-        $this->assertSame($app->getId(), $data['appId']);
-        $this->assertSame($app->getUrl(), $data['appUrl']);
-        $this->assertSame($app->getLocale(), $data['locale']);
-        $this->assertSame($app->getName(), $data['appName']);
+        self::assertSame($app->getId(), $data['appId']);
+        self::assertSame($app->getUrl(), $data['appUrl']);
+        self::assertSame($app->getLocale(), $data['locale']);
+        self::assertSame($app->getName(), $data['appName']);
 
-        $this->assertSame($app->getIcon(), $icon);
-        $this->assertSame($app->getIcon()->getUrl(), $data['iconUrl']);
+        self::assertSame($app->getIcon(), $icon);
+        self::assertSame($app->getIcon()->getUrl(), $data['iconUrl']);
 
-        $this->assertSame($app->getDeveloper(), $developer);
-        $this->assertSame($app->getDeveloper()->getId(), $data['developerId']);
-        $this->assertSame($app->getDeveloper()->getUrl(), $data['developerUrl']);
-        $this->assertSame($app->getDeveloper()->getName(), $data['developerName']);
+        self::assertSame($app->getDeveloper(), $developer);
+        self::assertSame($app->getDeveloper()->getId(), $data['developerId']);
+        self::assertSame($app->getDeveloper()->getUrl(), $data['developerUrl']);
+        self::assertSame($app->getDeveloper()->getName(), $data['developerName']);
 
-        $this->assertNull($app->getSummary());
-        $this->assertSame($app->getScore(), 0.0);
-        $this->assertNull($app->getPriceText());
-        $this->assertTrue($app->isFree());
+        self::assertNull($app->getSummary());
+        self::assertSame($app->getScore(), 0.0);
+        self::assertNull($app->getPriceText());
+        self::assertTrue($app->isFree());
 
         $builder
             ->setSummary($data['summary'])
             ->setScore($data['score'])
-            ->setPriceText($data['priceText']);
+            ->setPriceText($data['priceText'])
+        ;
 
         $appPaid = new App($builder);
-        $this->assertNotEquals($app, $appPaid);
+        self::assertNotEquals($app, $appPaid);
 
-        $this->assertSame($appPaid->getSummary(), $data['summary']);
-        $this->assertSame($appPaid->getScore(), $data['score']);
-        $this->assertSame($appPaid->getPriceText(), $data['priceText']);
-        $this->assertFalse($appPaid->isFree());
+        self::assertSame($appPaid->getSummary(), $data['summary']);
+        self::assertSame($appPaid->getScore(), $data['score']);
+        self::assertSame($appPaid->getPriceText(), $data['priceText']);
+        self::assertFalse($appPaid->isFree());
 
         // AppDetail
         try {
             new AppDetail($builder);
-            $this->fail('Application description is null or empty');
+            self::fail('Application description is null or empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Application description cannot be null or empty', $e->getMessage());
+            self::assertStringContainsString('Application description cannot be null or empty', $e->getMessage());
         }
 
         $builder->setDescription($data['description']);
+
         try {
             new AppDetail($builder);
-            $this->fail('Screenshots are empty');
+            self::fail('Screenshots are empty');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Screenshots', $e->getMessage());
+            self::assertStringContainsString('Screenshots', $e->getMessage());
         }
 
         foreach ($data['screenshots'] as $screenshot) {
             $builder->addScreenshot($screenshot);
         }
 
-        $this->assertSame($builder->getScreenshots(), $data['screenshots']);
+        self::assertSame($builder->getScreenshots(), $data['screenshots']);
         $builder->setScreenshots([]);
-        $this->assertEmpty($builder->getScreenshots());
+        self::assertEmpty($builder->getScreenshots());
         $builder->setScreenshots($data['screenshots']);
-        $this->assertSame($builder->getScreenshots(), $data['screenshots']);
+        self::assertSame($builder->getScreenshots(), $data['screenshots']);
 
         try {
             new AppDetail($builder);
-            $this->fail('Application category is null');
+            self::fail('Application category is null');
         } catch (\InvalidArgumentException $e) {
-            $this->assertStringContainsString('Application category cannot be null', $e->getMessage());
+            self::assertStringContainsString('Application category cannot be null', $e->getMessage());
         }
 
         $category = new Category($data['categoryId'], $data['categoryName']);
         $builder->setCategory($category);
 
         $appDetail = new AppDetail($builder);
-        $this->assertNull($appDetail->getDeveloper()->getDescription());
-        $this->assertSame($appDetail->getId(), $data['appId']);
-        $this->assertSame($appDetail->getLocale(), $data['locale']);
-        $this->assertSame($appDetail->getDescription(), $data['description']);
-        $this->assertSame($appDetail->getScreenshots(), $data['screenshots']);
-        $this->assertSame($appDetail->getCategory(), $category);
-        $this->assertSame($appDetail->getCategory()->getId(), $data['categoryId']);
-        $this->assertSame($appDetail->getCategory()->getName(), $data['categoryName']);
-        $this->assertFalse($appDetail->getCategory()->isFamilyCategory());
+        self::assertNull($appDetail->getDeveloper()->getDescription());
+        self::assertSame($appDetail->getId(), $data['appId']);
+        self::assertSame($appDetail->getLocale(), $data['locale']);
+        self::assertSame($appDetail->getDescription(), $data['description']);
+        self::assertSame($appDetail->getScreenshots(), $data['screenshots']);
+        self::assertSame($appDetail->getCategory(), $category);
+        self::assertSame($appDetail->getCategory()->getId(), $data['categoryId']);
+        self::assertSame($appDetail->getCategory()->getName(), $data['categoryName']);
+        self::assertFalse($appDetail->getCategory()->isFamilyCategory());
 
-        $this->assertNull($appDetail->getTranslatedFromLocale());
-        $this->assertNull($appDetail->getCover());
-        $this->assertNull($appDetail->getPrivacyPoliceUrl());
-        $this->assertNull($appDetail->getCategoryFamily());
-        $this->assertNull($appDetail->getVideo());
-        $this->assertNull($appDetail->getRecentChanges());
-        $this->assertFalse($appDetail->isEditorsChoice());
-        $this->assertSame($appDetail->getInstalls(), 0);
-        $this->assertSame($appDetail->getNumberVoters(), 0);
-        $this->assertEquals(
+        self::assertNull($appDetail->getTranslatedFromLocale());
+        self::assertNull($appDetail->getCover());
+        self::assertNull($appDetail->getPrivacyPoliceUrl());
+        self::assertNull($appDetail->getCategoryFamily());
+        self::assertNull($appDetail->getVideo());
+        self::assertNull($appDetail->getRecentChanges());
+        self::assertFalse($appDetail->isEditorsChoice());
+        self::assertSame($appDetail->getInstalls(), 0);
+        self::assertSame($appDetail->getNumberVoters(), 0);
+        self::assertEquals(
             $appDetail->getHistogramRating(),
             new HistogramRating(0, 0, 0, 0, 0)
         );
-        $this->assertSame($appDetail->getPrice(), 0.0);
-        $this->assertSame($appDetail->getCurrency(), 'USD');
-        $this->assertNull($appDetail->getOffersIAPCost());
-        $this->assertFalse($appDetail->isContainsIAP());
-        $this->assertFalse($appDetail->isContainsAds());
-        $this->assertNull($appDetail->getSize());
-        $this->assertNull($appDetail->getAppVersion());
-        $this->assertNull($appDetail->getAndroidVersion());
-        $this->assertNull($appDetail->getMinAndroidVersion());
-        $this->assertNull($appDetail->getContentRating());
-        $this->assertNull($appDetail->getReleased());
-        $this->assertNull($appDetail->getUpdated());
-        $this->assertSame($appDetail->getNumberReviews(), 0);
-        $this->assertIsArray($appDetail->getReviews());
-        $this->assertEmpty($appDetail->getReviews());
+        self::assertSame($appDetail->getPrice(), 0.0);
+        self::assertSame($appDetail->getCurrency(), 'USD');
+        self::assertNull($appDetail->getOffersIAPCost());
+        self::assertFalse($appDetail->isContainsIAP());
+        self::assertFalse($appDetail->isContainsAds());
+        self::assertNull($appDetail->getSize());
+        self::assertNull($appDetail->getAppVersion());
+        self::assertNull($appDetail->getAndroidVersion());
+        self::assertNull($appDetail->getMinAndroidVersion());
+        self::assertNull($appDetail->getContentRating());
+        self::assertNull($appDetail->getReleased());
+        self::assertNull($appDetail->getUpdated());
+        self::assertSame($appDetail->getNumberReviews(), 0);
+        self::assertIsArray($appDetail->getReviews());
+        self::assertEmpty($appDetail->getReviews());
 
         $categoryFamily = new Category($data['categoryFamilyId'], $data['categoryFamilyName']);
         $video = new Video($data['videoThumbUrl'], $data['videoUrl']);
@@ -227,54 +241,56 @@ class AppBuilderTest extends TestCase
             ->setReleased($data['released'])
             ->setUpdated($data['updated'])
             ->setNumberReviews($data['numberReviews'])
-            ->setReviews($data['reviews']);
+            ->setReviews($data['reviews'])
+        ;
 
         $appDetail = new AppDetail($builder);
 
-        $this->assertSame($appDetail->getDeveloper(), $developer);
-        $this->assertSame($appDetail->getDeveloper()->getEmail(), $data['developerEmail']);
-        $this->assertSame($appDetail->getDeveloper()->getAddress(), $data['developerAddress']);
-        $this->assertSame($appDetail->getDeveloper()->getWebsite(), $data['developerSite']);
-        $this->assertNull($appDetail->getDeveloper()->getDescription());
-        $this->assertNull($appDetail->getDeveloper()->getCover());
-        $this->assertNull($appDetail->getDeveloper()->getIcon());
+        self::assertSame($appDetail->getDeveloper(), $developer);
+        self::assertSame($appDetail->getDeveloper()->getEmail(), $data['developerEmail']);
+        self::assertSame($appDetail->getDeveloper()->getAddress(), $data['developerAddress']);
+        self::assertSame($appDetail->getDeveloper()->getWebsite(), $data['developerSite']);
+        self::assertNull($appDetail->getDeveloper()->getDescription());
+        self::assertNull($appDetail->getDeveloper()->getCover());
+        self::assertNull($appDetail->getDeveloper()->getIcon());
 
-        $this->assertSame($appDetail->getTranslatedFromLocale(), $data['translatedFromLocale']);
-        $this->assertSame($appDetail->getCover(), $data['cover']);
-        $this->assertSame($appDetail->getPrivacyPoliceUrl(), $data['privacyPoliceUrl']);
-        $this->assertSame($appDetail->getCategoryFamily(), $categoryFamily);
-        $this->assertSame($appDetail->getCategoryFamily()->getId(), $data['categoryFamilyId']);
-        $this->assertSame($appDetail->getCategoryFamily()->getName(), $data['categoryFamilyName']);
-        $this->assertTrue($appDetail->getCategoryFamily()->isFamilyCategory());
-        $this->assertSame($appDetail->getVideo(), $video);
-        $this->assertSame($appDetail->getVideo()->getImageUrl(), $data['videoThumbUrl']);
-        $this->assertSame($appDetail->getVideo()->getVideoUrl(), $data['videoUrl']);
-        $this->assertSame($appDetail->getVideo()->getYoutubeId(), $data['youtubeId']);
-        $this->assertSame($appDetail->getRecentChanges(), $data['recentChanges']);
-        $this->assertSame($appDetail->isEditorsChoice(), $data['editorChoice']);
-        $this->assertSame($appDetail->getInstalls(), $data['installs']);
-        $this->assertSame($appDetail->getNumberVoters(), $data['numberVoters']);
-        $this->assertSame($appDetail->getHistogramRating(), $data['histogramRating']);
-        $this->assertSame($appDetail->getPrice(), $data['price']);
-        $this->assertSame($appDetail->getCurrency(), $data['currency']);
-        $this->assertSame($appDetail->getPriceText(), $data['priceTextEur']);
-        $this->assertSame($appDetail->getOffersIAPCost(), $data['offersIAPCost']);
-        $this->assertTrue($appDetail->isContainsIAP());
-        $this->assertTrue($appDetail->isContainsAds());
-        $this->assertSame($appDetail->getSize(), $data['size']);
-        $this->assertSame($appDetail->getAppVersion(), $data['appVersion']);
-        $this->assertSame($appDetail->getAndroidVersion(), $data['androidVersion']);
-        $this->assertSame($appDetail->getMinAndroidVersion(), $data['minAndroidVersion']);
-        $this->assertSame($appDetail->getContentRating(), $data['contentRating']);
-        $this->assertSame($appDetail->getReleased(), $data['released']);
-        $this->assertSame($appDetail->getUpdated(), $data['updated']);
-        $this->assertSame($appDetail->getNumberReviews(), $data['numberReviews']);
-        $this->assertSame($appDetail->getReviews(), $data['reviews']);
+        self::assertSame($appDetail->getTranslatedFromLocale(), $data['translatedFromLocale']);
+        self::assertSame($appDetail->getCover(), $data['cover']);
+        self::assertSame($appDetail->getPrivacyPoliceUrl(), $data['privacyPoliceUrl']);
+        self::assertSame($appDetail->getCategoryFamily(), $categoryFamily);
+        self::assertSame($appDetail->getCategoryFamily()->getId(), $data['categoryFamilyId']);
+        self::assertSame($appDetail->getCategoryFamily()->getName(), $data['categoryFamilyName']);
+        self::assertTrue($appDetail->getCategoryFamily()->isFamilyCategory());
+        self::assertSame($appDetail->getVideo(), $video);
+        self::assertSame($appDetail->getVideo()->getImageUrl(), $data['videoThumbUrl']);
+        self::assertSame($appDetail->getVideo()->getVideoUrl(), $data['videoUrl']);
+        self::assertSame($appDetail->getVideo()->getYoutubeId(), $data['youtubeId']);
+        self::assertSame($appDetail->getRecentChanges(), $data['recentChanges']);
+        self::assertSame($appDetail->isEditorsChoice(), $data['editorChoice']);
+        self::assertSame($appDetail->getInstalls(), $data['installs']);
+        self::assertSame($appDetail->getNumberVoters(), $data['numberVoters']);
+        self::assertSame($appDetail->getHistogramRating(), $data['histogramRating']);
+        self::assertSame($appDetail->getPrice(), $data['price']);
+        self::assertSame($appDetail->getCurrency(), $data['currency']);
+        self::assertSame($appDetail->getPriceText(), $data['priceTextEur']);
+        self::assertSame($appDetail->getOffersIAPCost(), $data['offersIAPCost']);
+        self::assertTrue($appDetail->isContainsIAP());
+        self::assertTrue($appDetail->isContainsAds());
+        self::assertSame($appDetail->getSize(), $data['size']);
+        self::assertSame($appDetail->getAppVersion(), $data['appVersion']);
+        self::assertSame($appDetail->getAndroidVersion(), $data['androidVersion']);
+        self::assertSame($appDetail->getMinAndroidVersion(), $data['minAndroidVersion']);
+        self::assertSame($appDetail->getContentRating(), $data['contentRating']);
+        self::assertSame($appDetail->getReleased(), $data['released']);
+        self::assertSame($appDetail->getUpdated(), $data['updated']);
+        self::assertSame($appDetail->getNumberReviews(), $data['numberReviews']);
+        self::assertSame($appDetail->getReviews(), $data['reviews']);
     }
 
     /**
-     * @return array
      * @throws \Exception
+     *
+     * @return array
      */
     public function provideAppBuilderData(): array
     {
@@ -298,9 +314,15 @@ class AppBuilderTest extends TestCase
                     'priceText' => '$0.99',
                     'description' => 'Description du test',
                     'screenshots' => [
-                        new GoogleImage('https://lh3.ggpht.com/ueLFEoDXfL5ng9SeWLqstSw4GLAXyLgDSym5JKykOHpv_s0sm2HHHI_d2dAC_ugDyw=w720-h310'),
-                        new GoogleImage('https://lh3.ggpht.com/bhb0uFArLTzGg515ayV_eOYNlgtmDkwQjhTmQIfK1r_U0nS7fOp2Xfz6dpLGQCUcPOHt=w720-h310'),
-                        new GoogleImage('https://lh3.ggpht.com/pHNFX1g4E3QTnytKFOry-8rbaOMR9P8nT4IiuBZVYMHjfJLOYFsKSGvvTr_92SXafzU=w720-h310'),
+                        new GoogleImage(
+                            'https://lh3.ggpht.com/ueLFEoDXfL5ng9SeWLqstSw4GLAXyLgDSym5JKykOHpv_s0sm2HHHI_d2dAC_ugDyw=w720-h310'
+                        ),
+                        new GoogleImage(
+                            'https://lh3.ggpht.com/bhb0uFArLTzGg515ayV_eOYNlgtmDkwQjhTmQIfK1r_U0nS7fOp2Xfz6dpLGQCUcPOHt=w720-h310'
+                        ),
+                        new GoogleImage(
+                            'https://lh3.ggpht.com/pHNFX1g4E3QTnytKFOry-8rbaOMR9P8nT4IiuBZVYMHjfJLOYFsKSGvvTr_92SXafzU=w720-h310'
+                        ),
                     ],
                     'categoryId' => 'EVENTS',
                     'categoryName' => 'Events',
@@ -309,7 +331,9 @@ class AppBuilderTest extends TestCase
                         new \DateTimeZone('UTC')
                     ),
                     'translatedFromLocale' => 'fr_FR',
-                    'cover' => new GoogleImage('https://lh3.googleusercontent.com/_X0MDs89e-vT-xHIfPWnx3ws1brEhC8v1cx3cuwubc9EYDIav3h2ickpUJJfWm1UBqg'),
+                    'cover' => new GoogleImage(
+                        'https://lh3.googleusercontent.com/_X0MDs89e-vT-xHIfPWnx3ws1brEhC8v1cx3cuwubc9EYDIav3h2ickpUJJfWm1UBqg'
+                    ),
                     'privacyPoliceUrl' => 'https://www.example.com/privacy.html',
                     'categoryFamilyId' => 'FAMILY_CREATE',
                     'categoryFamilyName' => 'Creativity',
@@ -348,14 +372,15 @@ class AppBuilderTest extends TestCase
                             'https://play.google.com/store/apps/details?id=com.test&hl=en_US&reviewId=gp:XXXXXXXXXXX',
                             'Google User',
                             'The best app!',
-                            new GoogleImage('https://lh5.googleusercontent.com/-hGyaot6je8A/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcSBa3olHGF7huPpQN97OQA01cmTQ/w200/avatar.jpg'),
+                            new GoogleImage(
+                                'https://lh5.googleusercontent.com/-hGyaot6je8A/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcSBa3olHGF7huPpQN97OQA01cmTQ/w200/avatar.jpg'
+                            ),
                             new \DateTimeImmutable('2019-04-27 00:00:00.000000'),
                             4,
                             1,
                             new ReplyReview(
                                 new \DateTimeImmutable('2019-04-28 00:00:00.000000'),
                                 'Thanks!'
-
                             )
                         ),
                         new Review(
@@ -363,7 +388,9 @@ class AppBuilderTest extends TestCase
                             'https://play.google.com/store/apps/details?id=com.test&hl=en_US&reviewId=gp:YYYYYYYYYYYYY',
                             'Google User',
                             'This app requires way too many permissions. The app requires access to your app history, web browsing history, and every other permission available just to make a phone call.',
-                            new GoogleImage('https://lh4.googleusercontent.com/-l2Ebb1iCsto/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd_fPyE4q23MdG95wvDs4_XJ27z6g/'),
+                            new GoogleImage(
+                                'https://lh4.googleusercontent.com/-l2Ebb1iCsto/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd_fPyE4q23MdG95wvDs4_XJ27z6g/'
+                            ),
                             new \DateTimeImmutable('2019-04-25 04:32:01.000000'),
                             2,
                             1514
@@ -381,30 +408,47 @@ class AppBuilderTest extends TestCase
             ->setName('test')
             ->setLocale('en_US')
             ->setCountry('us')
-            ->setDeveloper(new Developer(
-                Developer::newBuilder()
-                    ->setId('010101101010')
-                    ->setName('developer test')
-                    ->setUrl('https://example.com/')
-            ))
-            ->setIcon(new GoogleImage('https://lh3.googleusercontent.com/DKoidc0T3T1KvYC2stChcX9zwmjKj1pgmg3hXzGBDQXM8RG_7JjgiuS0CLOh8DUa7as=s180'))
+            ->setDeveloper(
+                new Developer(
+                    Developer::newBuilder()
+                        ->setId('010101101010')
+                        ->setName('developer test')
+                        ->setUrl('https://example.com/')
+                )
+            )
+            ->setIcon(
+                new GoogleImage(
+                    'https://lh3.googleusercontent.com/DKoidc0T3T1KvYC2stChcX9zwmjKj1pgmg3hXzGBDQXM8RG_7JjgiuS0CLOh8DUa7as=s180'
+                )
+            )
             ->setDescription('test description')
-            ->addScreenshot(new GoogleImage('https://lh3.googleusercontent.com/1Ec6E-6nPcTn6OYzH9_P8sKupUsfJhbUd8M-iEOkzimaMr9CALI-KUpT2UyxHQUOPSY=w720-h310'))
-            ->setCategory(new Category(
-                'TEST',
-                'Test Category'
-            ));
+            ->addScreenshot(
+                new GoogleImage(
+                    'https://lh3.googleusercontent.com/1Ec6E-6nPcTn6OYzH9_P8sKupUsfJhbUd8M-iEOkzimaMr9CALI-KUpT2UyxHQUOPSY=w720-h310'
+                )
+            )
+            ->setCategory(
+                new Category(
+                    'TEST',
+                    'Test Category'
+                )
+            )
+        ;
 
         $builder2 = clone $builder;
 
         $appDetail = new AppDetail($builder);
         $appDetail2 = new AppDetail($builder2);
-        $this->assertEquals($appDetail2, $appDetail);
-        $this->assertTrue($appDetail->equals($appDetail2));
+        self::assertEquals($appDetail2, $appDetail);
+        self::assertTrue($appDetail->equals($appDetail2));
 
-        $builder2->setIcon(new GoogleImage('https://lh3.googleusercontent.com/v0e5DxXFtAlnNzdxgpEd6tcS5r6sKxd1oswufLlQFuqOmMjGAukJXrUN5RtHabg69A=s180'));
+        $builder2->setIcon(
+            new GoogleImage(
+                'https://lh3.googleusercontent.com/v0e5DxXFtAlnNzdxgpEd6tcS5r6sKxd1oswufLlQFuqOmMjGAukJXrUN5RtHabg69A=s180'
+            )
+        );
         $appDetail2 = new AppDetail($builder2);
-        $this->assertNotEquals($appDetail2, $appDetail);
-        $this->assertFalse($appDetail->equals($appDetail2));
+        self::assertNotEquals($appDetail2, $appDetail);
+        self::assertFalse($appDetail->equals($appDetail2));
     }
 }

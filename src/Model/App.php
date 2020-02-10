@@ -1,14 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\Builder\AppBuilder;
 
 /**
@@ -16,16 +19,16 @@ use Nelexa\GPlay\Model\Builder\AppBuilder;
  *
  * Some sections, such as search, similar applications, applications categories, etc. display
  * a list of applications with limited data. To get detailed information about the application,
- * you must call the appropriate method in the class {@see \Nelexa\GPlay\GPlayApps}.
+ * you must call the appropriate method in the class {@see GPlayApps}.
  *
- * @see \Nelexa\GPlay\Model\AppId Application ID, application locale and country.
- * @see \Nelexa\GPlay\GPlayApps::search() Returns a list of applications from the Google Play
+ * @see AppId Application ID, application locale and country.
+ * @see GPlayApps::search() Returns a list of applications from the Google Play
  *     store for a search query.
- * @see \Nelexa\GPlay\GPlayApps::getSimilarApps() Returns a list of similar applications in
+ * @see GPlayApps::getSimilarApps() Returns a list of similar applications in
  *     the Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getDeveloperApps() Returns a list of developer applications
+ * @see GPlayApps::getDeveloperApps() Returns a list of developer applications
  *     in the Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getAppsByCategory() Returns a list of applications with basic
+ * @see GPlayApps::getAppsByCategory() Returns a list of applications with basic
  *     information from the category and collection of the Google Play store.
  */
 class App extends AppId implements \JsonSerializable
@@ -53,31 +56,48 @@ class App extends AppId implements \JsonSerializable
     /**
      * Creates an object containing basic information about the Android application.
      *
-     * @param AppBuilder $builder Application builder.
+     * @param AppBuilder $builder application builder
      *
-     * @throws \InvalidArgumentException If not enough required data in the builder.
+     * @throws \InvalidArgumentException if not enough required data in the builder
      *
      * @ignore
      */
     public function __construct(AppBuilder $builder)
     {
         if (empty($builder->getId())) {
-            throw new \InvalidArgumentException('Application ID cannot be null or empty. Solution: $appBuilder->setId(...);');
+            throw new \InvalidArgumentException(
+                'Application ID cannot be null or empty. Solution: $appBuilder->setId(...);'
+            );
         }
+
         if (empty($builder->getLocale())) {
-            throw new \InvalidArgumentException('Locale cannot be null or empty. Solution: $appBuilder->setLocale(...);');
+            throw new \InvalidArgumentException(
+                'Locale cannot be null or empty. Solution: $appBuilder->setLocale(...);'
+            );
         }
+
         if (empty($builder->getCountry())) {
-            throw new \InvalidArgumentException('Country cannot be null or empty. Solution: $appBuilder->setCountry(...);');
+            throw new \InvalidArgumentException(
+                'Country cannot be null or empty. Solution: $appBuilder->setCountry(...);'
+            );
         }
+
         if (empty($builder->getName())) {
-            throw new \InvalidArgumentException('The application name cannot be null or empty. Solution: $appBuilder->setName(...);');
+            throw new \InvalidArgumentException(
+                'The application name cannot be null or empty. Solution: $appBuilder->setName(...);'
+            );
         }
+
         if ($builder->getDeveloper() === null) {
-            throw new \InvalidArgumentException('Application developer cannot be null. Solution: $appBuilder->setDeveloper(...);');
+            throw new \InvalidArgumentException(
+                'Application developer cannot be null. Solution: $appBuilder->setDeveloper(...);'
+            );
         }
+
         if ($builder->getIcon() === null) {
-            throw new \InvalidArgumentException('Application icon cannot be null. Solution: $appBuilder->setIcon(...);');
+            throw new \InvalidArgumentException(
+                'Application icon cannot be null. Solution: $appBuilder->setIcon(...);'
+            );
         }
 
         parent::__construct(
@@ -97,7 +117,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Returns application name.
      *
-     * @return string Application name.
+     * @return string application name
      */
     public function getName(): string
     {
@@ -107,7 +127,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Returns application summary.
      *
-     * @return string|null Application summary.
+     * @return string|null application summary
      */
     public function getSummary(): ?string
     {
@@ -115,9 +135,9 @@ class App extends AppId implements \JsonSerializable
     }
 
     /**
-     * Returns application developer
+     * Returns application developer.
      *
-     * @return Developer Application developer.
+     * @return Developer application developer
      */
     public function getDeveloper(): Developer
     {
@@ -127,7 +147,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Returns application icon.
      *
-     * @return GoogleImage Application icon.
+     * @return GoogleImage application icon
      */
     public function getIcon(): GoogleImage
     {
@@ -137,7 +157,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Returns application rating on a five-point scale.
      *
-     * @return float Rating application.
+     * @return float rating application
      */
     public function getScore(): float
     {
@@ -147,7 +167,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Returns the price of the application.
      *
-     * @return string|null Application price or null if it is free.
+     * @return string|null application price or null if it is free
      */
     public function getPriceText(): ?string
     {
@@ -157,7 +177,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Checks that this application is free.
      *
-     * @return bool `true` if the application is free and `false` if paid.
+     * @return bool `true` if the application is free and `false` if paid
      */
     public function isFree(): bool
     {
@@ -167,7 +187,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Creates a new application builder.
      *
-     * @return AppBuilder Application builder.
+     * @return AppBuilder application builder
      * @ignore
      */
     public static function newBuilder(): AppBuilder
@@ -178,7 +198,7 @@ class App extends AppId implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

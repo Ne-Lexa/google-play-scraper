@@ -1,25 +1,32 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Nelexa\GooglePlayScraper\Tests\Helper;
+namespace Nelexa\GPlay\Tests\Util;
 
 use Nelexa\GPlay\Util\DateStringFormatter;
 use PHPUnit\Framework\TestCase;
 
-class DateStringFormatterTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class DateStringFormatterTest extends TestCase
 {
     /**
      * @param string $actualDate
      * @param string $locale
      * @param string $releaseDate
+     *
      * @dataProvider provideData
      */
     public function testFormatted(string $actualDate, string $locale, string $releaseDate): void
     {
-        if (extension_loaded('intl')) {
+        if (\extension_loaded('intl')) {
             $dateTime = DateStringFormatter::formatted($locale, $releaseDate);
-            $this->assertNotNull($dateTime);
-            $this->assertEquals(
+            self::assertNotNull($dateTime);
+            self::assertEquals(
                 $dateTime->format('Y.m.d'),
                 $actualDate,
                 'Error php ext intl formatted date. Locale ' . $locale . '. Released date ' . $releaseDate
@@ -27,8 +34,8 @@ class DateStringFormatterTest extends TestCase
         }
 
         $dateTime = DateStringFormatter::formatted($locale, $releaseDate);
-        $this->assertNotNull($dateTime);
-        $this->assertEquals(
+        self::assertNotNull($dateTime);
+        self::assertEquals(
             $dateTime->format('Y.m.d'),
             $actualDate,
             'Error php implementation formatted date. Locale ' . $locale . '. Released date ' . $releaseDate
@@ -796,18 +803,18 @@ class DateStringFormatterTest extends TestCase
             ['2010.11.01', 'pl_PL', '1 lis 2010'],
             ['2011.12.20', 'pl_PL', '20 gru 2011'],
             // pt_BR
-            ['2016.01.11', 'pt_BR', '11 de jan de 2016'],
-            ['2019.02.28', 'pt_BR', '28 de fev de 2019'],
-            ['2011.03.06', 'pt_BR', '6 de mar de 2011'],
-            ['2014.04.30', 'pt_BR', '30 de abr de 2014'],
-            ['2010.05.24', 'pt_BR', '24 de mai de 2010'],
-            ['2015.06.17', 'pt_BR', '17 de jun de 2015'],
-            ['2011.07.19', 'pt_BR', '19 de jul de 2011'],
-            ['2010.08.12', 'pt_BR', '12 de ago de 2010'],
-            ['2012.09.26', 'pt_BR', '26 de set de 2012'],
-            ['2014.10.22', 'pt_BR', '22 de out de 2014'],
-            ['2010.11.01', 'pt_BR', '1 de nov de 2010'],
-            ['2011.12.20', 'pt_BR', '20 de dez de 2011'],
+            ['2016.01.11', 'pt_BR', '11 de jan. de 2016'],
+            ['2019.02.28', 'pt_BR', '28 de fev. de 2019'],
+            ['2011.03.06', 'pt_BR', '6 de mar. de 2011'],
+            ['2014.04.30', 'pt_BR', '30 de abr. de 2014'],
+            ['2010.05.24', 'pt_BR', '24 de mai. de 2010'],
+            ['2015.06.17', 'pt_BR', '17 de jun. de 2015'],
+            ['2011.07.19', 'pt_BR', '19 de jul. de 2011'],
+            ['2010.08.12', 'pt_BR', '12 de ago. de 2010'],
+            ['2012.09.26', 'pt_BR', '26 de set. de 2012'],
+            ['2014.10.22', 'pt_BR', '22 de out. de 2014'],
+            ['2010.11.01', 'pt_BR', '1 de nov. de 2010'],
+            ['2011.12.20', 'pt_BR', '20 de dez. de 2011'],
             // pt_PT
             ['2016.01.11', 'pt_PT', '11/01/2016'],
             ['2019.02.28', 'pt_PT', '28/02/2019'],

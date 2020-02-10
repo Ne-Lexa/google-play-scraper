@@ -1,22 +1,26 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
+
 /**
  * Contains application category information in the Google Play store.
  *
- * @see \Nelexa\GPlay\GPlayApps::getCategories() Returns an array of application categories
+ * @see GPlayApps::getCategories() Returns an array of application categories
  *     from the Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getCategoriesInLocales() Returns an array of application
+ * @see GPlayApps::getCategoriesInLocales() Returns an array of application
  *     categories from the Google Play store for the locale array.
- * @see \Nelexa\GPlay\GPlayApps::getCategoriesInAvailableLocales() Returns an array of
+ * @see GPlayApps::getCategoriesInAvailableLocales() Returns an array of
  *     categories from the Google Play store for all available locales.
  */
 class Category implements \JsonSerializable
@@ -32,8 +36,8 @@ class Category implements \JsonSerializable
     /**
      * Creates an object with application category information.
      *
-     * @param string $id Category id.
-     * @param string $name Category name.
+     * @param string $id   category id
+     * @param string $name category name
      */
     public function __construct(string $id, string $name)
     {
@@ -44,7 +48,7 @@ class Category implements \JsonSerializable
     /**
      * Returns category id.
      *
-     * @return string Category id.
+     * @return string category id
      */
     public function getId(): string
     {
@@ -54,7 +58,7 @@ class Category implements \JsonSerializable
     /**
      * Returns category name.
      *
-     * @return string Category name.
+     * @return string category name
      */
     public function getName(): string
     {
@@ -64,7 +68,7 @@ class Category implements \JsonSerializable
     /**
      * Checks if a category is a category with games.
      *
-     * @return bool `true` if this is a category with games and `false` if not.
+     * @return bool `true` if this is a category with games and `false` if not
      */
     public function isGamesCategory(): bool
     {
@@ -74,7 +78,7 @@ class Category implements \JsonSerializable
     /**
      * Checks if a category is a family category.
      *
-     * @return bool `true` if this is a family category and `false` if not.
+     * @return bool `true` if this is a family category and `false` if not
      */
     public function isFamilyCategory(): bool
     {
@@ -84,7 +88,7 @@ class Category implements \JsonSerializable
     /**
      * Checks whether a category is a category with applications.
      *
-     * @return bool `true` if this is a category with applications and `false` if not.
+     * @return bool `true` if this is a category with applications and `false` if not
      */
     public function isApplicationCategory(): bool
     {
@@ -94,7 +98,7 @@ class Category implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

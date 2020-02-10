@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
@@ -22,20 +24,27 @@ use function GuzzleHttp\Psr7\stream_for;
 class PlayStoreUiRequest
 {
     public const LIMIT_REVIEW_ON_PAGE = 199;
+
     public const LIMIT_APPS_ON_PAGE = 100;
 
     private const RPC_ID_REVIEWS = 'UsvDTd';
+
     private const RPC_ID_APPS = 'qnKhOb';
 
     /**
-     * @param AppId $requestApp
-     * @param int $count
-     * @param SortEnum $sort
+     * @param AppId       $requestApp
+     * @param int         $count
+     * @param SortEnum    $sort
      * @param string|null $token
+     *
      * @return RequestInterface
      */
-    public static function getReviewsRequest(AppId $requestApp, int $count, SortEnum $sort, ?string $token = null): RequestInterface
-    {
+    public static function getReviewsRequest(
+        AppId $requestApp,
+        int $count,
+        SortEnum $sort,
+        ?string $token = null
+    ): RequestInterface {
         $limit = min(self::LIMIT_REVIEW_ON_PAGE, max(1, $count));
         $queryParams = [
             'rpcids' => self::RPC_ID_REVIEWS,
@@ -48,20 +57,24 @@ class PlayStoreUiRequest
         ];
         $url = GPlayApps::GOOGLE_PLAY_URL . '/_/PlayStoreUi/data/batchexecute?' . http_build_query($queryParams);
         $formParams = [
-            'f.req' => '[[["' . self::RPC_ID_REVIEWS . '","[null,null,[2,' . $sort->value() . ',[' . $limit . ',null,' . ($token === null ? 'null' : '\\"' . $token . '\\"') . ']],[\\"' . $requestApp->getId() . '\\",7]]",null,"generic"]]]',
+            'f.req' => '[[["' . self::RPC_ID_REVIEWS . '","[null,null,[2,' . $sort->value(
+                ) . ',[' . $limit . ',null,' . ($token === null ? 'null' : '\\"' . $token . '\\"') . ']],[\\"' . $requestApp->getId(
+                ) . '\\",7]]",null,"generic"]]]',
         ];
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
         $body = stream_for(http_build_query($formParams));
+
         return new Request('POST', $url, $headers, $body);
     }
 
     /**
      * @param string $locale
      * @param string $country
-     * @param int $count
+     * @param int    $count
      * @param string $token
+     *
      * @return RequestInterface
      */
     public static function getAppsRequest(string $locale, string $country, int $count, string $token): RequestInterface
@@ -83,6 +96,7 @@ class PlayStoreUiRequest
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
         $body = stream_for(http_build_query($formParams));
+
         return new Request('POST', $url, $headers, $body);
     }
 }

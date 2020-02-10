@@ -1,11 +1,13 @@
 <?php
+
 /** @noinspection PhpUnusedPrivateFieldInspection */
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Enum;
@@ -13,11 +15,11 @@ namespace Nelexa\GPlay\Enum;
 use Nelexa\Enum;
 
 /**
- * Contains all valid values ​​for the "sort" parameter.
+ * Contains all valid values for the "sort" parameter.
  *
  * @method static SortEnum HELPFULNESS() Returns the value of the sorting of reviews by helpfulness.
- * @method static SortEnum NEWEST() Returns the value of the sorting of reviews by newest.
- * @method static SortEnum RATING() Returns the value of the sorting of reviews by rating.
+ * @method static SortEnum NEWEST()      Returns the value of the sorting of reviews by newest.
+ * @method static SortEnum RATING()      Returns the value of the sorting of reviews by rating.
  */
 class SortEnum extends Enum
 {
@@ -25,11 +27,17 @@ class SortEnum extends Enum
         /**
          * @var int Most helpful first
          */
-        HELPFULNESS = 1,
+        HELPFULNESS = 1;
+
+    private const
+
         /**
          * @var int Newest
          */
-        NEWEST = 2,
+        NEWEST = 2;
+
+    private const
+
         /**
          * @var int Rating
          */

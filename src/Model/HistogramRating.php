@@ -1,22 +1,26 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
+
 /**
  * Contains application rating data as data for histogram creation.
  *
- * @see \Nelexa\GPlay\GPlayApps::getApps() Returns detailed information about
+ * @see GPlayApps::getApps() Returns detailed information about
  *     many android packages.
- * @see \Nelexa\GPlay\GPlayApps::getAppInLocales() Returns detailed information
+ * @see GPlayApps::getAppInLocales() Returns detailed information
  *     about an application from the Google Play store for an array of locales.
- * @see \Nelexa\GPlay\GPlayApps::getAppInAvailableLocales() Returns detailed
+ * @see GPlayApps::getAppInAvailableLocales() Returns detailed
  *     information about the application in all available locales.
  */
 class HistogramRating implements \JsonSerializable
@@ -42,11 +46,11 @@ class HistogramRating implements \JsonSerializable
      * Creates an object with information about the rating of
      * Android applications from the Google Play store.
      *
-     * @param int $fiveStars Five star app rating.
-     * @param int $fourStars Four star app rating.
-     * @param int $threeStars Three star app rating.
-     * @param int $twoStars Two star app rating.
-     * @param int $oneStar One star app rating.
+     * @param int $fiveStars  five star app rating
+     * @param int $fourStars  four star app rating
+     * @param int $threeStars three star app rating
+     * @param int $twoStars   two star app rating
+     * @param int $oneStar    one star app rating
      */
     public function __construct(int $fiveStars, int $fourStars, int $threeStars, int $twoStars, int $oneStar)
     {
@@ -60,7 +64,7 @@ class HistogramRating implements \JsonSerializable
     /**
      * Returns the five-star rating of the application.
      *
-     * @return int Five star rating app.
+     * @return int five star rating app
      */
     public function getFiveStars(): int
     {
@@ -70,7 +74,7 @@ class HistogramRating implements \JsonSerializable
     /**
      * Returns the four-star rating of the application.
      *
-     * @return int Four star rating app.
+     * @return int four star rating app
      */
     public function getFourStars(): int
     {
@@ -80,7 +84,7 @@ class HistogramRating implements \JsonSerializable
     /**
      * Returns the three-star rating of the application.
      *
-     * @return int Three star rating app.
+     * @return int three star rating app
      */
     public function getThreeStars(): int
     {
@@ -90,7 +94,7 @@ class HistogramRating implements \JsonSerializable
     /**
      * Returns the two-star rating of the application.
      *
-     * @return int Two star rating app.
+     * @return int two star rating app
      */
     public function getTwoStars(): int
     {
@@ -100,7 +104,7 @@ class HistogramRating implements \JsonSerializable
     /**
      * Returns the one-star rating of the application.
      *
-     * @return int One star rating app.
+     * @return int one star rating app
      */
     public function getOneStar(): int
     {
@@ -110,7 +114,7 @@ class HistogramRating implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Сlass properties as an array.
+     * @return array Сlass properties as an array
      */
     public function asArray(): array
     {

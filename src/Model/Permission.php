@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
@@ -25,8 +27,8 @@ class Permission implements \JsonSerializable
     /**
      * Creates an object with information about one of the permissions of the Android application.
      *
-     * @param string $label Permission label.
-     * @param string $description Permission description.
+     * @param string $label       permission label
+     * @param string $description permission description
      */
     public function __construct(string $label, string $description)
     {
@@ -37,7 +39,7 @@ class Permission implements \JsonSerializable
     /**
      * Returns permission label.
      *
-     * @return string Permission label.
+     * @return string permission label
      */
     public function getLabel(): string
     {
@@ -47,7 +49,7 @@ class Permission implements \JsonSerializable
     /**
      * Returns permission description.
      *
-     * @return string Permission description.
+     * @return string permission description
      */
     public function getDescription(): string
     {
@@ -57,7 +59,7 @@ class Permission implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

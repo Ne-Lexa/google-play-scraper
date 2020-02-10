@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nelexa\GPlay\Tests\Http;
@@ -11,28 +12,40 @@ use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\Http\HttpClient;
 use PHPUnit\Framework\TestCase;
 
-class HttpClientTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class HttpClientTest extends TestCase
 {
     public function testConfig(): void
     {
         $client = new HttpClient();
-        $this->assertArrayHasKey('Accept-Language', $client->getConfig()[RequestOptions::HEADERS]);
+        self::assertArrayHasKey('Accept-Language', $client->getConfig()[RequestOptions::HEADERS]);
 
         $client
             ->setHttpHeader('DNT', '1')
-            ->setHttpHeader('User-Agent', 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36')
+            ->setHttpHeader(
+                'User-Agent',
+                'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36'
+            )
             ->setHttpHeader('Accept-Language', null)
-            ->setProxy('socks5://127.0.0.1:9050');
+            ->setProxy('socks5://127.0.0.1:9050')
+        ;
 
         $config = $client->getConfig();
-        $this->assertSame($config[RequestOptions::HEADERS]['DNT'], '1');
-        $this->assertSame($config[RequestOptions::HEADERS]['User-Agent'], 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36');
-        $this->assertArrayNotHasKey('Accept-Language', $config[RequestOptions::HEADERS]);
-        $this->assertSame($config[RequestOptions::PROXY], 'socks5://127.0.0.1:9050');
+        self::assertSame($config[RequestOptions::HEADERS]['DNT'], '1');
+        self::assertSame(
+            $config[RequestOptions::HEADERS]['User-Agent'],
+            'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36'
+        );
+        self::assertArrayNotHasKey('Accept-Language', $config[RequestOptions::HEADERS]);
+        self::assertSame($config[RequestOptions::PROXY], 'socks5://127.0.0.1:9050');
 
         $ttl = \DateInterval::createFromDateString('5 min');
         $client->setCacheTtl($ttl);
-        $this->assertSame($client->getConfig(HttpClient::OPTION_CACHE_TTL), $ttl);
+        self::assertSame($client->getConfig(HttpClient::OPTION_CACHE_TTL), $ttl);
     }
 
     public function testException(): void
@@ -40,16 +53,17 @@ class HttpClientTest extends TestCase
         $client = new HttpClient([], 0);
         $httpCode = 500;
         $url = 'https://httpbin.org/status/' . $httpCode;
+
         try {
             $client->request('GET', $url);
         } catch (GuzzleException $e) {
             $e = new GooglePlayException($e->getMessage(), $e->getCode(), $e);
 
-            $this->assertSame($e->getUrl(), $url);
-            $this->assertNotNull($e->getResponse());
-            $this->assertSame($e->getResponse()->getStatusCode(), $httpCode);
+            self::assertSame($e->getUrl(), $url);
+            self::assertNotNull($e->getResponse());
+            self::assertSame($e->getResponse()->getStatusCode(), $httpCode);
             $contents = $e->getResponse()->getBody()->getContents();
-            $this->assertEmpty($contents);
+            self::assertEmpty($contents);
         }
     }
 
@@ -59,14 +73,20 @@ class HttpClientTest extends TestCase
     public function testInvalidHandlerResponseOption(): void
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage("'handler_response' option is not implements Nelexa\\GPlay\\Http\\ResponseHandlerInterface");
+        $this->expectExceptionMessage(
+            "'handler_response' option is not implements Nelexa\\GPlay\\Http\\ResponseHandlerInterface"
+        );
 
         $client = new HttpClient();
-        $client->request('GET', 'https://httpbin.org/status/200', [
-            HttpClient::OPTION_HANDLER_RESPONSE => static function ($response) {
-                return $response;
-            },
-        ]);
+        $client->request(
+            'GET',
+            'https://httpbin.org/status/200',
+            [
+                HttpClient::OPTION_HANDLER_RESPONSE => static function ($response) {
+                    return $response;
+                },
+            ]
+        );
     }
 
     public function testRetryLimit(): void
@@ -75,18 +95,23 @@ class HttpClientTest extends TestCase
 
         $count = 0;
         $client = new HttpClient([], $retryLimit);
+
         try {
-            $client->request('GET', 'https://httpbin.org/status/500', [
-                RequestOptions::ON_STATS => static function (TransferStats $stats) use (&$count) {
-                    $response = $stats->getResponse();
-                    self::assertNotNull($response);
-                    self::assertEquals($response->getStatusCode(), 500);
-                    $count++;
-                },
-            ]);
+            $client->request(
+                'GET',
+                'https://httpbin.org/status/500',
+                [
+                    RequestOptions::ON_STATS => static function (TransferStats $stats) use (&$count): void {
+                        $response = $stats->getResponse();
+                        self::assertNotNull($response);
+                        self::assertEquals($response->getStatusCode(), 500);
+                        $count++;
+                    },
+                ]
+            );
         } catch (GuzzleException $e) {
         }
-        $this->assertEquals($count, $retryLimit + 1);
+        self::assertEquals($count, $retryLimit + 1);
     }
 
     public function testRetryLimitConnectException(): void
@@ -95,18 +120,23 @@ class HttpClientTest extends TestCase
 
         $count = 0;
         $client = new HttpClient([], $retryLimit);
+
         try {
-            $client->request('GET', 'https://httpbin.org/delay/3', [
-                RequestOptions::TIMEOUT => 1,
-                RequestOptions::ON_STATS => static function () use (&$count) {
-                    $count++;
-                },
-            ]);
-            $this->fail('an exception was expected ' . ConnectException::class);
+            $client->request(
+                'GET',
+                'https://httpbin.org/delay/3',
+                [
+                    RequestOptions::TIMEOUT => 1,
+                    RequestOptions::ON_STATS => static function () use (&$count): void {
+                        $count++;
+                    },
+                ]
+            );
+            self::fail('an exception was expected ' . ConnectException::class);
         } catch (GuzzleException $e) {
-            $this->assertInstanceOf(ConnectException::class, $e);
+            self::assertInstanceOf(ConnectException::class, $e);
         }
-        $this->assertEquals($count, $retryLimit + 1);
+        self::assertEquals($count, $retryLimit + 1);
     }
 
     public function testSetInvalidTtlCache(): void
@@ -120,7 +150,7 @@ class HttpClientTest extends TestCase
 
     public function testMergeConfig(): void
     {
-        $client = new class extends HttpClient {
+        $client = new class() extends HttpClient {
             public function setDebug(bool $debug): void
             {
                 $this->mergeConfig([RequestOptions::DEBUG => $debug]);
@@ -128,9 +158,9 @@ class HttpClientTest extends TestCase
         };
 
         $debug = $client->getConfig(RequestOptions::DEBUG) ?? false;
-        $this->assertFalse($debug);
+        self::assertFalse($debug);
 
         $client->setDebug(true);
-        $this->assertTrue($client->getConfig(RequestOptions::DEBUG));
+        self::assertTrue($client->getConfig(RequestOptions::DEBUG));
     }
 }

@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
@@ -20,9 +22,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ReviewsScraper implements ResponseHandlerInterface
 {
-    /**
-     * @var AppId
-     */
+    /** @var AppId */
     private $requestApp;
 
     /**
@@ -36,14 +36,16 @@ class ReviewsScraper implements ResponseHandlerInterface
     }
 
     /**
-     * @param RequestInterface $request
+     * @param RequestInterface  $request
      * @param ResponseInterface $response
+     *
      * @return array
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response)
     {
         $contents = substr($response->getBody()->getContents(), 5);
         $json = \GuzzleHttp\json_decode($contents, true);
+
         if (!isset($json[0][2])) {
             return [[], null];
         }
@@ -54,6 +56,7 @@ class ReviewsScraper implements ResponseHandlerInterface
         }
         $reviews = ReviewsExtractor::extractReviews($this->requestApp, $json[0]);
         $nextToken = $json[1][1] ?? null;
+
         return [$reviews, $nextToken];
     }
 }

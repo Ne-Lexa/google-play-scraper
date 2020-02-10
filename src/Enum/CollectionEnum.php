@@ -1,11 +1,13 @@
 <?php
+
 /** @noinspection PhpUnusedPrivateFieldInspection */
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Enum;
@@ -28,23 +30,38 @@ class CollectionEnum extends Enum
         /**
          * @var string Top Free
          */
-        TOP_FREE = 'topselling_free',
+        TOP_FREE = 'topselling_free';
+
+    private const
+
         /**
          * @var string Top Paid
          */
-        TOP_PAID = 'topselling_paid',
+        TOP_PAID = 'topselling_paid';
+
+    private const
+
         /**
          * @var string Top New Free
          */
-        NEW_FREE = 'topselling_new_free',
+        NEW_FREE = 'topselling_new_free';
+
+    private const
+
         /**
          * @var string Top New Paid
          */
-        NEW_PAID = 'topselling_new_paid',
+        NEW_PAID = 'topselling_new_paid';
+
+    private const
+
         /**
          * @var string Top Grossing
          */
-        GROSSING = 'topgrossing',
+        GROSSING = 'topgrossing';
+
+    private const
+
         /**
          * @var string Trending Apps
          */

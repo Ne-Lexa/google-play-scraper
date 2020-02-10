@@ -1,11 +1,13 @@
 <?php
+
 /** @noinspection PhpDocRedundantThrowsInspection */
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Http;
@@ -31,31 +33,31 @@ use function GuzzleHttp\Promise\each_limit_all;
 class HttpClient extends Client
 {
     public const OPTION_HANDLER_RESPONSE = 'handler_response';
+
     public const OPTION_CACHE_TTL = 'cache_ttl';
+
     public const OPTION_NO_CACHE = 'no_cache';
+
     public const OPTION_CACHE_KEY = 'cache_key';
 
-    /**
-     * @internal
-     */
+    /** @internal */
     private const CACHE_KEY = 'gplay.v1.%s.%s';
 
     /**
-     * Number of attempts with HTTP error (except 404)
+     * Number of attempts with HTTP error (except 404).
      *
      * @var int
      */
     private $retryLimit;
-    /**
-     * @var CacheInterface|null
-     */
+
+    /** @var CacheInterface|null */
     private $cache;
 
     /**
      * HttpClient constructor.
      *
-     * @param array $config
-     * @param int $retryLimit
+     * @param array               $config
+     * @param int                 $retryLimit
      * @param CacheInterface|null $cache
      */
     public function __construct(array $config = [], int $retryLimit = 4, ?CacheInterface $cache = null)
@@ -72,24 +74,29 @@ class HttpClient extends Client
                     }
 
                     if (!$options[self::OPTION_HANDLER_RESPONSE] instanceof ResponseHandlerInterface) {
-                        throw new \RuntimeException("'" . self::OPTION_HANDLER_RESPONSE . "' option is not implements " . ResponseHandlerInterface::class);
+                        throw new \RuntimeException(
+                            "'" . self::OPTION_HANDLER_RESPONSE . "' option is not implements " . ResponseHandlerInterface::class
+                        );
                     }
 
                     if ($this->cache !== null) {
                         if (!isset($options[self::OPTION_CACHE_KEY])) {
                             $func = $options[self::OPTION_HANDLER_RESPONSE];
                             $ref = new \ReflectionClass($func);
+
                             if ($ref->isAnonymous()) {
                                 static $hashes;
 
                                 if ($hashes === null) {
                                     $hashes = new \SplObjectStorage();
                                 }
+
                                 if (!isset($hashes[$func])) {
                                     try {
                                         $file = new \SplFileObject($ref->getFileName());
                                         $file->seek($ref->getStartLine() - 1);
                                         $content = '';
+
                                         while ($file->key() < $ref->getEndLine()) {
                                             $content .= $file->current();
                                             $file->next();
@@ -99,7 +106,7 @@ class HttpClient extends Client
                                         throw new \RuntimeException($e->getMessage(), $e->getCode(), $e);
                                     }
                                 }
-                                $handlerHash = (string)$hashes[$func];
+                                $handlerHash = (string) $hashes[$func];
                             } else {
                                 $handlerHash = $ref->getName();
                             }
@@ -112,6 +119,7 @@ class HttpClient extends Client
                         }
 
                         $value = $this->cache->get($options[self::OPTION_CACHE_KEY]);
+
                         if ($value !== null) {
                             return $value;
                         }
@@ -120,14 +128,18 @@ class HttpClient extends Client
                     return $handler($request, $options)
                         ->then(
                             function (ResponseInterface $response) use ($options, $request) {
-                                $result = call_user_func(
+                                $result = \call_user_func(
                                     $options[self::OPTION_HANDLER_RESPONSE],
                                     $request,
                                     $response
                                 );
+
                                 if ($this->cache !== null && $result !== null) {
-                                    $ttl = $options[self::OPTION_CACHE_TTL] ?? \DateInterval::createFromDateString('1 hour');
+                                    $ttl = $options[self::OPTION_CACHE_TTL] ?? \DateInterval::createFromDateString(
+                                        '1 hour'
+                                    );
                                     $noCache = $options[self::OPTION_NO_CACHE] ?? false;
+
                                     if (!$noCache) {
                                         $this->cache->set(
                                             $options[self::OPTION_CACHE_KEY],
@@ -136,9 +148,11 @@ class HttpClient extends Client
                                         );
                                     }
                                 }
+
                                 return $result;
                             }
-                        );
+                        )
+                    ;
                 };
             }
         );
@@ -148,8 +162,8 @@ class HttpClient extends Client
                     $retries,
                     /** @noinspection PhpUnusedParameterInspection */
                     RequestInterface $request,
-                    ResponseInterface $response = null,
-                    RequestException $exception = null
+                    ?ResponseInterface $response = null,
+                    ?RequestException $exception = null
                 ) {
                     // retry decider
                     if ($retries >= $this->retryLimit) {
@@ -169,6 +183,7 @@ class HttpClient extends Client
                     ) {
                         return true;
                     }
+
                     return false;
                 },
                 static function (int $numberOfRetries) {
@@ -178,33 +193,39 @@ class HttpClient extends Client
             )
         );
 
-        $config = array_replace_recursive($config, [
-            'handler' => $handlerStack,
-            RequestOptions::TIMEOUT => 10.0,
-            RequestOptions::COOKIES => new CookieJar(),
-            RequestOptions::HEADERS => [
-                'Accept-Encoding' => 'gzip',
-                'Accept-Language' => 'en',
-                'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0',
-                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Connection' => 'keep-alive',
-            ],
-        ]);
+        $config = array_replace_recursive(
+            $config,
+            [
+                'handler' => $handlerStack,
+                RequestOptions::TIMEOUT => 10.0,
+                RequestOptions::COOKIES => new CookieJar(),
+                RequestOptions::HEADERS => [
+                    'Accept-Encoding' => 'gzip',
+                    'Accept-Language' => 'en',
+                    'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:67.0) Gecko/20100101 Firefox/67.0',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Connection' => 'keep-alive',
+                ],
+            ]
+        );
         parent::__construct($config);
     }
 
     /**
      * @param CacheInterface|null $cache
+     *
      * @return self
      */
     public function setCache(?CacheInterface $cache): self
     {
         $this->cache = $cache;
+
         return $this;
     }
 
     /**
      * @param string|null $proxy
+     *
      * @return self
      */
     public function setProxy(?string $proxy): self
@@ -212,27 +233,32 @@ class HttpClient extends Client
         $config = $this->getConfig();
         $config[RequestOptions::PROXY] = $proxy;
         $this->setConfig($config);
+
         return $this;
     }
 
     /**
      * @param int $retryLimit
+     *
      * @return self
      */
     public function setRetryLimit(int $retryLimit): self
     {
         $this->retryLimit = max(0, $retryLimit);
+
         return $this;
     }
 
     /**
      * @param string $key
      * @param string $value
+     *
      * @return HttpClient
      */
     public function setHttpHeader(string $key, ?string $value): self
     {
         $config = $this->getConfig();
+
         if ($value === null) {
             if (isset($config[RequestOptions::HEADERS][$key])) {
                 unset($config[RequestOptions::HEADERS][$key]);
@@ -242,26 +268,30 @@ class HttpClient extends Client
             $config[RequestOptions::HEADERS][$key] = $value;
             $this->setConfig($config);
         }
+
         return $this;
     }
 
     /**
      * @param \DateInterval|int|null $ttl
+     *
      * @return HttpClient
      */
     public function setCacheTtl($ttl): self
     {
-        if ($ttl !== null && !is_int($ttl) && !$ttl instanceof \DateInterval) {
+        if ($ttl !== null && !\is_int($ttl) && !$ttl instanceof \DateInterval) {
             throw new \InvalidArgumentException('Invalid cache ttl value. Supported \DateInterval, int and null.');
         }
         $config = $this->getConfig();
         $config[self::OPTION_CACHE_TTL] = $ttl;
         $this->setConfig($config);
+
         return $this;
     }
 
     /**
      * @param float $connectTimeout
+     *
      * @return HttpClient
      */
     public function setConnectTimeout(float $connectTimeout): self
@@ -272,11 +302,13 @@ class HttpClient extends Client
         $config = $this->getConfig();
         $config[RequestOptions::CONNECT_TIMEOUT] = $connectTimeout;
         $this->setConfig($config);
+
         return $this;
     }
 
     /**
      * @param float $timeout
+     *
      * @return HttpClient
      */
     public function setTimeout(float $timeout): self
@@ -287,6 +319,7 @@ class HttpClient extends Client
         $config = $this->getConfig();
         $config[RequestOptions::TIMEOUT] = $timeout;
         $this->setConfig($config);
+
         return $this;
     }
 
@@ -311,6 +344,7 @@ class HttpClient extends Client
     protected function setConfig(array $config): void
     {
         static $property;
+
         try {
             if ($property === null) {
                 $property = new \ReflectionProperty(parent::class, 'config');
@@ -324,46 +358,58 @@ class HttpClient extends Client
 
     /**
      * @param RequestInterface $request
+     *
      * @return string
      */
     private static function getRequestHash(RequestInterface $request): string
     {
         $data = [
             $request->getMethod(),
-            (string)$request->getUri(),
+            (string) $request->getUri(),
             $request->getBody()->getContents(),
         ];
+
         foreach ($request->getHeaders() as $name => $header) {
             $data[] = $name . ': ' . implode(', ', $header);
         }
         $data[] = $request->getBody()->getContents();
+
         return hash('crc32b', implode("\n", $data));
     }
 
     /**
-     * @param string $method
+     * @param string   $method
      * @param iterable $urls
-     * @param array $options
-     * @param int $concurrency
-     * @return array
+     * @param array    $options
+     * @param int      $concurrency
+     *
      * @throws GuzzleException
+     *
+     * @return array
      */
     public function requestAsyncPool(string $method, iterable $urls, array $options = [], int $concurrency = 4): array
     {
         $results = [];
+
         if (!$urls instanceof \Generator) {
             $urls = $this->requestGenerator($method, $urls, $options);
         }
-        each_limit_all($urls, $concurrency, static function ($response, $index) use (&$results) {
-            $results[$index] = $response;
-        })->wait();
+        each_limit_all(
+            $urls,
+            $concurrency,
+            static function ($response, $index) use (&$results): void {
+                $results[$index] = $response;
+            }
+        )->wait();
+
         return $results;
     }
 
     /**
-     * @param string $method
+     * @param string   $method
      * @param iterable $urls
-     * @param array $options
+     * @param array    $options
+     *
      * @return \Generator
      */
     private function requestGenerator(string $method, iterable $urls, array $options): \Generator

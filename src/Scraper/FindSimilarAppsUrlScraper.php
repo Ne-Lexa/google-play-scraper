@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
@@ -21,9 +23,7 @@ use Psr\Http\Message\ResponseInterface;
  */
 class FindSimilarAppsUrlScraper implements ResponseHandlerInterface
 {
-    /**
-     * @var AppId
-     */
+    /** @var AppId */
     private $appId;
 
     /**
@@ -37,13 +37,15 @@ class FindSimilarAppsUrlScraper implements ResponseHandlerInterface
     }
 
     /**
-     * @param RequestInterface $request
+     * @param RequestInterface  $request
      * @param ResponseInterface $response
+     *
      * @return string|null
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response): ?string
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
+
         foreach ($scriptData as $key => $scriptValue) {
             if (isset($scriptValue[1][1][0][0][3][4][2])) {
                 return GPlayApps::GOOGLE_PLAY_URL . $scriptValue[1][1][0][0][3][4][2] .
@@ -52,6 +54,7 @@ class FindSimilarAppsUrlScraper implements ResponseHandlerInterface
                 break;
             }
         }
+
         return null;
     }
 }

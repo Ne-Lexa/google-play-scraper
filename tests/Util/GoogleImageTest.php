@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Nelexa\GPlay\Tests\Util;
@@ -6,7 +7,12 @@ namespace Nelexa\GPlay\Tests\Util;
 use Nelexa\GPlay\Model\GoogleImage;
 use PHPUnit\Framework\TestCase;
 
-class GoogleImageTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class GoogleImageTest extends TestCase
 {
     /**
      * @dataProvider provideImages
@@ -23,10 +29,13 @@ class GoogleImageTest extends TestCase
         $url = $googleImage->getUrl();
         $bestSizeUrl = $googleImage->getOriginalSizeUrl();
 
-        $this->assertSame($url, $actualUrl);
-        $this->assertSame($bestSizeUrl, $actualBestSizeUrl);
+        self::assertSame($url, $actualUrl);
+        self::assertSame($bestSizeUrl, $actualBestSizeUrl);
     }
 
+    /**
+     * @return array
+     */
     public function provideImages(): array
     {
         return [
@@ -131,177 +140,177 @@ class GoogleImageTest extends TestCase
         $imageUrl = $baseUrl . '=w515-h290';
 
         $googleImage = new GoogleImage($imageUrl);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w515-h290');
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w515-h290');
 
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 515);
-        $this->assertSame($googleImage->getHeight(), 290);
-        $this->assertNull($googleImage->getBorder());
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w515-h290');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 515);
+        self::assertSame($googleImage->getHeight(), 290);
+        self::assertNull($googleImage->getBorder());
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w515-h290');
 
         $googleImage->setSize(300);
-        $this->assertSame($googleImage->getSize(), 300);
-        $this->assertNull($googleImage->getWidth());
-        $this->assertNull($googleImage->getHeight());
-        $this->assertNull($googleImage->getBorder());
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=s300');
+        self::assertSame($googleImage->getSize(), 300);
+        self::assertNull($googleImage->getWidth());
+        self::assertNull($googleImage->getHeight());
+        self::assertNull($googleImage->getBorder());
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=s300');
 
         $googleImage->useOriginalSize();
-        $this->assertSame($googleImage->getSize(), 0);
-        $this->assertNull($googleImage->getWidth());
-        $this->assertNull($googleImage->getHeight());
-        $this->assertNull($googleImage->getBorder());
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=s0');
+        self::assertSame($googleImage->getSize(), 0);
+        self::assertNull($googleImage->getWidth());
+        self::assertNull($googleImage->getHeight());
+        self::assertNull($googleImage->getBorder());
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=s0');
 
         $googleImage->setWidth(500);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertNull($googleImage->getHeight());
-        $this->assertNull($googleImage->getBorder());
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertNull($googleImage->getHeight());
+        self::assertNull($googleImage->getBorder());
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500');
 
         $googleImage->setHeight(400);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertSame($googleImage->getHeight(), 400);
-        $this->assertNull($googleImage->getBorder());
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertSame($googleImage->getHeight(), 400);
+        self::assertNull($googleImage->getBorder());
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400');
 
         $googleImage->setBorder(10);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertSame($googleImage->getHeight(), 400);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-b10');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertSame($googleImage->getHeight(), 400);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-b10');
 
         $googleImage->setSmartCrop(true);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertSame($googleImage->getHeight(), 400);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertTrue($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-p-b10');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertSame($googleImage->getHeight(), 400);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertTrue($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-p-b10');
 
         $googleImage->setSquareCrop(true);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertSame($googleImage->getHeight(), 400);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertTrue($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertSame($googleImage->getHeight(), 400);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertTrue($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10');
 
         $googleImage->setVerticalFlip(true);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertSame($googleImage->getHeight(), 400);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertTrue($googleImage->isSquareCrop());
-        $this->assertTrue($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10-fv');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertSame($googleImage->getHeight(), 400);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertTrue($googleImage->isSquareCrop());
+        self::assertTrue($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10-fv');
 
         $googleImage->setHorizontalFlip(true);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 500);
-        $this->assertSame($googleImage->getHeight(), 400);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertTrue($googleImage->isSquareCrop());
-        $this->assertTrue($googleImage->isVerticalFlip());
-        $this->assertTrue($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10-fv-fh');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 500);
+        self::assertSame($googleImage->getHeight(), 400);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertTrue($googleImage->isSquareCrop());
+        self::assertTrue($googleImage->isVerticalFlip());
+        self::assertTrue($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w500-h400-c-b10-fv-fh');
 
         $googleImage->setSize(300);
-        $this->assertSame($googleImage->getSize(), 300);
-        $this->assertNull($googleImage->getWidth());
-        $this->assertNull($googleImage->getHeight());
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertTrue($googleImage->isSquareCrop());
-        $this->assertTrue($googleImage->isVerticalFlip());
-        $this->assertTrue($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=s300-c-b10-fv-fh');
+        self::assertSame($googleImage->getSize(), 300);
+        self::assertNull($googleImage->getWidth());
+        self::assertNull($googleImage->getHeight());
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertTrue($googleImage->isSquareCrop());
+        self::assertTrue($googleImage->isVerticalFlip());
+        self::assertTrue($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=s300-c-b10-fv-fh');
 
         $googleImage->setHeight(600);
-        $this->assertNull($googleImage->getSize());
-        $this->assertNull($googleImage->getWidth());
-        $this->assertSame($googleImage->getHeight(), 600);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertTrue($googleImage->isSquareCrop());
-        $this->assertTrue($googleImage->isVerticalFlip());
-        $this->assertTrue($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=h600-c-b10-fv-fh');
+        self::assertNull($googleImage->getSize());
+        self::assertNull($googleImage->getWidth());
+        self::assertSame($googleImage->getHeight(), 600);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertTrue($googleImage->isSquareCrop());
+        self::assertTrue($googleImage->isVerticalFlip());
+        self::assertTrue($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=h600-c-b10-fv-fh');
 
         $googleImage->setSmartCrop(true);
-        $this->assertNull($googleImage->getSize());
-        $this->assertNull($googleImage->getWidth());
-        $this->assertSame($googleImage->getHeight(), 600);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertTrue($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertTrue($googleImage->isVerticalFlip());
-        $this->assertTrue($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=h600-b10-fv-fh');
+        self::assertNull($googleImage->getSize());
+        self::assertNull($googleImage->getWidth());
+        self::assertSame($googleImage->getHeight(), 600);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertTrue($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertTrue($googleImage->isVerticalFlip());
+        self::assertTrue($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=h600-b10-fv-fh');
 
         $googleImage->setWidth(300);
-        $this->assertNull($googleImage->getSize());
-        $this->assertSame($googleImage->getWidth(), 300);
-        $this->assertSame($googleImage->getHeight(), 600);
-        $this->assertSame($googleImage->getBorder(), 10);
-        $this->assertTrue($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertTrue($googleImage->isVerticalFlip());
-        $this->assertTrue($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl . '=w300-h600-p-b10-fv-fh');
+        self::assertNull($googleImage->getSize());
+        self::assertSame($googleImage->getWidth(), 300);
+        self::assertSame($googleImage->getHeight(), 600);
+        self::assertSame($googleImage->getBorder(), 10);
+        self::assertTrue($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertTrue($googleImage->isVerticalFlip());
+        self::assertTrue($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl . '=w300-h600-p-b10-fv-fh');
 
         // test toString()
-        $this->assertEquals($googleImage, $baseUrl . '=w300-h600-p-b10-fv-fh');
-        $this->assertEquals($googleImage, $googleImage->__toString());
-        $this->assertEquals($googleImage, $googleImage->getUrl());
+        self::assertEquals($googleImage, $baseUrl . '=w300-h600-p-b10-fv-fh');
+        self::assertEquals($googleImage, $googleImage->__toString());
+        self::assertEquals($googleImage, $googleImage->getUrl());
 
         // reset
         $googleImage->reset();
-        $this->assertNull($googleImage->getSize());
-        $this->assertNull($googleImage->getWidth());
-        $this->assertNull($googleImage->getHeight());
-        $this->assertNull($googleImage->getBorder());
-        $this->assertFalse($googleImage->isSmartCrop());
-        $this->assertFalse($googleImage->isSquareCrop());
-        $this->assertFalse($googleImage->isVerticalFlip());
-        $this->assertFalse($googleImage->isHorizontalFlip());
-        $this->assertSame($googleImage->getUrl(), $baseUrl);
+        self::assertNull($googleImage->getSize());
+        self::assertNull($googleImage->getWidth());
+        self::assertNull($googleImage->getHeight());
+        self::assertNull($googleImage->getBorder());
+        self::assertFalse($googleImage->isSmartCrop());
+        self::assertFalse($googleImage->isSquareCrop());
+        self::assertFalse($googleImage->isVerticalFlip());
+        self::assertFalse($googleImage->isHorizontalFlip());
+        self::assertSame($googleImage->getUrl(), $baseUrl);
     }
 
     public function testSize(): void
@@ -315,12 +324,12 @@ class GoogleImageTest extends TestCase
         $googleImage->setSize($size);
         $url = $googleImage->getUrl();
 
-        $this->assertSame($url, $imageUrl . '=s' . $size);
+        self::assertSame($url, $imageUrl . '=s' . $size);
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo);
 
-        $this->assertContains($size, [$imageInfo[0], $imageInfo[1]]);
+        self::assertContains($size, [$imageInfo[0], $imageInfo[1]]);
     }
 
     public function testSizeSmartCrop(): void
@@ -334,15 +343,16 @@ class GoogleImageTest extends TestCase
         $url = $googleImage
             ->setSize($size)
             ->setSmartCrop(true)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=s' . $size . '-p');
+        self::assertSame($url, $imageUrl . '=s' . $size . '-p');
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $size);
-        $this->assertSame($imageInfo[1], $size);
+        self::assertSame($imageInfo[0], $size);
+        self::assertSame($imageInfo[1], $size);
     }
 
     public function testSizeSquareCrop(): void
@@ -356,15 +366,16 @@ class GoogleImageTest extends TestCase
         $url = $googleImage
             ->setSize($size)
             ->setSquareCrop(true)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=s' . $size . '-c');
+        self::assertSame($url, $imageUrl . '=s' . $size . '-c');
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $size);
-        $this->assertSame($imageInfo[1], $size);
+        self::assertSame($imageInfo[0], $size);
+        self::assertSame($imageInfo[1], $size);
     }
 
     public function testWidth(): void
@@ -377,15 +388,16 @@ class GoogleImageTest extends TestCase
         $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
         $url = $googleImage
             ->setWidth($size)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=w' . $size);
+        self::assertSame($url, $imageUrl . '=w' . $size);
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $size);
-        $this->assertNotSame($imageInfo[1], $size);
+        self::assertSame($imageInfo[0], $size);
+        self::assertNotSame($imageInfo[1], $size);
     }
 
     public function testWidthSquareCrop(): void
@@ -399,15 +411,16 @@ class GoogleImageTest extends TestCase
         $url = $googleImage
             ->setWidth($size)
             ->setSquareCrop(true)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=w' . $size . '-c');
+        self::assertSame($url, $imageUrl . '=w' . $size . '-c');
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $size);
-        $this->assertSame($imageInfo[1], $size);
+        self::assertSame($imageInfo[0], $size);
+        self::assertSame($imageInfo[1], $size);
     }
 
     public function testHeight(): void
@@ -420,15 +433,16 @@ class GoogleImageTest extends TestCase
         $googleImage = new GoogleImage($imageUrl . '=w2247-h1264', false);
         $url = $googleImage
             ->setHeight($size)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=h' . $size);
+        self::assertSame($url, $imageUrl . '=h' . $size);
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertNotSame($imageInfo[0], $size);
-        $this->assertSame($imageInfo[1], $size);
+        self::assertNotSame($imageInfo[0], $size);
+        self::assertSame($imageInfo[1], $size);
     }
 
     public function testHeightSquareCrop(): void
@@ -442,15 +456,16 @@ class GoogleImageTest extends TestCase
         $url = $googleImage
             ->setHeight($size)
             ->setSquareCrop(true)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=h' . $size . '-c');
+        self::assertSame($url, $imageUrl . '=h' . $size . '-c');
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $size);
-        $this->assertSame($imageInfo[1], $size);
+        self::assertSame($imageInfo[0], $size);
+        self::assertSame($imageInfo[1], $size);
     }
 
     public function testWidthHeight(): void
@@ -465,19 +480,22 @@ class GoogleImageTest extends TestCase
         $url = $googleImage
             ->setWidth($width)
             ->setHeight($height)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=w' . $width . '-h' . $height);
+        self::assertSame($url, $imageUrl . '=w' . $width . '-h' . $height);
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
         if ($imageInfo[0] === $width) {
-            $this->assertNotSame($imageInfo[1], $height);
+            self::assertNotSame($imageInfo[1], $height);
         } elseif ($imageInfo[1] === $height) {
-            $this->assertNotSame($imageInfo[0], $width);
+            self::assertNotSame($imageInfo[0], $width);
         } else {
-            $this->fail('Error image ' . $url . '. Expected ' . $width . 'x' . $height . '. Actual: ' . $imageInfo[0] . 'x' . $imageInfo[1]);
+            self::fail(
+                'Error image ' . $url . '. Expected ' . $width . 'x' . $height . '. Actual: ' . $imageInfo[0] . 'x' . $imageInfo[1]
+            );
         }
     }
 
@@ -494,15 +512,16 @@ class GoogleImageTest extends TestCase
             ->setWidth($width)
             ->setHeight($height)
             ->setSmartCrop(true)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=w' . $width . '-h' . $height . '-p');
+        self::assertSame($url, $imageUrl . '=w' . $width . '-h' . $height . '-p');
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $width);
-        $this->assertSame($imageInfo[1], $height);
+        self::assertSame($imageInfo[0], $width);
+        self::assertSame($imageInfo[1], $height);
     }
 
     public function testWidthHeightSquareCrop(): void
@@ -518,15 +537,16 @@ class GoogleImageTest extends TestCase
             ->setWidth($width)
             ->setHeight($height)
             ->setSquareCrop(true)
-            ->getUrl();
+            ->getUrl()
+        ;
 
-        $this->assertSame($url, $imageUrl . '=w' . $width . '-h' . $height . '-c');
+        self::assertSame($url, $imageUrl . '=w' . $width . '-h' . $height . '-c');
 
-        $imageInfo = @getimagesize($url);
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
+        $imageInfo = getimagesize($url);
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $url);
 
-        $this->assertSame($imageInfo[0], $width);
-        $this->assertSame($imageInfo[1], $height);
+        self::assertSame($imageInfo[0], $width);
+        self::assertSame($imageInfo[1], $height);
     }
 
     public function testUrlVariant(): void
@@ -535,69 +555,69 @@ class GoogleImageTest extends TestCase
         $imageUrl = $baseUrl . 'w48-h48-n-mo/photo.jpg';
 
         $googleImage = new GoogleImage($imageUrl);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w48-h48/');
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'w48-h48/');
         $googleImage->reset();
 
-        $this->assertSame($googleImage->getUrl(), $baseUrl);
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 512);
-        $this->assertSame($imageInfo[1], 512);
+        self::assertSame($googleImage->getUrl(), $baseUrl);
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 512);
+        self::assertSame($imageInfo[1], 512);
 
         $googleImage->setSize(300);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 's300/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 300);
-        $this->assertSame($imageInfo[1], 300);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 's300/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 300);
+        self::assertSame($imageInfo[1], 300);
 
         $googleImage->setWidth(300);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 300);
-        $this->assertSame($imageInfo[1], 300);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'w300/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 300);
+        self::assertSame($imageInfo[1], 300);
 
         $googleImage->setHeight(300);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h300/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 300);
-        $this->assertSame($imageInfo[1], 300);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'w300-h300/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 300);
+        self::assertSame($imageInfo[1], 300);
 
         $googleImage->setHeight(100);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 300);
-        $this->assertSame($imageInfo[1], 100);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 300);
+        self::assertSame($imageInfo[1], 100);
 
         $googleImage->setSquareCrop(true);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100-c/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 100);
-        $this->assertSame($imageInfo[1], 100);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100-c/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 100);
+        self::assertSame($imageInfo[1], 100);
 
         $googleImage->setSmartCrop(true);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100-p/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 300);
-        $this->assertSame($imageInfo[1], 100);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'w300-h100-p/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 300);
+        self::assertSame($imageInfo[1], 100);
 
         $googleImage->setWidth(null);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'h100/');
-        $imageInfo = @getimagesize($googleImage->getUrl());
-        $this->assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
-        $this->assertSame($imageInfo[0], 100);
-        $this->assertSame($imageInfo[1], 100);
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'h100/');
+        $imageInfo = getimagesize($googleImage->getUrl());
+        self::assertNotFalse($imageInfo, 'Error fetch image to ' . $googleImage->getUrl());
+        self::assertSame($imageInfo[0], 100);
+        self::assertSame($imageInfo[1], 100);
 
         // no effect for avatar
         $googleImage->setBorder(10);
         $googleImage->setVerticalFlip(true);
         $googleImage->setHorizontalFlip(true);
-        $this->assertSame($googleImage->getUrl(), $baseUrl . 'h100/');
+        self::assertSame($googleImage->getUrl(), $baseUrl . 'h100/');
     }
 
     public function testHashUrl(): void
@@ -607,16 +627,23 @@ class GoogleImageTest extends TestCase
         $image = new GoogleImage($imageUrl);
 
         $algo = 'sha1';
-        $this->assertSame($image->getHashUrl(), '8c720ab622672d2324898aaff5dd381c');
-        $this->assertSame($image->getHashUrl($algo), '8e7fb0940b21b4f428974a252da484a835b10fb3');
-        $this->assertSame($image->getHashUrl($algo, 2), '8e/7f/8e7fb0940b21b4f428974a252da484a835b10fb3');
-        $this->assertSame($image->getHashUrl($algo, 2, 3), '8e7/fb0/8e7fb0940b21b4f428974a252da484a835b10fb3');
-        $this->assertSame($image->getHashUrl($algo, 3, 10), '8e7fb0940b/21b4f42897/4a252da484/8e7fb0940b21b4f428974a252da484a835b10fb3');
-        $this->assertSame($image->getHashUrl($algo, 100, 100), '8e7fb0/940b21/b4f428/974a25/2da484/a835b1/8e7fb0940b21b4f428974a252da484a835b10fb3');
+        self::assertSame($image->getHashUrl(), '8c720ab622672d2324898aaff5dd381c');
+        self::assertSame($image->getHashUrl($algo), '8e7fb0940b21b4f428974a252da484a835b10fb3');
+        self::assertSame($image->getHashUrl($algo, 2), '8e/7f/8e7fb0940b21b4f428974a252da484a835b10fb3');
+        self::assertSame($image->getHashUrl($algo, 2, 3), '8e7/fb0/8e7fb0940b21b4f428974a252da484a835b10fb3');
+        self::assertSame(
+            $image->getHashUrl($algo, 3, 10),
+            '8e7fb0940b/21b4f42897/4a252da484/8e7fb0940b21b4f428974a252da484a835b10fb3'
+        );
+        self::assertSame(
+            $image->getHashUrl($algo, 100, 100),
+            '8e7fb0/940b21/b4f428/974a25/2da484/a835b1/8e7fb0940b21b4f428974a252da484a835b10fb3'
+        );
     }
 
     /**
      * @dataProvider provideInvalidHostUrl
+     *
      * @param string $url
      */
     public function testInvalidHostUrl(string $url): void

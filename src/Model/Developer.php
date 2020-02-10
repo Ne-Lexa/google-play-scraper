@@ -1,30 +1,33 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\Builder\DeveloperBuilder;
 
 /**
  * Contains data on the application developer in the Google Play store.
  *
- * @see \Nelexa\GPlay\GPlayApps::getDeveloperInfo() Returns information about the
+ * @see GPlayApps::getDeveloperInfo() Returns information about the
  *     developer: name, icon, cover, description and website address.
- * @see \Nelexa\GPlay\GPlayApps::getDeveloperInfoInLocales() Returns information
+ * @see GPlayApps::getDeveloperInfoInLocales() Returns information
  *     about the developer for the locale array.
- * @see \Nelexa\GPlay\GPlayApps::getApp() Returns detailed information about the
+ * @see GPlayApps::getApp() Returns detailed information about the
  *     Android application from the Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getApps() Returns detailed information about
+ * @see GPlayApps::getApps() Returns detailed information about
  *     many android packages.
- * @see \Nelexa\GPlay\GPlayApps::getAppInLocales() Returns detailed information
+ * @see GPlayApps::getAppInLocales() Returns detailed information
  *     about an application from the Google Play store for an array of locales.
- * @see \Nelexa\GPlay\GPlayApps::getAppInAvailableLocales() Returns detailed
+ * @see GPlayApps::getAppInAvailableLocales() Returns detailed
  *     information about the application in all available locales.
  */
 class Developer implements \JsonSerializable
@@ -61,7 +64,7 @@ class Developer implements \JsonSerializable
     /**
      * Creates an object with information about the developer of Google Play.
      *
-     * @param DeveloperBuilder $builder Developer builder.
+     * @param DeveloperBuilder $builder developer builder
      *
      * @throws \InvalidArgumentException
      *
@@ -80,23 +83,31 @@ class Developer implements \JsonSerializable
         $this->address = $builder->getAddress();
 
         if (empty($this->id)) {
-            throw new \InvalidArgumentException('Developer id cannot be null or empty. ' .
-                'Solution: $developerBuilder->setId(...);');
+            throw new \InvalidArgumentException(
+                'Developer id cannot be null or empty. ' .
+                'Solution: $developerBuilder->setId(...);'
+            );
         }
+
         if (empty($this->url)) {
-            throw new \InvalidArgumentException('Developer url cannot be null or empty. ' .
-                'Solution: $developerBuilder->setUrl(...);');
+            throw new \InvalidArgumentException(
+                'Developer url cannot be null or empty. ' .
+                'Solution: $developerBuilder->setUrl(...);'
+            );
         }
+
         if (empty($this->name)) {
-            throw new \InvalidArgumentException('Developer name cannot be null or empty. ' .
-                'Solution: $developerBuilder->setName(...);');
+            throw new \InvalidArgumentException(
+                'Developer name cannot be null or empty. ' .
+                'Solution: $developerBuilder->setName(...);'
+            );
         }
     }
 
     /**
      * Returns developer id.
      *
-     * @return string Developer id.
+     * @return string developer id
      */
     public function getId(): string
     {
@@ -106,7 +117,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns the URL of the developer’s page in Google Play.
      *
-     * @return string Developer page url.
+     * @return string developer page url
      */
     public function getUrl(): string
     {
@@ -126,7 +137,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns a description of the developer.
      *
-     * @return string|null Description of the developer or `null`.
+     * @return string|null description of the developer or `null`
      */
     public function getDescription(): ?string
     {
@@ -136,7 +147,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns the developer's website.
      *
-     * @return string|null Developer website or `null`.
+     * @return string|null developer website or `null`
      */
     public function getWebsite(): ?string
     {
@@ -146,7 +157,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns the developer icon.
      *
-     * @return GoogleImage|null Developer icon or `null`.
+     * @return GoogleImage|null developer icon or `null`
      */
     public function getIcon(): ?GoogleImage
     {
@@ -156,7 +167,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns the developer cover.
      *
-     * @return GoogleImage|null Developer cover or `null`.
+     * @return GoogleImage|null developer cover or `null`
      */
     public function getCover(): ?GoogleImage
     {
@@ -166,7 +177,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns developer email.
      *
-     * @return string|null Developer email or `null`.
+     * @return string|null developer email or `null`
      */
     public function getEmail(): ?string
     {
@@ -176,7 +187,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns the address of the developer.
      *
-     * @return string|null Developer address or `null`.
+     * @return string|null developer address or `null`
      */
     public function getAddress(): ?string
     {
@@ -186,7 +197,7 @@ class Developer implements \JsonSerializable
     /**
      * Creates a new developer builder.
      *
-     * @return DeveloperBuilder Developer builder.
+     * @return DeveloperBuilder developer builder
      *
      * @internal
      */
@@ -198,21 +209,23 @@ class Developer implements \JsonSerializable
     /**
      * Checks for equality of developer.
      *
-     * @param Developer $otherDeveloper Developer with which is compared.
+     * @param Developer $otherDeveloper developer with which is compared
      *
      * @return bool `true` if the contents of the objects being changed are the same
-     *     and `false` if the objects contain different data.
+     *              and `false` if the objects contain different data
      *
      * @internal
      */
-    public function equals(Developer $otherDeveloper): bool
+    public function equals(self $otherDeveloper): bool
     {
         if ($this->id !== $otherDeveloper->id) {
             return false;
         }
+
         if ($this->name !== $otherDeveloper->name) {
             return false;
         }
+
         if ($this->description !== $otherDeveloper->description) {
             return false;
         }
@@ -239,7 +252,7 @@ class Developer implements \JsonSerializable
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {

@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Exception;
@@ -23,13 +25,14 @@ class GooglePlayException extends \Exception
     /**
      * Construct the GooglePlayException.
      *
-     * @param string $message The Exception message to throw.
-     * @param int $code The Exception code.
-     * @param \Throwable $previous The previous throwable used for the exception chaining.
+     * @param string     $message  the Exception message to throw
+     * @param int        $code     the Exception code
+     * @param \Throwable $previous the previous throwable used for the exception chaining
      */
-    public function __construct($message = '', $code = 0, \Throwable $previous = null)
+    public function __construct($message = '', $code = 0, ?\Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
+
         if (($previous instanceof RequestException) && $previous->getRequest() !== null) {
             $this->url = $previous->getRequest()->getUri()->__toString();
         }
@@ -38,13 +41,14 @@ class GooglePlayException extends \Exception
     /**
      * Set the URL associated with the exception.
      *
-     * @param string $url URL associated with the exception.
+     * @param string $url URL associated with the exception
      *
-     * @return GooglePlayException Returns the same object to support the call chain.
+     * @return GooglePlayException returns the same object to support the call chain
      */
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -53,7 +57,7 @@ class GooglePlayException extends \Exception
      *
      * URL maybe `null`.
      *
-     * @return string|null URL associated with the exception or `null`.
+     * @return string|null URL associated with the exception or `null`
      */
     public function getUrl(): ?string
     {
@@ -63,16 +67,18 @@ class GooglePlayException extends \Exception
     /**
      * Returns an HTTP response if present.
      *
-     * @return ResponseInterface|null PSR-7 ResponseInterface or null.
+     * @return responseInterface|null PSR-7 ResponseInterface or null
      *
      * @see https://www.php-fig.org/psr/psr-7/ PSR-7: HTTP message interfaces
      */
     public function getResponse(): ?ResponseInterface
     {
         $e = $this->getPrevious();
+
         if ($e instanceof RequestException && $e->getResponse() !== null) {
             return $e->getResponse();
         }
+
         return null;
     }
 }

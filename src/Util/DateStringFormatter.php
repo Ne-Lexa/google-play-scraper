@@ -1,11 +1,13 @@
 <?php
+
 /** @noinspection PhpUnusedPrivateMethodInspection */
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Util;
@@ -859,7 +861,7 @@ class DateStringFormatter
             ],
         ],
         'pt_BR' => [
-            'pattern' => '~^(?P<day>\d{1,2})\sde\s(?P<month>.*?)\sde\s(?P<year>\d{4})$~',
+            'pattern' => '~^(?P<day>\d{1,2})\sde\s(?P<month>.*?)\.\sde\s(?P<year>\d{4})$~',
             'months' => [
                 'jan' => 1,
                 'fev' => 2,
@@ -1162,25 +1164,36 @@ class DateStringFormatter
     /**
      * Convert a date as localized string to a \DateTimeInterface object depending on locale.
      *
-     * @param string $locale locale
+     * @param string $locale   locale
      * @param string $dateText localized date
+     *
      * @return \DateTimeInterface|null returns \DateTimeInterface or null if error
      */
     public static function formatted(string $locale, string $dateText): ?\DateTimeInterface
     {
         $locale = LocaleHelper::getNormalizeLocale($locale);
+
         if (!isset(self::MEDIUM_DATE_PATTERNS[$locale])) {
             return null;
         }
         $datePatternObj = self::MEDIUM_DATE_PATTERNS[$locale];
+
         if (isset($datePatternObj['convert'])) {
             $dateText = forward_static_call($datePatternObj['convert'], $dateText);
         }
+
         if (preg_match($datePatternObj['pattern'], $dateText, $match)) {
             $day = $match['day'];
             $month = $match['month'];
             $year = $match['year'];
+
             if (isset($datePatternObj['months'])) {
+                if (!isset($datePatternObj['months'][$month])) {
+                    throw new \RuntimeException(
+                        'Error convert date. Locale ' . $locale . '. Date: ' . $dateText .
+                        '. Matches: ' . var_export($match, true)
+                    );
+                }
                 $month = $datePatternObj['months'][$month];
             }
 
@@ -1193,29 +1206,34 @@ class DateStringFormatter
                 $year . '.' . $month . '.' . $day,
                 new \DateTimeZone('UTC')
             );
+
             if ($dateTime !== false) {
                 return $dateTime;
             }
         }
+
         return null;
     }
 
     /**
      * @param string|int $unixTime
+     *
      * @return \DateTimeInterface|null
      */
     public static function unixTimeToDateTime($unixTime): ?\DateTimeInterface
     {
         $dateTime = \DateTimeImmutable::createFromFormat(
             'U',
-            (string)$unixTime,
+            (string) $unixTime,
             new \DateTimeZone('UTC')
         );
+
         return $dateTime === false ? null : $dateTime;
     }
 
     /**
      * @param string $str
+     *
      * @return string
      */
     private static function convertBengaliNumbers(string $str): string
@@ -1229,6 +1247,7 @@ class DateStringFormatter
 
     /**
      * @param string $str
+     *
      * @return string
      */
     private static function convertFarsiNumbers(string $str): string
@@ -1244,10 +1263,14 @@ class DateStringFormatter
      * @param int $persianYear
      * @param int $persianMonth
      * @param int $persianDay
+     *
      * @return array
      */
-    private static function convertPersianToGregorianCalendar(int $persianYear, int $persianMonth, int $persianDay): array
-    {
+    private static function convertPersianToGregorianCalendar(
+        int $persianYear,
+        int $persianMonth,
+        int $persianDay
+    ): array {
         $gregorianDaysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         $persianDaysInMonth = [31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29];
         $jy = $persianYear - 979;
@@ -1262,10 +1285,12 @@ class DateStringFormatter
         $gregorianYear = 1600 + 400 * floor($gregorianDayNo / 146097);
         $gregorianDayNo %= 146097;
         $leap = true;
+
         if ($gregorianDayNo >= 36525) {
             $gregorianDayNo--;
             $gregorianYear += 100 * floor($gregorianDayNo / 36524);
             $gregorianDayNo %= 36524;
+
             if ($gregorianDayNo >= 365) {
                 $gregorianDayNo++;
             } else {
@@ -1274,6 +1299,7 @@ class DateStringFormatter
         }
         $gregorianYear += 4 * floor($gregorianDayNo / 1461);
         $gregorianDayNo %= 1461;
+
         if ($gregorianDayNo >= 366) {
             $leap = false;
             $gregorianDayNo--;
@@ -1285,11 +1311,13 @@ class DateStringFormatter
         }
         $gregorianMonth = $i + 1;
         $gregorianDay = $gregorianDayNo + 1;
+
         return [$gregorianYear, $gregorianMonth, $gregorianDay];
     }
 
     /**
      * @param string $str
+     *
      * @return string
      */
     private static function convertMarathiNumbers(string $str): string
@@ -1303,6 +1331,7 @@ class DateStringFormatter
 
     /**
      * @param string $str
+     *
      * @return string
      */
     private static function convertBurmeseNumbers(string $str): string
@@ -1316,6 +1345,7 @@ class DateStringFormatter
 
     /**
      * @param string $str
+     *
      * @return string
      */
     private static function convertNepalNumbers(string $str): string
@@ -1331,6 +1361,7 @@ class DateStringFormatter
      * @param int $year
      * @param int $month
      * @param int $day
+     *
      * @return array
      */
     private static function convertThailandCalendar(int $year, int $month, int $day): array

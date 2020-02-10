@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
@@ -25,37 +27,20 @@ use function GuzzleHttp\Psr7\parse_query;
 class DeveloperInfoScraper implements ResponseHandlerInterface
 {
     /**
-     * @param RequestInterface $request
+     * @param RequestInterface  $request
      * @param ResponseInterface $response
-     * @return mixed
+     *
      * @throws GooglePlayException
+     *
+     * @return mixed
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response)
     {
-        $url = $request->getUri()->__toString();
-        $urlComponents = parse_url($url);
-        $query = parse_query($urlComponents['query']);
+        $query = parse_query($request->getUri()->getQuery());
         $developerId = $query[GPlayApps::REQ_PARAM_ID];
-        $url = $urlComponents['scheme'] . '://'
-            . $urlComponents['host']
-            . $urlComponents['path']
-            . '?' . http_build_query([GPlayApps::REQ_PARAM_ID => $developerId]);
+        $url = (string) $request->getUri()->withQuery(http_build_query([GPlayApps::REQ_PARAM_ID => $developerId]));
 
-        $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
-
-        $scriptDataInfo = null;
-        foreach ($scriptData as $key => $scriptValue) {
-            if (isset($scriptValue[0][21])) {
-                $scriptDataInfo = $scriptValue; // ds:5
-                break;
-            }
-        }
-        if ($scriptDataInfo === null) {
-            throw (new GooglePlayException(sprintf(
-                'Error parse vendor page %s. Need update library.',
-                $request->getUri()
-            )))->setUrl($request->getUri()->__toString());
-        }
+        $scriptDataInfo = $this->getScriptDataInfo($request, $response);
 
         $name = $scriptDataInfo[0][0][0];
 
@@ -78,5 +63,38 @@ class DeveloperInfoScraper implements ResponseHandlerInterface
                 ->setIcon($icon)
                 ->setCover($cover)
         );
+    }
+
+    /**
+     * @param RequestInterface  $request
+     * @param ResponseInterface $response
+     *
+     * @throws GooglePlayException
+     *
+     * @return array
+     */
+    private function getScriptDataInfo(RequestInterface $request, ResponseInterface $response): array
+    {
+        $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
+
+        $scriptDataInfo = null;
+
+        foreach ($scriptData as $key => $scriptValue) {
+            if (isset($scriptValue[0][21])) {
+                $scriptDataInfo = $scriptValue; // ds:5
+                break;
+            }
+        }
+
+        if ($scriptDataInfo === null) {
+            throw (new GooglePlayException(
+                sprintf(
+                    'Error parse vendor page %s. Need update library.',
+                    $request->getUri()
+                )
+            ))->setUrl($request->getUri()->__toString());
+        }
+
+        return $scriptDataInfo;
     }
 }

@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
@@ -15,12 +17,11 @@ use Nelexa\GPlay\Util\LocaleHelper;
 /**
  * Contains the application ID, as well as the locale and country for which the information was or will be obtained.
  *
- * This class is the base class for {@see \Nelexa\GPlay\Model\App}
- * and {@see \Nelexa\GPlay\Model\AppDetail}.
+ * This class is the base class for {@see App} and {@see AppDetail}.
  *
- * @see \Nelexa\GPlay\Model\App Contains basic information about the application
+ * @see App Contains basic information about the application
  *     from the Google Play store.
- * @see \Nelexa\GPlay\Model\AppDetail Contains detailed information about the
+ * @see AppDetail Contains detailed information about the
  *     application from the Google Play store.
  */
 class AppId
@@ -32,20 +33,20 @@ class AppId
     private $locale;
 
     /**
-     * @var string The country of the request for information about the
-     *     application (affects the price and currency of paid applications
-     *     and possibly their availability on the Google Play store).
+     * @var string the country of the request for information about the
+     *             application (affects the price and currency of paid applications
+     *             and possibly their availability on the Google Play store)
      */
     private $country;
 
     /**
      * Creates an \Nelexa\GPlay\Model\AppId object.
      *
-     * @param string $id Application ID (Android package name).
-     * @param string $locale Locale (ex. en_US, en-CA or en). Default is 'en_US'.
+     * @param string $id      application ID (Android package name)
+     * @param string $locale  Locale (ex. en_US, en-CA or en). Default is 'en_US'.
      * @param string $country Country (affects prices). Default is 'us'.
      *
-     * @throws \InvalidArgumentException If passed an empty application ID.
+     * @throws \InvalidArgumentException if passed an empty application ID
      */
     public function __construct(
         string $id,
@@ -63,7 +64,7 @@ class AppId
     /**
      * Returns the application ID (android package name).
      *
-     * @return string Application ID (android package name).
+     * @return string application ID (android package name)
      */
     public function getId(): string
     {
@@ -96,13 +97,15 @@ class AppId
     /**
      * Returns the URL of the application page in the Google Play store.
      *
-     * @return string Url of the app page in Google Play.
+     * @return string url of the app page in Google Play
      */
     public function getUrl(): string
     {
-        return GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
+        return GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query(
+            [
                 GPlayApps::REQ_PARAM_ID => $this->id,
-            ]);
+            ]
+        );
     }
 
     /**
@@ -110,14 +113,16 @@ class AppId
      * the locale and country of the request.
      *
      * @return string URL of the app's page on Google Play, specifying the
-     *     locale and country of the request.
+     *                locale and country of the request
      */
     public function getFullUrl(): string
     {
-        return GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query([
+        return GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?' . http_build_query(
+            [
                 GPlayApps::REQ_PARAM_ID => $this->id,
                 GPlayApps::REQ_PARAM_LOCALE => $this->locale,
                 GPlayApps::REQ_PARAM_COUNTRY => $this->country,
-            ]);
+            ]
+        );
     }
 }

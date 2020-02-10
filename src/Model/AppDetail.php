@@ -1,26 +1,29 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * @author   Ne-Lexa
  * @license  MIT
- * @link     https://github.com/Ne-Lexa/google-play-scraper
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\Builder\AppBuilder;
 
 /**
  * Contains detailed information about the application from the Google Play store.
  *
- * @see \Nelexa\GPlay\Model\App Basic information about the application from the Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getApp() Returns detailed information about the Android
+ * @see App Basic information about the application from the Google Play store.
+ * @see GPlayApps::getApp() Returns detailed information about the Android
  *     application from the Google Play store.
- * @see \Nelexa\GPlay\GPlayApps::getApps() Returns detailed information about many android packages.
- * @see \Nelexa\GPlay\GPlayApps::getAppInLocales() Returns detailed information about an application
+ * @see GPlayApps::getApps() Returns detailed information about many android packages.
+ * @see GPlayApps::getAppInLocales() Returns detailed information about an application
  *     from the Google Play store for an array of locales.
- * @see \Nelexa\GPlay\GPlayApps::getAppInAvailableLocales() Returns detailed information about the
+ * @see GPlayApps::getAppInAvailableLocales() Returns detailed information about the
  *     application in all available locales.
  */
 final class AppDetail extends App
@@ -37,9 +40,9 @@ final class AppDetail extends App
      * Play Console in the "Add your own translation text" section. If a translation
      * is added, the value will be null.
      *
-     * @var string|null Locale of the original description or null.
+     * @var string|null locale of the original description or null
      *
-     * @link https://support.google.com/googleplay/android-developer/answer/3125566
+     * @see https://support.google.com/googleplay/android-developer/answer/3125566
      */
     private $translatedFromLocale;
 
@@ -118,9 +121,9 @@ final class AppDetail extends App
     /**
      * Returns an object with detailed information about the application.
      *
-     * @param AppBuilder $builder Application builder.
+     * @param AppBuilder $builder application builder
      *
-     * @throws \InvalidArgumentException If not enough required data in the builder.
+     * @throws \InvalidArgumentException if not enough required data in the builder
      *
      * @ignore
      */
@@ -129,13 +132,21 @@ final class AppDetail extends App
         parent::__construct($builder);
 
         if (empty($builder->getDescription())) {
-            throw new \InvalidArgumentException('Application description cannot be null or empty. Solution: $appBuilder->setDescription(...);');
+            throw new \InvalidArgumentException(
+                'Application description cannot be null or empty. Solution: $appBuilder->setDescription(...);'
+            );
         }
+
         if (empty($builder->getScreenshots())) {
-            throw new \InvalidArgumentException('Screenshots of the application must contain at least one screenshot. Solution: $appBuilder->setScreenshots(...); or $appBuilder->addScreenshot(...);');
+            throw new \InvalidArgumentException(
+                'Screenshots of the application must contain at least one screenshot. Solution: $appBuilder->setScreenshots(...); or $appBuilder->addScreenshot(...);'
+            );
         }
+
         if ($builder->getCategory() === null) {
-            throw new \InvalidArgumentException('Application category cannot be null. Solution: $appBuilder->setCategory(...);');
+            throw new \InvalidArgumentException(
+                'Application category cannot be null. Solution: $appBuilder->setCategory(...);'
+            );
         }
 
         $this->description = $builder->getDescription();
@@ -170,7 +181,7 @@ final class AppDetail extends App
     /**
      * Returns a description of the application.
      *
-     * @return string Description of the application.
+     * @return string description of the application
      */
     public function getDescription(): string
     {
@@ -181,7 +192,7 @@ final class AppDetail extends App
      * Checks if the class description is automatically translated via Google Translate.
      *
      * @return bool `true` if the description was automatically translated using Google Translate and
-     *     `false` if the developer added a description for the locale in the Google Play Console.
+     *              `false` if the developer added a description for the locale in the Google Play Console
      */
     public function isAutoTranslatedDescription(): bool
     {
@@ -195,8 +206,8 @@ final class AppDetail extends App
      * has not added it to the Play Console in the "Add your own translation text" section.
      * If a translation is added, the value will be null.
      *
-     * @return string|null If the developer added a translation of the description, then the
-     *     value will be `null`, otherwise the original language of the application description.
+     * @return string|null if the developer added a translation of the description, then the
+     *                     value will be `null`, otherwise the original language of the application description
      */
     public function getTranslatedFromLocale(): ?string
     {
@@ -215,7 +226,7 @@ final class AppDetail extends App
      * * JPEG or 24-bit PNG (no alpha)
      * * Dimensions: 1024px by 500px
      *
-     * @return GoogleImage|null Cover image or `null`.
+     * @return GoogleImage|null cover image or `null`
      *
      * @see https://support.google.com/googleplay/android-developer/answer/1078870?hl=en Graphic assets,
      *     screenshots, & video. Section **Feature graphic**.
@@ -236,7 +247,7 @@ final class AppDetail extends App
      * * Maximum dimension: 3840px
      * * The maximum dimension of the screenshot can't be more than twice as long as the minimum dimension.
      *
-     * @return GoogleImage[] Array of screenshots.
+     * @return GoogleImage[] array of screenshots
      */
     public function getScreenshots(): array
     {
@@ -246,7 +257,7 @@ final class AppDetail extends App
     /**
      * Returns the category of the application.
      *
-     * @return Category Category of application.
+     * @return Category category of application
      */
     public function getCategory(): Category
     {
@@ -256,7 +267,7 @@ final class AppDetail extends App
     /**
      * Returns family category.
      *
-     * @return Category|null Family category or `null`.
+     * @return Category|null family category or `null`
      */
     public function getCategoryFamily(): ?Category
     {
@@ -266,7 +277,7 @@ final class AppDetail extends App
     /**
      * Returns a video about the application.
      *
-     * @return Video|null Promo video or `null`.
+     * @return Video|null promo video or `null`
      */
     public function getVideo(): ?Video
     {
@@ -276,7 +287,7 @@ final class AppDetail extends App
     /**
      * Returns recent changes.
      *
-     * @return string|null Recent changes or null if not provided.
+     * @return string|null recent changes or null if not provided
      */
     public function getRecentChanges(): ?string
     {
@@ -286,7 +297,7 @@ final class AppDetail extends App
     /**
      * Checks if the application is an editors' choice.
      *
-     * @return bool `true` if the application is selected by Google Play editor, otherwise `false`.
+     * @return bool `true` if the application is selected by Google Play editor, otherwise `false`
      */
     public function isEditorsChoice(): bool
     {
@@ -296,7 +307,7 @@ final class AppDetail extends App
     /**
      * Returns the number of installations of the application.
      *
-     * @return int The number of installations of the application.
+     * @return int the number of installations of the application
      */
     public function getInstalls(): int
     {
@@ -306,7 +317,7 @@ final class AppDetail extends App
     /**
      * Returns histogram rating.
      *
-     * @return HistogramRating Histogram rating.
+     * @return HistogramRating histogram rating
      */
     public function getHistogramRating(): HistogramRating
     {
@@ -314,11 +325,11 @@ final class AppDetail extends App
     }
 
     /**
-     * Returns the price of the app in the Google Play Store.
+     * Returns the price of the app in the Google Play store.
      *
      * @return float price or 0.00 if the app is free
      *
-     * @see \Nelexa\GPlay\Model\AppDetail::getCurrency() Returns the price currency
+     * @see AppDetail::getCurrency() Returns the price currency
      *     of the app in the Google Play store.
      */
     public function getPrice(): float
@@ -329,7 +340,7 @@ final class AppDetail extends App
     /**
      * Returns the price currency of the app in the Google Play store.
      *
-     * @return string Currency price of the application, default USD.
+     * @return string currency price of the application, default USD
      */
     public function getCurrency(): string
     {
@@ -339,7 +350,7 @@ final class AppDetail extends App
     /**
      * Checks if the app contains In-App Purchases (IAP).
      *
-     * @return bool `true` if the application contains AIP, and `false` if not contains.
+     * @return bool `true` if the application contains AIP, and `false` if not contains
      */
     public function isContainsIAP(): bool
     {
@@ -349,7 +360,7 @@ final class AppDetail extends App
     /**
      * Returns the cost of In-App Purchases (IAP).
      *
-     * @return string|null In-App Purchase price.
+     * @return string|null in-App Purchase price
      */
     public function getOffersIAPCost(): ?string
     {
@@ -359,7 +370,7 @@ final class AppDetail extends App
     /**
      * Checks if the app contains ads.
      *
-     * @return bool `true` if the application contains ads, and `false` if not contains.
+     * @return bool `true` if the application contains ads, and `false` if not contains
      */
     public function isContainsAds(): bool
     {
@@ -379,7 +390,7 @@ final class AppDetail extends App
     /**
      * Returns the version of the application.
      *
-     * @return string|null Application version, `null` if the application version depends on the device.
+     * @return string|null application version, `null` if the application version depends on the device
      */
     public function getAppVersion(): ?string
     {
@@ -389,7 +400,7 @@ final class AppDetail extends App
     /**
      * Returns the supported version of Android.
      *
-     * @return string|null Android version, `null` if android version depends on the device.
+     * @return string|null android version, `null` if android version depends on the device
      */
     public function getAndroidVersion(): ?string
     {
@@ -399,7 +410,7 @@ final class AppDetail extends App
     /**
      * Returns the minimum supported version of Android.
      *
-     * @return string|null Minimum android version, `null` if android version depends on the device.
+     * @return string|null minimum android version, `null` if android version depends on the device
      */
     public function getMinAndroidVersion(): ?string
     {
@@ -419,7 +430,7 @@ final class AppDetail extends App
     /**
      * Returns privacy policy URL.
      *
-     * @return string|null Privacy policy URL.
+     * @return string|null privacy policy URL
      */
     public function getPrivacyPoliceUrl(): ?string
     {
@@ -429,7 +440,7 @@ final class AppDetail extends App
     /**
      * Returns the release date.
      *
-     * @return \DateTimeInterface|null Release date or `null` if not provided.
+     * @return \DateTimeInterface|null release date or `null` if not provided
      */
     public function getReleased(): ?\DateTimeInterface
     {
@@ -439,7 +450,7 @@ final class AppDetail extends App
     /**
      * Returns the date of the update.
      *
-     * @return \DateTimeInterface|null Update date or `null` if not provided.
+     * @return \DateTimeInterface|null update date or `null` if not provided
      */
     public function getUpdated(): ?\DateTimeInterface
     {
@@ -449,7 +460,7 @@ final class AppDetail extends App
     /**
      * Returns the number of voters.
      *
-     * @return int Number of voters.
+     * @return int number of voters
      */
     public function getNumberVoters(): int
     {
@@ -459,7 +470,7 @@ final class AppDetail extends App
     /**
      * Returns the number of reviews.
      *
-     * @return int Number of reviews.
+     * @return int number of reviews
      */
     public function getNumberReviews(): int
     {
@@ -469,7 +480,7 @@ final class AppDetail extends App
     /**
      * Returns some useful reviews.
      *
-     * @return Review[] Some useful reviews.
+     * @return Review[] some useful reviews
      */
     public function getReviews(): array
     {
@@ -479,40 +490,49 @@ final class AppDetail extends App
     /**
      * Checks for equality of applications.
      *
-     * @param AppDetail $otherApp Application with which is compared.
+     * @param AppDetail $otherApp application with which is compared
      *
      * @return bool `true` if the contents of the objects being changed are the same
-     *     and `false` if the objects contain different data.
+     *              and `false` if the objects contain different data
      *
      * @internal
      */
-    public function equals(AppDetail $otherApp): bool
+    public function equals(self $otherApp): bool
     {
         if ($otherApp->getId() !== $this->getId()) {
             return false;
         }
+
         if ($otherApp->getName() !== $this->getName()) {
             return false;
         }
+
         if ($otherApp->description !== $this->description) {
             return false;
         }
+
         if ($otherApp->recentChanges !== $this->recentChanges) {
             return false;
         }
+
         if ($otherApp->getIcon()->getOriginalSizeUrl() !== $this->getIcon()->getOriginalSizeUrl()) {
             return false;
         }
-        $diff = array_udiff($otherApp->screenshots, $this->screenshots, static function (GoogleImage $a, GoogleImage $b) {
-            return strcmp($a->getOriginalSizeUrl(), $b->getOriginalSizeUrl());
-        });
+        $diff = array_udiff(
+            $otherApp->screenshots,
+            $this->screenshots,
+            static function (GoogleImage $a, GoogleImage $b) {
+                return strcmp($a->getOriginalSizeUrl(), $b->getOriginalSizeUrl());
+            }
+        );
+
         return empty($diff);
     }
 
     /**
      * Returns class properties as an array.
      *
-     * @return array Class properties as an array.
+     * @return array class properties as an array
      */
     public function asArray(): array
     {
@@ -520,9 +540,12 @@ final class AppDetail extends App
         $array['description'] = $this->description;
         $array['translatedFromLocale'] = $this->translatedFromLocale;
         $array['cover'] = $this->cover !== null ? $this->cover->getUrl() : null;
-        $array['screenshots'] = array_map(static function (GoogleImage $googleImage) {
-            return $googleImage->getUrl();
-        }, $this->screenshots);
+        $array['screenshots'] = array_map(
+            static function (GoogleImage $googleImage) {
+                return $googleImage->getUrl();
+            },
+            $this->screenshots
+        );
         $array['category'] = $this->category->asArray();
         $array['categoryFamily'] = $this->categoryFamily !== null ? $this->categoryFamily->asArray() : null;
         $array['video'] = $this->video !== null ? $this->video->asArray() : null;
@@ -547,9 +570,13 @@ final class AppDetail extends App
         $array['updated'] = $this->updated !== null ? $this->updated->format(\DateTimeInterface::RFC3339) : null;
         $array['updatedTimestamp'] = $this->updated !== null ? $this->updated->getTimestamp() : 0;
         $array['numberReviews'] = $this->numberReviews;
-        $array['reviews'] = array_map(static function (Review $review) {
-            return $review->asArray();
-        }, $this->reviews);
+        $array['reviews'] = array_map(
+            static function (Review $review) {
+                return $review->asArray();
+            },
+            $this->reviews
+        );
+
         return $array;
     }
 }
