@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Scraper;
 
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
+use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

@@ -23,23 +23,12 @@ use Nelexa\Enum;
  */
 class SortEnum extends Enum
 {
-    private const
-        /**
-         * @var int Most helpful first
-         */
-        HELPFULNESS = 1;
+    /** @var int Most helpful first */
+    private const HELPFULNESS = 1;
 
-    private const
+    /** @var int Newest */
+    private const NEWEST = 2;
 
-        /**
-         * @var int Newest
-         */
-        NEWEST = 2;
-
-    private const
-
-        /**
-         * @var int Rating
-         */
-        RATING = 3;
+    /** @var int Rating */
+    private const RATING = 3;
 }

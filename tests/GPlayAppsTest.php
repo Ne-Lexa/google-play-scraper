@@ -20,6 +20,7 @@ use Nelexa\GPlay\Model\Permission;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Util\LocaleHelper;
 use PHPUnit\Framework\TestCase;
+use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\Psr16Cache;
@@ -34,12 +35,19 @@ final class GPlayAppsTest extends TestCase
     /** @var GPlayApps */
     private $gplay;
 
-    /**
-     * @noinspection PhpComposerExtensionStubsInspection
-     */
     protected function setUp(): void
     {
-        $cacheNamespace = 'nelexa.gplay.v2';
+        $this->gplay = new GPlayApps();
+    }
+
+    /**
+     * @return CacheInterface
+     *
+     * @noinspection PhpComposerExtensionStubsInspection
+     */
+    private function getCacheInterface(): CacheInterface
+    {
+        $cacheNamespace = 'nelexa.gplay.v3';
 
         if (class_exists(\Redis::class)) {
             $psr6Cache = new RedisAdapter(RedisAdapter::createConnection('redis://localhost'), $cacheNamespace);
@@ -48,11 +56,8 @@ final class GPlayAppsTest extends TestCase
         if (!isset($psr6Cache)) {
             $psr6Cache = new FilesystemAdapter($cacheNamespace);
         }
-        $psr16Cache = new Psr16Cache($psr6Cache);
 
-        $gplay = new GPlayApps();
-        $gplay->setCache($psr16Cache);
-        $this->gplay = $gplay;
+        return new Psr16Cache($psr6Cache);
     }
 
     /**
@@ -94,6 +99,8 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetApp(): void
     {
+        $this->gplay->setCache($this->getCacheInterface());
+
         $appId = 'com.google.android.googlequicksearchbox';
         $locale = 'es';
         $country = 'ca';

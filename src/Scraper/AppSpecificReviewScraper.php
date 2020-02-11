@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Nelexa\GPlay\Util\ScraperUtil;
+use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;

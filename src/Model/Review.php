@@ -53,7 +53,7 @@ class Review implements \JsonSerializable
     private $reply;
 
     /**
-     * Constructs a Reply.
+     * Creates an Android app review object in the Google Play store.
      *
      * @param string                  $id        review id
      * @param string                  $url       review url

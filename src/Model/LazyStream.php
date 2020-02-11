@@ -6,7 +6,6 @@ namespace Nelexa\GPlay\Model;
 
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
 use Psr\Http\Message\StreamInterface;
-
 use function GuzzleHttp\Psr7\stream_for;
 use function GuzzleHttp\Psr7\try_fopen;
 
@@ -44,6 +43,7 @@ final class LazyStream implements StreamInterface
     {
         $this->filename = str_replace($from, $to, $this->filename);
     }
+
     /**
      * @return string
      */

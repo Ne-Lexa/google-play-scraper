@@ -13,8 +13,8 @@ namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Util\ScraperUtil;
+use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

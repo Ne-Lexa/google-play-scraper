@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Util\ScraperUtil;
+use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

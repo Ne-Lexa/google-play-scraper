@@ -149,6 +149,8 @@ class CollectionEnum extends Enum
      * @param int $count
      *
      * @return int|null
+     *
+     * @internal
      */
     public function getMappingKeyByCount(int $count): ?int
     {

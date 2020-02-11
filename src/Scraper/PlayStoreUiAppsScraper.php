@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\GPlayApps;
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Scraper\Extractor\AppsExtractor;
+use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use function GuzzleHttp\Psr7\parse_query;

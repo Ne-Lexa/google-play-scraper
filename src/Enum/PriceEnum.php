@@ -23,12 +23,9 @@ use Nelexa\Enum;
  */
 class PriceEnum extends Enum
 {
-    private const
-        ALL = 0;
+    private const ALL = 0;
 
-    private const
-        FREE = 1;
+    private const FREE = 1;
 
-    private const
-        PAID = 2;
+    private const PAID = 2;
 }

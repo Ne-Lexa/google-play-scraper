@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Scraper;
 
-use Nelexa\GPlay\Http\ResponseHandlerInterface;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Model\Permission;
+use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -41,6 +41,10 @@ class PermissionScraper implements ResponseHandlerInterface
         $permissions = [];
 
         foreach (\array_slice($data, 0, 2) as $items) {
+            if ($items === null) {
+                continue;
+            }
+
             foreach ($items as $values) {
                 $permissionName = $values[0];
                 $permissions[$permissionName] = [

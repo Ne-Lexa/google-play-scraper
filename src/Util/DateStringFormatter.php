@@ -1202,8 +1202,8 @@ class DateStringFormatter
             }
 
             $dateTime = \DateTimeImmutable::createFromFormat(
-                'Y.m.d',
-                $year . '.' . $month . '.' . $day,
+                'Y.m.d H:i:s',
+                $year . '.' . $month . '.' . $day . ' 00:00:00',
                 new \DateTimeZone('UTC')
             );
 

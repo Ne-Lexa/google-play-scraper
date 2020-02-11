@@ -13,7 +13,7 @@ namespace Nelexa\GPlay\Model;
 
 use GuzzleHttp\RequestOptions;
 use Nelexa\GPlay\Exception\GooglePlayException;
-use Nelexa\GPlay\Http\HttpClient;
+use Nelexa\HttpClient\HttpClient;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -222,22 +222,22 @@ class GoogleImage
             $command = $param[0]; // 1 char
             switch ($command) {
                 case self::PARAM_SIZE:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setSize($arg);
                     break;
 
                 case self::PARAM_WIDTH:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setWidth($arg);
                     break;
 
                 case self::PARAM_HEIGHT:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setHeight($arg);
                     break;
 
                 case self::PARAM_BORDER:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setBorder($arg);
                     break;
 
@@ -324,10 +324,10 @@ class GoogleImage
     private function isValidSmartCrop(): bool
     {
         return $this->smartCrop && (
-                $this->size !== null ||
+            $this->size !== null ||
                 ($this->width !== null && $this->height !== null) ||
                 ($this->size === null && $this->width === null && $this->height === null)
-            );
+        );
     }
 
     /**
@@ -363,7 +363,7 @@ class GoogleImage
         $parts = max(0, min(6, $parts));
 
         if ($parts > 0) {
-            $partLength = max(1, min($partLength, (int)($hashLength / $parts)));
+            $partLength = max(1, min($partLength, (int) ($hashLength / $parts)));
             $partsBuild = [];
             for ($i = 0; $i < $parts; $i++) {
                 $partsBuild[] = substr($hash, $i * $partLength, $partLength);

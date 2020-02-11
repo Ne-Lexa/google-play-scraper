@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Util;
 
+/**
+ * Class LocaleHelper.
+ */
 class LocaleHelper
 {
     public const DEFAULT_GOOGLE_PLAY_LOCALE = 'en_US';

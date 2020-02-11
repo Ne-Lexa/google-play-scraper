@@ -20,7 +20,6 @@ use Nelexa\GPlay\Enum\CollectionEnum;
 use Nelexa\GPlay\Enum\PriceEnum;
 use Nelexa\GPlay\Enum\SortEnum;
 use Nelexa\GPlay\Exception\GooglePlayException;
-use Nelexa\GPlay\Http\HttpClient;
 use Nelexa\GPlay\Model\App;
 use Nelexa\GPlay\Model\AppDetail;
 use Nelexa\GPlay\Model\AppId;
@@ -46,6 +45,8 @@ use Nelexa\GPlay\Scraper\PlayStoreUiRequest;
 use Nelexa\GPlay\Scraper\ReviewsScraper;
 use Nelexa\GPlay\Scraper\SuggestScraper;
 use Nelexa\GPlay\Util\LocaleHelper;
+use Nelexa\HttpClient\HttpClient;
+use Nelexa\HttpClient\Options;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -122,6 +123,7 @@ class GPlayApps
      */
     public function setCache(?CacheInterface $cache, $cacheTtl = null): self
     {
+        $cacheTtl = $cacheTtl ?? \DateInterval::createFromDateString('5 min');
         $this->getHttpClient()
             ->setCache($cache)
             ->setCacheTtl($cacheTtl)
@@ -140,7 +142,14 @@ class GPlayApps
         static $httpClient;
 
         if ($httpClient === null) {
-            $httpClient = new HttpClient();
+            $httpClient = new HttpClient(
+                [
+                    Options::TIMEOUT => 10.0,
+                    Options::HEADERS => [
+                        'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
+                    ],
+                ]
+            );
         }
 
         return $httpClient;
@@ -230,7 +239,7 @@ class GPlayApps
                 'GET',
                 $urls,
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new AppDetailScraper(),
+                    Options::HANDLER_RESPONSE => new AppDetailScraper(),
                 ],
                 $this->concurrency
             );
@@ -422,7 +431,7 @@ class GPlayApps
                 $appId->getFullUrl(),
                 [
                     RequestOptions::HTTP_ERRORS => false,
-                    HttpClient::OPTION_HANDLER_RESPONSE => new ExistsAppScraper(),
+                    Options::HANDLER_RESPONSE => new ExistsAppScraper(),
                 ]
             );
         } catch (\Throwable $e) {
@@ -460,7 +469,7 @@ class GPlayApps
                 $urls,
                 [
                     RequestOptions::HTTP_ERRORS => false,
-                    HttpClient::OPTION_HANDLER_RESPONSE => new ExistsAppScraper(),
+                    Options::HANDLER_RESPONSE => new ExistsAppScraper(),
                 ],
                 $this->concurrency
             );
@@ -471,6 +480,7 @@ class GPlayApps
 
     /**
      * Returns reviews of the Android app in the Google Play store.
+     *
      * Getting a lot of reviews can take a lot of time.
      *
      * @param string|AppId  $appId application ID (Android package name) as
@@ -513,8 +523,8 @@ class GPlayApps
                 [$reviews, $token] = $this->getHttpClient()->send(
                     $request,
                     [
-                        HttpClient::OPTION_CACHE_TTL => $cacheTtl,
-                        HttpClient::OPTION_HANDLER_RESPONSE => new ReviewsScraper($appId),
+                        Options::CACHE_TTL => $cacheTtl,
+                        Options::HANDLER_RESPONSE => new ReviewsScraper($appId),
                     ]
                 );
                 $allCount += \count($reviews);
@@ -528,8 +538,10 @@ class GPlayApps
     }
 
     /**
-     * @param        $appId
-     * @param string $reviewId
+     * Returns specific review of the Android app in the Google Play store.
+     *
+     * @param AppId|string $appId
+     * @param string       $reviewId
      *
      * @throws GooglePlayException
      *
@@ -540,7 +552,8 @@ class GPlayApps
         $appId = $this->castToAppId($appId);
 
         try {
-            return $this->getHttpClient()->request(
+            /** @var Review $review */
+            $review = $this->getHttpClient()->request(
                 'GET',
                 self::GOOGLE_PLAY_APPS_URL . '/details',
                 [
@@ -550,12 +563,14 @@ class GPlayApps
                         self::REQ_PARAM_COUNTRY => $appId->getCountry(),
                         'reviewId' => $reviewId,
                     ],
-                    HttpClient::OPTION_HANDLER_RESPONSE => new AppSpecificReviewScraper($appId),
+                    Options::HANDLER_RESPONSE => new AppSpecificReviewScraper($appId),
                 ]
             );
         } catch (\Throwable $e) {
             throw new GooglePlayException($e->getMessage(), 1, $e);
         }
+
+        return $review;
     }
 
     /**
@@ -587,7 +602,7 @@ class GPlayApps
                 'GET',
                 $appId->getFullUrl(),
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new FindSimilarAppsUrlScraper($appId),
+                    Options::HANDLER_RESPONSE => new FindSimilarAppsUrlScraper($appId),
                 ]
             );
 
@@ -636,7 +651,7 @@ class GPlayApps
                 'GET',
                 $clusterPageUrl,
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new ClusterAppsScraper(),
+                    Options::HANDLER_RESPONSE => new ClusterAppsScraper(),
                 ]
             );
 
@@ -653,7 +668,7 @@ class GPlayApps
                 [$apps, $token] = $this->getHttpClient()->send(
                     $request,
                     [
-                        HttpClient::OPTION_HANDLER_RESPONSE => new PlayStoreUiAppsScraper(),
+                        Options::HANDLER_RESPONSE => new PlayStoreUiAppsScraper(),
                     ]
                 );
                 $allCount += \count($apps);
@@ -694,15 +709,18 @@ class GPlayApps
         try {
             $request = PlayStoreUiRequest::getPermissionsRequest($appId);
 
-            return $this->getHttpClient()->send(
+            /** @var Permission[] $permissions */
+            $permissions = $this->getHttpClient()->send(
                 $request,
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new PermissionScraper(),
+                    Options::HANDLER_RESPONSE => new PermissionScraper(),
                 ]
             );
         } catch (\Throwable $e) {
             throw new GooglePlayException($e->getMessage(), 1, $e);
         }
+
+        return $permissions;
     }
 
     /**
@@ -719,19 +737,22 @@ class GPlayApps
         $url = self::GOOGLE_PLAY_APPS_URL;
 
         try {
-            return $this->getHttpClient()->request(
+            /** @var Category[] $categories */
+            $categories = $this->getHttpClient()->request(
                 'GET',
                 $url,
                 [
                     RequestOptions::QUERY => [
                         self::REQ_PARAM_LOCALE => $this->locale,
                     ],
-                    HttpClient::OPTION_HANDLER_RESPONSE => new CategoriesScraper(),
+                    Options::HANDLER_RESPONSE => new CategoriesScraper(),
                 ]
             );
         } catch (\Throwable $e) {
             throw new GooglePlayException($e->getMessage(), 1, $e);
         }
+
+        return $categories;
     }
 
     /**
@@ -771,7 +792,7 @@ class GPlayApps
                 'GET',
                 $urls,
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new CategoriesScraper(),
+                    Options::HANDLER_RESPONSE => new CategoriesScraper(),
                 ],
                 $this->concurrency
             );
@@ -827,7 +848,8 @@ class GPlayApps
         $url = self::GOOGLE_PLAY_APPS_URL . '/dev';
 
         try {
-            return $this->getHttpClient()->request(
+            /** @var Developer $developer */
+            $developer = $this->getHttpClient()->request(
                 'GET',
                 $url,
                 [
@@ -835,12 +857,14 @@ class GPlayApps
                         self::REQ_PARAM_ID => $developerId,
                         self::REQ_PARAM_LOCALE => $this->locale,
                     ],
-                    HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperInfoScraper(),
+                    Options::HANDLER_RESPONSE => new DeveloperInfoScraper(),
                 ]
             );
         } catch (\Throwable $e) {
             throw new GooglePlayException($e->getMessage(), 1, $e);
         }
+
+        return $developer;
     }
 
     /**
@@ -918,7 +942,7 @@ class GPlayApps
                 'GET',
                 $urls,
                 [
-                    HttpClient::OPTION_HANDLER_RESPONSE => new DeveloperInfoScraper(),
+                    Options::HANDLER_RESPONSE => new DeveloperInfoScraper(),
                 ],
                 $this->concurrency
             );
@@ -961,7 +985,7 @@ class GPlayApps
                     'GET',
                     $developerUrl,
                     [
-                        HttpClient::OPTION_HANDLER_RESPONSE => new FindDevAppsUrlScraper(),
+                        Options::HANDLER_RESPONSE => new FindDevAppsUrlScraper(),
                     ]
                 );
 
@@ -1007,7 +1031,8 @@ class GPlayApps
         $url = 'https://market.android.com/suggest/SuggRequest';
 
         try {
-            return $this->getHttpClient()->request(
+            /** @var string[] $suggestions */
+            $suggestions = $this->getHttpClient()->request(
                 'GET',
                 $url,
                 [
@@ -1018,12 +1043,14 @@ class GPlayApps
                         self::REQ_PARAM_LOCALE => $this->locale,
                         self::REQ_PARAM_COUNTRY => $this->country,
                     ],
-                    HttpClient:: OPTION_HANDLER_RESPONSE => new SuggestScraper(),
+                    Options::HANDLER_RESPONSE => new SuggestScraper(),
                 ]
             );
         } catch (\Throwable $e) {
             throw new GooglePlayException($e->getMessage(), 1, $e);
         }
+
+        return $suggestions;
     }
 
     /**
@@ -1127,7 +1154,7 @@ class GPlayApps
             $url,
             [
                 RequestOptions::QUERY => $queryParams,
-                HttpClient::OPTION_HANDLER_RESPONSE => new CategoryAppsGetClusterPageScraper(),
+                Options::HANDLER_RESPONSE => new CategoryAppsGetClusterPageScraper(),
             ]
         );
 
