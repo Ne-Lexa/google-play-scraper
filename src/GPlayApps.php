@@ -1215,18 +1215,7 @@ class GPlayApps
                                     $url,
                                     $stream
                                 ): void {
-                                    if ($response->getStatusCode() >= 400) {
-                                        return;
-                                    }
-
-                                    $contentType = $response->getHeaderLine('Content-Type');
-
-                                    if (!preg_match('~\bimage/.*\b~i', $contentType, $match)) {
-                                        throw new GooglePlayException('Url ' . $url . ' is not image');
-                                    }
-                                    $contentType = $match[0];
-                                    $imageType = GoogleImage::getImageExtension($contentType);
-                                    $stream->replaceFilename('{ext}', $imageType);
+                                    GoogleImage::onHeaders($response, $url, $stream);
                                 },
                             ]
                         )

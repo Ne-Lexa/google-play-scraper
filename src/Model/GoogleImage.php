@@ -222,22 +222,22 @@ class GoogleImage
             $command = $param[0]; // 1 char
             switch ($command) {
                 case self::PARAM_SIZE:
-                    $arg = (int) substr($param, 1);
+                    $arg = (int)substr($param, 1);
                     $this->setSize($arg);
                     break;
 
                 case self::PARAM_WIDTH:
-                    $arg = (int) substr($param, 1);
+                    $arg = (int)substr($param, 1);
                     $this->setWidth($arg);
                     break;
 
                 case self::PARAM_HEIGHT:
-                    $arg = (int) substr($param, 1);
+                    $arg = (int)substr($param, 1);
                     $this->setHeight($arg);
                     break;
 
                 case self::PARAM_BORDER:
-                    $arg = (int) substr($param, 1);
+                    $arg = (int)substr($param, 1);
                     $this->setBorder($arg);
                     break;
 
@@ -248,6 +248,7 @@ class GoogleImage
                 case self::PARAM_SMART_CROP:
                     $this->setSmartCrop(true);
                     break;
+
                 default:
                     switch ($param) {
                         case self::PARAM_FLIP_VERTICAL:
@@ -323,10 +324,10 @@ class GoogleImage
     private function isValidSmartCrop(): bool
     {
         return $this->smartCrop && (
-            $this->size !== null ||
+                $this->size !== null ||
                 ($this->width !== null && $this->height !== null) ||
                 ($this->size === null && $this->width === null && $this->height === null)
-        );
+            );
     }
 
     /**
@@ -362,7 +363,7 @@ class GoogleImage
         $parts = max(0, min(6, $parts));
 
         if ($parts > 0) {
-            $partLength = max(1, min($partLength, (int) ($hashLength / $parts)));
+            $partLength = max(1, min($partLength, (int)($hashLength / $parts)));
             $partsBuild = [];
             for ($i = 0; $i < $parts; $i++) {
                 $partsBuild[] = substr($hash, $i * $partLength, $partLength);
@@ -636,18 +637,7 @@ class GoogleImage
                         $url,
                         $stream
                     ): void {
-                        if ($response->getStatusCode() >= 400) {
-                            return;
-                        }
-
-                        $contentType = $response->getHeaderLine('Content-Type');
-
-                        if (!preg_match('~\bimage/.*\b~i', $contentType, $match)) {
-                            throw new GooglePlayException('Url ' . $url . ' is not image');
-                        }
-                        $contentType = $match[0];
-                        $imageType = self::getImageExtension($contentType);
-                        $stream->replaceFilename('{ext}', $imageType);
+                        self::onHeaders($response, $url, $stream);
                     },
                 ]
             );
@@ -673,6 +663,10 @@ class GoogleImage
      */
     public static function onHeaders(ResponseInterface $response, string $url, LazyStream $stream): void
     {
+        if ($response->getStatusCode() >= 400) {
+            return;
+        }
+
         $contentType = $response->getHeaderLine('Content-Type');
 
         if (!preg_match('~\bimage/.*\b~i', $contentType, $match)) {
@@ -681,12 +675,6 @@ class GoogleImage
         $contentType = $match[0];
         $imageType = self::getImageExtension($contentType);
         $stream->replaceFilename('{ext}', $imageType);
-
-        $dir = \dirname($stream->getFilename());
-
-        if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
-        }
     }
 
     /**
@@ -705,6 +693,10 @@ class GoogleImage
 
             case 'image/png':
                 return 'png';
+
+            case 'image/webp':
+                return 'webp';
+
             default:
                 return null;
         }

@@ -9,6 +9,8 @@ use Psr\Http\Message\StreamInterface;
 
 /**
  * Class LazyStream.
+ *
+ * @internal
  */
 class LazyStream extends LazyOpenStream
 {
