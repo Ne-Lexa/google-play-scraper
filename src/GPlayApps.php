@@ -32,14 +32,14 @@ use Nelexa\GPlay\Model\LazyStream;
 use Nelexa\GPlay\Model\Permission;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Scraper\AppDetailScraper;
+use Nelexa\GPlay\Scraper\AppSpecificReviewScraper;
 use Nelexa\GPlay\Scraper\CategoriesScraper;
-use Nelexa\GPlay\Scraper\CategoryAppsScraper;
+use Nelexa\GPlay\Scraper\CategoryAppsGetClusterPageScraper;
 use Nelexa\GPlay\Scraper\ClusterAppsScraper;
 use Nelexa\GPlay\Scraper\DeveloperInfoScraper;
 use Nelexa\GPlay\Scraper\ExistsAppScraper;
 use Nelexa\GPlay\Scraper\FindDevAppsUrlScraper;
 use Nelexa\GPlay\Scraper\FindSimilarAppsUrlScraper;
-use Nelexa\GPlay\Scraper\AppSpecificReviewScraper;
 use Nelexa\GPlay\Scraper\PermissionScraper;
 use Nelexa\GPlay\Scraper\PlayStoreUiAppsScraper;
 use Nelexa\GPlay\Scraper\PlayStoreUiRequest;
@@ -268,8 +268,16 @@ class GPlayApps
      */
     protected function castToAppId($appId): AppId
     {
+        if ($appId === null) {
+            throw new \InvalidArgumentException('Application ID is null');
+        }
+
         if (\is_string($appId)) {
             return new AppId($appId, $this->locale, $this->country);
+        }
+
+        if ($appId instanceof AppId) {
+            return $appId;
         }
 
         return $appId;
@@ -1050,8 +1058,8 @@ class GPlayApps
         $params = [
             'c' => 'apps',
             'q' => $query,
-            'hl' => $this->locale,
-            'gl' => $this->country,
+            self::REQ_PARAM_LOCALE => $this->locale,
+            self::REQ_PARAM_COUNTRY => $this->country,
             'price' => $price->value(),
         ];
         $clusterPageUrl = self::GOOGLE_PLAY_URL . '/store/search?' . http_build_query($params);
@@ -1065,7 +1073,7 @@ class GPlayApps
      *
      * @param string|Category|CategoryEnum|null $category   application category as
      *                                                      string, {@see Category}, {@see CategoryEnum} or `null`
-     * @param CollectionEnum|string             $collection application collection
+     * @param CollectionEnum                    $collection application collection
      * @param int                               $limit      the limit on the number of results
      * @param AgeEnum|null                      $age        age restrictions or `null`
      *
@@ -1082,7 +1090,7 @@ class GPlayApps
      */
     public function getAppsByCategory(
         $category,
-        $collection,
+        CollectionEnum $collection,
         int $limit = 60,
         ?AgeEnum $age = null
     ): array {
@@ -1091,16 +1099,13 @@ class GPlayApps
         $maxResults = $maxOffset + $limitOnPage;
 
         $limit = $limit === self::UNLIMIT ? $maxResults : min($maxResults, max(1, $limit));
-        $collection = (string) $collection;
 
-        $url = self::GOOGLE_PLAY_APPS_URL . '';
+        $path = $collection->getPath();
+        $url = self::GOOGLE_PLAY_APPS_URL . '/' . $path;
 
         if ($category !== null) {
             $url .= '/category/' . $this->castToCategoryId($category);
         }
-        $url .= '/collection/' . $collection;
-
-        $offset = 0;
 
         $queryParams = [
             self::REQ_PARAM_LOCALE => $this->locale,
@@ -1111,44 +1116,29 @@ class GPlayApps
             $queryParams['age'] = $age->value();
         }
 
-        $results = [];
-        $countResults = 0;
-        $slice = 0;
+        /**
+         * @var array $categoryClusterPages = [[
+         *            "name" => "Top Free Games",
+         *            "url" => "https://play.google.com/store/apps/store/apps/collection/cluster?clp=......"
+         *            ]]
+         */
+        $categoryClusterPages = $this->getHttpClient()->request(
+            'GET',
+            $url,
+            [
+                RequestOptions::QUERY => $queryParams,
+                HttpClient::OPTION_HANDLER_RESPONSE => new CategoryAppsGetClusterPageScraper(),
+            ]
+        );
 
-        try {
-            do {
-                if ($offset > $maxOffset) {
-                    $slice = $offset - $maxOffset;
-                    $offset = $maxOffset;
-                }
-                $queryParams['num'] = min($limit - $offset + $slice, $limitOnPage);
+        $idx = $collection->getMappingKeyByCount(\count($categoryClusterPages));
 
-                $result = $this->getHttpClient()->request(
-                    'POST',
-                    $url,
-                    [
-                        RequestOptions::QUERY => $queryParams,
-                        RequestOptions::FORM_PARAMS => [
-                            'start' => $offset,
-                        ],
-                        HttpClient::OPTION_HANDLER_RESPONSE => new CategoryAppsScraper(),
-                    ]
-                );
-
-                if ($slice > 0) {
-                    $result = \array_slice($result, $slice);
-                }
-                $countResult = \count($result);
-                $countResults += $countResult;
-                $results[] = $result;
-                $offset += $countResult;
-            } while ($countResult === $limitOnPage && $countResults < $limit);
-        } catch (\Throwable $e) {
-            throw new GooglePlayException($e->getMessage(), 1, $e);
+        if ($idx === null) {
+            return null;
         }
-        $results = array_merge(...$results);
+        $clusterUrl = $categoryClusterPages[$idx]['url'];
 
-        return \array_slice($results, 0, $limit);
+        return $this->getAppsFromClusterPage($clusterUrl, $this->locale, $this->country, $limit);
     }
 
     /**

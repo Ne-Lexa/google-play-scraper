@@ -39,14 +39,10 @@ final class GPlayAppsTest extends TestCase
      */
     protected function setUp(): void
     {
-        $cacheNamespace = 'nelexa.gplay.v1';
+        $cacheNamespace = 'nelexa.gplay.v2';
 
         if (class_exists(\Redis::class)) {
-            $redis = new \Redis();
-
-            if ($redis->connect('127.0.0.1')) {
-                $psr6Cache = new RedisAdapter($redis, $cacheNamespace);
-            }
+            $psr6Cache = new RedisAdapter(RedisAdapter::createConnection('redis://localhost'), $cacheNamespace);
         }
 
         if (!isset($psr6Cache)) {
@@ -546,13 +542,12 @@ final class GPlayAppsTest extends TestCase
     public function testAppsByCategory(): void
     {
         $apps = $this->gplay->getAppsByCategory(
-            CategoryEnum::GAME(),
-            CollectionEnum::TRENDING(),
-            140,
+            CategoryEnum::GAME_ARCADE(),
+            CollectionEnum::TOP_FREE(),
+            150,
             AgeEnum::FIVE_UNDER()
         );
         self::assertNotEmpty($apps);
-        self::assertCount(140, $apps);
         self::assertContainsOnlyInstancesOf(App::class, $apps);
     }
 
