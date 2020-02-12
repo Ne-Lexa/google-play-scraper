@@ -26,10 +26,8 @@
         "ext-hash": "*",
         "ext-json": "*",
         "ext-libxml": "*",
-        "guzzlehttp/guzzle": "^6.5",
         "nelexa/enum": "^1.0",
-        "nelexa/http-client-simple-cache": "^1.0",
-        "psr/simple-cache": "^1.0"
+        "nelexa/http-client-simple-cache": "^1.0.1"
     },
     "autoload": {
         "psr-4": {

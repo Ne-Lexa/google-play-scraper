@@ -15,6 +15,7 @@ use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\App;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
+use Nelexa\GPlay\Util\ScraperUtil;
 use function GuzzleHttp\Psr7\parse_query;
 
 /**
@@ -36,7 +37,7 @@ class AppsExtractor
         $icon = new GoogleImage($data[1][1][0][3][2]);
         $developer = self::extractDeveloper($data);
         $price = $data[7][0][3][2][1][0][2] ?? null;
-        $summary = $data[4][1][1][1][1] ?? null;
+        $summary = self::extractSummary($data);
         $score = $data[6][0][2][1][1] ?? 0.0;
 
         return new App(
@@ -70,5 +71,17 @@ class AppsExtractor
                 ->setUrl($developerPage)
                 ->setName($developerName)
         );
+    }
+
+    /**
+     * @param $scriptDataInfo
+     *
+     * @return string|null
+     */
+    private static function extractSummary(array $scriptDataInfo): ?string
+    {
+        return empty($scriptDataInfo[4][1][1][1][1]) ?
+            null :
+            ScraperUtil::html2text($scriptDataInfo[4][1][1][1][1]);
     }
 }

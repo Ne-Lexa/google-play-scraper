@@ -13,6 +13,7 @@ namespace Nelexa\GPlay\Model;
 
 use GuzzleHttp\RequestOptions;
 use Nelexa\GPlay\Exception\GooglePlayException;
+use Nelexa\GPlay\Util\LazyStream;
 use Nelexa\HttpClient\HttpClient;
 use Psr\Http\Message\ResponseInterface;
 
@@ -169,9 +170,6 @@ class GoogleImage
      *
      * @param string $url        URL image of googleusercontent.com server
      * @param bool   $keepParams keep parameters from URL
-     *
-     * @throws \InvalidArgumentException If the URL is not an image from the
-     *                                   hosts *.googleusercontent.com, *.ggpht.com or *.bp.blogspot.com.
      */
     public function __construct(string $url, bool $keepParams = true)
     {

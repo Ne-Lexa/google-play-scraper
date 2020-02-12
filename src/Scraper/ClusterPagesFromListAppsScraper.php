@@ -21,7 +21,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @internal
  */
-class CategoryAppsGetClusterPageScraper implements ResponseHandlerInterface
+class ClusterPagesFromListAppsScraper implements ResponseHandlerInterface
 {
     /**
      * @param RequestInterface  $request
@@ -31,31 +31,24 @@ class CategoryAppsGetClusterPageScraper implements ResponseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response)
     {
-        $scriptData = $this->getClusterScriptData($response);
-
-        return array_map(static function (array $a) {
-            return [
-                'name' => (string) $a[0][1],
-                'url' => GPlayApps::GOOGLE_PLAY_URL . $a[0][3][4][2],
-            ];
-        }, $scriptData[0][1]);
-    }
-
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return array
-     */
-    private function getClusterScriptData(ResponseInterface $response): array
-    {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
+        $results = [];
+
         foreach ($scriptData as $k => $v) {
-            if (isset($v[0][1][0][0][1])) {
-                return $v;
+            if (isset($v[0][1][0][0][1], $v[0][1][0][0][3][4][2])) {
+                foreach ($v[0][1] as $a) {
+                    if (isset($a[0][1], $a[0][3][4][2])) {
+                        $results[] = [
+                            'name' => trim($a[0][1]),
+                            'url' => GPlayApps::GOOGLE_PLAY_URL . $a[0][3][4][2],
+                        ];
+                    }
+                }
+                break;
             }
         }
 
-        throw new \RuntimeException('No script data');
+        return $results;
     }
 }

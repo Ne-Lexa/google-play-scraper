@@ -6,7 +6,6 @@ namespace Nelexa\GPlay\Tests;
 
 use Nelexa\GPlay\Enum\AgeEnum;
 use Nelexa\GPlay\Enum\CategoryEnum;
-use Nelexa\GPlay\Enum\CollectionEnum;
 use Nelexa\GPlay\Enum\PriceEnum;
 use Nelexa\GPlay\Enum\SortEnum;
 use Nelexa\GPlay\Exception\GooglePlayException;
@@ -544,18 +543,81 @@ final class GPlayAppsTest extends TestCase
     }
 
     /**
-     * @throws GooglePlayException
+     * @dataProvider provideNullCategory
+     * @dataProvider provideRandomCategoryApps
+     *
+     * @param CategoryEnum|null $category
      */
-    public function testAppsByCategory(): void
+    public function testGetCategoryApps(?CategoryEnum $category): void
     {
-        $apps = $this->gplay->getAppsByCategory(
-            CategoryEnum::GAME_ARCADE(),
-            CollectionEnum::TOP_FREE(),
-            150,
-            AgeEnum::FIVE_UNDER()
-        );
+        $this->gplay->setCache($this->getCacheInterface());
+        $apps = $this->gplay->getListApps($category);
+
         self::assertNotEmpty($apps);
         self::assertContainsOnlyInstancesOf(App::class, $apps);
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function provideRandomCategoryApps(): ?\Generator
+    {
+        $categories = CategoryEnum::values();
+        shuffle($categories);
+        $categories = \array_slice($categories, 0, 10);
+
+        foreach ($categories as $category) {
+            yield $category->value() => [$category];
+        }
+    }
+
+    /**
+     * @dataProvider provideNullCategory
+     * @dataProvider provideRandomCategoryApps
+     *
+     * @param CategoryEnum|null $category
+     */
+    public function testGetNewApps(?CategoryEnum $category): void
+    {
+        $this->gplay->setCache($this->getCacheInterface());
+        $apps = $this->gplay->getNewApps($category);
+
+        self::assertContainsOnlyInstancesOf(App::class, $apps);
+    }
+
+    /**
+     * @return \Generator|null
+     */
+    public function provideNullCategory(): ?\Generator
+    {
+        yield 'No category' => [null];
+    }
+
+    /**
+     * @dataProvider provideNullCategory
+     * @dataProvider provideRandomCategoryApps
+     *
+     * @param CategoryEnum|null $category
+     */
+    public function testGetTopApps(?CategoryEnum $category): void
+    {
+        $this->gplay->setCache($this->getCacheInterface());
+        $apps = $this->gplay->getTopApps($category);
+
+        self::assertNotEmpty($apps);
+        self::assertContainsOnlyInstancesOf(App::class, $apps);
+    }
+
+    public function testGetListAppLimit(): void
+    {
+        $limit = 100;
+
+        $this->gplay->setCache($this->getCacheInterface());
+        $apps = $this->gplay->getTopApps(null, AgeEnum::FIVE_UNDER(), $limit);
+
+        self::assertNotEmpty($apps);
+        self::assertContainsOnlyInstancesOf(App::class, $apps);
+        self::assertLessThanOrEqual($limit, \count($apps));
     }
 
     /**

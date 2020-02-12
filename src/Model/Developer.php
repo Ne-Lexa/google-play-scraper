@@ -66,8 +66,6 @@ class Developer implements \JsonSerializable
      *
      * @param DeveloperBuilder $builder developer builder
      *
-     * @throws \InvalidArgumentException
-     *
      * @internal
      */
     public function __construct(DeveloperBuilder $builder)

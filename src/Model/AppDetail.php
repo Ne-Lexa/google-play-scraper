@@ -123,8 +123,6 @@ final class AppDetail extends App
      *
      * @param AppBuilder $builder application builder
      *
-     * @throws \InvalidArgumentException if not enough required data in the builder
-     *
      * @ignore
      */
     public function __construct(AppBuilder $builder)

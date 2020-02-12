@@ -28,7 +28,7 @@ use Nelexa\GPlay\Model\Builder\AppBuilder;
  *     the Google Play store.
  * @see GPlayApps::getDeveloperApps() Returns a list of developer applications
  *     in the Google Play store.
- * @see GPlayApps::getAppsByCategory() Returns a list of applications with basic
+ * @see GPlayApps::getTopApps() Returns a list of applications with basic
  *     information from the category and collection of the Google Play store.
  */
 class App extends AppId implements \JsonSerializable
@@ -57,8 +57,6 @@ class App extends AppId implements \JsonSerializable
      * Creates an object containing basic information about the Android application.
      *
      * @param AppBuilder $builder application builder
-     *
-     * @throws \InvalidArgumentException if not enough required data in the builder
      *
      * @ignore
      */

@@ -45,8 +45,6 @@ class AppId
      * @param string $id      application ID (Android package name)
      * @param string $locale  Locale (ex. en_US, en-CA or en). Default is 'en_US'.
      * @param string $country Country (affects prices). Default is 'us'.
-     *
-     * @throws \InvalidArgumentException if passed an empty application ID
      */
     public function __construct(
         string $id,

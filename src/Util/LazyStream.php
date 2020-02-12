@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Nelexa\GPlay\Model;
+namespace Nelexa\GPlay\Util;
 
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
 use Psr\Http\Message\StreamInterface;
