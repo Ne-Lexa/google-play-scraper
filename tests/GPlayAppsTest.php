@@ -538,7 +538,7 @@ final class GPlayAppsTest extends TestCase
         $limit = 125;
         $similarApps = $this->gplay->getSimilarApps('com.google.android.apps.docs.editors.docs', $limit);
         self::assertNotEmpty($similarApps);
-        self::assertCount($limit, $similarApps);
+        self::assertLessThanOrEqual($limit, \count($similarApps));
         self::assertContainsOnlyInstancesOf(App::class, $similarApps);
     }
 
