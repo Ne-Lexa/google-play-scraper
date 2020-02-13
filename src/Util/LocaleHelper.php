@@ -1,9 +1,20 @@
 <?php
+
 /** @noinspection SpellCheckingInspection */
 declare(strict_types=1);
 
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Util;
 
+/**
+ * Class LocaleHelper.
+ */
 class LocaleHelper
 {
     public const DEFAULT_GOOGLE_PLAY_LOCALE = 'en_US';
@@ -3507,12 +3518,12 @@ class LocaleHelper
             'el_GR' => 'ក្រិក (ក្រិក)',
             'en_AU' => 'អង់គ្លេស (អូស្ត្រាលី)',
             'en_CA' => 'អង់គ្លេស (កាណាដា)',
-            'en_GB' => 'អង់គ្លេស (ចក្រភព​អង់គ្លេស)',
+            'en_GB' => 'អង់គ្លេស (ចក្រភពអង់គ្លេស)',
             'en_IN' => 'អង់គ្លេស (ឥណ្ឌា)',
             'en_SG' => 'អង់គ្លេស (សិង្ហបុរី)',
             'en_US' => 'អង់គ្លេស (សហរដ្ឋអាមេរិក)',
             'en_ZA' => 'អង់គ្លេស (អាហ្វ្រិកខាងត្បូង)',
-            'es_419' => 'អេស្ប៉ាញ (អាមេរិក​ឡាទីន)',
+            'es_419' => 'អេស្ប៉ាញ (អាមេរិកឡាទីន)',
             'es_ES' => 'អេស្ប៉ាញ (អេស្ប៉ាញ)',
             'es_US' => 'អេស្ប៉ាញ (សហរដ្ឋអាមេរិក)',
             'et' => 'អេស្តូនី',
@@ -3532,11 +3543,11 @@ class LocaleHelper
             'it_IT' => 'អ៊ីតាលី (អ៊ីតាលី)',
             'iw_IL' => 'ហេប្រឺ (អ៊ីស្រាអែល)',
             'ja_JP' => 'ជប៉ុន (ជប៉ុន)',
-            'ka_GE' => 'ហ្សក​ហ្ស៊ី (ហ្សកហ្ស៊ី)',
+            'ka_GE' => 'ហ្សកហ្ស៊ី (ហ្សកហ្ស៊ី)',
             'kk' => 'កាហ្សាក់',
             'kn_IN' => 'ខាណាដា (ឥណ្ឌា)',
-            'ko' => 'កូរ៉េ (កូរ៉េ​ខាង​ត្បូង)',
-            'ky_KG' => '​កៀហ្ស៊ីស (កៀហ្ស៊ីស៊ីស្ថាន)',
+            'ko' => 'កូរ៉េ (កូរ៉េខាងត្បូង)',
+            'ky_KG' => 'កៀហ្ស៊ីស (កៀហ្ស៊ីស៊ីស្ថាន)',
             'lo_LA' => 'ឡាវ (ឡាវ)',
             'lt' => 'លីទុយអានី',
             'lv' => 'ឡាតវី',
@@ -3566,9 +3577,9 @@ class LocaleHelper
             'tr_TR' => 'ទួរគី (តួកគី)',
             'uk' => 'អ៊ុយក្រែន',
             'vi' => 'វៀតណាម',
-            'zh_CN' => 'ចិន (អក្សរ​ចិន​កាត់)',
+            'zh_CN' => 'ចិន (អក្សរចិនកាត់)',
             'zh_HK' => 'ចិន (ហុងកុង តំបន់រដ្ឋបាលពិសេសចិន)',
-            'zh_TW' => 'ចិន (អក្សរ​ចិន​ពេញ)',
+            'zh_TW' => 'ចិន (អក្សរចិនពេញ)',
             'zu' => 'ហ្សូលូ',
         ],
         'kn_IN' => [
@@ -6491,9 +6502,10 @@ class LocaleHelper
     ];
 
     /**
-     * Normalizes the locale
+     * Normalizes the locale.
      *
      * @param string $locale
+     *
      * @return string
      */
     public static function getNormalizeLocale(string $locale): string
@@ -6502,43 +6514,53 @@ class LocaleHelper
             return self::DEFAULT_GOOGLE_PLAY_LOCALE;
         }
         $locale = str_replace('-', '_', strtolower($locale));
+
         if (isset(self::SUPPORTED_LOCALES[$locale])) {
             return self::SUPPORTED_LOCALES[$locale];
         }
+
         if (isset(self::ALIASES_LOCALE[$locale])) {
             return self::ALIASES_LOCALE[$locale];
         }
+
         if (($pos = strpos($locale, '_')) !== false) {
             $locale = substr($locale, 0, $pos);
+
             if (isset(self::SUPPORTED_LOCALES[$locale])) {
                 return self::SUPPORTED_LOCALES[$locale];
             }
+
             if (isset(self::ALIASES_LOCALE[$locale])) {
                 return self::ALIASES_LOCALE[$locale];
             }
         }
+
         return self::DEFAULT_GOOGLE_PLAY_LOCALE;
     }
 
     /**
-     * Normalizes the locales
+     * Normalizes the locales.
      *
      * @param array $locales
+     *
      * @return array
      */
     public static function getNormalizeLocales(array $locales): array
     {
         $locales = !empty($locales) ? $locales : self::SUPPORTED_LOCALES;
         $locales = array_map([self::class, 'getNormalizeLocale'], $locales);
+
         return array_values(array_unique($locales));
     }
 
     /**
-     * Finds preferred language
+     * Finds preferred language.
      *
      * @param string $sourceLocale
      * @param string $destLanguageName
+     *
      * @return string|null
+     *
      * @internal
      */
     public static function findPreferredLanguage(string $sourceLocale, string $destLanguageName): ?string
@@ -6552,6 +6574,7 @@ class LocaleHelper
                 }
             }
         }
+
         return null;
     }
 
@@ -6560,12 +6583,15 @@ class LocaleHelper
      *
      * @param string $locale
      * @param string $message
+     *
      * @return bool
+     *
      * @internal
      */
     public static function isDependOnDevice(string $locale, string $message): bool
     {
         $locale = self::getNormalizeLocale($locale);
+
         return isset(self::DEPEND_ON_DEVICE_MESSAGES[$locale]) &&
             strcmp(self::DEPEND_ON_DEVICE_MESSAGES[$locale], $message) === 0;
     }

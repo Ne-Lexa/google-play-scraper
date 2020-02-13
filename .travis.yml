@@ -3,15 +3,12 @@ php:
     - '7.1'
     - '7.2'
     - '7.3'
+    - '7.4'
 
 cache:
     directories:
         - vendor
         - $HOME/.composer/cache
-
-before_install:
-    - sudo apt-get update
-    - sudo apt-get install -y tor
 
 install:
     - travis_retry composer self-update && composer --version
@@ -19,7 +16,7 @@ install:
 
 script:
     - composer validate --no-check-lock
-    - vendor/bin/phpunit -c phpunit.xml --coverage-clover=coverage.clover
+    - vendor/bin/phpunit -c phpunit.xml.dist --coverage-clover=coverage.clover --exclude-group proxy
 
 after_success:
     - wget https://scrutinizer-ci.com/ocular.phar

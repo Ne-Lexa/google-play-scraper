@@ -1,47 +1,50 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model\Builder;
 
 use Nelexa\GPlay\Model\GoogleImage;
 
+/**
+ * Developer Builder.
+ *
+ * @internal
+ */
 class DeveloperBuilder
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $id;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $url;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $name;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $description;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $website;
-    /**
-     * @var GoogleImage|null
-     */
+
+    /** @var \Nelexa\GPlay\Model\GoogleImage|null */
     private $icon;
-    /**
-     * @var GoogleImage|null
-     */
-    private $headerImage;
-    /**
-     * @var string|null
-     */
+
+    /** @var \Nelexa\GPlay\Model\GoogleImage|null */
+    private $cover;
+
+    /** @var string|null */
     private $email;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $address;
 
     /**
@@ -54,11 +57,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $id
+     *
      * @return DeveloperBuilder
      */
-    public function setId(?string $id): DeveloperBuilder
+    public function setId(?string $id): self
     {
         $this->id = $id;
+
         return $this;
     }
 
@@ -72,11 +77,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $url
+     *
      * @return DeveloperBuilder
      */
-    public function setUrl(?string $url): DeveloperBuilder
+    public function setUrl(?string $url): self
     {
         $this->url = $url;
+
         return $this;
     }
 
@@ -90,11 +97,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $name
+     *
      * @return DeveloperBuilder
      */
-    public function setName(?string $name): DeveloperBuilder
+    public function setName(?string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -108,11 +117,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $description
+     *
      * @return DeveloperBuilder
      */
-    public function setDescription(?string $description): DeveloperBuilder
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -126,11 +137,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $website
+     *
      * @return DeveloperBuilder
      */
-    public function setWebsite(?string $website): DeveloperBuilder
+    public function setWebsite(?string $website): self
     {
         $this->website = $website;
+
         return $this;
     }
 
@@ -144,29 +157,33 @@ class DeveloperBuilder
 
     /**
      * @param GoogleImage|null $icon
+     *
      * @return DeveloperBuilder
      */
-    public function setIcon(?GoogleImage $icon): DeveloperBuilder
+    public function setIcon(?GoogleImage $icon): self
     {
         $this->icon = $icon;
+
         return $this;
     }
 
     /**
      * @return GoogleImage|null
      */
-    public function getHeaderImage(): ?GoogleImage
+    public function getCover(): ?GoogleImage
     {
-        return $this->headerImage;
+        return $this->cover;
     }
 
     /**
-     * @param GoogleImage|null $headerImage
+     * @param GoogleImage|null $cover
+     *
      * @return DeveloperBuilder
      */
-    public function setHeaderImage(?GoogleImage $headerImage): DeveloperBuilder
+    public function setCover(?GoogleImage $cover): self
     {
-        $this->headerImage = $headerImage;
+        $this->cover = $cover;
+
         return $this;
     }
 
@@ -180,11 +197,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $email
+     *
      * @return DeveloperBuilder
      */
-    public function setEmail(?string $email): DeveloperBuilder
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -198,11 +217,13 @@ class DeveloperBuilder
 
     /**
      * @param string|null $address
+     *
      * @return DeveloperBuilder
      */
-    public function setAddress(?string $address): DeveloperBuilder
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
+
         return $this;
     }
 }

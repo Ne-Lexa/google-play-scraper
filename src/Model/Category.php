@@ -1,24 +1,43 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model;
 
-class Category
+use Nelexa\GPlay\GPlayApps;
+
+/**
+ * Contains application category information in the Google Play store.
+ *
+ * @see GPlayApps::getCategories() Returns an array of application categories
+ *     from the Google Play store.
+ * @see GPlayApps::getCategoriesForLocales() Returns an array of application
+ *     categories from the Google Play store for the locale array.
+ * @see GPlayApps::getCategoriesForAvailableLocales() Returns an array of
+ *     categories from the Google Play store for all available locales.
+ */
+class Category implements \JsonSerializable
 {
-    /**
-     * @var string
-     */
+    use JsonSerializableTrait;
+
+    /** @var string Category id. */
     private $id;
-    /**
-     * @var string
-     */
+
+    /** @var string Category name. */
     private $name;
 
     /**
-     * Category constructor.
+     * Creates an object with application category information.
      *
-     * @param string $id
-     * @param string $name
+     * @param string $id   category id
+     * @param string $name category name
      */
     public function __construct(string $id, string $name)
     {
@@ -27,7 +46,9 @@ class Category
     }
 
     /**
-     * @return string
+     * Returns category id.
+     *
+     * @return string category id
      */
     public function getId(): string
     {
@@ -35,7 +56,9 @@ class Category
     }
 
     /**
-     * @return string
+     * Returns category name.
+     *
+     * @return string category name
      */
     public function getName(): string
     {
@@ -43,7 +66,9 @@ class Category
     }
 
     /**
-     * @return bool
+     * Checks if a category is a category with games.
+     *
+     * @return bool `true` if this is a category with games and `false` if not
      */
     public function isGamesCategory(): bool
     {
@@ -51,7 +76,9 @@ class Category
     }
 
     /**
-     * @return bool
+     * Checks if a category is a family category.
+     *
+     * @return bool `true` if this is a family category and `false` if not
      */
     public function isFamilyCategory(): bool
     {
@@ -59,10 +86,25 @@ class Category
     }
 
     /**
-     * @return bool
+     * Checks whether a category is a category with applications.
+     *
+     * @return bool `true` if this is a category with applications and `false` if not
      */
     public function isApplicationCategory(): bool
     {
         return !$this->isGamesCategory() && !$this->isFamilyCategory();
+    }
+
+    /**
+     * Returns class properties as an array.
+     *
+     * @return array class properties as an array
+     */
+    public function asArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+        ];
     }
 }

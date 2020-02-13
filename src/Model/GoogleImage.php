@@ -1,164 +1,187 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model;
 
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use Nelexa\GPlay\Exception\GooglePlayException;
-use Nelexa\GPlay\Http\HttpClient;
+use Nelexa\GPlay\Util\LazyStream;
+use Nelexa\HttpClient\HttpClient;
+use Psr\Http\Message\ResponseInterface;
 
 /**
- * Google User Content URLs.
+ * Contains a link to the image, allows you to customize its size and download it.
  *
- * @see https://developers.google.com/people/image-sizing
- * @see https://github.com/null-dev/libGoogleUserContent
+ * This class only works with images stored on googleusercontent.com.
+ * To modify the image, special parameters are added to the URL, using a hyphen.
+ *
+ * **Supported parameters:**
+ *
+ * | Param | Name         | Description                                     | Example                       |
+ * | :---: |:------------ | :---------------------------------------------- | ----------------------------: |
+ * | sN | size            | Sets the longer of height or width to N pixels  | s70 ![][_s] ![][_s2] ![][_s3] |
+ * | wN | width           | Sets width of image to N pixels                 | w70 ![][_w] ![][_w2] ![][_w3] |
+ * | hN | height          | Sets height of image to N pixels                | h70 ![][_h] ![][_h2] ![][_h3] |
+ * | c  | square crop     | Sets square crop                   | w40-h70-c ![][_c1.1] ![][_c1.2] ![][_c1.3] |
+ * |    |                 |                                    | w70-h40-c ![][_c2.1] ![][_c2.2] ![][_c2.3] |
+ * |    |                 |                                    | w70-h70-c ![][_c3.1] ![][_c3.2] ![][_c3.3] |
+ * | p  | smart crop      | Sets smart crop                    | w40-h70-p ![][_p1.1] ![][_p1.2] ![][_p1.3] |
+ * |    |                 |                                    | w70-h40-p ![][_p2.1] ![][_p2.2] ![][_p2.3] |
+ * |    |                 |                                    | w70-h70-p ![][_p3.1] ![][_p3.2] ![][_p3.3] |
+ * | bN | border          | Sets border of image to N pixels            | s70-b10 ![][_b] ![][_b2] ![][_b3] |
+ * | fv | vertical flip   | Vertically flips the image                | s70-fv ![][_fv] ![][_fv2] ![][_fv3] |
+ * | fh | horizontal flip | Horizontally flips the image              | s70-fh ![][_fh] ![][_fh2] ![][_fh3] |
+ *
+ * [_s]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=s70
+ * [_w]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w70
+ * [_h]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=h70
+ * [_c1.1]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w40-h70-c
+ * [_c2.1]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w70-h40-c
+ * [_c3.1]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w70-h70-c
+ * [_p1.1]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w40-h70-p
+ * [_p2.1]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w70-h40-p
+ * [_p3.1]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=w70-h70-p
+ * [_b]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=s70-b10
+ * [_fv]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=s70-fv
+ * [_fh]:https://lh3.googleusercontent.com/6EtT4dght1QF9-XYvSiwx2uqkBiOnrwq-N-dPZLUw4x61Bh2Bp_w6BZ_d0dZPoTBVqM=s70-fh
+ *
+ * [_s2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=s70
+ * [_w2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w70
+ * [_h2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=h70
+ * [_c1.2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w40-h70-c
+ * [_c2.2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w70-h40-c
+ * [_c3.2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w70-h70-c
+ * [_p1.2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w40-h70-p
+ * [_p2.2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w70-h40-p
+ * [_p3.2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=w70-h70-p
+ * [_b2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=s70-b10
+ * [_fv2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=s70-fv
+ * [_fh2]:https://lh3.googleusercontent.com/7tB9mdZ61rXn1uhgPVeGDV39FMtce_bDxyFcRMKlbZy_AbGP6rHn8BknJI4n-U4hki8p=s70-fh
+ *
+ * [_s3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=s70
+ * [_w3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w70
+ * [_h3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=h70
+ * [_c1.3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w40-h70-c
+ * [_c2.3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w70-h40-c
+ * [_c3.3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w70-h70-c
+ * [_p1.3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w40-h70-p
+ * [_p2.3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w70-h40-p
+ * [_p3.3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=w70-h70-p
+ * [_b3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=s70-b10
+ * [_fv3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=s70-fv
+ * [_fh3]:https://lh3.googleusercontent.com/tCijG_gfFddONMX6aDD8RjnohoVy0TNbx5wc_Jn9ERSBBXIVtMqO_vs1h-v_FPFrzA0=s70-fh
+ *
+ * If the URL has no parameters, by default GoogleUserContents uses the parameter **s512**.
+ * This means that the width or height will not exceed 512px.
+ *
+ * @see https://developers.google.com/people/image-sizing Goolge People API - Image Sizing.
+ * @see https://github.com/null-dev/libGoogleUserContent Java library to create googleusercontent.com URLs.
  * @see https://sites.google.com/site/picasaresources/Home/Picasa-FAQ/google-photos-1/how-to/how-to-get-a-direct-link-to-an-image
- *
- * sN   size             Sets the longer of height or width to N pixels
- * wN   width            Sets width of image to N pixels
- * hN   height           Sets height of image to N pixels
- * c    square crop      Sets height and width of crop to the same value
- * n    ? crop           Required sets width and height
- * p    smart crop       Sets smart crop
- * bN   border           Sets border of image to N pixels
- * fv   vertical flip    Vertically flips the image
- * fh   horizontal flip  Horizontally flips the image
- * d    download         Attachment header
- *
- * Animation image:
- * aN   frame number     Sets frame number of animation image
- * k    stop animation   Without GIF animation (1 frame)
- * no   hidden play      Hidden play button if video thumbnail or animation
- *
- * Video contents:
- * mN   media format
- * m18  mp4              video, 640x360, medium
- * m22  mp4              video, 1280x720, hd720
- * m36  3gp              video, 320x180
- * m37  mp4              video, 1920x1080, full-hd
- * m140 m4a              audio, 133k
- *
- * Without parameters, s512 is used.
- *
- * Example URLs:
- *
- * https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ
- * https://lh3.googleusercontent.com/GbJNOZ-E87H68Tq6Q_G4uqABQRKnA1zJqU1C5LTP8hUhCKq3BomtfntBnIJF2YhRrQ=s0-k-no
- *
- * https://lh3.googleusercontent.com/HANcKpgwKaXt380ZJKK8_YpZlGn0NcjY5os1GOJmRHQjn9x9iCz9C-_lZRUkgTHYOChGMcMuuw=w200-h300
- *
- * https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/
- * https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/w40/
- * https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/photo.jpg
- * https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s100-no/photo.jpg
- *
- * https://lh3.googleusercontent.com/-khz-7NpZXic/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reKXLHM7Pk6A7iXGRNBP8HxB0Xs1Q/w48-h48-n-mo/photo.jpg
- *
- * https://1.bp.blogspot.com/-gZoPZt6mOLQ/XMa2QFgXs6I/AAAAAAAACGs/wqldyhxSPX4PcttYLT1SB32O8-mbe5q7QCEwYBhgL/s0/top%2B40%2Bbest%2Btravel%2Bquotes.png
- *
- * https://lh4.googleusercontent.com/-0A4JtBQDKrs/VVJPnSLrOXI/AAAAAAABXR8/VFxcZF53zqk/w1134-h850-no/20141002_080237_HDR%257E2.jpg
- *
- * https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH
- * https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0-b30-fv
- * https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s100-k-no
- * https://lh3.googleusercontent.com/FStqaBaXK7pteZ4jX5poKc0c-Ed2tqKcv2NyTAP7MwuH=s0
- *
- * https://lh3.googleusercontent.com/proxy/3cI6bAx1WWTsIL5iPDRiPPknXImSb8xJtNuEUKGgXg8hWaGTY48kqGOdpOkLQJG1BGj3N6Y1Dc-6qvdfHoIdtk2PcwByKzpu3PkrsFIOXe-ePM9r9jPRL1lg9A=w720-h405
- *
- * https://lh3.ggpht.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g
- *
- * https://lh3.googleusercontent.com/a-/AAuE7mAndrvGgUUJNSkl3mPSa-y-XcUJch1aKZDzCD2S
- *
- * https://lh3.googleusercontent.com/BeUSIDayFKt8LBwm-xbw4gpktnthRNW7aeYo-2oqG0pIscoyablMSJpxiTfkSIkNjuiDsQ=w640-h360-k
- * https://lh3.googleusercontent.com/BeUSIDayFKt8LBwm-xbw4gpktnthRNW7aeYo-2oqG0pIscoyablMSJpxiTfkSIkNjuiDsQ=w640-h360-k-n
- *
- * https://lh4.googleusercontent.com/-2XOcvsAH-kc/VHvmCm1aOoI/AAAAAAABtzg/SDdN1Vg5FFs/s300/
+ *      Google Photos and Picasa: How to get a direct link to an image (of a specific size)
  */
 class GoogleImage
 {
     private const PARAM_SIZE = 's';
+
     private const PARAM_WIDTH = 'w';
+
     private const PARAM_HEIGHT = 'h';
+
     private const PARAM_BORDER = 'b';
+
     private const PARAM_SQUARE_CROP = 'c';
+
     private const PARAM_SMART_CROP = 'p';
+
     private const PARAM_FLIP_VERTICAL = 'fv';
+
     private const PARAM_FLIP_HORIZONTAL = 'fh';
 
-    /**
-     * @var string
-     */
-    private $url;
-    /**
-     * Size longer of height or width to N pixels.
-     * If set, then GoogleImage::width and GoogleImage::height are set to null.
-     *
-     * @var int|null
-     */
+    /** @var string Base URL without parameters and file name. */
+    private $baseUrl;
+
+    /** @var int|null Size longer of height or width to N pixels or `null`. */
     private $size;
-    /**
-     * Image width size up to N pixels.
-     * If set, then GoogleImage::size is null.
-     *
-     * @var int|null
-     */
+
+    /** @var int|null Image width size up to N pixels. */
     private $width;
-    /**
-     * Image height size up to N pixels.
-     * If set, then GoogleImage::size is null.
-     *
-     * @var int|null
-     */
+
+    /** @var int|null Image height size up to N pixels. */
     private $height;
-    /**
-     * @var int|null
-     */
+
+    /** @var int|null Image border size or `null`. */
     private $border;
+
     /**
-     * @var bool
+     * Using square crop.
+     *
+     * When cropping, only the center of the image is saved.
+     *
+     * @var bool using square crop
      */
     private $squareCrop = false;
+
     /**
-     * @var bool
+     * Using smart crop.
+     *
+     * When cropping, some algorithm searches for the most interesting part of the image,
+     * so the result of cropping does not always preserve the center of the image.
+     *
+     * @var bool using smart crop
      */
     private $smartCrop = false;
-    /**
-     * @var bool
-     */
+
+    /** @var bool Vertical flip effect */
     private $verticalFlip = false;
-    /**
-     * @var bool
-     */
+
+    /** @var bool Horizontal flip effect */
     private $horizontalFlip = false;
+
     /**
      * Variant URL with file name at the end.
-     * A special URL structure is used.
-     * URL starts with /-
+     *
+     * A special URL structure is used. URL starts with /-.
      *
      * Example URL:
      * https://lh3.googleusercontent.com/-LB59qNIqtS4/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf3YR_W16kFTuh5tCgHpZ02_ndQOg/s100-no/photo.jpg
      *
-     * @var bool
-     * @internal
+     * @var bool special URL structure is used
      */
     private $variantOfUrlWithFileName = false;
 
     /**
-     * @param string $url google image url
-     * @param bool $keepParams keep url params
+     * Creates a GoogleImage object from the URL of the googleusercontent.com.
+     *
+     * @param string $url        URL image of googleusercontent.com server
+     * @param bool   $keepParams keep parameters from URL
      */
     public function __construct(string $url, bool $keepParams = true)
     {
         $httpComponents = parse_url($url);
+
+        if (
+            !isset($httpComponents['host']) ||
+            !preg_match('~\.(googleusercontent\.com|ggpht\.com|bp\.blogspot\.com)$~i', $httpComponents['host'])
+        ) {
+            throw new \InvalidArgumentException(sprintf('Unsupported URL: %s', $url));
+        }
         $path = ltrim($httpComponents['path'], '/');
         $parts = explode('/', $path);
         $paramString = null;
-        if (count($parts) > 4 && strpos($parts[0], '-') === 0) {
-            if (isset($parts[5]) || (isset($parts[4]) && strrpos($url, '/') === strlen($url) - 1)) {
+
+        if (\count($parts) > 4 && strpos($parts[0], '-') === 0) {
+            if (isset($parts[5]) || (isset($parts[4]) && strrpos($url, '/') === \strlen($url) - 1)) {
                 $paramString = $parts[4];
             }
-            $parts = array_slice($parts, 0, 4);
+            $parts = \array_slice($parts, 0, 4);
             $path = implode('/', $parts);
             $url = $httpComponents['scheme'] . '://' . $httpComponents['host'] . '/' . $path . '/';
             $this->variantOfUrlWithFileName = true;
@@ -167,19 +190,20 @@ class GoogleImage
             $url = substr($url, 0, $pos);
         }
 
-        $this->url = $url;
+        $this->baseUrl = $url;
+
         if ($keepParams && $paramString !== null) {
             $this->parseParams($paramString);
         }
     }
 
     /**
-     * @param string $paramString
-     * @internal
+     * @param string $paramString Image parameters
      */
     private function parseParams(string $paramString): void
     {
         $params = explode('-', $paramString);
+
         foreach ($params as $param) {
             if (empty($param)) {
                 continue;
@@ -188,32 +212,39 @@ class GoogleImage
             $command = $param[0]; // 1 char
             switch ($command) {
                 case self::PARAM_SIZE:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setSize($arg);
                     break;
+
                 case self::PARAM_WIDTH:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setWidth($arg);
                     break;
+
                 case self::PARAM_HEIGHT:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setHeight($arg);
                     break;
+
                 case self::PARAM_BORDER:
-                    $arg = (int)substr($param, 1);
+                    $arg = (int) substr($param, 1);
                     $this->setBorder($arg);
                     break;
+
                 case self::PARAM_SQUARE_CROP:
                     $this->setSquareCrop(true);
                     break;
+
                 case self::PARAM_SMART_CROP:
                     $this->setSmartCrop(true);
                     break;
+
                 default:
                     switch ($param) {
                         case self::PARAM_FLIP_VERTICAL:
                             $this->setVerticalFlip(true);
                             break;
+
                         case self::PARAM_FLIP_HORIZONTAL:
                             $this->setHorizontalFlip(true);
                             break;
@@ -224,28 +255,27 @@ class GoogleImage
     }
 
     /**
-     * @return string
+     * Returns the URL of the image with all the parameters set.
+     *
+     * @return string image URL
      */
     public function getUrl(): string
     {
         $params = [];
+
         if ($this->size !== null) {
             $params[] = self::PARAM_SIZE . $this->size;
         } else {
             if ($this->width !== null) {
                 $params[] = self::PARAM_WIDTH . $this->width;
             }
+
             if ($this->height !== null) {
                 $params[] = self::PARAM_HEIGHT . $this->height;
             }
         }
 
-        if ($this->smartCrop && (
-            $this->size !== null ||
-                ($this->width !== null && $this->height !== null) ||
-                ($this->size === null && $this->width === null && $this->height === null)
-            )
-        ) {
+        if ($this->isValidSmartCrop()) {
             $params[] = self::PARAM_SMART_CROP;
         } elseif ($this->squareCrop) {
             $params[] = self::PARAM_SQUARE_CROP;
@@ -253,9 +283,10 @@ class GoogleImage
 
         if ($this->variantOfUrlWithFileName) {
             if (empty($params)) {
-                return $this->url;
+                return $this->baseUrl;
             }
-            return $this->url . implode('-', $params) . '/';
+
+            return $this->baseUrl . implode('-', $params) . '/';
         }
 
         if ($this->border !== null) {
@@ -271,23 +302,38 @@ class GoogleImage
         }
 
         if (empty($params)) {
-            return $this->url;
+            return $this->baseUrl;
         }
-        return $this->url . '=' . implode('-', $params);
+
+        return $this->baseUrl . '=' . implode('-', $params);
     }
 
     /**
-     * Returns the URL with the best image size.
-     *
-     * @return string url
+     * @return bool
      */
-    public function getBestSizeUrl(): string
+    private function isValidSmartCrop(): bool
+    {
+        return $this->smartCrop && (
+            $this->size !== null ||
+                ($this->width !== null && $this->height !== null) ||
+                ($this->size === null && $this->width === null && $this->height === null)
+        );
+    }
+
+    /**
+     * Returns a URL with the original image size.
+     *
+     * @return string URL of the original image size
+     */
+    public function getOriginalSizeUrl(): string
     {
         $params = [self::PARAM_SIZE . '0'];
+
         if ($this->variantOfUrlWithFileName) {
-            return $this->url . implode('-', $params) . '/';
+            return $this->baseUrl . implode('-', $params) . '/';
         }
-        return $this->url . '=' . implode('-', $params);
+
+        return $this->baseUrl . '=' . implode('-', $params);
     }
 
     /**
@@ -295,138 +341,179 @@ class GoogleImage
      * Can be used to generate a file save path.
      *
      * @param string $hashAlgorithm Hash algorithm. Default is md5.
-     * @param int $parts Nesting path. Maximum 6.
-     * @param int $partLength The length of the nested path.
+     * @param int    $parts         Nesting path. Maximum 6.
+     * @param int    $partLength    the length of the nested path
+     *
      * @return string unique hash value of this object
      */
-    public function getHashUrl(string $hashAlgorithm = 'md5', int $parts = 1, int $partLength = 2): string
+    public function getHashUrl(string $hashAlgorithm = 'md5', int $parts = 0, int $partLength = 2): string
     {
         $hash = hash($hashAlgorithm, $this->getUrl());
-        $hashLength = strlen($hash);
-        $parts = max(1, min(6, $parts));
-        if ($parts > 1) {
-            $partLength = max(1, min($partLength, (int)($hashLength / $parts)));
+        $hashLength = \strlen($hash);
+        $parts = max(0, min(6, $parts));
+
+        if ($parts > 0) {
+            $partLength = max(1, min($partLength, (int) ($hashLength / $parts)));
             $partsBuild = [];
             for ($i = 0; $i < $parts; $i++) {
                 $partsBuild[] = substr($hash, $i * $partLength, $partLength);
             }
             $hash = implode('/', $partsBuild) . '/' . $hash;
         }
+
         return $hash;
     }
 
     /**
      * Sets the original image size.
      *
-     * @return GoogleImage
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function useOriginalSize(): GoogleImage
+    public function useOriginalSize(): self
     {
         $this->setSize(0);
+
         return $this;
     }
 
     /**
-     * @param int|null $size
-     * @return GoogleImage
+     * Sets the image size greater than height or width up to N pixels.
+     *
+     * @param int|null $size width or height of the image in pixels
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setSize(?int $size): GoogleImage
+    public function setSize(?int $size): self
     {
         $this->size = $size;
         $this->width = null;
         $this->height = null;
+
         return $this;
     }
 
     /**
-     * @param int|null $width
-     * @return GoogleImage
+     * Sets the width of the image.
+     *
+     * @param int|null $width image width
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setWidth(?int $width): GoogleImage
+    public function setWidth(?int $width): self
     {
         $this->width = $width;
         $this->size = null;
+
         return $this;
     }
 
     /**
-     * @param int|null $height
-     * @return GoogleImage
+     * Sets the height of the image.
+     *
+     * @param int|null $height image height
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setHeight(?int $height): GoogleImage
+    public function setHeight(?int $height): self
     {
         $this->height = $height;
         $this->size = null;
+
         return $this;
     }
 
     /**
-     * @param int $width
-     * @param int $height
-     * @return GoogleImage
+     * Sets the width and height of the image.
+     *
+     * @param int $width  image width
+     * @param int $height image height
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setWidthAndHeight(int $width, int $height): GoogleImage
+    public function setWidthAndHeight(int $width, int $height): self
     {
         $this->width = $width;
         $this->height = $height;
         $this->size = null;
+
         return $this;
     }
 
     /**
-     * @param int|null $border
-     * @return GoogleImage
+     * Sets the border around the image.
+     *
+     * @param int|null $border the number of pixels of the border
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setBorder(?int $border): GoogleImage
+    public function setBorder(?int $border): self
     {
         $this->border = $border;
+
         return $this;
     }
 
     /**
-     * @param bool $squareCrop
-     * @return GoogleImage
+     * Sets the use of square crop.
+     *
+     * @param bool $squareCrop square crop
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setSquareCrop(bool $squareCrop): GoogleImage
+    public function setSquareCrop(bool $squareCrop): self
     {
         $this->squareCrop = $squareCrop;
         $this->smartCrop = false;
+
         return $this;
     }
 
     /**
-     * @param bool $smartCrop
-     * @return GoogleImage
+     * Sets the use of smart crop.
+     *
+     * @param bool $smartCrop smart crop
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setSmartCrop(bool $smartCrop): GoogleImage
+    public function setSmartCrop(bool $smartCrop): self
     {
         $this->smartCrop = $smartCrop;
         $this->squareCrop = false;
+
         return $this;
     }
 
     /**
-     * @param bool $verticalFlip
-     * @return GoogleImage
+     * Sets the use of vertical flip.
+     *
+     * @param bool $verticalFlip vertical flip
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setVerticalFlip(bool $verticalFlip): GoogleImage
+    public function setVerticalFlip(bool $verticalFlip): self
     {
         $this->verticalFlip = $verticalFlip;
+
         return $this;
     }
 
     /**
-     * @param bool $horizontalFlip
-     * @return GoogleImage
+     * Sets the use of horizontal flip.
+     *
+     * @param bool $horizontalFlip horizontal flip
+     *
+     * @return GoogleImage returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
      */
-    public function setHorizontalFlip(bool $horizontalFlip): GoogleImage
+    public function setHorizontalFlip(bool $horizontalFlip): self
     {
         $this->horizontalFlip = $horizontalFlip;
+
         return $this;
     }
 
     /**
      * @return int|null
+     * @ignore
      */
     public function getSize(): ?int
     {
@@ -435,6 +522,7 @@ class GoogleImage
 
     /**
      * @return int|null
+     * @ignore
      */
     public function getWidth(): ?int
     {
@@ -443,6 +531,7 @@ class GoogleImage
 
     /**
      * @return int|null
+     * @ignore
      */
     public function getHeight(): ?int
     {
@@ -451,6 +540,7 @@ class GoogleImage
 
     /**
      * @return int|null
+     * @ignore
      */
     public function getBorder(): ?int
     {
@@ -459,6 +549,7 @@ class GoogleImage
 
     /**
      * @return bool
+     * @ignore
      */
     public function isSquareCrop(): bool
     {
@@ -467,6 +558,7 @@ class GoogleImage
 
     /**
      * @return bool
+     * @ignore
      */
     public function isSmartCrop(): bool
     {
@@ -475,6 +567,7 @@ class GoogleImage
 
     /**
      * @return bool
+     * @ignore
      */
     public function isVerticalFlip(): bool
     {
@@ -483,12 +576,16 @@ class GoogleImage
 
     /**
      * @return bool
+     * @ignore
      */
     public function isHorizontalFlip(): bool
     {
         return $this->horizontalFlip;
     }
 
+    /**
+     * Reset all parameters.
+     */
     public function reset(): void
     {
         $this->size = null;
@@ -502,11 +599,105 @@ class GoogleImage
     }
 
     /**
-     * @param string $destPath
-     * @return ImageInfo
-     * @throws GooglePlayException
+     * Save image to disk.
+     *
+     * @param string $destPath output filename
+     *
+     * @throws GooglePlayException if the error is HTTP or save to disk
+     *
+     * @return ImageInfo returns the object {@see ImageInfo}
+     *
+     * @see ImageInfo Contains information about the image.
      */
     public function saveAs(string $destPath): ImageInfo
+    {
+        $url = $this->getUrl();
+
+        $stream = new LazyStream($destPath, 'w+b');
+
+        try {
+            $this->getHttpClient()->request(
+                'GET',
+                $url,
+                [
+                    RequestOptions::COOKIES => null,
+                    RequestOptions::HTTP_ERRORS => true,
+                    RequestOptions::SINK => $stream,
+                    RequestOptions::ON_HEADERS => static function (ResponseInterface $response) use (
+                        $url,
+                        $stream
+                    ): void {
+                        self::onHeaders($response, $url, $stream);
+                    },
+                ]
+            );
+
+            return new ImageInfo($url, $stream->getFilename());
+        } catch (\Throwable $e) {
+            if (is_file($destPath)) {
+                unlink($destPath);
+            }
+            $ge = new GooglePlayException($e->getMessage(), 1, $e);
+            $ge->setUrl($url);
+
+            throw $ge;
+        }
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @param string            $url
+     * @param LazyStream        $stream
+     *
+     * @throws GooglePlayException
+     *
+     * @internal
+     */
+    public static function onHeaders(ResponseInterface $response, string $url, LazyStream $stream): void
+    {
+        if ($response->getStatusCode() >= 400) {
+            return;
+        }
+
+        $contentType = $response->getHeaderLine('Content-Type');
+
+        if (!preg_match('~\bimage/.*\b~i', $contentType, $match)) {
+            throw new GooglePlayException('Url ' . $url . ' is not image');
+        }
+        $contentType = $match[0];
+        $imageType = self::getImageExtension($contentType);
+        $stream->replaceFilename('{ext}', $imageType);
+    }
+
+    /**
+     * @param string $mimeType
+     *
+     * @return string|null
+     */
+    public static function getImageExtension(string $mimeType): ?string
+    {
+        switch ($mimeType) {
+            case 'image/gif':
+                return 'gif';
+
+            case 'image/jpeg':
+                return 'jpg';
+
+            case 'image/png':
+                return 'png';
+
+            case 'image/webp':
+                return 'webp';
+
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * @return HttpClient
+     */
+    private function getHttpClient(): HttpClient
     {
         static $httpClient;
 
@@ -514,32 +705,55 @@ class GoogleImage
             $httpClient = new HttpClient();
         }
 
+        return $httpClient;
+    }
+
+    /**
+     * Returns binary image contents.
+     *
+     * @throws GooglePlayException if an HTTP error occurred
+     *
+     * @return string binary image content
+     */
+    public function getBinaryImageContent(): string
+    {
         $url = $this->getUrl();
 
-        $dirName = dirname($destPath);
-        if (!is_dir($dirName) && !mkdir($dirName, 0755, true) && !is_dir($dirName)) {
-            throw new \RuntimeException(sprintf('Failed to create "%s"', $dirName));
-        }
-
         try {
-            $httpClient->request('GET', $url, [
-                RequestOptions::SINK => $destPath,
-                RequestOptions::HTTP_ERRORS => true,
-            ]);
+            $response = $this->getHttpClient()->request(
+                'GET',
+                $url,
+                [
+                    RequestOptions::HTTP_ERRORS => true,
+                ]
+            );
 
-            return new ImageInfo($url, $destPath);
-        } catch (\Throwable|GuzzleException $e) {
-            if (is_file($destPath)) {
-                unlink($destPath);
-            }
-            $ge = new GooglePlayException($e->getMessage(), $e->getCode(), $e);
+            return $response->getBody()->getContents();
+        } catch (\Throwable $e) {
+            $ge = new GooglePlayException($e->getMessage(), 1, $e);
             $ge->setUrl($url);
+
             throw $ge;
         }
     }
 
     /**
-     * @return string
+     * @return array
+     * @ignore
+     */
+    public function __debugInfo()
+    {
+        return [
+            'url' => $this->getUrl(),
+        ];
+    }
+
+    /**
+     * Returns the URL of the image.
+     *
+     * This method is equivalent to {@see GoogleImage::getUrl()}.
+     *
+     * @return string image URL
      */
     public function __toString()
     {

@@ -1,39 +1,56 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model;
 
-class HistogramRating
+use Nelexa\GPlay\GPlayApps;
+
+/**
+ * Contains application rating data as data for histogram creation.
+ *
+ * @see GPlayApps::getAppsInfo() Returns detailed information about
+ *     many android packages.
+ * @see GPlayApps::getAppInLocales() Returns detailed information
+ *     about an application from the Google Play store for an array of locales.
+ * @see GPlayApps::getAppInfoForAvailableLocales() Returns detailed
+ *     information about the application in all available locales.
+ */
+class HistogramRating implements \JsonSerializable
 {
-    /**
-     * @var int
-     */
+    use JsonSerializableTrait;
+
+    /** @var int Five star app rating. */
     private $fiveStars;
-    /**
-     * @var int
-     */
+
+    /** @var int Four star app rating. */
     private $fourStars;
-    /**
-     * @var int
-     */
+
+    /** @var int Three star app rating. */
     private $threeStars;
-    /**
-     * @var int
-     */
+
+    /** @var int Two star app rating. */
     private $twoStars;
-    /**
-     * @var int
-     */
+
+    /** @var int One star app rating. */
     private $oneStar;
 
     /**
-     * HistogramRating constructor.
+     * Creates an object with information about the rating of
+     * Android applications from the Google Play store.
      *
-     * @param int $fiveStars
-     * @param int $fourStars
-     * @param int $threeStars
-     * @param int $twoStars
-     * @param int $oneStar
+     * @param int $fiveStars  five star app rating
+     * @param int $fourStars  four star app rating
+     * @param int $threeStars three star app rating
+     * @param int $twoStars   two star app rating
+     * @param int $oneStar    one star app rating
      */
     public function __construct(int $fiveStars, int $fourStars, int $threeStars, int $twoStars, int $oneStar)
     {
@@ -45,7 +62,9 @@ class HistogramRating
     }
 
     /**
-     * @return int
+     * Returns the five-star rating of the application.
+     *
+     * @return int five star rating app
      */
     public function getFiveStars(): int
     {
@@ -53,7 +72,9 @@ class HistogramRating
     }
 
     /**
-     * @return int
+     * Returns the four-star rating of the application.
+     *
+     * @return int four star rating app
      */
     public function getFourStars(): int
     {
@@ -61,7 +82,9 @@ class HistogramRating
     }
 
     /**
-     * @return int
+     * Returns the three-star rating of the application.
+     *
+     * @return int three star rating app
      */
     public function getThreeStars(): int
     {
@@ -69,7 +92,9 @@ class HistogramRating
     }
 
     /**
-     * @return int
+     * Returns the two-star rating of the application.
+     *
+     * @return int two star rating app
      */
     public function getTwoStars(): int
     {
@@ -77,7 +102,9 @@ class HistogramRating
     }
 
     /**
-     * @return int
+     * Returns the one-star rating of the application.
+     *
+     * @return int one star rating app
      */
     public function getOneStar(): int
     {
@@ -85,17 +112,18 @@ class HistogramRating
     }
 
     /**
-     * @return string
+     * Returns class properties as an array.
+     *
+     * @return array Сlass properties as an array
      */
-    public function __toString()
+    public function asArray(): array
     {
-        return sprintf(
-            "⭐⭐⭐⭐⭐ %d\n⭐⭐⭐⭐  %d\n⭐⭐⭐   %d\n⭐⭐    %d\n⭐     %d",
-            $this->fiveStars,
-            $this->fourStars,
-            $this->threeStars,
-            $this->twoStars,
-            $this->oneStar
-        );
+        return [
+            'five' => $this->fiveStars,
+            'four' => $this->fiveStars,
+            'three' => $this->threeStars,
+            'two' => $this->twoStars,
+            'one' => $this->oneStar,
+        ];
     }
 }

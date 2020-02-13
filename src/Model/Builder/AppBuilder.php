@@ -1,9 +1,18 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model\Builder;
 
-use Nelexa\GPlay\GPlayApps;
+use Nelexa\GPlay\Model\App;
+use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
@@ -11,151 +20,116 @@ use Nelexa\GPlay\Model\HistogramRating;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
 
+/**
+ * App Builder.
+ *
+ * @internal
+ */
 class AppBuilder
 {
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $id;
-    /**
-     * @var string|null
-     */
-    private $url;
-    /**
-     * @var string|null
-     */
-    private $name;
-    /**
-     * @var string|null
-     */
-    private $summary;
-    /**
-     * @var Developer|null
-     */
-    private $developer;
-    /**
-     * @var GoogleImage|null
-     */
-    private $icon;
-    /**
-     * @var float
-     */
-    private $score = 0.0;
-    /**
-     * @var string|null
-     */
-    private $priceText;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $locale;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
+    private $country;
+
+    /** @var string|null */
+    private $name;
+
+    /** @var string|null */
+    private $summary;
+
+    /** @var Developer|null */
+    private $developer;
+
+    /** @var GoogleImage|null */
+    private $icon;
+
+    /** @var float */
+    private $score = 0.0;
+
+    /** @var string|null */
+    private $priceText;
+
+    /** @var string|null */
     private $description;
-    /**
-     * @var string|null
-     */
-    private $translatedDescription;
-    /**
-     * @var string|null
-     */
-    private $translatedFromLanguage;
-    /**
-     * @var GoogleImage|null
-     */
-    private $headerImage;
-    /**
-     * @var GoogleImage[]
-     */
+
+    /** @var string|null */
+    private $translatedFromLocale;
+
+    /** @var GoogleImage|null */
+    private $cover;
+
+    /** @var GoogleImage[] */
     private $screenshots = [];
-    /**
-     * @var Category|null
-     */
+
+    /** @var Category|null */
     private $category;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $privacyPoliceUrl;
-    /**
-     * @var Category|null
-     */
+
+    /** @var Category|null */
     private $categoryFamily;
-    /**
-     * @var Video|null
-     */
+
+    /** @var Video|null */
     private $video;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $recentChanges;
-    /**
-     * @var bool
-     */
+
+    /** @var bool */
     private $editorsChoice = false;
-    /**
-     * @var int
-     */
+
+    /** @var int */
     private $installs = 0;
-    /**
-     * @var int
-     */
+
+    /** @var int */
     private $numberVoters = 0;
-    /**
-     * @var HistogramRating|null
-     */
+
+    /** @var HistogramRating|null */
     private $histogramRating;
-    /**
-     * @var float
-     */
+
+    /** @var float */
     private $price = 0;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $currency;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $offersIAPCost;
-    /**
-     * @var bool
-     */
-    private $adSupported = false;
-    /**
-     * @var string|null
-     */
-    private $appSize;
-    /**
-     * @var string|null
-     */
+
+    /** @var bool */
+    private $containsAds = false;
+
+    /** @var string|null */
+    private $size;
+
+    /** @var string|null */
     private $appVersion;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $androidVersion;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $minAndroidVersion;
-    /**
-     * @var string|null
-     */
+
+    /** @var string|null */
     private $contentRating;
-    /**
-     * @var \DateTimeInterface|null
-     */
+
+    /** @var \DateTimeInterface|null */
     private $released;
-    /**
-     * @var \DateTimeInterface|null
-     */
+
+    /** @var \DateTimeInterface|null */
     private $updated;
-    /**
-     * @var int
-     */
-    private $reviewsCount = 0;
-    /**
-     * @var Review[]
-     */
+
+    /** @var int */
+    private $numberReviews = 0;
+
+    /** @var Review[] */
     private $reviews = [];
 
     /**
@@ -168,138 +142,13 @@ class AppBuilder
 
     /**
      * @param string $id
+     *
      * @return AppBuilder
      */
-    public function setId(string $id): AppBuilder
+    public function setId(string $id): self
     {
         $this->id = $id;
-        $this->url = GPlayApps::GOOGLE_PLAY_APPS_URL . '/details?id=' . $id;
-        return $this;
-    }
 
-    /**
-     * @param string|null $url
-     * @return AppBuilder
-     */
-    public function setUrl(?string $url): AppBuilder
-    {
-        $this->url = $url;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string|null $name
-     * @return AppBuilder
-     */
-    public function setName(?string $name): AppBuilder
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSummary(): ?string
-    {
-        return $this->summary;
-    }
-
-    /**
-     * @param string|null $summary
-     * @return AppBuilder
-     */
-    public function setSummary(?string $summary): AppBuilder
-    {
-        $this->summary = $summary;
-        return $this;
-    }
-
-    /**
-     * @return Developer|null
-     */
-    public function getDeveloper(): ?Developer
-    {
-        return $this->developer;
-    }
-
-    /**
-     * @param Developer|null $developer
-     * @return AppBuilder
-     */
-    public function setDeveloper(?Developer $developer): AppBuilder
-    {
-        $this->developer = $developer;
-        return $this;
-    }
-
-    /**
-     * @return GoogleImage|null
-     */
-    public function getIcon(): ?GoogleImage
-    {
-        return $this->icon;
-    }
-
-    /**
-     * @param GoogleImage|null $icon
-     * @return AppBuilder
-     */
-    public function setIcon(?GoogleImage $icon): AppBuilder
-    {
-        $this->icon = $icon;
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getScore(): float
-    {
-        return $this->score;
-    }
-
-    /**
-     * @param float $score
-     * @return AppBuilder
-     */
-    public function setScore(float $score): AppBuilder
-    {
-        $this->score = $score;
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPriceText(): ?string
-    {
-        return $this->priceText;
-    }
-
-    /**
-     * @param string|null $priceText
-     * @return AppBuilder
-     */
-    public function setPriceText(?string $priceText): AppBuilder
-    {
-        $this->priceText = $priceText;
         return $this;
     }
 
@@ -313,11 +162,153 @@ class AppBuilder
 
     /**
      * @param string|null $locale
+     *
      * @return AppBuilder
      */
-    public function setLocale(?string $locale): AppBuilder
+    public function setLocale(?string $locale): self
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string|null $country
+     *
+     * @return AppBuilder
+     */
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     *
+     * @return AppBuilder
+     */
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSummary(): ?string
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string|null $summary
+     *
+     * @return AppBuilder
+     */
+    public function setSummary(?string $summary): self
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * @return Developer|null
+     */
+    public function getDeveloper(): ?Developer
+    {
+        return $this->developer;
+    }
+
+    /**
+     * @param Developer|null $developer
+     *
+     * @return AppBuilder
+     */
+    public function setDeveloper(?Developer $developer): self
+    {
+        $this->developer = $developer;
+
+        return $this;
+    }
+
+    /**
+     * @return GoogleImage|null
+     */
+    public function getIcon(): ?GoogleImage
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param GoogleImage|null $icon
+     *
+     * @return AppBuilder
+     */
+    public function setIcon(?GoogleImage $icon): self
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getScore(): float
+    {
+        return $this->score;
+    }
+
+    /**
+     * @param float $score
+     *
+     * @return AppBuilder
+     */
+    public function setScore(float $score): self
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPriceText(): ?string
+    {
+        return $this->priceText;
+    }
+
+    /**
+     * @param string|null $priceText
+     *
+     * @return AppBuilder
+     */
+    public function setPriceText(?string $priceText): self
+    {
+        $this->priceText = $priceText;
+
         return $this;
     }
 
@@ -331,64 +322,53 @@ class AppBuilder
 
     /**
      * @param string|null $description
+     *
      * @return AppBuilder
      */
-    public function setDescription(?string $description): AppBuilder
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getTranslatedDescription(): ?string
+    public function getTranslatedFromLocale(): ?string
     {
-        return $this->translatedDescription;
+        return $this->translatedFromLocale;
     }
 
     /**
-     * @return string|null
-     */
-    public function getTranslatedFromLanguage(): ?string
-    {
-        return $this->translatedFromLanguage;
-    }
-
-    /**
-     * @param string|null $translatedDescription
-     * @param string|null $translatedFromLanguage
+     * @param string|null $translatedFromLocale
+     *
      * @return AppBuilder
      */
-    public function setTranslated(
-        ?string $translatedDescription,
-        ?string $translatedFromLanguage
-    ): AppBuilder {
-        if ($translatedFromLanguage === null || $translatedDescription === null) {
-            $this->translatedDescription = null;
-            $this->translatedFromLanguage = null;
-        } else {
-            $this->translatedDescription = $translatedDescription;
-            $this->translatedFromLanguage = $translatedFromLanguage;
-        }
+    public function setTranslatedFromLocale(?string $translatedFromLocale): self
+    {
+        $this->translatedFromLocale = $translatedFromLocale;
+
         return $this;
     }
 
     /**
      * @return GoogleImage|null
      */
-    public function getHeaderImage(): ?GoogleImage
+    public function getCover(): ?GoogleImage
     {
-        return $this->headerImage;
+        return $this->cover;
     }
 
     /**
-     * @param GoogleImage|null $headerImage
+     * @param GoogleImage|null $cover
+     *
      * @return AppBuilder
      */
-    public function setHeaderImage(?GoogleImage $headerImage): AppBuilder
+    public function setCover(?GoogleImage $cover): self
     {
-        $this->headerImage = $headerImage;
+        $this->cover = $cover;
+
         return $this;
     }
 
@@ -402,24 +382,29 @@ class AppBuilder
 
     /**
      * @param GoogleImage[] $screenshots
+     *
      * @return AppBuilder
      */
-    public function setScreenshots(array $screenshots): AppBuilder
+    public function setScreenshots(array $screenshots): self
     {
         $this->screenshots = [];
+
         foreach ($screenshots as $screenshot) {
             $this->addScreenshot($screenshot);
         }
+
         return $this;
     }
 
     /**
      * @param GoogleImage $image
+     *
      * @return AppBuilder
      */
-    public function addScreenshot(GoogleImage $image): AppBuilder
+    public function addScreenshot(GoogleImage $image): self
     {
         $this->screenshots[] = $image;
+
         return $this;
     }
 
@@ -433,11 +418,13 @@ class AppBuilder
 
     /**
      * @param Category|null $category
+     *
      * @return AppBuilder
      */
-    public function setCategory(?Category $category): AppBuilder
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
         return $this;
     }
 
@@ -451,11 +438,13 @@ class AppBuilder
 
     /**
      * @param string|null $privacyPoliceUrl
+     *
      * @return AppBuilder
      */
-    public function setPrivacyPoliceUrl(?string $privacyPoliceUrl): AppBuilder
+    public function setPrivacyPoliceUrl(?string $privacyPoliceUrl): self
     {
         $this->privacyPoliceUrl = $privacyPoliceUrl;
+
         return $this;
     }
 
@@ -469,11 +458,13 @@ class AppBuilder
 
     /**
      * @param Category|null $categoryFamily
+     *
      * @return AppBuilder
      */
-    public function setCategoryFamily(?Category $categoryFamily): AppBuilder
+    public function setCategoryFamily(?Category $categoryFamily): self
     {
         $this->categoryFamily = $categoryFamily;
+
         return $this;
     }
 
@@ -487,11 +478,13 @@ class AppBuilder
 
     /**
      * @param Video|null $video
+     *
      * @return AppBuilder
      */
-    public function setVideo(?Video $video): AppBuilder
+    public function setVideo(?Video $video): self
     {
         $this->video = $video;
+
         return $this;
     }
 
@@ -505,11 +498,13 @@ class AppBuilder
 
     /**
      * @param string|null $recentChanges
+     *
      * @return AppBuilder
      */
-    public function setRecentChanges(?string $recentChanges): AppBuilder
+    public function setRecentChanges(?string $recentChanges): self
     {
         $this->recentChanges = $recentChanges;
+
         return $this;
     }
 
@@ -523,11 +518,13 @@ class AppBuilder
 
     /**
      * @param bool $editorsChoice
+     *
      * @return AppBuilder
      */
-    public function setEditorsChoice(bool $editorsChoice): AppBuilder
+    public function setEditorsChoice(bool $editorsChoice): self
     {
         $this->editorsChoice = $editorsChoice;
+
         return $this;
     }
 
@@ -541,11 +538,13 @@ class AppBuilder
 
     /**
      * @param int $installs
+     *
      * @return AppBuilder
      */
-    public function setInstalls(int $installs): AppBuilder
+    public function setInstalls(int $installs): self
     {
         $this->installs = $installs;
+
         return $this;
     }
 
@@ -559,11 +558,13 @@ class AppBuilder
 
     /**
      * @param int $numberVoters
+     *
      * @return AppBuilder
      */
-    public function setNumberVoters(int $numberVoters): AppBuilder
+    public function setNumberVoters(int $numberVoters): self
     {
         $this->numberVoters = $numberVoters;
+
         return $this;
     }
 
@@ -577,11 +578,13 @@ class AppBuilder
 
     /**
      * @param HistogramRating|null $histogramRating
+     *
      * @return AppBuilder
      */
-    public function setHistogramRating(?HistogramRating $histogramRating): AppBuilder
+    public function setHistogramRating(?HistogramRating $histogramRating): self
     {
         $this->histogramRating = $histogramRating;
+
         return $this;
     }
 
@@ -595,11 +598,13 @@ class AppBuilder
 
     /**
      * @param float $price
+     *
      * @return AppBuilder
      */
-    public function setPrice(float $price): AppBuilder
+    public function setPrice(float $price): self
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -613,11 +618,13 @@ class AppBuilder
 
     /**
      * @param string|null $currency
+     *
      * @return AppBuilder
      */
-    public function setCurrency(?string $currency): AppBuilder
+    public function setCurrency(?string $currency): self
     {
         $this->currency = $currency;
+
         return $this;
     }
 
@@ -631,47 +638,53 @@ class AppBuilder
 
     /**
      * @param string|null $offersIAPCost
+     *
      * @return AppBuilder
      */
-    public function setOffersIAPCost(?string $offersIAPCost): AppBuilder
+    public function setOffersIAPCost(?string $offersIAPCost): self
     {
         $this->offersIAPCost = $offersIAPCost;
+
         return $this;
     }
 
     /**
      * @return bool
      */
-    public function isAdSupported(): bool
+    public function isContainsAds(): bool
     {
-        return $this->adSupported;
+        return $this->containsAds;
     }
 
     /**
-     * @param bool $adSupported
+     * @param bool $containsAds
+     *
      * @return AppBuilder
      */
-    public function setAdSupported(bool $adSupported): AppBuilder
+    public function setContainsAds(bool $containsAds): self
     {
-        $this->adSupported = $adSupported;
+        $this->containsAds = $containsAds;
+
         return $this;
     }
 
     /**
      * @return string|null
      */
-    public function getAppSize(): ?string
+    public function getSize(): ?string
     {
-        return $this->appSize;
+        return $this->size;
     }
 
     /**
-     * @param string|null $appSize
+     * @param string|null $size
+     *
      * @return AppBuilder
      */
-    public function setAppSize(?string $appSize): AppBuilder
+    public function setSize(?string $size): self
     {
-        $this->appSize = $appSize;
+        $this->size = $size;
+
         return $this;
     }
 
@@ -685,11 +698,13 @@ class AppBuilder
 
     /**
      * @param string|null $appVersion
+     *
      * @return AppBuilder
      */
-    public function setAppVersion(?string $appVersion): AppBuilder
+    public function setAppVersion(?string $appVersion): self
     {
         $this->appVersion = $appVersion;
+
         return $this;
     }
 
@@ -703,11 +718,13 @@ class AppBuilder
 
     /**
      * @param string|null $androidVersion
+     *
      * @return AppBuilder
      */
-    public function setAndroidVersion(?string $androidVersion): AppBuilder
+    public function setAndroidVersion(?string $androidVersion): self
     {
         $this->androidVersion = $androidVersion;
+
         return $this;
     }
 
@@ -721,11 +738,13 @@ class AppBuilder
 
     /**
      * @param string|null $minAndroidVersion
+     *
      * @return AppBuilder
      */
-    public function setMinAndroidVersion(?string $minAndroidVersion): AppBuilder
+    public function setMinAndroidVersion(?string $minAndroidVersion): self
     {
         $this->minAndroidVersion = $minAndroidVersion;
+
         return $this;
     }
 
@@ -739,11 +758,13 @@ class AppBuilder
 
     /**
      * @param string|null $contentRating
+     *
      * @return AppBuilder
      */
-    public function setContentRating(?string $contentRating): AppBuilder
+    public function setContentRating(?string $contentRating): self
     {
         $this->contentRating = $contentRating;
+
         return $this;
     }
 
@@ -757,11 +778,13 @@ class AppBuilder
 
     /**
      * @param \DateTimeInterface|null $released
+     *
      * @return AppBuilder
      */
-    public function setReleased(?\DateTimeInterface $released): AppBuilder
+    public function setReleased(?\DateTimeInterface $released): self
     {
         $this->released = $released;
+
         return $this;
     }
 
@@ -775,29 +798,33 @@ class AppBuilder
 
     /**
      * @param \DateTimeInterface|null $updated
+     *
      * @return AppBuilder
      */
-    public function setUpdated(?\DateTimeInterface $updated): AppBuilder
+    public function setUpdated(?\DateTimeInterface $updated): self
     {
         $this->updated = $updated;
+
         return $this;
     }
 
     /**
      * @return int
      */
-    public function getReviewsCount(): int
+    public function getNumberReviews(): int
     {
-        return $this->reviewsCount;
+        return $this->numberReviews;
     }
 
     /**
-     * @param int $reviewsCount
+     * @param int $numberReviews
+     *
      * @return AppBuilder
      */
-    public function setReviewsCount(int $reviewsCount): AppBuilder
+    public function setNumberReviews(int $numberReviews): self
     {
-        $this->reviewsCount = $reviewsCount;
+        $this->numberReviews = $numberReviews;
+
         return $this;
     }
 
@@ -811,24 +838,45 @@ class AppBuilder
 
     /**
      * @param Review[] $reviews
+     *
      * @return AppBuilder
      */
-    public function setReviews(array $reviews): AppBuilder
+    public function setReviews(array $reviews): self
     {
         $this->reviews = [];
+
         foreach ($reviews as $review) {
             $this->addReview($review);
         }
+
         return $this;
     }
 
     /**
      * @param Review $review
+     *
      * @return AppBuilder
      */
-    public function addReview(Review $review): AppBuilder
+    public function addReview(Review $review): self
     {
         $this->reviews[] = $review;
+
         return $this;
+    }
+
+    /**
+     * @return App
+     */
+    public function build(): App
+    {
+        return new App($this);
+    }
+
+    /**
+     * @return AppInfo
+     */
+    public function buildDetailInfo(): AppInfo
+    {
+        return new AppInfo($this);
     }
 }

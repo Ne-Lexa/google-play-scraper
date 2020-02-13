@@ -1,24 +1,41 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model;
 
-class ReplyReview
+use Nelexa\GPlay\GPlayApps;
+
+/**
+ * Contains the developer’s reply to a review in the Google Play store.
+ *
+ * @see Review Contains review of application on Google Play store.
+ * @see GPlayApps::getReviews() Returns reviews of the
+ *     Android app in the Google Play store.
+ */
+class ReplyReview implements \JsonSerializable
 {
-    /**
-     * @var \DateTimeInterface
-     */
+    use JsonSerializableTrait;
+
+    /** @var \DateTimeInterface Reply date. */
     private $date;
-    /**
-     * @var string
-     */
+
+    /** @var string Reply text. */
     private $text;
 
     /**
-     * ReplyReview constructor.
+     * Creates an object with information about the developer’s response
+     * to a review of an application in the Google Play store.
      *
-     * @param \DateTimeInterface $date
-     * @param string $text
+     * @param \DateTimeInterface $date reply date
+     * @param string             $text reply text
      */
     public function __construct(\DateTimeInterface $date, string $text)
     {
@@ -27,7 +44,9 @@ class ReplyReview
     }
 
     /**
-     * @return \DateTimeInterface
+     * Returns reply date.
+     *
+     * @return \DateTimeInterface reply date
      */
     public function getDate(): \DateTimeInterface
     {
@@ -35,10 +54,26 @@ class ReplyReview
     }
 
     /**
-     * @return string
+     * Returns reply text.
+     *
+     * @return string reply text
      */
     public function getText(): string
     {
         return $this->text;
+    }
+
+    /**
+     * Returns class properties as an array.
+     *
+     * @return array class properties as an array
+     */
+    public function asArray(): array
+    {
+        return [
+            'date' => $this->date->format(\DateTimeInterface::RFC3339),
+            'timestamp' => $this->date->getTimestamp(),
+            'text' => $this->text,
+        ];
     }
 }

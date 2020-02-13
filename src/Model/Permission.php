@@ -1,44 +1,81 @@
 <?php
+
 declare(strict_types=1);
+
+/**
+ * @author   Ne-Lexa
+ * @license  MIT
+ *
+ * @see      https://github.com/Ne-Lexa/google-play-scraper
+ */
 
 namespace Nelexa\GPlay\Model;
 
-class Permission
+/**
+ * Contains information about application permissions.
+ */
+class Permission implements \JsonSerializable
 {
-    /**
-     * @var string
-     */
-    private $permission;
-    /**
-     * @var string
-     */
-    private $description;
+    use JsonSerializableTrait;
+
+    /** @var string Permission label. */
+    private $label;
+
+    /** @var GoogleImage */
+    private $icon;
+
+    /** @var string[] Permissions. */
+    private $permissions;
 
     /**
      * Permission constructor.
      *
-     * @param string $permission
-     * @param string $description
+     * @param string      $label
+     * @param GoogleImage $icon
+     * @param string[]    $permissions
      */
-    public function __construct(string $permission, string $description)
+    public function __construct(string $label, GoogleImage $icon, array $permissions)
     {
-        $this->permission = $permission;
-        $this->description = $description;
+        $this->label = $label;
+        $this->icon = $icon;
+        $this->permissions = $permissions;
     }
 
     /**
      * @return string
      */
-    public function getPermission(): string
+    public function getLabel(): string
     {
-        return $this->permission;
+        return $this->label;
     }
 
     /**
-     * @return string
+     * @return GoogleImage
      */
-    public function getDescription(): string
+    public function getIcon(): GoogleImage
     {
-        return $this->description;
+        return $this->icon;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPermissions(): array
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * Returns class properties as an array.
+     *
+     * @return array class properties as an array
+     */
+    public function asArray(): array
+    {
+        return [
+            'label' => $this->label,
+            'icon' => $this->icon->getUrl(),
+            'permissions' => $this->permissions,
+        ];
     }
 }

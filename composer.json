@@ -1,9 +1,10 @@
 {
     "name": "nelexa/google-play-scraper",
     "type": "library",
-    "description": "Google Play apps PHP scraper.",
+    "description": "Scrapes app data from Google Play store.",
     "keywords": [
         "google play",
+        "google",
         "scraper",
         "android",
         "gplay"
@@ -20,15 +21,13 @@
         "preferred-install": "dist"
     },
     "require": {
-        "php": "^7.1",
+        "php": ">=7.1",
         "ext-dom": "*",
-        "ext-json": "*",
-        "ext-curl": "*",
         "ext-hash": "*",
+        "ext-json": "*",
         "ext-libxml": "*",
-        "guzzlehttp/guzzle": "^6.3",
         "nelexa/enum": "^1.0",
-        "psr/simple-cache": "^1.0"
+        "nelexa/http-client-simple-cache": "^1.0.1"
     },
     "autoload": {
         "psr-4": {
@@ -36,11 +35,10 @@
         }
     },
     "require-dev": {
-        "ext-gd": "*",
-        "phpunit/phpunit": "^6.0 | ^7.0",
-        "symfony/cache": "^4.0",
-        "symfony/var-dumper": "^4.0",
-        "symfony/var-exporter": "^4.0"
+        "phpunit/phpunit": "^7.0 | ^8.0 | ^9.0",
+        "symfony/cache": "^4.0 | ^5.0",
+        "symfony/var-dumper": "^4.0 | ^5.0",
+        "symfony/var-exporter": "^4.0 | ^5.0"
     },
     "autoload-dev": {
         "psr-4": {

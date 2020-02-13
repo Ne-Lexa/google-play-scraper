@@ -1,22 +1,29 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Nelexa\GPlay\Tests\Helper;
+namespace Nelexa\GPlay\Tests\Util;
 
 use Nelexa\GPlay\Util\LocaleHelper;
 use PHPUnit\Framework\TestCase;
 
-class PreferredLanguageTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class PreferredLanguageTest extends TestCase
 {
     /**
      * @dataProvider providerPreferredLanguage
+     *
      * @param string $sourceLocale
      * @param string $translateLangName
      * @param string $destLocale
      */
     public function testPreferredLanguage(string $sourceLocale, string $translateLangName, string $destLocale): void
     {
-        $this->assertEquals(
+        self::assertEquals(
             LocaleHelper::findPreferredLanguage($sourceLocale, $translateLangName),
             $destLocale,
             'Error ' . $sourceLocale . ' -> ' . $destLocale
@@ -44,13 +51,17 @@ class PreferredLanguageTest extends TestCase
 
     /**
      * @dataProvider providerErrorPreferredLanguage
+     *
      * @param string $sourceLocale
      * @param string $translateLangName
      * @param string $destLocale
      */
-    public function testErrorPreferredLanguage(string $sourceLocale, string $translateLangName, string $destLocale): void
-    {
-        $this->assertNotEquals(
+    public function testErrorPreferredLanguage(
+        string $sourceLocale,
+        string $translateLangName,
+        string $destLocale
+    ): void {
+        self::assertNotEquals(
             LocaleHelper::findPreferredLanguage($sourceLocale, $translateLangName),
             $destLocale,
             $sourceLocale . ' -> ' . $destLocale
