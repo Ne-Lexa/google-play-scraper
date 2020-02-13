@@ -18,9 +18,9 @@ use Nelexa\GPlay\GPlayApps;
  *
  * @see GPlayApps::getCategories() Returns an array of application categories
  *     from the Google Play store.
- * @see GPlayApps::getCategoriesInLocales() Returns an array of application
+ * @see GPlayApps::getCategoriesForLocales() Returns an array of application
  *     categories from the Google Play store for the locale array.
- * @see GPlayApps::getCategoriesInAvailableLocales() Returns an array of
+ * @see GPlayApps::getCategoriesForAvailableLocales() Returns an array of
  *     categories from the Google Play store for all available locales.
  */
 class Category implements \JsonSerializable

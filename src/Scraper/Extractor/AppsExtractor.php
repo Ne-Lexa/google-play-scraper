@@ -40,18 +40,18 @@ class AppsExtractor
         $summary = self::extractSummary($data);
         $score = $data[6][0][2][1][1] ?? 0.0;
 
-        return new App(
-            App::newBuilder()
-                ->setId($appId)
-                ->setLocale($locale)
-                ->setCountry($country)
-                ->setName($name)
-                ->setSummary($summary)
-                ->setDeveloper($developer)
-                ->setIcon($icon)
-                ->setScore($score)
-                ->setPriceText($price)
-        );
+        return App::newBuilder()
+            ->setId($appId)
+            ->setLocale($locale)
+            ->setCountry($country)
+            ->setName($name)
+            ->setSummary($summary)
+            ->setDeveloper($developer)
+            ->setIcon($icon)
+            ->setScore($score)
+            ->setPriceText($price)
+            ->build()
+        ;
     }
 
     /**

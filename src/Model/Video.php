@@ -16,11 +16,11 @@ use Nelexa\GPlay\GPlayApps;
 /**
  * Contains promo video data.
  *
- * @see GPlayApps::getApps() Returns detailed information about
+ * @see GPlayApps::getAppsInfo() Returns detailed information about
  *     many android packages.
  * @see GPlayApps::getAppInLocales() Returns detailed information
  *     about an application from the Google Play store for an array of locales.
- * @see GPlayApps::getAppInAvailableLocales() Returns detailed
+ * @see GPlayApps::getAppInfoForAvailableLocales() Returns detailed
  *     information about the application in all available locales.
  */
 class Video implements \JsonSerializable
@@ -73,7 +73,7 @@ class Video implements \JsonSerializable
     public function getYoutubeId(): ?string
     {
         if (preg_match(
-            '~^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*~',
+            '~^.*(?:(?:youtu\.be/|v/|vi/|u/\w/|embed/)|(?:(?:watch)?\?v(?:i)?=|&v(?:i)?=))([^#&?]*).*~',
             $this->videoUrl,
             $match
         )) {

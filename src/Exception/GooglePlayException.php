@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Nelexa\GPlay\Exception;
 
 use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -65,9 +66,27 @@ class GooglePlayException extends \Exception
     }
 
     /**
+     * Returns an HTTP request if present.
+     *
+     * @return RequestInterface|null PSR-7 `RequestInterface` or `null`
+     *
+     * @see https://www.php-fig.org/psr/psr-7/ PSR-7: HTTP message interfaces
+     */
+    public function getRequest(): ?RequestInterface
+    {
+        $e = $this->getPrevious();
+
+        if ($e instanceof RequestException && $e->getRequest() !== null) {
+            return $e->getRequest();
+        }
+
+        return null;
+    }
+
+    /**
      * Returns an HTTP response if present.
      *
-     * @return responseInterface|null PSR-7 ResponseInterface or null
+     * @return ResponseInterface|null PSR-7 `ResponseInterface` or `null`
      *
      * @see https://www.php-fig.org/psr/psr-7/ PSR-7: HTTP message interfaces
      */

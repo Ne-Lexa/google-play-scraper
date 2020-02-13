@@ -89,29 +89,21 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GoogleImage
 {
-    private const
-        PARAM_SIZE = 's';
+    private const PARAM_SIZE = 's';
 
-    private const
-        PARAM_WIDTH = 'w';
+    private const PARAM_WIDTH = 'w';
 
-    private const
-        PARAM_HEIGHT = 'h';
+    private const PARAM_HEIGHT = 'h';
 
-    private const
-        PARAM_BORDER = 'b';
+    private const PARAM_BORDER = 'b';
 
-    private const
-        PARAM_SQUARE_CROP = 'c';
+    private const PARAM_SQUARE_CROP = 'c';
 
-    private const
-        PARAM_SMART_CROP = 'p';
+    private const PARAM_SMART_CROP = 'p';
 
-    private const
-        PARAM_FLIP_VERTICAL = 'fv';
+    private const PARAM_FLIP_VERTICAL = 'fv';
 
-    private const
-        PARAM_FLIP_HORIZONTAL = 'fh';
+    private const PARAM_FLIP_HORIZONTAL = 'fh';
 
     /** @var string Base URL without parameters and file name. */
     private $baseUrl;
@@ -658,6 +650,8 @@ class GoogleImage
      * @param LazyStream        $stream
      *
      * @throws GooglePlayException
+     *
+     * @internal
      */
     public static function onHeaders(ResponseInterface $response, string $url, LazyStream $stream): void
     {

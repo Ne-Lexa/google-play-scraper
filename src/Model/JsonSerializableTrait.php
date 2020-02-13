@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Model;
 
+/**
+ * Trait JsonSerializableTrait.
+ */
 trait JsonSerializableTrait
 {
     /**

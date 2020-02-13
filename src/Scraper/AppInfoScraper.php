@@ -14,8 +14,8 @@ namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
-use Nelexa\GPlay\Model\AppDetail;
 use Nelexa\GPlay\Model\AppId;
+use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
@@ -34,7 +34,7 @@ use function GuzzleHttp\Psr7\parse_query;
 /**
  * @internal
  */
-class AppDetailScraper implements ResponseHandlerInterface
+class AppInfoScraper implements ResponseHandlerInterface
 {
     /**
      * @param RequestInterface  $request
@@ -42,9 +42,9 @@ class AppDetailScraper implements ResponseHandlerInterface
      *
      * @throws GooglePlayException
      *
-     * @return AppDetail
+     * @return AppInfo
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response): AppDetail
+    public function __invoke(RequestInterface $request, ResponseInterface $response): AppInfo
     {
         $query = parse_query($request->getUri()->getQuery());
 
@@ -107,49 +107,49 @@ class AppDetailScraper implements ResponseHandlerInterface
         $recentChanges = $this->extractRecentChanges($scriptDataInfo);
         $reviews = $this->extractReviews(new AppId($id, $locale, $country), $scriptDataReviews);
 
-        return new AppDetail(
-            AppDetail::newBuilder()
-                ->setId($id)
-                ->setLocale($locale)
-                ->setCountry($country)
-                ->setName($name)
-                ->setDescription($description)
-                ->setTranslatedFromLocale($translatedFromLocale)
-                ->setSummary($summary)
-                ->setIcon($icon)
-                ->setCover($cover)
-                ->setScreenshots($screenshots)
-                ->setDeveloper($developer)
-                ->setCategory($category)
-                ->setCategoryFamily($categoryFamily)
-                ->setVideo($video)
-                ->setRecentChanges($recentChanges)
-                ->setEditorsChoice($editorsChoice)
-                ->setPrivacyPoliceUrl($privacyPoliceUrl)
-                ->setInstalls($installs)
-                ->setScore($score)
-                ->setRecentChanges($recentChanges)
-                ->setEditorsChoice($editorsChoice)
-                ->setPrivacyPoliceUrl($privacyPoliceUrl)
-                ->setInstalls($installs)
-                ->setScore($score)
-                ->setNumberVoters($numberVoters)
-                ->setHistogramRating($histogramRating)
-                ->setPrice($price)
-                ->setCurrency($currency)
-                ->setPriceText($priceText)
-                ->setOffersIAPCost($offersIAPCost)
-                ->setContainsAds($containsAds)
-                ->setSize($size)
-                ->setAppVersion($appVersion)
-                ->setAndroidVersion($androidVersion)
-                ->setMinAndroidVersion($minAndroidVersion)
-                ->setContentRating($contentRating)
-                ->setReleased($released)
-                ->setUpdated($updated)
-                ->setNumberReviews($numberReviews)
-                ->setReviews($reviews)
-        );
+        return AppInfo::newBuilder()
+            ->setId($id)
+            ->setLocale($locale)
+            ->setCountry($country)
+            ->setName($name)
+            ->setDescription($description)
+            ->setTranslatedFromLocale($translatedFromLocale)
+            ->setSummary($summary)
+            ->setIcon($icon)
+            ->setCover($cover)
+            ->setScreenshots($screenshots)
+            ->setDeveloper($developer)
+            ->setCategory($category)
+            ->setCategoryFamily($categoryFamily)
+            ->setVideo($video)
+            ->setRecentChanges($recentChanges)
+            ->setEditorsChoice($editorsChoice)
+            ->setPrivacyPoliceUrl($privacyPoliceUrl)
+            ->setInstalls($installs)
+            ->setScore($score)
+            ->setRecentChanges($recentChanges)
+            ->setEditorsChoice($editorsChoice)
+            ->setPrivacyPoliceUrl($privacyPoliceUrl)
+            ->setInstalls($installs)
+            ->setScore($score)
+            ->setNumberVoters($numberVoters)
+            ->setHistogramRating($histogramRating)
+            ->setPrice($price)
+            ->setCurrency($currency)
+            ->setPriceText($priceText)
+            ->setOffersIAPCost($offersIAPCost)
+            ->setContainsAds($containsAds)
+            ->setSize($size)
+            ->setAppVersion($appVersion)
+            ->setAndroidVersion($androidVersion)
+            ->setMinAndroidVersion($minAndroidVersion)
+            ->setContentRating($contentRating)
+            ->setReleased($released)
+            ->setUpdated($updated)
+            ->setNumberReviews($numberReviews)
+            ->setReviews($reviews)
+            ->buildDetailInfo()
+        ;
     }
 
     /**

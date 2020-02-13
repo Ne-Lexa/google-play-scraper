@@ -17,11 +17,11 @@ use Nelexa\GPlay\Util\LocaleHelper;
 /**
  * Contains the application ID, as well as the locale and country for which the information was or will be obtained.
  *
- * This class is the base class for {@see App} and {@see AppDetail}.
+ * This class is the base class for {@see App} and {@see AppInfo}.
  *
  * @see App Contains basic information about the application
  *     from the Google Play store.
- * @see AppDetail Contains detailed information about the
+ * @see AppInfo Contains detailed information about the
  *     application from the Google Play store.
  */
 class AppId

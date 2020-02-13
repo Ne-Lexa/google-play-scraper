@@ -16,11 +16,11 @@ use Nelexa\GPlay\GPlayApps;
 /**
  * Contains application rating data as data for histogram creation.
  *
- * @see GPlayApps::getApps() Returns detailed information about
+ * @see GPlayApps::getAppsInfo() Returns detailed information about
  *     many android packages.
  * @see GPlayApps::getAppInLocales() Returns detailed information
  *     about an application from the Google Play store for an array of locales.
- * @see GPlayApps::getAppInAvailableLocales() Returns detailed
+ * @see GPlayApps::getAppInfoForAvailableLocales() Returns detailed
  *     information about the application in all available locales.
  */
 class HistogramRating implements \JsonSerializable

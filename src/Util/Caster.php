@@ -13,8 +13,8 @@ namespace Nelexa\GPlay\Util;
 
 use Nelexa\GPlay\Enum\CategoryEnum;
 use Nelexa\GPlay\Model\App;
-use Nelexa\GPlay\Model\AppDetail;
 use Nelexa\GPlay\Model\AppId;
+use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 
@@ -24,7 +24,7 @@ use Nelexa\GPlay\Model\Developer;
 final class Caster
 {
     /**
-     * @param string|int|Developer|App|AppDetail $developerId
+     * @param string|int|Developer|App|AppInfo $developerId
      *
      * @return string
      */
