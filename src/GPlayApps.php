@@ -706,9 +706,9 @@ class GPlayApps
     /**
      * Returns information about the developer for the specified locales.
      *
-     * @param string|Model\Developer|Model\App $developerId developer id as string,
-     *                                                      {@see Model\Developer} or
-     *                                                      {@see Model\App} object
+     * @param string|Model\Developer|Model\App $developerId developer id as
+     *                                                      string, {@see Model\Developer}
+     *                                                      or {@see Model\App} object
      * @param string[]                         $locales     array of locales
      *
      * @throws Exception\GooglePlayException if HTTP error is received
@@ -769,9 +769,9 @@ class GPlayApps
     /**
      * Returns an array of applications from the Google Play store by developer id.
      *
-     * @param string|Model\Developer|Model\App $developerId developer id as string,
-     *                                                      {@see Model\Developer} or
-     *                                                      {@see Model\App} object
+     * @param string|Model\Developer|Model\App $developerId developer id as
+     *                                                      string, {@see Model\Developer}
+     *                                                      or {@see Model\App} object
      *
      * @throws Exception\GooglePlayException if HTTP error is received
      *
