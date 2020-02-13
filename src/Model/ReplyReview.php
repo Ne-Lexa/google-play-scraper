@@ -17,7 +17,7 @@ use Nelexa\GPlay\GPlayApps;
  * Contains the developer’s reply to a review in the Google Play store.
  *
  * @see Review Contains review of application on Google Play store.
- * @see GPlayApps::getAppReviews() Returns reviews of the
+ * @see GPlayApps::getReviews() Returns reviews of the
  *     Android app in the Google Play store.
  */
 class ReplyReview implements \JsonSerializable

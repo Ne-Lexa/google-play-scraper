@@ -11,8 +11,8 @@ use Nelexa\GPlay\Enum\SortEnum;
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\App;
-use Nelexa\GPlay\Model\AppDetail;
 use Nelexa\GPlay\Model\AppId;
+use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\Permission;
@@ -46,7 +46,7 @@ final class GPlayAppsTest extends TestCase
      */
     private function getCacheInterface(): CacheInterface
     {
-        $cacheNamespace = 'nelexa.gplay.v3';
+        $cacheNamespace = 'gplay.scraper.v1';
 
         if (class_exists(\Redis::class)) {
             $psr6Cache = new RedisAdapter(RedisAdapter::createConnection('redis://localhost'), $cacheNamespace);
@@ -70,8 +70,8 @@ final class GPlayAppsTest extends TestCase
     public function testConstruct($defaultLocale, $defaultCountry, $actualLocale, $actualCountry): void
     {
         $gplay = new GPlayApps($defaultLocale, $defaultCountry);
-        self::assertSame($gplay->getLocale(), $actualLocale);
-        self::assertSame($gplay->getCountry(), $actualCountry);
+        self::assertSame($gplay->getDefaultLocale(), $actualLocale);
+        self::assertSame($gplay->getDefaultCountry(), $actualCountry);
     }
 
     /**
@@ -89,14 +89,14 @@ final class GPlayAppsTest extends TestCase
     public function testDefaultConstruct(): void
     {
         $gplay = new GPlayApps();
-        self::assertSame($gplay->getLocale(), GPlayApps::DEFAULT_LOCALE);
-        self::assertSame($gplay->getCountry(), GPlayApps::DEFAULT_COUNTRY);
+        self::assertSame($gplay->getDefaultLocale(), GPlayApps::DEFAULT_LOCALE);
+        self::assertSame($gplay->getDefaultCountry(), GPlayApps::DEFAULT_COUNTRY);
     }
 
     /**
      * @throws GooglePlayException
      */
-    public function testGetApp(): void
+    public function testGetAppInfo(): void
     {
         $this->gplay->setCache($this->getCacheInterface());
 
@@ -104,7 +104,7 @@ final class GPlayAppsTest extends TestCase
         $locale = 'es';
         $country = 'ca';
 
-        $app = $this->gplay->getApp(
+        $app = $this->gplay->getAppInfo(
             new AppId(
                 $appId,
                 $locale,
@@ -115,16 +115,16 @@ final class GPlayAppsTest extends TestCase
         self::assertEquals($app->getId(), $appId);
         self::assertEquals($app->getLocale(), LocaleHelper::getNormalizeLocale($locale));
 
-        $app2 = $this->gplay->getApp($appId);
+        $app2 = $this->gplay->getAppInfo($appId);
         self::assertEquals($app2->getId(), $appId);
         self::assertEquals($app2->getLocale(), GPlayApps::DEFAULT_LOCALE);
         self::assertNotEquals($app2, $app);
 
         $this->gplay
-            ->setLocale($locale)
-            ->setCountry($country)
+            ->setDefaultLocale($locale)
+            ->setDefaultCountry($country)
         ;
-        $app3 = $this->gplay->getApp($appId);
+        $app3 = $this->gplay->getAppInfo($appId);
         self::assertEquals($app3->getId(), $appId);
         self::assertEquals($app3->getLocale(), LocaleHelper::getNormalizeLocale($locale));
         self::assertEquals($app3, $app);
@@ -138,7 +138,7 @@ final class GPlayAppsTest extends TestCase
         $this->expectException(GooglePlayException::class);
         $this->expectExceptionMessage('404 Not Found');
 
-        $this->gplay->getApp(new AppId('com.example'));
+        $this->gplay->getAppInfo(new AppId('com.example'));
     }
 
     /**
@@ -149,12 +149,12 @@ final class GPlayAppsTest extends TestCase
      *
      * @throws GooglePlayException
      */
-    public function testGetAppInvalidAppId($appId, string $exceptionMessage): void
+    public function testGetAppInfoInvalidAppId($appId, string $exceptionMessage): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage($exceptionMessage);
 
-        $this->gplay->getApp($appId);
+        $this->gplay->getAppInfo($appId);
     }
 
     /**
@@ -179,7 +179,7 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetApps(): void
+    public function testGetAppsInfo(): void
     {
         /**
          * @var AppId[] $requests
@@ -189,10 +189,10 @@ final class GPlayAppsTest extends TestCase
             'com.android.chrome' => new AppId('com.android.chrome'),
         ];
 
-        $apps = $this->gplay->getApps($requests);
+        $apps = $this->gplay->getAppsInfo($requests);
 
         self::assertCount(\count($requests), $apps);
-        self::assertContainsOnlyInstancesOf(AppDetail::class, $apps);
+        self::assertContainsOnlyInstancesOf(AppInfo::class, $apps);
 
         foreach ($requests as $key => $request) {
             self::assertArrayHasKey($key, $apps);
@@ -203,7 +203,7 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetApps2(): void
+    public function testGetAppsInfo2(): void
     {
         /**
          * @var AppId[] $requests
@@ -215,10 +215,10 @@ final class GPlayAppsTest extends TestCase
             'com.android.chrome',
         ];
 
-        $apps = $this->gplay->getApps($requests);
+        $apps = $this->gplay->getAppsInfo($requests);
 
         self::assertCount(\count($requests), $apps);
-        self::assertContainsOnlyInstancesOf(AppDetail::class, $apps);
+        self::assertContainsOnlyInstancesOf(AppInfo::class, $apps);
 
         foreach ($requests as $key => $appId) {
             self::assertIsInt($key);
@@ -232,9 +232,9 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetAppsWithEmptyListIds(): void
     {
-        $appDetails = $this->gplay->getApps([]);
-        self::assertIsArray($appDetails);
-        self::assertEmpty($appDetails);
+        $apps = $this->gplay->getAppsInfo([]);
+        self::assertIsArray($apps);
+        self::assertEmpty($apps);
     }
 
     /**
@@ -252,21 +252,21 @@ final class GPlayAppsTest extends TestCase
             'com.example',
             'com.android.chrome',
         ];
-        $this->gplay->getApps($ids);
+        $this->gplay->getAppsInfo($ids);
     }
 
     /**
      * @throws GooglePlayException
      */
-    public function testGetAppInLocales(): void
+    public function testGetAppInfoForLocales(): void
     {
         $this->gplay->setConcurrency(6);
 
         $appId = 'com.google.android.calculator';
         $id = new AppId($appId, 'en', 'ru');
         $locales = ['en', 'es', 'fr', 'ru', 'kk', 'uk', 'ar', 'zh-TW', 'zt-CN'];
-        $apps = $this->gplay->getAppInLocales($id, $locales);
-        self::assertContainsOnlyInstancesOf(AppDetail::class, $apps);
+        $apps = $this->gplay->getAppInfoForLocales($id, $locales);
+        self::assertContainsOnlyInstancesOf(AppInfo::class, $apps);
 
         self::assertCount(\count($locales), $apps);
 
@@ -279,13 +279,13 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetAppInAvailableLocales(): void
+    public function testGetAppInfoForAvailableLocales(): void
     {
         $this->gplay->setConcurrency(10);
 
         $id = 'ru.yandex.metro';
-        $apps = $this->gplay->getAppInAvailableLocales($id);
-        self::assertContainsOnlyInstancesOf(AppDetail::class, $apps);
+        $apps = $this->gplay->getAppInfoForAvailableLocales($id);
+        self::assertContainsOnlyInstancesOf(AppInfo::class, $apps);
 
         self::assertTrue(\count(LocaleHelper::SUPPORTED_LOCALES) > \count($apps));
 
@@ -302,12 +302,12 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetAppInAvailableLocalesWithEmptyAppId(): void
+    public function testGetAppInfoForAvailableLocalesWithEmptyAppId(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Application ID cannot be empty');
 
-        $this->gplay->getAppInAvailableLocales('');
+        $this->gplay->getAppInfoForAvailableLocales('');
     }
 
     /**
@@ -373,14 +373,14 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetAppReviews(): void
+    public function testGetReviews(): void
     {
         $appId = new AppId(
             'com.google.android.webview',
             $locale = 'zh_TW',
             $country = 'cn'
         );
-        $reviews = $this->gplay->getAppReviews(
+        $reviews = $this->gplay->getReviews(
             $appId,
             $limit = 555,
             SortEnum::NEWEST()
@@ -389,7 +389,7 @@ final class GPlayAppsTest extends TestCase
         self::assertContainsOnlyInstancesOf(Review::class, $reviews);
 
         $firstActualReview = $reviews[0];
-        $expectedReview = $this->gplay->getAppReviewById($appId, $firstActualReview->getId());
+        $expectedReview = $this->gplay->getReviewById($appId, $firstActualReview->getId());
         self::assertEquals($expectedReview, $firstActualReview);
     }
 
@@ -398,7 +398,7 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetCategories(): void
     {
-        $this->gplay->setLocale('ru');
+        $this->gplay->setDefaultLocale('ru');
         $categories = $this->gplay->getCategories();
 
         self::assertNotEmpty($categories);
@@ -408,13 +408,13 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetCategoriesInLocales(): void
+    public function testGetCategoriesForLocales(): void
     {
-        $categoriesInLocales = $this->gplay->getCategoriesInLocales(['ru', 'en', 'es', 'be', 'fil', 'zh-TW']);
+        $categoriesForLocales = $this->gplay->getCategoriesForLocales(['ru', 'en', 'es', 'be', 'fil', 'zh-TW']);
 
-        self::assertNotEmpty($categoriesInLocales);
+        self::assertNotEmpty($categoriesForLocales);
 
-        foreach ($categoriesInLocales as $categories) {
+        foreach ($categoriesForLocales as $categories) {
             self::assertContainsOnlyInstancesOf(Category::class, $categories);
         }
     }
@@ -422,15 +422,15 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testGetCategoriesInAvailableLocales(): void
+    public function testGetCategoriesForAvailableLocales(): void
     {
         $this->gplay->setConcurrency(10);
 
-        $categoriesInAvailableLocales = $this->gplay->getCategoriesInAvailableLocales();
+        $categoriesForAvailableLocales = $this->gplay->getCategoriesForAvailableLocales();
 
-        self::assertNotEmpty($categoriesInAvailableLocales);
+        self::assertNotEmpty($categoriesForAvailableLocales);
 
-        foreach ($categoriesInAvailableLocales as $categories) {
+        foreach ($categoriesForAvailableLocales as $categories) {
             self::assertContainsOnlyInstancesOf(Category::class, $categories);
         }
     }
@@ -440,7 +440,7 @@ final class GPlayAppsTest extends TestCase
      */
     public function testDeveloperInfo(): void
     {
-        $this->gplay->setLocale('ru_RU');
+        $this->gplay->setDefaultLocale('ru_RU');
         $devInfo = $this->gplay->getDeveloperInfo(7935948260069539271);
 
         self::assertNotEmpty($devInfo->getId());
@@ -473,7 +473,7 @@ final class GPlayAppsTest extends TestCase
         $this->expectException(GooglePlayException::class);
         $this->expectExceptionMessage('Developer "Facebook" does not have a personalized page on Google Play.');
 
-        $app = $this->gplay->getApp(new AppId('com.facebook.katana'));
+        $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app);
     }
 
@@ -485,7 +485,7 @@ final class GPlayAppsTest extends TestCase
         $this->expectException(GooglePlayException::class);
         $this->expectExceptionMessage('Developer "Facebook" does not have a personalized page on Google Play.');
 
-        $app = $this->gplay->getApp(new AppId('com.facebook.katana'));
+        $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app->getDeveloper());
     }
 
@@ -503,9 +503,9 @@ final class GPlayAppsTest extends TestCase
     /**
      * @throws GooglePlayException
      */
-    public function testDevInfoInLocales(): void
+    public function testDevInfoForLocales(): void
     {
-        $devInfo = $this->gplay->getDeveloperInfoInLocales(5627378377477294831, ['ru_RU', 'uk', 'en', 'fr', 'be']);
+        $devInfo = $this->gplay->getDeveloperInfoForLocales(5627378377477294831, ['ru_RU', 'uk', 'en', 'fr', 'be']);
 
         self::assertNotEmpty($devInfo);
         self::assertContainsOnlyInstancesOf(Developer::class, $devInfo);
@@ -516,7 +516,7 @@ final class GPlayAppsTest extends TestCase
      */
     public function testSuggest(): void
     {
-        $suggest = $this->gplay->setLocale('ar')->getSearchSuggestions('Maps');
+        $suggest = $this->gplay->setDefaultLocale('ar')->getSearchSuggestions('Maps');
         self::assertNotEmpty($suggest);
     }
 
@@ -636,8 +636,8 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperApps(): void
     {
         $this->gplay
-            ->setLocale('ru_RU')
-            ->setCountry('be')
+            ->setDefaultLocale('ru_RU')
+            ->setDefaultCountry('be')
         ;
 
         $developerAppsById = $this->gplay->getDeveloperApps('5700313618786177705');
@@ -665,15 +665,15 @@ final class GPlayAppsTest extends TestCase
         }
 
         $appId = 'com.google.android.googlequicksearchbox';
-        $appDetail = $this->gplay
+        $appInfo = $this->gplay
             ->setProxy($torProxy)
             ->setTimeout(20.0)
             ->setConnectTimeout(20.0)
             ->setCache(null)
-            ->getApp($appId)
+            ->getAppInfo($appId)
         ;
 
-        self::assertSame($appDetail->getId(), $appId);
+        self::assertSame($appInfo->getId(), $appId);
     }
 
     /**
@@ -709,24 +709,24 @@ final class GPlayAppsTest extends TestCase
 
     public function testClone(): void
     {
-        $this->gplay->setLocale('ko_KR')->setCountry('ko');
+        $this->gplay->setDefaultLocale('ko_KR')->setDefaultCountry('ko');
 
-        self::assertEquals($this->gplay->getLocale(), 'ko_KR');
-        self::assertEquals($this->gplay->getCountry(), 'ko');
+        self::assertEquals($this->gplay->getDefaultLocale(), 'ko_KR');
+        self::assertEquals($this->gplay->getDefaultCountry(), 'ko');
 
         $anotherGplay = clone $this->gplay;
 
         self::assertNotSame($anotherGplay, $this->gplay);
 
-        self::assertEquals($anotherGplay->getLocale(), 'ko_KR');
-        self::assertEquals($anotherGplay->getCountry(), 'ko');
+        self::assertEquals($anotherGplay->getDefaultLocale(), 'ko_KR');
+        self::assertEquals($anotherGplay->getDefaultCountry(), 'ko');
 
-        $anotherGplay->setLocale('es_ES')->setCountry('es');
-        self::assertEquals($anotherGplay->getLocale(), 'es_ES');
-        self::assertEquals($anotherGplay->getCountry(), 'es');
+        $anotherGplay->setDefaultLocale('es_ES')->setDefaultCountry('es');
+        self::assertEquals($anotherGplay->getDefaultLocale(), 'es_ES');
+        self::assertEquals($anotherGplay->getDefaultCountry(), 'es');
 
-        self::assertEquals($this->gplay->getLocale(), 'ko_KR');
-        self::assertEquals($this->gplay->getCountry(), 'ko');
+        self::assertEquals($this->gplay->getDefaultLocale(), 'ko_KR');
+        self::assertEquals($this->gplay->getDefaultCountry(), 'ko');
     }
 
     /**
@@ -739,13 +739,13 @@ final class GPlayAppsTest extends TestCase
      *
      * @medium
      */
-    public function testReleaseDateInAllLocales(string $actualReleaseDate, string $packageName): void
+    public function testReleaseDateForAllLocales(string $actualReleaseDate, string $packageName): void
     {
-        $appDetails = $this->gplay->getAppInAvailableLocales($packageName);
+        $appInfos = $this->gplay->getAppInfoForAvailableLocales($packageName);
 
-        foreach ($appDetails as $appDetail) {
-            $released = $appDetail->getReleased();
-            $errorMessage = 'Error equals released date in ' . $appDetail->getLocale() . ' locale';
+        foreach ($appInfos as $appInfo) {
+            $released = $appInfo->getReleased();
+            $errorMessage = 'Error equals released date in ' . $appInfo->getLocale() . ' locale';
             self::assertSame(
                 $released->format('Y.m.d'),
                 $actualReleaseDate,

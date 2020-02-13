@@ -54,8 +54,8 @@ final class SaveGoogleImagesTest extends TestCase
      */
     public function testSaveIcon(): void
     {
-        $detailApp = $this->gplay->getApp('com.google.android.googlequicksearchbox');
-        $icon = $detailApp->getIcon();
+        $appInfo = $this->gplay->getAppInfo('com.google.android.googlequicksearchbox');
+        $icon = $appInfo->getIcon();
 
         $icon->setSize(128);
         $imageInfo = $icon->saveAs($this->destDirectory . '/icon_small.{ext}');
@@ -77,8 +77,8 @@ final class SaveGoogleImagesTest extends TestCase
      */
     public function testSaveImages(): void
     {
-        $detailApp = $this->gplay->getApp('com.rovio.angrybirdsfriends');
-        $screenshots = $detailApp->getScreenshots();
+        $appInfo = $this->gplay->getAppInfo('com.rovio.angrybirdsfriends');
+        $screenshots = $appInfo->getScreenshots();
         array_walk(
             $screenshots,
             static function (GoogleImage $image): void {

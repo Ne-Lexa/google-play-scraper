@@ -18,15 +18,15 @@ use Nelexa\GPlay\Model\Builder\AppBuilder;
  * Contains detailed information about the application from the Google Play store.
  *
  * @see App Basic information about the application from the Google Play store.
- * @see GPlayApps::getApp() Returns detailed information about the Android
+ * @see GPlayApps::getAppInfo() Returns detailed information about the Android
  *     application from the Google Play store.
- * @see GPlayApps::getApps() Returns detailed information about many android packages.
+ * @see GPlayApps::getAppsInfo() Returns detailed information about many android packages.
  * @see GPlayApps::getAppInLocales() Returns detailed information about an application
  *     from the Google Play store for an array of locales.
- * @see GPlayApps::getAppInAvailableLocales() Returns detailed information about the
+ * @see GPlayApps::getAppInfoForAvailableLocales() Returns detailed information about the
  *     application in all available locales.
  */
-final class AppDetail extends App
+final class AppInfo extends App
 {
     /** @var string Default currency. */
     private const DEFAULT_CURRENCY = 'USD';
@@ -327,7 +327,7 @@ final class AppDetail extends App
      *
      * @return float price or 0.00 if the app is free
      *
-     * @see AppDetail::getCurrency() Returns the price currency
+     * @see AppInfo::getCurrency() Returns the price currency
      *     of the app in the Google Play store.
      */
     public function getPrice(): float
@@ -488,7 +488,7 @@ final class AppDetail extends App
     /**
      * Checks for equality of applications.
      *
-     * @param AppDetail $otherApp application with which is compared
+     * @param AppInfo $otherApp application with which is compared
      *
      * @return bool `true` if the contents of the objects being changed are the same
      *              and `false` if the objects contain different data

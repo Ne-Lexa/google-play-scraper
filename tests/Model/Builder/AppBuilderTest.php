@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Nelexa\GPlay\Tests\Model\Builder;
 
 use Nelexa\GPlay\Model\App;
-use Nelexa\GPlay\Model\AppDetail;
+use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
@@ -32,7 +32,7 @@ final class AppBuilderTest extends TestCase
         $builder = App::newBuilder();
 
         try {
-            new App($builder);
+            $builder->build();
             self::fail('Application ID is null or empty');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Application ID cannot be null or empty', $e->getMessage());
@@ -41,7 +41,7 @@ final class AppBuilderTest extends TestCase
         $builder->setId($data['appId']);
 
         try {
-            new App($builder);
+            $builder->build();
             self::fail('Locale is null or empty');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Locale cannot be null or empty', $e->getMessage());
@@ -50,7 +50,7 @@ final class AppBuilderTest extends TestCase
         $builder->setLocale($data['locale']);
 
         try {
-            new App($builder);
+            $builder->build();
             self::fail('Country is null or empty');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Country cannot be null or empty', $e->getMessage());
@@ -59,7 +59,7 @@ final class AppBuilderTest extends TestCase
         $builder->setCountry($data['country']);
 
         try {
-            new App($builder);
+            $builder->build();
             self::fail('Application name is null or empty');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('application name cannot be null or empty', $e->getMessage());
@@ -68,7 +68,7 @@ final class AppBuilderTest extends TestCase
         $builder->setName($data['appName']);
 
         try {
-            new App($builder);
+            $builder->build();
             self::fail('Developer is null');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('developer cannot be null', $e->getMessage());
@@ -84,7 +84,7 @@ final class AppBuilderTest extends TestCase
         $builder->setDeveloper($developer);
 
         try {
-            new App($builder);
+            $builder->build();
             self::fail('Application icon is null');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Application icon cannot be null', $e->getMessage());
@@ -93,9 +93,7 @@ final class AppBuilderTest extends TestCase
         $icon = new GoogleImage($data['iconUrl']);
         $builder->setIcon($icon);
 
-        $app = new App($builder);
-
-        self::assertInstanceOf(App::class, $app);
+        $app = $builder->build();
 
         self::assertSame($app->getId(), $data['appId']);
         self::assertSame($app->getUrl(), $data['appUrl']);
@@ -121,7 +119,7 @@ final class AppBuilderTest extends TestCase
             ->setPriceText($data['priceText'])
         ;
 
-        $appPaid = new App($builder);
+        $appPaid = $builder->build();
         self::assertNotEquals($app, $appPaid);
 
         self::assertSame($appPaid->getSummary(), $data['summary']);
@@ -129,9 +127,9 @@ final class AppBuilderTest extends TestCase
         self::assertSame($appPaid->getPriceText(), $data['priceText']);
         self::assertFalse($appPaid->isFree());
 
-        // AppDetail
+        // AppInfo
         try {
-            new AppDetail($builder);
+            $builder->buildDetailInfo();
             self::fail('Application description is null or empty');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Application description cannot be null or empty', $e->getMessage());
@@ -140,7 +138,7 @@ final class AppBuilderTest extends TestCase
         $builder->setDescription($data['description']);
 
         try {
-            new AppDetail($builder);
+            $builder->buildDetailInfo();
             self::fail('Screenshots are empty');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Screenshots', $e->getMessage());
@@ -157,7 +155,7 @@ final class AppBuilderTest extends TestCase
         self::assertSame($builder->getScreenshots(), $data['screenshots']);
 
         try {
-            new AppDetail($builder);
+            $builder->buildDetailInfo();
             self::fail('Application category is null');
         } catch (\InvalidArgumentException $e) {
             self::assertStringContainsString('Application category cannot be null', $e->getMessage());
@@ -166,45 +164,45 @@ final class AppBuilderTest extends TestCase
         $category = new Category($data['categoryId'], $data['categoryName']);
         $builder->setCategory($category);
 
-        $appDetail = new AppDetail($builder);
-        self::assertNull($appDetail->getDeveloper()->getDescription());
-        self::assertSame($appDetail->getId(), $data['appId']);
-        self::assertSame($appDetail->getLocale(), $data['locale']);
-        self::assertSame($appDetail->getDescription(), $data['description']);
-        self::assertSame($appDetail->getScreenshots(), $data['screenshots']);
-        self::assertSame($appDetail->getCategory(), $category);
-        self::assertSame($appDetail->getCategory()->getId(), $data['categoryId']);
-        self::assertSame($appDetail->getCategory()->getName(), $data['categoryName']);
-        self::assertFalse($appDetail->getCategory()->isFamilyCategory());
+        $appInfo = $builder->buildDetailInfo();
+        self::assertNull($appInfo->getDeveloper()->getDescription());
+        self::assertSame($appInfo->getId(), $data['appId']);
+        self::assertSame($appInfo->getLocale(), $data['locale']);
+        self::assertSame($appInfo->getDescription(), $data['description']);
+        self::assertSame($appInfo->getScreenshots(), $data['screenshots']);
+        self::assertSame($appInfo->getCategory(), $category);
+        self::assertSame($appInfo->getCategory()->getId(), $data['categoryId']);
+        self::assertSame($appInfo->getCategory()->getName(), $data['categoryName']);
+        self::assertFalse($appInfo->getCategory()->isFamilyCategory());
 
-        self::assertNull($appDetail->getTranslatedFromLocale());
-        self::assertNull($appDetail->getCover());
-        self::assertNull($appDetail->getPrivacyPoliceUrl());
-        self::assertNull($appDetail->getCategoryFamily());
-        self::assertNull($appDetail->getVideo());
-        self::assertNull($appDetail->getRecentChanges());
-        self::assertFalse($appDetail->isEditorsChoice());
-        self::assertSame($appDetail->getInstalls(), 0);
-        self::assertSame($appDetail->getNumberVoters(), 0);
+        self::assertNull($appInfo->getTranslatedFromLocale());
+        self::assertNull($appInfo->getCover());
+        self::assertNull($appInfo->getPrivacyPoliceUrl());
+        self::assertNull($appInfo->getCategoryFamily());
+        self::assertNull($appInfo->getVideo());
+        self::assertNull($appInfo->getRecentChanges());
+        self::assertFalse($appInfo->isEditorsChoice());
+        self::assertSame($appInfo->getInstalls(), 0);
+        self::assertSame($appInfo->getNumberVoters(), 0);
         self::assertEquals(
-            $appDetail->getHistogramRating(),
+            $appInfo->getHistogramRating(),
             new HistogramRating(0, 0, 0, 0, 0)
         );
-        self::assertSame($appDetail->getPrice(), 0.0);
-        self::assertSame($appDetail->getCurrency(), 'USD');
-        self::assertNull($appDetail->getOffersIAPCost());
-        self::assertFalse($appDetail->isContainsIAP());
-        self::assertFalse($appDetail->isContainsAds());
-        self::assertNull($appDetail->getSize());
-        self::assertNull($appDetail->getAppVersion());
-        self::assertNull($appDetail->getAndroidVersion());
-        self::assertNull($appDetail->getMinAndroidVersion());
-        self::assertNull($appDetail->getContentRating());
-        self::assertNull($appDetail->getReleased());
-        self::assertNull($appDetail->getUpdated());
-        self::assertSame($appDetail->getNumberReviews(), 0);
-        self::assertIsArray($appDetail->getReviews());
-        self::assertEmpty($appDetail->getReviews());
+        self::assertSame($appInfo->getPrice(), 0.0);
+        self::assertSame($appInfo->getCurrency(), 'USD');
+        self::assertNull($appInfo->getOffersIAPCost());
+        self::assertFalse($appInfo->isContainsIAP());
+        self::assertFalse($appInfo->isContainsAds());
+        self::assertNull($appInfo->getSize());
+        self::assertNull($appInfo->getAppVersion());
+        self::assertNull($appInfo->getAndroidVersion());
+        self::assertNull($appInfo->getMinAndroidVersion());
+        self::assertNull($appInfo->getContentRating());
+        self::assertNull($appInfo->getReleased());
+        self::assertNull($appInfo->getUpdated());
+        self::assertSame($appInfo->getNumberReviews(), 0);
+        self::assertIsArray($appInfo->getReviews());
+        self::assertEmpty($appInfo->getReviews());
 
         $categoryFamily = new Category($data['categoryFamilyId'], $data['categoryFamilyName']);
         $video = new Video($data['videoThumbUrl'], $data['videoUrl']);
@@ -244,47 +242,47 @@ final class AppBuilderTest extends TestCase
             ->setReviews($data['reviews'])
         ;
 
-        $appDetail = new AppDetail($builder);
+        $appInfo = $builder->buildDetailInfo();
 
-        self::assertSame($appDetail->getDeveloper(), $developer);
-        self::assertSame($appDetail->getDeveloper()->getEmail(), $data['developerEmail']);
-        self::assertSame($appDetail->getDeveloper()->getAddress(), $data['developerAddress']);
-        self::assertSame($appDetail->getDeveloper()->getWebsite(), $data['developerSite']);
-        self::assertNull($appDetail->getDeveloper()->getDescription());
-        self::assertNull($appDetail->getDeveloper()->getCover());
-        self::assertNull($appDetail->getDeveloper()->getIcon());
+        self::assertSame($appInfo->getDeveloper(), $developer);
+        self::assertSame($appInfo->getDeveloper()->getEmail(), $data['developerEmail']);
+        self::assertSame($appInfo->getDeveloper()->getAddress(), $data['developerAddress']);
+        self::assertSame($appInfo->getDeveloper()->getWebsite(), $data['developerSite']);
+        self::assertNull($appInfo->getDeveloper()->getDescription());
+        self::assertNull($appInfo->getDeveloper()->getCover());
+        self::assertNull($appInfo->getDeveloper()->getIcon());
 
-        self::assertSame($appDetail->getTranslatedFromLocale(), $data['translatedFromLocale']);
-        self::assertSame($appDetail->getCover(), $data['cover']);
-        self::assertSame($appDetail->getPrivacyPoliceUrl(), $data['privacyPoliceUrl']);
-        self::assertSame($appDetail->getCategoryFamily(), $categoryFamily);
-        self::assertSame($appDetail->getCategoryFamily()->getId(), $data['categoryFamilyId']);
-        self::assertSame($appDetail->getCategoryFamily()->getName(), $data['categoryFamilyName']);
-        self::assertTrue($appDetail->getCategoryFamily()->isFamilyCategory());
-        self::assertSame($appDetail->getVideo(), $video);
-        self::assertSame($appDetail->getVideo()->getImageUrl(), $data['videoThumbUrl']);
-        self::assertSame($appDetail->getVideo()->getVideoUrl(), $data['videoUrl']);
-        self::assertSame($appDetail->getVideo()->getYoutubeId(), $data['youtubeId']);
-        self::assertSame($appDetail->getRecentChanges(), $data['recentChanges']);
-        self::assertSame($appDetail->isEditorsChoice(), $data['editorChoice']);
-        self::assertSame($appDetail->getInstalls(), $data['installs']);
-        self::assertSame($appDetail->getNumberVoters(), $data['numberVoters']);
-        self::assertSame($appDetail->getHistogramRating(), $data['histogramRating']);
-        self::assertSame($appDetail->getPrice(), $data['price']);
-        self::assertSame($appDetail->getCurrency(), $data['currency']);
-        self::assertSame($appDetail->getPriceText(), $data['priceTextEur']);
-        self::assertSame($appDetail->getOffersIAPCost(), $data['offersIAPCost']);
-        self::assertTrue($appDetail->isContainsIAP());
-        self::assertTrue($appDetail->isContainsAds());
-        self::assertSame($appDetail->getSize(), $data['size']);
-        self::assertSame($appDetail->getAppVersion(), $data['appVersion']);
-        self::assertSame($appDetail->getAndroidVersion(), $data['androidVersion']);
-        self::assertSame($appDetail->getMinAndroidVersion(), $data['minAndroidVersion']);
-        self::assertSame($appDetail->getContentRating(), $data['contentRating']);
-        self::assertSame($appDetail->getReleased(), $data['released']);
-        self::assertSame($appDetail->getUpdated(), $data['updated']);
-        self::assertSame($appDetail->getNumberReviews(), $data['numberReviews']);
-        self::assertSame($appDetail->getReviews(), $data['reviews']);
+        self::assertSame($appInfo->getTranslatedFromLocale(), $data['translatedFromLocale']);
+        self::assertSame($appInfo->getCover(), $data['cover']);
+        self::assertSame($appInfo->getPrivacyPoliceUrl(), $data['privacyPoliceUrl']);
+        self::assertSame($appInfo->getCategoryFamily(), $categoryFamily);
+        self::assertSame($appInfo->getCategoryFamily()->getId(), $data['categoryFamilyId']);
+        self::assertSame($appInfo->getCategoryFamily()->getName(), $data['categoryFamilyName']);
+        self::assertTrue($appInfo->getCategoryFamily()->isFamilyCategory());
+        self::assertSame($appInfo->getVideo(), $video);
+        self::assertSame($appInfo->getVideo()->getImageUrl(), $data['videoThumbUrl']);
+        self::assertSame($appInfo->getVideo()->getVideoUrl(), $data['videoUrl']);
+        self::assertSame($appInfo->getVideo()->getYoutubeId(), $data['youtubeId']);
+        self::assertSame($appInfo->getRecentChanges(), $data['recentChanges']);
+        self::assertSame($appInfo->isEditorsChoice(), $data['editorChoice']);
+        self::assertSame($appInfo->getInstalls(), $data['installs']);
+        self::assertSame($appInfo->getNumberVoters(), $data['numberVoters']);
+        self::assertSame($appInfo->getHistogramRating(), $data['histogramRating']);
+        self::assertSame($appInfo->getPrice(), $data['price']);
+        self::assertSame($appInfo->getCurrency(), $data['currency']);
+        self::assertSame($appInfo->getPriceText(), $data['priceTextEur']);
+        self::assertSame($appInfo->getOffersIAPCost(), $data['offersIAPCost']);
+        self::assertTrue($appInfo->isContainsIAP());
+        self::assertTrue($appInfo->isContainsAds());
+        self::assertSame($appInfo->getSize(), $data['size']);
+        self::assertSame($appInfo->getAppVersion(), $data['appVersion']);
+        self::assertSame($appInfo->getAndroidVersion(), $data['androidVersion']);
+        self::assertSame($appInfo->getMinAndroidVersion(), $data['minAndroidVersion']);
+        self::assertSame($appInfo->getContentRating(), $data['contentRating']);
+        self::assertSame($appInfo->getReleased(), $data['released']);
+        self::assertSame($appInfo->getUpdated(), $data['updated']);
+        self::assertSame($appInfo->getNumberReviews(), $data['numberReviews']);
+        self::assertSame($appInfo->getReviews(), $data['reviews']);
     }
 
     /**
@@ -401,9 +399,9 @@ final class AppBuilderTest extends TestCase
         ];
     }
 
-    public function testAppDetailEquals(): void
+    public function testAppInfoEquals(): void
     {
-        $builder = AppDetail::newBuilder()
+        $builder = AppInfo::newBuilder()
             ->setId('com.test')
             ->setName('test')
             ->setLocale('en_US')
@@ -437,18 +435,18 @@ final class AppBuilderTest extends TestCase
 
         $builder2 = clone $builder;
 
-        $appDetail = new AppDetail($builder);
-        $appDetail2 = new AppDetail($builder2);
-        self::assertEquals($appDetail2, $appDetail);
-        self::assertTrue($appDetail->equals($appDetail2));
+        $appInfo = $builder->buildDetailInfo();
+        $appInfo2 = new AppInfo($builder2);
+        self::assertEquals($appInfo2, $appInfo);
+        self::assertTrue($appInfo->equals($appInfo2));
 
         $builder2->setIcon(
             new GoogleImage(
                 'https://lh3.googleusercontent.com/v0e5DxXFtAlnNzdxgpEd6tcS5r6sKxd1oswufLlQFuqOmMjGAukJXrUN5RtHabg69A=s180'
             )
         );
-        $appDetail2 = new AppDetail($builder2);
-        self::assertNotEquals($appDetail2, $appDetail);
-        self::assertFalse($appDetail->equals($appDetail2));
+        $appInfo2 = new AppInfo($builder2);
+        self::assertNotEquals($appInfo2, $appInfo);
+        self::assertFalse($appInfo->equals($appInfo2));
     }
 }

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Model\Builder;
 
+use Nelexa\GPlay\Model\App;
+use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
@@ -860,5 +862,21 @@ class AppBuilder
         $this->reviews[] = $review;
 
         return $this;
+    }
+
+    /**
+     * @return App
+     */
+    public function build(): App
+    {
+        return new App($this);
+    }
+
+    /**
+     * @return AppInfo
+     */
+    public function buildDetailInfo(): AppInfo
+    {
+        return new AppInfo($this);
     }
 }

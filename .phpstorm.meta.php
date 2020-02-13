@@ -1,9 +1,6 @@
 <?php
 
 namespace PHPSTORM_META {
-
-    use function PHPUnit\Framework\returnArgument;
-
     registerArgumentsSet(
         "locales",
         'en_US', 'af', 'am', 'ar', 'az_AZ',
@@ -73,6 +70,18 @@ namespace PHPSTORM_META {
     );
 
     registerArgumentsSet(
+        'cache_ttl_sec',
+        null,
+        \DateInterval::createFromDateString('5 min'),
+        \DateInterval::createFromDateString('10 min'),
+        \DateInterval::createFromDateString('1 hour'),
+        \DateInterval::createFromDateString('1 day'),
+        60,
+        60 * 5,
+        60 * 60,
+    );
+
+    registerArgumentsSet(
         'sort',
         \Nelexa\GPlay\Enum\SortEnum::HELPFULNESS(),
         \Nelexa\GPlay\Enum\SortEnum::NEWEST(),
@@ -86,25 +95,119 @@ namespace PHPSTORM_META {
         \Nelexa\GPlay\Enum\PriceEnum::PAID(),
     );
 
+    registerArgumentsSet(
+        'age',
+        null,
+        \Nelexa\GPlay\Enum\AgeEnum::FIVE_UNDER(),
+        \Nelexa\GPlay\Enum\AgeEnum::SIX_EIGHT(),
+        \Nelexa\GPlay\Enum\AgeEnum::NINE_UP(),
+    );
+
+    registerArgumentsSet(
+        'category',
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY(),
+        \Nelexa\GPlay\Enum\CategoryEnum::ART_AND_DESIGN(),
+        \Nelexa\GPlay\Enum\CategoryEnum::AUTO_AND_VEHICLES(),
+        \Nelexa\GPlay\Enum\CategoryEnum::BEAUTY(),
+        \Nelexa\GPlay\Enum\CategoryEnum::BOOKS_AND_REFERENCE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::BUSINESS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::COMICS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::COMMUNICATION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::DATING(),
+        \Nelexa\GPlay\Enum\CategoryEnum::EDUCATION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::ENTERTAINMENT(),
+        \Nelexa\GPlay\Enum\CategoryEnum::EVENTS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FINANCE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FOOD_AND_DRINK(),
+        \Nelexa\GPlay\Enum\CategoryEnum::HEALTH_AND_FITNESS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::HOUSE_AND_HOME(),
+        \Nelexa\GPlay\Enum\CategoryEnum::LIBRARIES_AND_DEMO(),
+        \Nelexa\GPlay\Enum\CategoryEnum::LIFESTYLE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::MAPS_AND_NAVIGATION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::MEDICAL(),
+        \Nelexa\GPlay\Enum\CategoryEnum::MUSIC_AND_AUDIO(),
+        \Nelexa\GPlay\Enum\CategoryEnum::NEWS_AND_MAGAZINES(),
+        \Nelexa\GPlay\Enum\CategoryEnum::PARENTING(),
+        \Nelexa\GPlay\Enum\CategoryEnum::PERSONALIZATION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::PHOTOGRAPHY(),
+        \Nelexa\GPlay\Enum\CategoryEnum::PRODUCTIVITY(),
+        \Nelexa\GPlay\Enum\CategoryEnum::SHOPPING(),
+        \Nelexa\GPlay\Enum\CategoryEnum::SOCIAL(),
+        \Nelexa\GPlay\Enum\CategoryEnum::SPORTS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::TOOLS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::TRAVEL_AND_LOCAL(),
+        \Nelexa\GPlay\Enum\CategoryEnum::VIDEO_PLAYERS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::ANDROID_WEAR(),
+        \Nelexa\GPlay\Enum\CategoryEnum::WEATHER(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_ACTION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_ADVENTURE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_ARCADE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_BOARD(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_CARD(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_CASINO(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_CASUAL(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_EDUCATIONAL(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_MUSIC(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_PUZZLE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_ROLE_PLAYING(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_SIMULATION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_SPORTS(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_STRATEGY(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_TRIVIA(),
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_WORD(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_ACTION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_BRAINGAMES(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_CREATE(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_EDUCATION(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_MUSICVIDEO(),
+        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_PRETEND(),
+    );
+
+    registerArgumentsSet(
+        'limit',
+        \Nelexa\GPlay\GPlayApps::UNLIMIT,
+        50,
+        100,
+        150,
+        200,
+        250,
+        300,
+        350,
+        400,
+        500
+    );
+
     expectedArguments(\Nelexa\GPlay\GPlayApps::__construct(), 0, argumentsSet("locales"));
     expectedArguments(\Nelexa\GPlay\GPlayApps::__construct(), 1, argumentsSet("countries"));
     expectedArguments(\Nelexa\GPlay\GPlayApps::setConcurrency(), 0, 4, 8, 1, 2, 3, 5, 6, 7, 9, 10, 11, 12);
     expectedArguments(\Nelexa\GPlay\GPlayApps::setProxy(), 0, null, 'socks5://', 'https://', 'http://', 'socks4://', 'socks4a://', 'socks5h://', 'socks5://127.0.0.1:9050');
-    expectedArguments(\Nelexa\GPlay\GPlayApps::getAppInLocales(), 1, argumentsSet('locales_array'));
-    expectedArguments(\Nelexa\GPlay\GPlayApps::getAppReviews(), 2, argumentsSet('sort'));
-    expectedArguments(\Nelexa\GPlay\GPlayApps::getCategoriesInLocales(), 0, argumentsSet('locales_array'));
-    expectedArguments(\Nelexa\GPlay\GPlayApps::getDeveloperInfoInLocales(), 1, argumentsSet('locales_array'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::setCache(), 1, argumentsSet('cache_ttl_sec'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::setCacheTtl(), 0, argumentsSet('cache_ttl_sec'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getAppInfoForLocales(), 1, argumentsSet('locales_array'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getReviews(), 2, argumentsSet('sort'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getReviewById(), 1, 'gp:');
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getCategoriesForLocales(), 0, argumentsSet('locales_array'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getDeveloperInfoForLocales(), 1, argumentsSet('locales_array'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getSimilarApps(), 1, argumentsSet('limit'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::search(), 1, argumentsSet('limit'));
     expectedArguments(\Nelexa\GPlay\GPlayApps::search(), 2, argumentsSet('price'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getListApps(), 1, argumentsSet('age'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getListApps(), 2, argumentsSet('limit'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getTopApps(), 1, argumentsSet('age'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getTopApps(), 2, argumentsSet('limit'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getNewApps(), 1, argumentsSet('age'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::getNewApps(), 2, argumentsSet('limit'));
     expectedArguments(\Nelexa\GPlay\GPlayApps::saveGoogleImages(), 1, static function (\Nelexa\GPlay\Model\GoogleImage $image): string {
         $hash = $image->getHashUrl($hashAlgo = 'md5', $parts = 2, $partLength = 2);
         return 'path/to/screenshots/' . $hash . '.{ext}';
     });
-    expectedReturnValues(\Nelexa\GPlay\GPlayApps::getLocale(), argumentsSet('locales'));
-    expectedArguments(\Nelexa\GPlay\GPlayApps::setLocale(), 0, argumentsSet("locales"));
-    expectedReturnValues(\Nelexa\GPlay\GPlayApps::getCountry(), argumentsSet('countries'));
-    expectedArguments(\Nelexa\GPlay\GPlayApps::setCountry(), 0, argumentsSet("countries"));
+    expectedReturnValues(\Nelexa\GPlay\GPlayApps::getDefaultLocale(), argumentsSet('locales'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::setDefaultLocale(), 0, argumentsSet("locales"));
+    expectedReturnValues(\Nelexa\GPlay\GPlayApps::getDefaultCountry(), argumentsSet('countries'));
+    expectedArguments(\Nelexa\GPlay\GPlayApps::setDefaultCountry(), 0, argumentsSet("countries"));
 
     expectedArguments(\Nelexa\GPlay\Model\AppId::__construct(), 1, argumentsSet("locales"));
     expectedArguments(\Nelexa\GPlay\Model\AppId::__construct(), 2, argumentsSet("countries"));
-
 }
