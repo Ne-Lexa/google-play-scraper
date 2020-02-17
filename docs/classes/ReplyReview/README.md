@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **ReplyReview**
+
 # The `Nelexa\GPlay\Model\ReplyReview` class
 
 ## Introduction
@@ -30,10 +32,10 @@ Nelexa\GPlay\Model\ReplyReview implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ReplyReview {
-  -getDate(): DateTimeInterface: @1575805460 {
-    date: 2019-12-08T11:44:20+00:00
+  -getDate(): DateTimeInterface: @1581879989 {
+    date: 2020-02-16T19:06:29+00:00
   }
-  -getText(): string: "Thank you for feedback! Try to disable "Google location accuracy" in your device settings. It should help you."
+  -getText(): string: "We will think about adding UK maps in the near future. Thank you for the feedback!"
   -asArray(): array: …
   -jsonSerialize(): mixed: …
 }
@@ -46,8 +48,10 @@ echo json_encode($replyReview, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSO
 Output:
 ```json
 {
-    "date": "2019-12-08T11:44:20+00:00",
-    "timestamp": 1575805460,
-    "text": "Thank you for feedback! Try to disable \"Google location accuracy\" in your device settings. It should help you."
+    "date": "2020-02-16T19:06:29+00:00",
+    "timestamp": 1581879989,
+    "text": "We will think about adding UK maps in the near future. Thank you for the feedback!"
 }
 ```
+
+[Documentation](../../README.md) > **ReplyReview**

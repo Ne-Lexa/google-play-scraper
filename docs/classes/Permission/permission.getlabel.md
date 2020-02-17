@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Permission](README.md) > **getLabel**
+
 # Nelexa\GPlay\Model\Permission::getLabel
 `Nelexa\GPlay\Model\Permission::getLabel`
 
@@ -17,3 +19,4 @@ This function has no parameters.
 ## Return Values
 Returns `string`
 
+[Documentation](../../README.md) > [Permission](README.md) > **getLabel**

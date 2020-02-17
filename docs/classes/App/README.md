@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **App**
+
 # The `Nelexa\GPlay\Model\App` class
 
 ## Introduction
@@ -55,17 +57,17 @@ Nelexa\GPlay\Model\App extends Nelexa\GPlay\Model\AppId implements JsonSerializa
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\App {
-  -getId(): string: "jp.co.ofcr.cm00"
+  -getId(): string: "com.kristanix.android.jigsawpuzzleepic"
   -getLocale(): string: "en_US"
   -getCountry(): string: "us"
-  -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00"
-  -getFullUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&hl=en_US&gl=us"
-  -getName(): string: "Cooking Mama: Let's cook!"
-  -getSummary(): ?string: "Make scrumptious food and serve it!"
+  -getUrl(): string: "https://play.google.com/store/apps/details?id=com.kristanix.android.jigsawpuzzleepic"
+  -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.kristanix.android.jigsawpuzzleepic&hl=en_US&gl=us"
+  -getName(): string: "Jigsaw Puzzles Epic"
+  -getSummary(): ?string: "Jigsaw Puzzles Epic: Jigsaw game with over 10,000 beautiful puzzles!"
   -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-    -getId(): string: "5667641639682181100"
-    -getUrl(): string: "https://play.google.com/store/apps/dev?id=5667641639682181100"
-    -getName(): string: "Office Create Corp."
+    -getId(): string: "5808801354978445358"
+    -getUrl(): string: "https://play.google.com/store/apps/dev?id=5808801354978445358"
+    -getName(): string: "Kristanix Games"
     -getDescription(): ?string: null
     -getWebsite(): ?string: null
     -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -76,12 +78,12 @@ class Nelexa\GPlay\Model\App {
     -jsonSerialize(): mixed: …
   }
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw=s0"
+    -getUrl(): string: "https://lh3.googleusercontent.com/-Qb2u9InIcCiH4obms_Np4tCgCVG0WWwQml6qNK70X4tT3Iabj5ggcXH3jhLchj2UEvr"
+    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-Qb2u9InIcCiH4obms_Np4tCgCVG0WWwQml6qNK70X4tT3Iabj5ggcXH3jhLchj2UEvr=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
+    -__toString(): string: "https://lh3.googleusercontent.com/-Qb2u9InIcCiH4obms_Np4tCgCVG0WWwQml6qNK70X4tT3Iabj5ggcXH3jhLchj2UEvr"
   }
-  -getScore(): float: 4.3656025
+  -getScore(): float: 4.50017
   -getPriceText(): ?string: null
   -isFree(): bool: true
   -asArray(): array: …
@@ -96,16 +98,16 @@ echo json_encode($app, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_UNESCA
 Output:
 ```json
 {
-    "id": "jp.co.ofcr.cm00",
-    "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00",
+    "id": "com.kristanix.android.jigsawpuzzleepic",
+    "url": "https://play.google.com/store/apps/details?id=com.kristanix.android.jigsawpuzzleepic",
     "locale": "en_US",
     "country": "us",
-    "name": "Cooking Mama: Let's cook!",
-    "summary": "Make scrumptious food and serve it!",
+    "name": "Jigsaw Puzzles Epic",
+    "summary": "Jigsaw Puzzles Epic: Jigsaw game with over 10,000 beautiful puzzles!",
     "developer": {
-        "id": "5667641639682181100",
-        "url": "https://play.google.com/store/apps/dev?id=5667641639682181100",
-        "name": "Office Create Corp.",
+        "id": "5808801354978445358",
+        "url": "https://play.google.com/store/apps/dev?id=5808801354978445358",
+        "name": "Kristanix Games",
         "description": null,
         "website": null,
         "icon": null,
@@ -113,8 +115,10 @@ Output:
         "email": null,
         "address": null
     },
-    "icon": "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw",
-    "score": 4.3656025,
+    "icon": "https://lh3.googleusercontent.com/-Qb2u9InIcCiH4obms_Np4tCgCVG0WWwQml6qNK70X4tT3Iabj5ggcXH3jhLchj2UEvr",
+    "score": 4.50017,
     "priceText": null
 }
 ```
+
+[Documentation](../../README.md) > **App**

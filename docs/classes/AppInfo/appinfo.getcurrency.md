@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCurrency**
+
 # Nelexa\GPlay\Model\AppInfo::getCurrency
 `Nelexa\GPlay\Model\AppInfo::getCurrency` — Returns the price currency of the app in the Google Play store.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 currency price of the application, default USD
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCurrency**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [App](README.md) > **jsonSerialize**
+
 # Nelexa\GPlay\Model\App::jsonSerialize
 `Nelexa\GPlay\Model\App::jsonSerialize` — Specify data which should be serialized to JSON.
 
@@ -16,3 +18,5 @@ which is a value of any type other than a `resource`
 
 ## See Also
 * :link: [https://php.net/manual/en/jsonserializable.jsonserialize.php](https://php.net/manual/en/jsonserializable.jsonserialize.php) - JsonSerializable::jsonSerialize
+
+[Documentation](../../README.md) > [App](README.md) > **jsonSerialize**

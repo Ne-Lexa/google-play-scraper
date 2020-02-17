@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Developer](README.md) > **getAddress**
+
 # Nelexa\GPlay\Model\Developer::getAddress
 `Nelexa\GPlay\Model\Developer::getAddress` — Returns the address of the developer.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 developer address or `null`
 
+[Documentation](../../README.md) > [Developer](README.md) > **getAddress**

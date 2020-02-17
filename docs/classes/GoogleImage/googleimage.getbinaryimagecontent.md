@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **getBinaryImageContent**
+
 # Nelexa\GPlay\Model\GoogleImage::getBinaryImageContent
 `Nelexa\GPlay\Model\GoogleImage::getBinaryImageContent` — Returns binary image contents.
 
@@ -15,3 +17,5 @@ binary image content
 
 ## Errors/Exceptions
 * Throws [Nelexa\GPlay\Exception\GooglePlayException](../GooglePlayException/README.md) if an HTTP error occurred
+
+[Documentation](../../README.md) > [GoogleImage](README.md) > **getBinaryImageContent**

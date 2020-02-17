@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **saveGoogleImages**
+
 # Nelexa\GPlay\GPlayApps::saveGoogleImages
 `Nelexa\GPlay\GPlayApps::saveGoogleImages` — Asynchronously saves images from googleusercontent.com and similar URLs to disk.
 
@@ -61,17 +63,6 @@ $imageInfos = $gplay
 ```php
 array:15 [
     0 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/Qty-abgT_-kvC_uU-cDgY9YyGqVbjMxoHjHKF5fBCEuBLv64Xn88RXY5hhcom92q3pE=s700"
-      -getFilename(): string: "screenshots/6b/bb/6bbb94f8b009399ed1bc51d82dc9abc1.png"
-      -getMimeType(): string: "image/png"
-      -getExtension(): string: "png"
-      -getWidth(): int: 394
-      -getHeight(): int: 700
-      -getFilesize(): int: 266242
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    1 => class Nelexa\GPlay\Model\ImageInfo {
       -getUrl(): string: "https://lh3.googleusercontent.com/0Wp_JWb55MC6uygq04cbRi6sZp1ygf2tASy_NxCiVislgV0aECPtnVjkfJBSX48tOQE=s700"
       -getFilename(): string: "screenshots/5b/53/5b534ca8013eaa6eba692eb99a7d857a.png"
       -getMimeType(): string: "image/png"
@@ -79,6 +70,17 @@ array:15 [
       -getWidth(): int: 394
       -getHeight(): int: 700
       -getFilesize(): int: 308317
+      -asArray(): array: …
+      -jsonSerialize(): mixed: …
+    }
+    1 => class Nelexa\GPlay\Model\ImageInfo {
+      -getUrl(): string: "https://lh3.googleusercontent.com/9OxTFiQV8AEPSlAkgkNu-Vz9wyEdvQCt3IjcuskfZ7neQACjFAHX9CpW7Th5RCT4n7lQ=s700"
+      -getFilename(): string: "screenshots/3d/1b/3d1b9ce3cd4a8da69c351613142dc7ed.png"
+      -getMimeType(): string: "image/png"
+      -getExtension(): string: "png"
+      -getWidth(): int: 525
+      -getHeight(): int: 700
+      -getFilesize(): int: 386558
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
@@ -119,3 +121,5 @@ class Nelexa\GPlay\Model\ImageInfo {
 ## See Also
 * [Nelexa\GPlay\Model\GoogleImage](../GoogleImage/README.md) - Contains a link to the image, allows you to customize its size and download it.
 * [Nelexa\GPlay\Model\ImageInfo](../ImageInfo/README.md) - Contains information about the image.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **saveGoogleImages**

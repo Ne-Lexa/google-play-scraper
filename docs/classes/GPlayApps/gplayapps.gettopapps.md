@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getTopApps**
+
 # Nelexa\GPlay\GPlayApps::getTopApps
 `Nelexa\GPlay\GPlayApps::getTopApps` — Returns an array of **top apps** from the Google Play store for the specified category.
 
@@ -28,7 +30,7 @@ $apps = $gplay->getTopApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:279 [
+array:280 [
     "com.gym.racegame" => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.gym.racegame"
       -getLocale(): string: "en_US"
@@ -56,7 +58,7 @@ array:279 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
       }
-      -getScore(): float: 3.9453926
+      -getScore(): float: 3.8746777
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -89,7 +91,7 @@ array:279 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk"
       }
-      -getScore(): float: 4.1609874
+      -getScore(): float: 4.1582165
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -113,7 +115,40 @@ $apps = $gplay->getTopApps(
   <summary>Results</summary>
 
 ```php
-array:524 [
+array:530 [
+    "com.BallGames.Woodturning" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.BallGames.Woodturning"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.BallGames.Woodturning"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.BallGames.Woodturning&hl=en_US&gl=us"
+      -getName(): string: "Woodturning"
+      -getSummary(): ?string: "One lathe to rule them all"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "VOODOO"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=VOODOO"
+        -getName(): string: "VOODOO"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): mixed: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -getUrl(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ=s0"
+        -getBinaryImageContent(): string: …
+        -__toString(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ"
+      }
+      -getScore(): float: 3.7703204
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): mixed: …
+    }
     "com.trianglegames.squarebird" => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.trianglegames.squarebird"
       -getLocale(): string: "en_US"
@@ -141,40 +176,7 @@ array:524 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM"
       }
-      -getScore(): float: 4.207692
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    "com.maroieqrwlk.unpin" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.maroieqrwlk.unpin"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.maroieqrwlk.unpin"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.maroieqrwlk.unpin&hl=en_US&gl=us"
-      -getName(): string: "Pull the Pin"
-      -getSummary(): ?string: "Can you reach the pinnacle?"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "7948217467540814816"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7948217467540814816"
-        -getName(): string: "Popcore Games"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/1f8VVY8jrDNERyXOSGm_f_yKfpSg3wiZYrBXuojLSpCTUdCpyIt9sA6aCOWa1EDUt3OK"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/1f8VVY8jrDNERyXOSGm_f_yKfpSg3wiZYrBXuojLSpCTUdCpyIt9sA6aCOWa1EDUt3OK=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/1f8VVY8jrDNERyXOSGm_f_yKfpSg3wiZYrBXuojLSpCTUdCpyIt9sA6aCOWa1EDUt3OK"
-      }
-      -getScore(): float: 3.4897423
+      -getScore(): float: 4.1803513
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -194,7 +196,7 @@ $apps = $gplay->getTopApps();
   <summary>Results</summary>
 
 ```php
-array:1075 [
+array:1074 [
     "com.whatsapp" => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.whatsapp"
       -getLocale(): string: "en_US"
@@ -222,7 +224,7 @@ array:1075 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
       }
-      -getScore(): float: 4.2857103
+      -getScore(): float: 4.28501
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -255,7 +257,7 @@ array:1075 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d"
       }
-      -getScore(): float: 4.5814614
+      -getScore(): float: 4.581792
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -269,3 +271,5 @@ array:1075 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) - Limit for all available results.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getTopApps**

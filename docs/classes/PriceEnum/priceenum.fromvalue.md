@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **fromValue**
+
 # Nelexa\GPlay\Enum\PriceEnum::fromValue
 `Nelexa\GPlay\Enum\PriceEnum::fromValue` — Returns first enum of the specified constant value.
 
@@ -13,3 +15,4 @@ Checked value.
 ## Return Values
 the enum constant of the specified constant value.
 
+[Documentation](../../README.md) > [PriceEnum](README.md) > **fromValue**

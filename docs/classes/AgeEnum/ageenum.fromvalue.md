@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AgeEnum](README.md) > **fromValue**
+
 # Nelexa\GPlay\Enum\AgeEnum::fromValue
 `Nelexa\GPlay\Enum\AgeEnum::fromValue` — Returns first enum of the specified constant value.
 
@@ -13,3 +15,4 @@ Checked value.
 ## Return Values
 the enum constant of the specified constant value.
 
+[Documentation](../../README.md) > [AgeEnum](README.md) > **fromValue**

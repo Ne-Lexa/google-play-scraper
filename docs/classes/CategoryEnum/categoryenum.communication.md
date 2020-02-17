@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **COMMUNICATION**
+
 # Nelexa\GPlay\Enum\CategoryEnum::COMMUNICATION
 `Nelexa\GPlay\Enum\CategoryEnum::COMMUNICATION` — Returns the category id 'Communication'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "COMMUNICATION"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **COMMUNICATION**

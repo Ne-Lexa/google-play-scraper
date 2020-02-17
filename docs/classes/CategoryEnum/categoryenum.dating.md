@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **DATING**
+
 # Nelexa\GPlay\Enum\CategoryEnum::DATING
 `Nelexa\GPlay\Enum\CategoryEnum::DATING` — Returns the category id 'Dating'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "DATING"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **DATING**

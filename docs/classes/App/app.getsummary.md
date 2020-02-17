@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [App](README.md) > **getSummary**
+
 # Nelexa\GPlay\Model\App::getSummary
 `Nelexa\GPlay\Model\App::getSummary` — Returns application summary.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 application summary
 
+[Documentation](../../README.md) > [App](README.md) > **getSummary**

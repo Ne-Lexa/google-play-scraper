@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AgeEnum](README.md) > **values**
+
 # Nelexa\GPlay\Enum\AgeEnum::values
 `Nelexa\GPlay\Enum\AgeEnum::values` — Returns an array containing the constants of this enum type, in the order they're declared.
 
@@ -37,3 +39,5 @@ array:3 [
     …
   ]
 ```
+
+[Documentation](../../README.md) > [AgeEnum](README.md) > **values**

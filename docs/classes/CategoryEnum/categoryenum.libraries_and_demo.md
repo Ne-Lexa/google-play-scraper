@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **LIBRARIES_AND_DEMO**
+
 # Nelexa\GPlay\Enum\CategoryEnum::LIBRARIES_AND_DEMO
 `Nelexa\GPlay\Enum\CategoryEnum::LIBRARIES_AND_DEMO` — Returns the category id 'Libraries & Demo'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "LIBRARIES_AND_DEMO"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **LIBRARIES_AND_DEMO**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **Review**
+
 # The `Nelexa\GPlay\Model\Review` class
 
 ## Introduction
@@ -44,26 +46,26 @@ Nelexa\GPlay\Model\Review implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Review {
-  -getId(): string: "gp:AOqpTOHteVH-49OdkyZUCpJDHzkfoqTVV33a_METb56eVeP2GbszZ0VmhqFCblo_bdAWoi74gEFaXf7tw7RnTw"
-  -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.yandexnavi&reviewId=gp%3AAOqpTOHteVH-49OdkyZUCpJDHzkfoqTVV33a_METb56eVeP2GbszZ0VmhqFCblo_bdAWo…"
-  -getUserName(): string: "Дмитрий Крайнов"
-  -getText(): string: "Great app, but doesn't work correctly with Xiaomi Mi 9T Pro in terms of location defining. During the driving, application do not identify location an…"
+  -getId(): string: "gp:AOqpTOGYU8vuRNk_RGWoZQxbwCJ34fjyvs039F0jjWOwIhyyILKG4yY-FHdeNLnR0bctbBj1MfGdiAb-7TedPg"
+  -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.yandexnavi&reviewId=gp%3AAOqpTOGYU8vuRNk_RGWoZQxbwCJ34fjyvs039F0jjWOwIhyyILKG4yY-FHdeNLnR0bctb…"
+  -getUserName(): string: "Vitaly Baturchik"
+  -getText(): string: "Great app. Show the best routes, traffic jams. I use it even in my native city."
   -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mB6tTQU_fTGrFPUZpy4xQPWCinV4eg3q5W4uxKB6g=s64"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mB6tTQU_fTGrFPUZpy4xQPWCinV4eg3q5W4uxKB6g=s0"
+    -getUrl(): string: "https://lh3.googleusercontent.com/-tQpGiOCYY94/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rec-XKxbFIL5o_K3mDoO-0bbBWm4A/s64/"
+    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-tQpGiOCYY94/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rec-XKxbFIL5o_K3mDoO-0bbBWm4A/s0/"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mB6tTQU_fTGrFPUZpy4xQPWCinV4eg3q5W4uxKB6g=s64"
+    -__toString(): string: "https://lh3.googleusercontent.com/-tQpGiOCYY94/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rec-XKxbFIL5o_K3mDoO-0bbBWm4A/s64/"
   }
-  -getDate(): ?DateTimeInterface: @1575785907 {
-    date: 2019-12-08T06:18:27+00:00
+  -getDate(): ?DateTimeInterface: @1575959899 {
+    date: 2019-12-10T06:38:19+00:00
   }
-  -getScore(): int: 2
-  -getCountLikes(): int: 10
+  -getScore(): int: 5
+  -getCountLikes(): int: 45
   -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-    -getDate(): DateTimeInterface: @1575805460 {
-      date: 2019-12-08T11:44:20+00:00
+    -getDate(): DateTimeInterface: @1575983861 {
+      date: 2019-12-10T13:17:41+00:00
     }
-    -getText(): string: "Thank you for feedback! Try to disable "Google location accuracy" in your device settings. It should help you."
+    -getText(): string: "Thank you!"
     -asArray(): array: …
     -jsonSerialize(): mixed: …
   }
@@ -79,19 +81,21 @@ echo json_encode($review, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_UNE
 Output:
 ```json
 {
-    "id": "gp:AOqpTOHteVH-49OdkyZUCpJDHzkfoqTVV33a_METb56eVeP2GbszZ0VmhqFCblo_bdAWoi74gEFaXf7tw7RnTw",
-    "url": "https://play.google.com/store/apps/details?id=ru.yandex.yandexnavi&reviewId=gp%3AAOqpTOHteVH-49OdkyZUCpJDHzkfoqTVV33a_METb56eVeP2GbszZ0VmhqFCblo_bdAWoi74gEFaXf7tw7RnTw",
-    "userName": "Дмитрий Крайнов",
-    "text": "Great app, but doesn't work correctly with Xiaomi Mi 9T Pro in terms of location defining. During the driving, application do not identify location and speed correct. Other apps on the same device work normally. Very sad with this.",
-    "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mB6tTQU_fTGrFPUZpy4xQPWCinV4eg3q5W4uxKB6g=s64",
-    "date": "2019-12-08T06:18:27+00:00",
-    "timestamp": 1575785907,
-    "score": 2,
-    "countLikes": 10,
+    "id": "gp:AOqpTOGYU8vuRNk_RGWoZQxbwCJ34fjyvs039F0jjWOwIhyyILKG4yY-FHdeNLnR0bctbBj1MfGdiAb-7TedPg",
+    "url": "https://play.google.com/store/apps/details?id=ru.yandex.yandexnavi&reviewId=gp%3AAOqpTOGYU8vuRNk_RGWoZQxbwCJ34fjyvs039F0jjWOwIhyyILKG4yY-FHdeNLnR0bctbBj1MfGdiAb-7TedPg",
+    "userName": "Vitaly Baturchik",
+    "text": "Great app. Show the best routes, traffic jams. I use it even in my native city.",
+    "avatar": "https://lh3.googleusercontent.com/-tQpGiOCYY94/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rec-XKxbFIL5o_K3mDoO-0bbBWm4A/s64/",
+    "date": "2019-12-10T06:38:19+00:00",
+    "timestamp": 1575959899,
+    "score": 5,
+    "countLikes": 45,
     "reply": {
-        "date": "2019-12-08T11:44:20+00:00",
-        "timestamp": 1575805460,
-        "text": "Thank you for feedback! Try to disable \"Google location accuracy\" in your device settings. It should help you."
+        "date": "2019-12-10T13:17:41+00:00",
+        "timestamp": 1575983861,
+        "text": "Thank you!"
     }
 }
 ```
+
+[Documentation](../../README.md) > **Review**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [ImageInfo](README.md) > **getMimeType**
+
 # Nelexa\GPlay\Model\ImageInfo::getMimeType
 `Nelexa\GPlay\Model\ImageInfo::getMimeType` — Returns the mime type of the image.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 image mime-type
 
+[Documentation](../../README.md) > [ImageInfo](README.md) > **getMimeType**

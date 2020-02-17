@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppInfoForAvailableLocales**
+
 # Nelexa\GPlay\GPlayApps::getAppInfoForAvailableLocales
 `Nelexa\GPlay\GPlayApps::getAppInfoForAvailableLocales` — Returns detailed application information for all available locales.
 
@@ -62,7 +64,7 @@ array:3 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
       }
-      -getScore(): float: 3.8194444
+      -getScore(): float: 3.851852
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -jsonSerialize(): mixed: …
@@ -103,13 +105,13 @@ array:3 [
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
       -getRecentChanges(): ?string: "Problemen opgelost"
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 595303
+      -getInstalls(): int: 596014
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 1259
+        -getFiveStars(): int: 1281
         -getFourStars(): int: 191
         -getThreeStars(): int: 151
-        -getTwoStars(): int: 221
-        -getOneStar(): int: 352
+        -getTwoStars(): int: 211
+        -getOneStar(): int: 343
         -asArray(): array: …
         -jsonSerialize(): mixed: …
       }
@@ -127,11 +129,11 @@ array:3 [
       -getReleased(): ?DateTimeInterface: @1502236800 {
         date: 2017-08-09T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1580899434 {
-        date: 2020-02-05T10:43:54+00:00
+      -getUpdated(): ?DateTimeInterface: @1581600058 {
+        date: 2020-02-13T13:20:58+00:00
       }
-      -getNumberVoters(): int: 2176
-      -getNumberReviews(): int: 556
+      -getNumberVoters(): int: 2180
+      -getNumberReviews(): int: 558
       -getReviews(): array:4 [
         0 => class Nelexa\GPlay\Model\Review {
           -getId(): string: "gp:AOqpTOFi7Kk_jVOllPRPnIosMlgQKqGd2uLTWb5TldsE4KjAOpnLMlxGW6eLrjT8wOQ8ziGNCTukqmr8vMBBFg"
@@ -148,7 +150,7 @@ array:3 [
             date: 2018-11-26T09:56:36+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 14
+          -getCountLikes(): int: 15
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
@@ -168,7 +170,7 @@ array:3 [
             date: 2018-12-26T11:31:20+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 56
+          -getCountLikes(): int: 57
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
@@ -204,7 +206,7 @@ array:3 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
       }
-      -getScore(): float: 3.8194444
+      -getScore(): float: 3.851852
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -jsonSerialize(): mixed: …
@@ -245,13 +247,13 @@ array:3 [
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
       -getRecentChanges(): ?string: "Problemen opgelost"
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 595303
+      -getInstalls(): int: 596014
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 1259
+        -getFiveStars(): int: 1281
         -getFourStars(): int: 191
         -getThreeStars(): int: 151
-        -getTwoStars(): int: 221
-        -getOneStar(): int: 352
+        -getTwoStars(): int: 211
+        -getOneStar(): int: 343
         -asArray(): array: …
         -jsonSerialize(): mixed: …
       }
@@ -269,11 +271,11 @@ array:3 [
       -getReleased(): ?DateTimeInterface: @1502236800 {
         date: 2017-08-09T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1580899434 {
-        date: 2020-02-05T10:43:54+00:00
+      -getUpdated(): ?DateTimeInterface: @1581600058 {
+        date: 2020-02-13T13:20:58+00:00
       }
-      -getNumberVoters(): int: 2176
-      -getNumberReviews(): int: 556
+      -getNumberVoters(): int: 2180
+      -getNumberReviews(): int: 558
       -getReviews(): array:0 []
       -asArray(): array: …
     }
@@ -285,3 +287,5 @@ array:3 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::setConcurrency()](gplayapps.setconcurrency.md) - Sets the limit of concurrent HTTP requests.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppInfoForAvailableLocales**

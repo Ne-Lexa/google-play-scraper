@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [SortEnum](README.md) > **containsValue**
+
 # Nelexa\GPlay\Enum\SortEnum::containsValue
 `Nelexa\GPlay\Enum\SortEnum::containsValue` — Checks if enum contains a passed value.
 
@@ -15,3 +17,4 @@ Strict check.
 ## Return Values
 Returns true if the value is defined in one of the constants.
 
+[Documentation](../../README.md) > [SortEnum](README.md) > **containsValue**

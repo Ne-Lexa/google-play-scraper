@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getResponse**
+
 # Nelexa\GPlay\Exception\GooglePlayException::getResponse
 `Nelexa\GPlay\Exception\GooglePlayException::getResponse` — Returns an HTTP response if present.
 
@@ -14,3 +16,5 @@ PSR-7 `ResponseInterface` or `null`
 
 ## See Also
 * :link: [https://www.php-fig.org/psr/psr-7/](https://www.php-fig.org/psr/psr-7/) - PSR-7: HTTP message interfaces
+
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getResponse**

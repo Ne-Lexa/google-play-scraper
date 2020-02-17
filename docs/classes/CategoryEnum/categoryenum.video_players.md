@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **VIDEO_PLAYERS**
+
 # Nelexa\GPlay\Enum\CategoryEnum::VIDEO_PLAYERS
 `Nelexa\GPlay\Enum\CategoryEnum::VIDEO_PLAYERS` — Returns the category id 'Video Players & Editors'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "VIDEO_PLAYERS"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **VIDEO_PLAYERS**

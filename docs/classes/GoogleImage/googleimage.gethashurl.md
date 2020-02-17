@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **getHashUrl**
+
 # Nelexa\GPlay\Model\GoogleImage::getHashUrl
 `Nelexa\GPlay\Model\GoogleImage::getHashUrl` — Returns a hash value for this object.
 
@@ -18,3 +20,4 @@ the length of the nested path
 ## Return Values
 unique hash value of this object
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **getHashUrl**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **HOUSE_AND_HOME**
+
 # Nelexa\GPlay\Enum\CategoryEnum::HOUSE_AND_HOME
 `Nelexa\GPlay\Enum\CategoryEnum::HOUSE_AND_HOME` — Returns the category id 'House & Home'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "HOUSE_AND_HOME"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **HOUSE_AND_HOME**

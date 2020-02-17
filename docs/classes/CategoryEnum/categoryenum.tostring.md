@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **__toString**
+
 # Nelexa\GPlay\Enum\CategoryEnum::__toString
 `Nelexa\GPlay\Enum\CategoryEnum::__toString` — Returns the value of this enum constant, as contained in the declaration.
 
@@ -15,3 +17,4 @@ This function has no parameters.
 ## Return Values
 Value of this enum constant (the array will be serialized in json).
 
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **__toString**

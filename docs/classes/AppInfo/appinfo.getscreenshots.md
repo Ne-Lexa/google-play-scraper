@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getScreenshots**
+
 # Nelexa\GPlay\Model\AppInfo::getScreenshots
 `Nelexa\GPlay\Model\AppInfo::getScreenshots` — Returns screenshots of the application.
 
@@ -19,3 +21,4 @@ This function has no parameters.
 ## Return Values
 array of screenshots
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getScreenshots**

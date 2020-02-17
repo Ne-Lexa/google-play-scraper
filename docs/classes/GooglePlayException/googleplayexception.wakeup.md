@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **__wakeup**
+
 # Nelexa\GPlay\Exception\GooglePlayException::__wakeup
 `Nelexa\GPlay\Exception\GooglePlayException::__wakeup`
 
@@ -16,3 +18,5 @@ This function has no parameters.
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **__wakeup**

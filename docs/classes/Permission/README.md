@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **Permission**
+
 # The `Nelexa\GPlay\Model\Permission` class
 
 ## Introduction
@@ -29,12 +31,12 @@ Nelexa\GPlay\Model\Permission implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Permission {
-  -getLabel(): string: "Photos/Media/Files"
+  -getLabel(): string: "Storage"
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw=s0"
+    -getUrl(): string: "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ"
+    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw"
+    -__toString(): string: "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ"
   }
   -getPermissions(): array:2 [
     0 => "read the contents of your USB storage"
@@ -52,11 +54,13 @@ echo json_encode($permission, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON
 Output:
 ```json
 {
-    "label": "Photos/Media/Files",
-    "icon": "https://lh3.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw",
+    "label": "Storage",
+    "icon": "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ",
     "permissions": [
         "read the contents of your USB storage",
         "modify or delete the contents of your USB storage"
     ]
 }
 ```
+
+[Documentation](../../README.md) > **Permission**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **valueOf**
+
 # Nelexa\GPlay\Enum\CategoryEnum::valueOf
 `Nelexa\GPlay\Enum\CategoryEnum::valueOf` — Returns the enum of the specified constant name.
 
@@ -15,3 +17,4 @@ the name of the constant
 ## Return Values
 the enum constant of the specified enum type with the specified name
 
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **valueOf**

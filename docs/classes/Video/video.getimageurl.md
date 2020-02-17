@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Video](README.md) > **getImageUrl**
+
 # Nelexa\GPlay\Model\Video::getImageUrl
 `Nelexa\GPlay\Model\Video::getImageUrl` — Returns the video thumbnail url.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 image url
 
+[Documentation](../../README.md) > [Video](README.md) > **getImageUrl**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PHOTOGRAPHY**
+
 # Nelexa\GPlay\Enum\CategoryEnum::PHOTOGRAPHY
 `Nelexa\GPlay\Enum\CategoryEnum::PHOTOGRAPHY` — Returns the category id 'Photography'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "PHOTOGRAPHY"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PHOTOGRAPHY**

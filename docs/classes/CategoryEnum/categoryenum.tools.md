@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **TOOLS**
+
 # Nelexa\GPlay\Enum\CategoryEnum::TOOLS
 `Nelexa\GPlay\Enum\CategoryEnum::TOOLS` — Returns the category id 'Tools'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "TOOLS"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **TOOLS**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **COMICS**
+
 # Nelexa\GPlay\Enum\CategoryEnum::COMICS
 `Nelexa\GPlay\Enum\CategoryEnum::COMICS` — Returns the category id 'Comics'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "COMICS"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **COMICS**

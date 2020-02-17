@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PRODUCTIVITY**
+
 # Nelexa\GPlay\Enum\CategoryEnum::PRODUCTIVITY
 `Nelexa\GPlay\Enum\CategoryEnum::PRODUCTIVITY` — Returns the category id 'Productivity'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "PRODUCTIVITY"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PRODUCTIVITY**

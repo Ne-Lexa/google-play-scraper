@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [SortEnum](README.md) > **NEWEST**
+
 # Nelexa\GPlay\Enum\SortEnum::NEWEST
 `Nelexa\GPlay\Enum\SortEnum::NEWEST` — Returns the value of the sorting of reviews by newest.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\SortEnum {
   -__toString(): string: "2"
 }
 ```
+
+[Documentation](../../README.md) > [SortEnum](README.md) > **NEWEST**

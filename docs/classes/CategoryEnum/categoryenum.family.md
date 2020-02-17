@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY**
+
 # Nelexa\GPlay\Enum\CategoryEnum::FAMILY
 `Nelexa\GPlay\Enum\CategoryEnum::FAMILY` — Returns the category id 'Family'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "FAMILY"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY**

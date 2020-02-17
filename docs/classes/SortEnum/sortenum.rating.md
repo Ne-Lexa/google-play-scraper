@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [SortEnum](README.md) > **RATING**
+
 # Nelexa\GPlay\Enum\SortEnum::RATING
 `Nelexa\GPlay\Enum\SortEnum::RATING` — Returns the value of the sorting of reviews by rating.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\SortEnum {
   -__toString(): string: "3"
 }
 ```
+
+[Documentation](../../README.md) > [SortEnum](README.md) > **RATING**

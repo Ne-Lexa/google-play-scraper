@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_WORD**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_WORD
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_WORD` — Returns the category id 'Word'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_WORD"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_WORD**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **containsValue**
+
 # Nelexa\GPlay\Enum\PriceEnum::containsValue
 `Nelexa\GPlay\Enum\PriceEnum::containsValue` — Checks if enum contains a passed value.
 
@@ -15,3 +17,4 @@ Strict check.
 ## Return Values
 Returns true if the value is defined in one of the constants.
 
+[Documentation](../../README.md) > [PriceEnum](README.md) > **containsValue**

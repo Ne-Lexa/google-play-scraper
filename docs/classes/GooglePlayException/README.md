@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **GooglePlayException**
+
 # The `Nelexa\GPlay\Exception\GooglePlayException` class
 
 ## Introduction
@@ -58,3 +60,5 @@ class Nelexa\GPlay\Exception\GooglePlayException {
   -getResponse(): ?Psr\Http\Message\ResponseInterface: …
 }
 ```
+
+[Documentation](../../README.md) > **GooglePlayException**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [ReplyReview](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\ReplyReview::__construct
 `Nelexa\GPlay\Model\ReplyReview::__construct` — Creates an object with information about the developer’s response to a review of an application in the Google Play store.
 
@@ -14,3 +16,5 @@ reply text
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [ReplyReview](README.md) > **__construct**

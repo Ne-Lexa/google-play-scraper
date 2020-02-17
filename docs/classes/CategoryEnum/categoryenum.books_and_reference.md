@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **BOOKS_AND_REFERENCE**
+
 # Nelexa\GPlay\Enum\CategoryEnum::BOOKS_AND_REFERENCE
 `Nelexa\GPlay\Enum\CategoryEnum::BOOKS_AND_REFERENCE` — Returns the category id 'Books & Reference'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "BOOKS_AND_REFERENCE"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **BOOKS_AND_REFERENCE**

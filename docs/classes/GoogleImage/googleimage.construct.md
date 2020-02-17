@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\GoogleImage::__construct
 `Nelexa\GPlay\Model\GoogleImage::__construct` — Creates a GoogleImage object from the URL of the googleusercontent.com.
 
@@ -14,3 +16,5 @@ keep parameters from URL
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [GoogleImage](README.md) > **__construct**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_TRIVIA**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_TRIVIA
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_TRIVIA` — Returns the category id 'Trivia'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_TRIVIA"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_TRIVIA**

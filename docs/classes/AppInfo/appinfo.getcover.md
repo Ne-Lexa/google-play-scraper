@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCover**
+
 # Nelexa\GPlay\Model\AppInfo::getCover
 `Nelexa\GPlay\Model\AppInfo::getCover` — Returns cover image.
 
@@ -22,3 +24,5 @@ cover image or `null`
 
 ## See Also
 * :link: [https://support.google.com/googleplay/android-developer/answer/1078870?hl=en](https://support.google.com/googleplay/android-developer/answer/1078870?hl=en) - Graphic assets, screenshots, & video. Section **Feature graphic**.
+
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCover**

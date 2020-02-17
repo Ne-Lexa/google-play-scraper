@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getDeveloperInfoForLocales**
+
 # Nelexa\GPlay\GPlayApps::getDeveloperInfoForLocales
 `Nelexa\GPlay\GPlayApps::getDeveloperInfoForLocales` — Returns information about the developer for the specified locales.
 
@@ -91,3 +93,5 @@ array:4 [
 ## See Also
 * [Nelexa\GPlay\GPlayApps::setConcurrency()](gplayapps.setconcurrency.md) - Sets the limit of concurrent HTTP requests.
 * [Nelexa\GPlay\GPlayApps::getDeveloperInfo()](gplayapps.getdeveloperinfo.md) - Returns information about the developer: name, icon, cover, description and website address.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getDeveloperInfoForLocales**

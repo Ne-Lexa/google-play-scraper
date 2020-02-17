@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getReviewById**
+
 # Nelexa\GPlay\GPlayApps::getReviewById
 `Nelexa\GPlay\GPlayApps::getReviewById` — Returns review of the Android app in the Google Play store by review id.
 
@@ -68,3 +70,4 @@ class Nelexa\GPlay\Model\Review {
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getReviewById**

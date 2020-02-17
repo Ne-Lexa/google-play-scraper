@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **ART_AND_DESIGN**
+
 # Nelexa\GPlay\Enum\CategoryEnum::ART_AND_DESIGN
 `Nelexa\GPlay\Enum\CategoryEnum::ART_AND_DESIGN` — Returns the category id 'Art & Design'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "ART_AND_DESIGN"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **ART_AND_DESIGN**

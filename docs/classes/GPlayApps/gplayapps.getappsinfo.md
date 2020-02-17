@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppsInfo**
+
 # Nelexa\GPlay\GPlayApps::getAppsInfo
 `Nelexa\GPlay\GPlayApps::getAppsInfo` — Returns the full detail of multiple applications.
 
@@ -61,7 +63,7 @@ array:2 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
       }
-      -getScore(): float: 4.370738
+      -getScore(): float: 4.371647
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -jsonSerialize(): mixed: …
@@ -102,15 +104,19 @@ array:2 [
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: "Thanks for choosing Chrome! This release includes stability and performance improvements."
+      -getRecentChanges(): ?string: """
+        Thanks for choosing Chrome! This release contains the following features, as well as stability and performance improvements: \n
+        \n
+        • Quieter notifications…
+        """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 6090507724
+      -getInstalls(): int: 6109119447
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 13585003
-        -getFourStars(): int: 2314160
-        -getThreeStars(): int: 1114345
-        -getTwoStars(): int: 545061
-        -getOneStar(): int: 1445057
+        -getFiveStars(): int: 13653105
+        -getFourStars(): int: 2319179
+        -getThreeStars(): int: 1115216
+        -getTwoStars(): int: 545239
+        -getOneStar(): int: 1451591
         -asArray(): array: …
         -jsonSerialize(): mixed: …
       }
@@ -128,55 +134,48 @@ array:2 [
       -getReleased(): ?DateTimeInterface: @1328572800 {
         date: 2012-02-07T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581455005 {
-        date: 2020-02-11T21:03:25+00:00
+      -getUpdated(): ?DateTimeInterface: @1581622298 {
+        date: 2020-02-13T19:31:38+00:00
       }
-      -getNumberVoters(): int: 19003628
-      -getNumberReviews(): int: 5552461
+      -getNumberVoters(): int: 19084332
+      -getNumberReviews(): int: 5581111
       -getReviews(): array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOEsmqp5FTgADw-dLlv2Rgdhnr5-aE2Ssv5yUNA55w6xFinXuBYTuUSfyEgpxxUfrRDAiYlEMrPDNyAIXl0"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOEsmqp5FTgADw-dLlv2Rgdhnr5-aE2Ssv5yUNA55w6xFinXuBYTuUSfyEgpxxUfrRD…"
-          -getUserName(): string: "Yanaica Reinink"
-          -getText(): string: "This app always worked fine but recently it's been having trouble on my device. I even had to switch to a different browser. Chrome won't load my page…"
+          -getId(): string: "gp:AOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZAUppOOGWOIwdUCDs"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZ…"
+          -getUserName(): string: "Stephen"
+          -getText(): string: "I thought it was just me (or my device - Samsung S10 tablet), but I see that many users are having crash problems with Chrome. I tried all of the fixe…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAlgN8IWBo27FAuQv8WTTT4mnEZyzPK5_n6s1wz=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAlgN8IWBo27FAuQv8WTTT4mnEZyzPK5_n6s1wz=s0"
+            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAlgN8IWBo27FAuQv8WTTT4mnEZyzPK5_n6s1wz=s64"
+            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581446345 {
-            date: 2020-02-11T18:39:05+00:00
+          -getDate(): ?DateTimeInterface: @1581778840 {
+            date: 2020-02-15T15:00:40+00:00
           }
-          -getScore(): int: 2
-          -getCountLikes(): int: 114
-          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-            -getDate(): DateTimeInterface: @1581447931 {
-              date: 2020-02-11T19:05:31+00:00
-            }
-            -getText(): string: "Hey Yanaica. Let's try resetting Chrome's app data. You can learn how in this help center article under the "Clear the app's cache" section: https://g…"
-            -asArray(): array: …
-            -jsonSerialize(): mixed: …
-          }
+          -getScore(): int: 1
+          -getCountLikes(): int: 260
+          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOE0uqCbq9NlXoyjCfnu0l5nRRKybZ0-hwT1T_RpJs7GlxyjtBtvVcL7yJbhY7RilHeMYfUya4gWM6xe0Tw"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOE0uqCbq9NlXoyjCfnu0l5nRRKybZ0-hwT1T_RpJs7GlxyjtBtvVcL7yJbhY7RilHe…"
-          -getUserName(): string: "Queen Lie"
-          -getText(): string: "Everyone can visit: ( BrowserGood. Com ) to install the best browser app. It's adblock and faster. Everytime I have chrome, and its not by choice, onl…"
+          -getId(): string: "gp:AOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkqoOZRUoC6qm4OXv7g"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkq…"
+          -getUserName(): string: "Janae Ask"
+          -getText(): string: "I've been a diehard chrome fan for years but I noticed today that my app updated and my home page button disappeared. I'm super annoyed and honestly I…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mADpm9XahajGfNYJRiRpG4lA6F_EU_Mri54vV-Q=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mADpm9XahajGfNYJRiRpG4lA6F_EU_Mri54vV-Q=s0"
+            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mADpm9XahajGfNYJRiRpG4lA6F_EU_Mri54vV-Q=s64"
+            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581353069 {
-            date: 2020-02-10T16:44:29+00:00
+          -getDate(): ?DateTimeInterface: @1581740061 {
+            date: 2020-02-15T04:14:21+00:00
           }
-          -getScore(): int: 2
-          -getCountLikes(): int: 77
+          -getScore(): int: 1
+          -getCountLikes(): int: 24
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
@@ -218,7 +217,7 @@ array:2 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
       }
-      -getScore(): float: 4.4578714
+      -getScore(): float: 4.4607687
       -getPriceText(): ?string: "R$ 19,99"
       -isFree(): bool: false
       -jsonSerialize(): mixed: …
@@ -270,13 +269,13 @@ array:2 [
         Correção de diversos erros
         """
       -isEditorsChoice(): bool: true
-      -getInstalls(): int: 27323886
+      -getInstalls(): int: 27372757
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 2405991
-        -getFourStars(): int: 246493
-        -getThreeStars(): int: 118772
-        -getTwoStars(): int: 65780
-        -getOneStar(): int: 247742
+        -getFiveStars(): int: 2414732
+        -getFourStars(): int: 246521
+        -getThreeStars(): int: 118459
+        -getTwoStars(): int: 65428
+        -getOneStar(): int: 246900
         -asArray(): array: …
         -jsonSerialize(): mixed: …
       }
@@ -297,45 +296,45 @@ array:2 [
       -getUpdated(): ?DateTimeInterface: @1581031098 {
         date: 2020-02-06T23:18:18+00:00
       }
-      -getNumberVoters(): int: 3084780
-      -getNumberReviews(): int: 1595838
+      -getNumberVoters(): int: 3092042
+      -getNumberReviews(): int: 1599717
       -getReviews(): array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOHXInX9_Y5AfQjP7N1nb71L_VaOG9CKzF3gtEefqCVZYvTocYmp5mVge3QHh0-QrIpuEj4lIzSpR1iwz5U"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOHXInX9_Y5AfQjP7N1nb71L_VaOG9CKzF3gtEefqCVZYvTocYmp5mVge3QHh0-…"
-          -getUserName(): string: "rafa fabi"
-          -getText(): string: "muito decepcionante pagar pelo jogo e mesmo assim deparar-se com problemas de jogabilidade. jogar online em endereços diferentes é praticamente imposs…"
+          -getId(): string: "gp:AOqpTOF9xom9V10RMHeOT7ZOg-0lZggY1fvhp7rXdiCJROaDn93a3sH1Uo6ECUCH907-Z0Sy81qsEF8wrxGrA-s"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOF9xom9V10RMHeOT7ZOg-0lZggY1fvhp7rXdiCJROaDn93a3sH1Uo6ECUCH907…"
+          -getUserName(): string: "Um usuário do Google"
+          -getText(): string: "Toda vez que eu abro o jogo após a nova atualização o jogo não abre, apenas da tela preta, e fecha, dei uma olhada em outras resenhas e vi outras pess…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAU5Be_53SOaVPuVirDHDE6iTyK0vCefsgK-VVUjA=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAU5Be_53SOaVPuVirDHDE6iTyK0vCefsgK-VVUjA=s0"
+            -getUrl(): string: "https://lh3.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s64"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAU5Be_53SOaVPuVirDHDE6iTyK0vCefsgK-VVUjA=s64"
+            -__toString(): string: "https://lh3.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581385130 {
-            date: 2020-02-11T01:38:50+00:00
+          -getDate(): ?DateTimeInterface: @1580406646 {
+            date: 2020-01-30T17:50:46+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 64
+          -getScore(): int: 4
+          -getCountLikes(): int: 1000
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOGccABYmTwtROuk6toEz8s3tkbKyeF_xnN56glRuELrr0bWvBi0m71So26rs3w3ji5degaHBw5V2mAmYFI"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOGccABYmTwtROuk6toEz8s3tkbKyeF_xnN56glRuELrr0bWvBi0m71So26rs3w…"
-          -getUserName(): string: "Andressa Santos"
-          -getText(): string: "Depois da última atualização, Não consigo conectar ao jogo/mundo multiplayer. Há erros na conexão por servidor e também não consigo conectar ao multip…"
+          -getId(): string: "gp:AOqpTOE9rwGIAQ6BEXIsbLzZEWSiEuWog_l5UnOFfDAvzsv2drkIGtMuZvGhjgqOABrBtRtGXHzr0Jq5_k2GI1s"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOE9rwGIAQ6BEXIsbLzZEWSiEuWog_l5UnOFfDAvzsv2drkIGtMuZvGhjgqOABr…"
+          -getUserName(): string: "Iralo `"
+          -getText(): string: "O jogo é excelente, super criativo e divertido. Não consigo entrar em um dos servidores ( Mineville City ) desde que comprei o jogo. Tudo o que aconte…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAtL3gJ8zGBmOeb6FGh7myKTfSlMEonTm9d2fko4g=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAtL3gJ8zGBmOeb6FGh7myKTfSlMEonTm9d2fko4g=s0"
+            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mApSsq3soGQoKLTguLGtUT6Ts1m4Bt1LgDK_YDMvg=s64"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mApSsq3soGQoKLTguLGtUT6Ts1m4Bt1LgDK_YDMvg=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAtL3gJ8zGBmOeb6FGh7myKTfSlMEonTm9d2fko4g=s64"
+            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mApSsq3soGQoKLTguLGtUT6Ts1m4Bt1LgDK_YDMvg=s64"
           }
-          -getDate(): ?DateTimeInterface: @1580688212 {
-            date: 2020-02-03T00:03:32+00:00
+          -getDate(): ?DateTimeInterface: @1581090202 {
+            date: 2020-02-07T15:43:22+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 626
+          -getScore(): int: 4
+          -getCountLikes(): int: 440
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
@@ -351,3 +350,5 @@ array:2 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::setConcurrency()](gplayapps.setconcurrency.md) - Sets the limit of concurrent HTTP requests.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppsInfo**

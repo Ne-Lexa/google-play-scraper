@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_PRETEND**
+
 # Nelexa\GPlay\Enum\CategoryEnum::FAMILY_PRETEND
 `Nelexa\GPlay\Enum\CategoryEnum::FAMILY_PRETEND` — Returns the category id 'Pretend play'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "FAMILY_PRETEND"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_PRETEND**

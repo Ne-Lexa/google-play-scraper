@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AgeEnum](README.md) > **ordinal**
+
 # Nelexa\GPlay\Enum\AgeEnum::ordinal
 `Nelexa\GPlay\Enum\AgeEnum::ordinal` — Returns the ordinal of this enum constant.
 
@@ -13,3 +15,4 @@ This function has no parameters.
 ## Return Values
 Ordinal of this enumeration constant.
 
+[Documentation](../../README.md) > [AgeEnum](README.md) > **ordinal**

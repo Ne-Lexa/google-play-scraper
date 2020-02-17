@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getPriceText**
+
 # Nelexa\GPlay\Model\AppInfo::getPriceText
 `Nelexa\GPlay\Model\AppInfo::getPriceText` — Returns the price of the application.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 application price or null if it is free
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getPriceText**

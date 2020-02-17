@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **setCache**
+
 # Nelexa\GPlay\GPlayApps::setCache
 `Nelexa\GPlay\GPlayApps::setCache` — Sets caching for HTTP requests.
 
@@ -15,3 +17,4 @@ TTL cached data
 ## Return Values
 returns the current class instance to allow method chaining
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **setCache**

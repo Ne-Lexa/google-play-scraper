@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getTranslatedFromLocale**
+
 # Nelexa\GPlay\Model\AppInfo::getTranslatedFromLocale
 `Nelexa\GPlay\Model\AppInfo::getTranslatedFromLocale` — Returns locale (language) of the original description.
 
@@ -16,3 +18,4 @@ This function has no parameters.
 if the developer added a translation of the description, then the
 value will be `null`, otherwise the original language of the application description
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getTranslatedFromLocale**

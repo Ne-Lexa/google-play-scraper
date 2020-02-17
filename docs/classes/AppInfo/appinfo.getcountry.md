@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCountry**
+
 # Nelexa\GPlay\Model\AppInfo::getCountry
 `Nelexa\GPlay\Model\AppInfo::getCountry` — Returns the country of the request for information about the application.
 
@@ -14,3 +16,4 @@ This function has no parameters.
 ## Return Values
 Country (affects prices). Default is 'us'.
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCountry**

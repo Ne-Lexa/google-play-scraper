@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [ImageInfo](README.md) > **getFilesize**
+
 # Nelexa\GPlay\Model\ImageInfo::getFilesize
 `Nelexa\GPlay\Model\ImageInfo::getFilesize` — Returns the size of the image file.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 image file size
 
+[Documentation](../../README.md) > [ImageInfo](README.md) > **getFilesize**

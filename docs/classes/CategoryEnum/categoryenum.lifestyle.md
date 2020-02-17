@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **LIFESTYLE**
+
 # Nelexa\GPlay\Enum\CategoryEnum::LIFESTYLE
 `Nelexa\GPlay\Enum\CategoryEnum::LIFESTYLE` — Returns the category id 'Lifestyle'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "LIFESTYLE"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **LIFESTYLE**

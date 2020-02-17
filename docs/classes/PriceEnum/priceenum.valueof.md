@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **valueOf**
+
 # Nelexa\GPlay\Enum\PriceEnum::valueOf
 `Nelexa\GPlay\Enum\PriceEnum::valueOf` — Returns the enum of the specified constant name.
 
@@ -15,3 +17,4 @@ the name of the constant
 ## Return Values
 the enum constant of the specified enum type with the specified name
 
+[Documentation](../../README.md) > [PriceEnum](README.md) > **valueOf**

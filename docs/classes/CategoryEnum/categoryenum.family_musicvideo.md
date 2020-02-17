@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_MUSICVIDEO**
+
 # Nelexa\GPlay\Enum\CategoryEnum::FAMILY_MUSICVIDEO
 `Nelexa\GPlay\Enum\CategoryEnum::FAMILY_MUSICVIDEO` — Returns the category id 'Family Music and Video'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "FAMILY_MUSICVIDEO"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_MUSICVIDEO**

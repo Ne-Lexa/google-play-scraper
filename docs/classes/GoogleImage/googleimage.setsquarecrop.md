@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setSquareCrop**
+
 # Nelexa\GPlay\Model\GoogleImage::setSquareCrop
 `Nelexa\GPlay\Model\GoogleImage::setSquareCrop` — Sets the use of square crop.
 
@@ -13,3 +15,4 @@ square crop
 ## Return Values
 returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setSquareCrop**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_BRAINGAMES**
+
 # Nelexa\GPlay\Enum\CategoryEnum::FAMILY_BRAINGAMES
 `Nelexa\GPlay\Enum\CategoryEnum::FAMILY_BRAINGAMES` — Returns the category id 'Family Brain Games'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "FAMILY_BRAINGAMES"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_BRAINGAMES**

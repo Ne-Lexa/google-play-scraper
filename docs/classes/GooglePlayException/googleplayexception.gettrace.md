@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getTrace**
+
 # Nelexa\GPlay\Exception\GooglePlayException::getTrace
 `Nelexa\GPlay\Exception\GooglePlayException::getTrace`
 
@@ -16,3 +18,5 @@ This function has no parameters.
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getTrace**

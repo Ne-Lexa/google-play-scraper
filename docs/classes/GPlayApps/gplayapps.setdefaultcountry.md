@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **setDefaultCountry**
+
 # Nelexa\GPlay\GPlayApps::setDefaultCountry
 `Nelexa\GPlay\GPlayApps::setDefaultCountry` — Sets the country of requests.
 
@@ -13,3 +15,4 @@ country for HTTP requests to Google Play
 ## Return Values
 returns the current class instance to allow method chaining
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **setDefaultCountry**

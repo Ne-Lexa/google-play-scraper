@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **TRAVEL_AND_LOCAL**
+
 # Nelexa\GPlay\Enum\CategoryEnum::TRAVEL_AND_LOCAL
 `Nelexa\GPlay\Enum\CategoryEnum::TRAVEL_AND_LOCAL` — Returns the category id 'Travel & Local'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "TRAVEL_AND_LOCAL"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **TRAVEL_AND_LOCAL**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [HistogramRating](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\HistogramRating::__construct
 `Nelexa\GPlay\Model\HistogramRating::__construct` — Creates an object with information about the rating of Android applications from the Google Play store.
 
@@ -20,3 +22,5 @@ one star app rating
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [HistogramRating](README.md) > **__construct**

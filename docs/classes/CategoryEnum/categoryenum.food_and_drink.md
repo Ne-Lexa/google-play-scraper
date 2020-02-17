@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FOOD_AND_DRINK**
+
 # Nelexa\GPlay\Enum\CategoryEnum::FOOD_AND_DRINK
 `Nelexa\GPlay\Enum\CategoryEnum::FOOD_AND_DRINK` — Returns the category id 'Food & Drink'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "FOOD_AND_DRINK"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FOOD_AND_DRINK**

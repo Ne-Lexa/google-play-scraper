@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getReviews**
+
 # Nelexa\GPlay\GPlayApps::getReviews
 `Nelexa\GPlay\GPlayApps::getReviews` — Returns reviews of the Android app in the Google Play store.
 
@@ -40,6 +42,33 @@ $reviews = $gplay->getReviews(
 ```php
 array:1000 [
     0 => class Nelexa\GPlay\Model\Review {
+      -getId(): string: "gp:AOqpTOGMp3ybCbJiOqLVaUuFuC9OJnYcVQ17YcqBw1o78rC3Rc7eD0WGwuqgqrHDbTtO6J2hgzcWR7FtK97oyzw"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGMp3ybCbJiOqLVaUuFuC9OJnYcVQ17YcqBw1o78rC3Rc7eD0WGwuqgqrHDbTtO6J2hgz…"
+      -getUserName(): string: "Ury Kamensky"
+      -getText(): string: "Добавьте возможность закрывать (или уберите насовсем, но на это особо не надеюсь) иконку/кнопку/ссылку с предложением заказать такси, она ОЧЕНЬ РАЗДРА…"
+      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
+        -getUrl(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s64/"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s0/"
+        -getBinaryImageContent(): string: …
+        -__toString(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s64/"
+      }
+      -getDate(): ?DateTimeInterface: @1581494510 {
+        date: 2020-02-12T08:01:50+00:00
+      }
+      -getScore(): int: 2
+      -getCountLikes(): int: 12
+      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
+        -getDate(): DateTimeInterface: @1581510687 {
+          date: 2020-02-12T12:31:27+00:00
+        }
+        -getText(): string: "Спасибо за отзыв и замечание к отображению этой кнопки, мы обязательно рассмотрим его подробнее!"
+        -asArray(): array: …
+        -jsonSerialize(): mixed: …
+      }
+      -asArray(): array: …
+      -jsonSerialize(): mixed: …
+    }
+    1 => class Nelexa\GPlay\Model\Review {
       -getId(): string: "gp:AOqpTOGXiWwiyPHHUCXsx5JPJtDtKIa7CCXTUK8xhAJ9eyNv_jkm4coeSOqKHn3Eu5s52AMTOvPLPL0RbAJV25Y"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGXiWwiyPHHUCXsx5JPJtDtKIa7CCXTUK8xhAJ9eyNv_jkm4coeSOqKHn3Eu5s52AMTOv…"
       -getUserName(): string: "Рии Эн"
@@ -66,33 +95,6 @@ array:1000 [
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
-    1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOG_xA95u0_lmV3wsgCsQtowloGBgg6npK5MD_dHWE1dFhsFsZXU6SlHjZGHdIZhvVUfyhhCjDAzBPOfSuA"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOG_xA95u0_lmV3wsgCsQtowloGBgg6npK5MD_dHWE1dFhsFsZXU6SlHjZGHdIZhvVUfyh…"
-      -getUserName(): string: "Андрей Жигалов"
-      -getText(): string: "После пополнения карты, запись ден. средств на карту происходит только раза с восьмого. Постоянно ошибки какие-то. Приложение удобное, но работает не …"
-      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-djEIryva90g/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcNhSmP66ktNvsWeLcIEBM59ypA9g/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-djEIryva90g/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcNhSmP66ktNvsWeLcIEBM59ypA9g/s0/"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-djEIryva90g/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcNhSmP66ktNvsWeLcIEBM59ypA9g/s64/"
-      }
-      -getDate(): ?DateTimeInterface: @1580965709 {
-        date: 2020-02-06T05:08:29+00:00
-      }
-      -getScore(): int: 3
-      -getCountLikes(): int: 2
-      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-        -getDate(): DateTimeInterface: @1581004502 {
-          date: 2020-02-06T15:55:02+00:00
-        }
-        -getText(): string: "Пожалуйста, напишите нам о ситуации на geopay@support.yandex.ru. Обязательно всё проверим."
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
     …
   ]
 ```
@@ -102,3 +104,5 @@ array:1000 [
 ## See Also
 * [Nelexa\GPlay\Enum\SortEnum](../SortEnum/README.md) - Contains all valid values for the "sort" parameter.
 * [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) - Limit for all available results.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getReviews**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getMessage**
+
 # Nelexa\GPlay\Exception\GooglePlayException::getMessage
 `Nelexa\GPlay\Exception\GooglePlayException::getMessage`
 
@@ -16,3 +18,5 @@ This function has no parameters.
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getMessage**

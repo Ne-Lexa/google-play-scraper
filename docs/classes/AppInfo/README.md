@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **AppInfo**
+
 # The `Nelexa\GPlay\Model\AppInfo` class
 
 ## Introduction
@@ -133,7 +135,7 @@ class Nelexa\GPlay\Model\AppInfo {
     -getBinaryImageContent(): string: …
     -__toString(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
   }
-  -getScore(): float: 4.3656025
+  -getScore(): float: 4.3630123
   -getPriceText(): ?string: null
   -isFree(): bool: true
   -jsonSerialize(): mixed: …
@@ -200,13 +202,13 @@ class Nelexa\GPlay\Model\AppInfo {
     Made balance adjustments.
     """
   -isEditorsChoice(): bool: true
-  -getInstalls(): int: 51856444
+  -getInstalls(): int: 52048343
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 476384
-    -getFourStars(): int: 69065
-    -getThreeStars(): int: 39189
-    -getTwoStars(): int: 20211
-    -getOneStar(): int: 52185
+    -getFiveStars(): int: 476544
+    -getFourStars(): int: 69144
+    -getThreeStars(): int: 39314
+    -getTwoStars(): int: 20224
+    -getOneStar(): int: 52653
     -asArray(): array: …
     -jsonSerialize(): mixed: …
   }
@@ -227,30 +229,10 @@ class Nelexa\GPlay\Model\AppInfo {
   -getUpdated(): ?DateTimeInterface: @1580446355 {
     date: 2020-01-31T04:52:35+00:00
   }
-  -getNumberVoters(): int: 657037
-  -getNumberReviews(): int: 244183
+  -getNumberVoters(): int: 657882
+  -getNumberReviews(): int: 244629
   -getReviews(): array:4 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8…"
-      -getUserName(): string: "Samantha"
-      -getText(): string: "I loved the DS series as a kid and was excited when I saw this. While it did bring back old memories and the recipes I could unlock were fun, most are…"
-      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mDpplpluhiYsZu0DoM_3kG9LHCol2UEkz5GIZcUrw=s64"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mDpplpluhiYsZu0DoM_3kG9LHCol2UEkz5GIZcUrw=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mDpplpluhiYsZu0DoM_3kG9LHCol2UEkz5GIZcUrw=s64"
-      }
-      -getDate(): ?DateTimeInterface: @1581051389 {
-        date: 2020-02-07T04:56:29+00:00
-      }
-      -getScore(): int: 3
-      -getCountLikes(): int: 6
-      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    1 => class Nelexa\GPlay\Model\Review {
       -getId(): string: "gp:AOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWKglrWxdEHoYJg"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWK…"
       -getUserName(): string: "Marijana Stojanović"
@@ -265,7 +247,27 @@ class Nelexa\GPlay\Model\AppInfo {
         date: 2020-02-05T08:36:21+00:00
       }
       -getScore(): int: 3
-      -getCountLikes(): int: 13
+      -getCountLikes(): int: 65
+      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+      -asArray(): array: …
+      -jsonSerialize(): mixed: …
+    }
+    1 => class Nelexa\GPlay\Model\Review {
+      -getId(): string: "gp:AOqpTOG0m_5SlxX20BniMe8ojx7IKMVJkrZoflVFp_YBzgyTqXExqTnZXGf9GWwOyR_RKlsvRtfM9g4aPFETRg"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOG0m_5SlxX20BniMe8ojx7IKMVJkrZoflVFp_YBzgyTqXExqTnZXGf9GWwOyR_RKlsvRt…"
+      -getUserName(): string: "Angela Gallagher"
+      -getText(): string: "Level 10 is where it ends??!! That's it. In each area. Not much fun after that. And it's a shame that only those that have the money to spend in the g…"
+      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
+        -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s64"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s0"
+        -getBinaryImageContent(): string: …
+        -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s64"
+      }
+      -getDate(): ?DateTimeInterface: @1580680688 {
+        date: 2020-02-02T21:58:08+00:00
+      }
+      -getScore(): int: 3
+      -getCountLikes(): int: 36
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
       -jsonSerialize(): mixed: …
@@ -301,7 +303,7 @@ Output:
         "address": "神奈川県横浜市青葉区青葉台２－１６－１０　第2鈴木ビル３F"
     },
     "icon": "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw",
-    "score": 4.3656025,
+    "score": 4.3630123,
     "priceText": null,
     "description": "Make scrumptious food and serve it!\n\nChop, bake, stew...\nCook tasty meals with easy touch controls!\nTry out this unique cooking game.\nThe yummy food you'll create will definitely make you hungry!\n\n▼Let's Cook! \nCook food by playing fun mini games. More than 30 kinds of recipes are waiting for you. Do your best, Special Chef!\n\n▼Happy Village! \nServe your cooking to everyone at your restaurant. Create a big and wonderful restaurant that's all your own.\nHarvest lots of things by going Fishing, growing plants in the Fields, and raising animals in your Ranch.\nGather up lots to exchange for Happy Foods!\n\n▼Game Plaza!\nPlay non-cooking games like \"Help out,\" \"Play Shopkeeper,\" and \"Exercise your brain.\" More than 30 kinds of mini games are waiting for you. Aim to get high scores!\n\n▼Challenge Ranking!\nCompete in weekly events for the best scores! Join the global rankings!\n\n▼Other Ways to Have Fun\n-Decorate the kitchen with various items.\n-Make surprise dishes by combining 2 recipes.\n-Watch realistic cooking videos for supported recipes.\n-Watch an animated video of Mama's fun daily life.\n\n[Game Features]\nWith its intuitive controls, both children and adults can enjoy the game. Also, even if you make mistakes there are no game overs, so everyone can complete dishes. Furthermore, children who play may develop an interest in cooking.\n\n[Recommended Setup]\nAndroid OS 4.1 or later.\n**Game may not be playable on certain devices even if the above conditions are met.\n\n**By downloading this game, you are accepting its User Agreement.\nhttp://www.ofcr.co.jp/APP_CookingMama/en/privacypolicy.html\n\n[Supported Languages]\nEnglish,French,German,Italian,Spanish,Dutch,Russian,Portuguese,Polish,Czech,Turkish,Japanese,Korean,Simplified Chinese,Traditional Chinese,Indonesian,Filipino,Malay,Thai,Vietnamese,Hindi,Spanish-mexico,Portugues brasileiro,Arabic,Persian,Swedish,Norwegian,Danish,Finnish",
     "translatedFromLocale": null,
@@ -347,14 +349,14 @@ Output:
     "privacyPoliceUrl": "https://app-ofcr.com/OFFICE_CREATE/Website/APP_CookingMama/en/privacypolicy.html",
     "recentChange": "New! World Dishes 5!\nRound 5: Middle Eastern Dishes! Dine on global cuisines!\nFixed certain bugs.\nMade balance adjustments.",
     "editorsChoice": true,
-    "installs": 51856444,
-    "numberVoters": 657037,
+    "installs": 52048343,
+    "numberVoters": 657882,
     "histogramRating": {
-        "five": 476384,
-        "four": 476384,
-        "three": 39189,
-        "two": 20211,
-        "one": 52185
+        "five": 476544,
+        "four": 476544,
+        "three": 39314,
+        "two": 20224,
+        "one": 52653
     },
     "price": 0,
     "currency": "USD",
@@ -370,20 +372,8 @@ Output:
     "releasedTimestamp": 1431561600,
     "updated": "2020-01-31T04:52:35+00:00",
     "updatedTimestamp": 1580446355,
-    "numberReviews": 244183,
+    "numberReviews": 244629,
     "reviews": [
-        {
-            "id": "gp:AOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg",
-            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg",
-            "userName": "Samantha",
-            "text": "I loved the DS series as a kid and was excited when I saw this. While it did bring back old memories and the recipes I could unlock were fun, most are locked behind a pay wall. They're also much simpler and don't take very long to do, so not really worth the prices they're asking for. The interface is also extremely busy and it constantly feels like I'm on one of those scam websites with all these popups. You're better off playing the original games.",
-            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mDpplpluhiYsZu0DoM_3kG9LHCol2UEkz5GIZcUrw=s64",
-            "date": "2020-02-07T04:56:29+00:00",
-            "timestamp": 1581051389,
-            "score": 3,
-            "countLikes": 6,
-            "reply": null
-        },
         {
             "id": "gp:AOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWKglrWxdEHoYJg",
             "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWKglrWxdEHoYJg",
@@ -393,7 +383,7 @@ Output:
             "date": "2020-02-05T08:36:21+00:00",
             "timestamp": 1580891781,
             "score": 3,
-            "countLikes": 13,
+            "countLikes": 65,
             "reply": null
         },
         {
@@ -405,21 +395,35 @@ Output:
             "date": "2020-02-02T21:58:08+00:00",
             "timestamp": 1580680688,
             "score": 3,
-            "countLikes": 7,
+            "countLikes": 36,
             "reply": null
         },
         {
-            "id": "gp:AOqpTOG7_BiGxeWvjEMconeb0ED4Gxzw0tyDxu3UgwCNV_6mZgVIhAgf_rLPiTkGG15Em3_5cLLhtywDphi2Zw",
-            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOG7_BiGxeWvjEMconeb0ED4Gxzw0tyDxu3UgwCNV_6mZgVIhAgf_rLPiTkGG15Em3_5cLLhtywDphi2Zw",
-            "userName": "Keirstyn Price",
-            "text": "Love it. Fun fishing mechanics. Fun idle harvesting minigames. Reminds me a lot of the original games, and P.S. you can turn ads off in settings 🤔",
-            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mDLmyg19FRHrAC2WMFsAVFdkuQG2-z-9RlxizQ-1g=s64",
-            "date": "2020-01-31T05:28:38+00:00",
-            "timestamp": 1580448518,
-            "score": 5,
-            "countLikes": 124,
+            "id": "gp:AOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg",
+            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg",
+            "userName": "Samantha",
+            "text": "I loved the DS series as a kid and was excited when I saw this. While it did bring back old memories and the recipes I could unlock were fun, most are locked behind a pay wall. They're also much simpler and don't take very long to do, so not really worth the prices they're asking for. The interface is also extremely busy and it constantly feels like I'm on one of those scam websites with all these popups. You're better off playing the original games.",
+            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mDpplpluhiYsZu0DoM_3kG9LHCol2UEkz5GIZcUrw=s64",
+            "date": "2020-02-07T04:56:29+00:00",
+            "timestamp": 1581051389,
+            "score": 3,
+            "countLikes": 37,
+            "reply": null
+        },
+        {
+            "id": "gp:AOqpTOEzneZAaLNXDOVffe-i0fOQNJ7jR_84vi0GUctpTEtaJce7wrpr4wGEYd3LJzg2EfJgcXm0IEglpPCFRg",
+            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOEzneZAaLNXDOVffe-i0fOQNJ7jR_84vi0GUctpTEtaJce7wrpr4wGEYd3LJzg2EfJgcXm0IEglpPCFRg",
+            "userName": "Mahdi Reza",
+            "text": "It's great! Although I would live to change cooking mama to cooking papa. I would also like more cartoon sound effects like bongs, slide whistles and stuff for atmosphere. He should have a basic dad fleece jacket in all colors as part of his outfit line!",
+            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mARwrEe_qvBdEBx3rJO5h9qjDUKnbL4KZx048xIyA=s64",
+            "date": "2020-02-13T03:16:29+00:00",
+            "timestamp": 1581563789,
+            "score": 3,
+            "countLikes": 5,
             "reply": null
         }
     ]
 }
 ```
+
+[Documentation](../../README.md) > **AppInfo**

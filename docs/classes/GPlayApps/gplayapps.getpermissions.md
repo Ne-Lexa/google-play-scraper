@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getPermissions**
+
 # Nelexa\GPlay\GPlayApps::getPermissions
 `Nelexa\GPlay\GPlayApps::getPermissions` — Returns a list of permissions for the application.
 
@@ -40,8 +42,8 @@ array:1 [
         -__toString(): string: "https://lh3.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
       }
       -getPermissions(): array:2 [
-        0 => "full network access"
-        1 => "view network connections"
+        0 => "view network connections"
+        1 => "full network access"
       ]
       -asArray(): array: …
       -jsonSerialize(): mixed: …
@@ -51,3 +53,4 @@ array:1 [
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getPermissions**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AgeEnum](README.md) > **SIX_EIGHT**
+
 # Nelexa\GPlay\Enum\AgeEnum::SIX_EIGHT
 `Nelexa\GPlay\Enum\AgeEnum::SIX_EIGHT` — Returns the value of the age parameter for age 6 - 8 years.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\AgeEnum {
   -__toString(): string: "AGE_RANGE2"
 }
 ```
+
+[Documentation](../../README.md) > [AgeEnum](README.md) > **SIX_EIGHT**

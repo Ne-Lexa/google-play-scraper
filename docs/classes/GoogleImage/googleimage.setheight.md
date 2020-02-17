@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setHeight**
+
 # Nelexa\GPlay\Model\GoogleImage::setHeight
 `Nelexa\GPlay\Model\GoogleImage::setHeight` — Sets the height of the image.
 
@@ -13,3 +15,4 @@ image height
 ## Return Values
 returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setHeight**

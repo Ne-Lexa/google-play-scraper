@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **MAPS_AND_NAVIGATION**
+
 # Nelexa\GPlay\Enum\CategoryEnum::MAPS_AND_NAVIGATION
 `Nelexa\GPlay\Enum\CategoryEnum::MAPS_AND_NAVIGATION` — Returns the category id 'Maps & Navigation'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "MAPS_AND_NAVIGATION"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **MAPS_AND_NAVIGATION**

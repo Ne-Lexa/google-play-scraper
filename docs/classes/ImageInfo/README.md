@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **ImageInfo**
+
 # The `Nelexa\GPlay\Model\ImageInfo` class
 
 ## Introduction
@@ -37,13 +39,13 @@ Nelexa\GPlay\Model\ImageInfo implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ImageInfo {
-  -getUrl(): string: "https://lh3.googleusercontent.com/hr8MZS9g4BVXvL55PGb7LjfwK8VfpfyXLjBzWUozYzveehpdmI9zSTE2EOFq8RVuLug"
+  -getUrl(): string: "https://lh3.googleusercontent.com/eJRcpLl6mxZpq2VK0MjIwiSSv0fnVjgVtC_p2Z0pzgykn40oMG-RX3J8JdRLYGHHrQ"
   -getFilename(): string: "/tmp/screenshot.png"
-  -getMimeType(): string: "image/png"
-  -getExtension(): string: "png"
-  -getWidth(): int: 512
-  -getHeight(): int: 341
-  -getFilesize(): int: 311216
+  -getMimeType(): string: "image/jpeg"
+  -getExtension(): string: "jpg"
+  -getWidth(): int: 288
+  -getHeight(): int: 512
+  -getFilesize(): int: 49287
   -asArray(): array: …
   -jsonSerialize(): mixed: …
 }
@@ -56,11 +58,13 @@ echo json_encode($imageInfo, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_
 Output:
 ```json
 {
-    "url": "https://lh3.googleusercontent.com/hr8MZS9g4BVXvL55PGb7LjfwK8VfpfyXLjBzWUozYzveehpdmI9zSTE2EOFq8RVuLug",
+    "url": "https://lh3.googleusercontent.com/eJRcpLl6mxZpq2VK0MjIwiSSv0fnVjgVtC_p2Z0pzgykn40oMG-RX3J8JdRLYGHHrQ",
     "path": "/tmp/screenshot.png",
-    "mimeType": "image/png",
-    "extension": "png",
-    "width": 512,
-    "height": 341
+    "mimeType": "image/jpeg",
+    "extension": "jpg",
+    "width": 288,
+    "height": 512
 }
 ```
+
+[Documentation](../../README.md) > **ImageInfo**

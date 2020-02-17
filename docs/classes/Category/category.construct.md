@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Category](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\Category::__construct
 `Nelexa\GPlay\Model\Category::__construct` — Creates an object with application category information.
 
@@ -14,3 +16,5 @@ category name
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [Category](README.md) > **__construct**

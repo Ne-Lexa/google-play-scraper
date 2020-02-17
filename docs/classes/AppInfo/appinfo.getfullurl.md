@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getFullUrl**
+
 # Nelexa\GPlay\Model\AppInfo::getFullUrl
 `Nelexa\GPlay\Model\AppInfo::getFullUrl` — Returns the full URL of the app's page on Google Play, specifying the locale and country of the request.
 
@@ -13,3 +15,4 @@ This function has no parameters.
 URL of the app's page on Google Play, specifying the
 locale and country of the request
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getFullUrl**

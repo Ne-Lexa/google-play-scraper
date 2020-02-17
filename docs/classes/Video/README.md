@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **Video**
+
 # The `Nelexa\GPlay\Model\Video` class
 
 ## Introduction
@@ -52,3 +54,5 @@ Output:
     "videoUrl": "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
 }
 ```
+
+[Documentation](../../README.md) > **Video**

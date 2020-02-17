@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **GPlayApps**
+
 # The `Nelexa\GPlay\GPlayApps` class
 
 ## Introduction
@@ -124,7 +126,7 @@ class Nelexa\GPlay\Model\AppInfo {
     -getBinaryImageContent(): string: …
     -__toString(): string: "https://lh3.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc"
   }
-  -getScore(): float: 4.2718096
+  -getScore(): float: 4.2702456
   -getPriceText(): ?string: null
   -isFree(): bool: true
   -jsonSerialize(): mixed: …
@@ -167,13 +169,13 @@ class Nelexa\GPlay\Model\AppInfo {
   -getVideo(): ?Nelexa\GPlay\Model\Video: null
   -getRecentChanges(): ?string: "Pour plus d'informations sur les nouvelles fonctionnalités et leur utilisation, consultez la documentation et les notifications intégrées au produit."
   -isEditorsChoice(): bool: true
-  -getInstalls(): int: 7013548647
+  -getInstalls(): int: 7031586741
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 46190797
-    -getFourStars(): int: 6620150
-    -getThreeStars(): int: 4116962
-    -getTwoStars(): int: 2094322
-    -getOneStar(): int: 6675930
+    -getFiveStars(): int: 46293839
+    -getFourStars(): int: 6604000
+    -getThreeStars(): int: 4119923
+    -getTwoStars(): int: 2102244
+    -getOneStar(): int: 6725025
     -asArray(): array: …
     -jsonSerialize(): mixed: …
   }
@@ -191,48 +193,48 @@ class Nelexa\GPlay\Model\AppInfo {
   -getReleased(): ?DateTimeInterface: @1287532800 {
     date: 2010-10-20T00:00:00+00:00
   }
-  -getUpdated(): ?DateTimeInterface: @1581539535 {
-    date: 2020-02-12T20:32:15+00:00
+  -getUpdated(): ?DateTimeInterface: @1581726651 {
+    date: 2020-02-15T00:30:51+00:00
   }
-  -getNumberVoters(): int: 65698164
-  -getNumberReviews(): int: 22599743
+  -getNumberVoters(): int: 65845033
+  -getNumberReviews(): int: 22662148
   -getReviews(): array:4 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOGNJB2tiexHU1kXkxMdcWDbUzNfODnJAKh4Os_1Ip3lJxAO0FMI5LJDI6gsyhHqjk_p2iI_Yx5XVIGuHQ"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&reviewId=gp%3AAOqpTOGNJB2tiexHU1kXkxMdcWDbUzNfODnJAKh4Os_1Ip3lJxAO0FMI5LJDI6g…"
-      -getUserName(): string: "Georges Vouilloz"
-      -getText(): string: "Depuis la dernière version 15.04.56, il me semble, un problème magistral de sécurité apparaît. Si par malheur, vous «liker» ou commenter une vidéo, vo…"
+      -getId(): string: "gp:AOqpTOFv5o4-aYf5iNfp3rzCH_aMGwnydc81bauwOmvDufGH-q2Soghj4xy-uu0bgycvTEHCz-dYexkiDjQerA"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&reviewId=gp%3AAOqpTOFv5o4-aYf5iNfp3rzCH_aMGwnydc81bauwOmvDufGH-q2Soghj4xy-uu0…"
+      -getUserName(): string: "Armada Main De Feer"
+      -getText(): string: "Il y a moins de 5 ans YouTube était très bien, lecture de vidéo lorsque le téléphone est éteint, très peu de pub ou des pub indiqué dès le début de la…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-wdgzHOQaOkg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reGV0DPON6ENaOMmi10qr0Vld8aug/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-wdgzHOQaOkg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reGV0DPON6ENaOMmi10qr0Vld8aug/s0/"
+        -getUrl(): string: "https://lh3.googleusercontent.com/-lyBtSOmBK-Q/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdBBfAB8BXTby_LQ6V0tzUMNvQUAw/s64/"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-lyBtSOmBK-Q/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdBBfAB8BXTby_LQ6V0tzUMNvQUAw/s0/"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-wdgzHOQaOkg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reGV0DPON6ENaOMmi10qr0Vld8aug/s64/"
+        -__toString(): string: "https://lh3.googleusercontent.com/-lyBtSOmBK-Q/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdBBfAB8BXTby_LQ6V0tzUMNvQUAw/s64/"
       }
-      -getDate(): ?DateTimeInterface: @1580816830 {
-        date: 2020-02-04T11:47:10+00:00
+      -getDate(): ?DateTimeInterface: @1581718360 {
+        date: 2020-02-14T22:12:40+00:00
       }
       -getScore(): int: 2
-      -getCountLikes(): int: 585
+      -getCountLikes(): int: 79
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
     1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOGjeAI4UiSjr8bCjxaBZBVdTgptr5XmBa7u1jFB9cnqqm1XCRp58_-C_ouf1iX_LYPH0aiuI4m-TUm1Rw"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&reviewId=gp%3AAOqpTOGjeAI4UiSjr8bCjxaBZBVdTgptr5XmBa7u1jFB9cnqqm1XCRp58_-C_ou…"
-      -getUserName(): string: "Derdre Schildzer"
-      -getText(): string: "On ne peut pas mettre l'écran en veille sans que YouTube s'arrête = Gaspillage d'énergie. les concepteurs sont sans imagination et sans bon sens. la l…"
+      -getId(): string: "gp:AOqpTOG6NjEMVtgqVenK24PtboizUULevM-aX1iE_ttsompnAGT7VhpK_tRMyQ5p-H-GvEQtq1DzXbJom-lLTA"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&reviewId=gp%3AAOqpTOG6NjEMVtgqVenK24PtboizUULevM-aX1iE_ttsompnAGT7VhpK_tRMyQ5…"
+      -getUserName(): string: "Yolande Mombo"
+      -getText(): string: "Trés trés bien, parce que c'est par aplication il faut le faire pour les autres aussi surtout pour la TV qui souvre mais ne veut pas me donné les émis…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAVbFM_SXSu8AlfEi4bTeQ1qKrcvDVQqMjNkBiC=s64"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAVbFM_SXSu8AlfEi4bTeQ1qKrcvDVQqMjNkBiC=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/-QS-3y3fDnEI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re1NF0j8W4oumNRobHYjw3FP7_p6Q/s64/"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-QS-3y3fDnEI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re1NF0j8W4oumNRobHYjw3FP7_p6Q/s0/"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAVbFM_SXSu8AlfEi4bTeQ1qKrcvDVQqMjNkBiC=s64"
+        -__toString(): string: "https://lh3.googleusercontent.com/-QS-3y3fDnEI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3re1NF0j8W4oumNRobHYjw3FP7_p6Q/s64/"
       }
-      -getDate(): ?DateTimeInterface: @1581427833 {
-        date: 2020-02-11T13:30:33+00:00
+      -getDate(): ?DateTimeInterface: @1581753650 {
+        date: 2020-02-15T08:00:50+00:00
       }
-      -getScore(): int: 1
-      -getCountLikes(): int: 121
+      -getScore(): int: 5
+      -getCountLikes(): int: 21
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
       -jsonSerialize(): mixed: …
@@ -280,4 +282,4 @@ class Nelexa\GPlay\Model\AppInfo {
 * [Nelexa\GPlay\GPlayApps::setConnectTimeout](gplayapps.setconnecttimeout.md) - Sets the number of seconds to wait when trying to connect to the server.
 * [Nelexa\GPlay\GPlayApps::setTimeout](gplayapps.settimeout.md) - Sets the timeout of the request in second.
 
-
+[Documentation](../../README.md) > **GPlayApps**

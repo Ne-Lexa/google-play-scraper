@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **Category**
+
 # The `Nelexa\GPlay\Model\Category` class
 
 ## Introduction
@@ -37,11 +39,11 @@ Nelexa\GPlay\Model\Category implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Category {
-  -getId(): string: "HOUSE_AND_HOME"
-  -getName(): string: "House & Home"
+  -getId(): string: "FAMILY_PRETEND"
+  -getName(): string: "Pretend Play"
   -isGamesCategory(): bool: false
-  -isFamilyCategory(): bool: false
-  -isApplicationCategory(): bool: true
+  -isFamilyCategory(): bool: true
+  -isApplicationCategory(): bool: false
   -asArray(): array: …
   -jsonSerialize(): mixed: …
 }
@@ -54,7 +56,9 @@ echo json_encode($category, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_U
 Output:
 ```json
 {
-    "id": "HOUSE_AND_HOME",
-    "name": "House & Home"
+    "id": "FAMILY_PRETEND",
+    "name": "Pretend Play"
 }
 ```
+
+[Documentation](../../README.md) > **Category**

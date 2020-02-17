@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **EDUCATION**
+
 # Nelexa\GPlay\Enum\CategoryEnum::EDUCATION
 `Nelexa\GPlay\Enum\CategoryEnum::EDUCATION` — Returns the category id 'Education'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "EDUCATION"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **EDUCATION**

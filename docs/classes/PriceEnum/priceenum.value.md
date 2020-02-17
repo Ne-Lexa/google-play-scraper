@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **value**
+
 # Nelexa\GPlay\Enum\PriceEnum::value
 `Nelexa\GPlay\Enum\PriceEnum::value` — Returns the scalar value of this enum constant.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 Constant value.
 
+[Documentation](../../README.md) > [PriceEnum](README.md) > **value**

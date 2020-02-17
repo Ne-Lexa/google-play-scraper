@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **SOCIAL**
+
 # Nelexa\GPlay\Enum\CategoryEnum::SOCIAL
 `Nelexa\GPlay\Enum\CategoryEnum::SOCIAL` — Returns the category id 'Social'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "SOCIAL"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **SOCIAL**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getLine**
+
 # Nelexa\GPlay\Exception\GooglePlayException::getLine
 `Nelexa\GPlay\Exception\GooglePlayException::getLine`
 
@@ -16,3 +18,5 @@ This function has no parameters.
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getLine**

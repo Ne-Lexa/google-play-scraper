@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getIcon**
+
 # Nelexa\GPlay\Model\AppInfo::getIcon
 `Nelexa\GPlay\Model\AppInfo::getIcon` — Returns application icon.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 application icon
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getIcon**

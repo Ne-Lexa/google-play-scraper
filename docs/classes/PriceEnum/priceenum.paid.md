@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **PAID**
+
 # Nelexa\GPlay\Enum\PriceEnum::PAID
 `Nelexa\GPlay\Enum\PriceEnum::PAID` — Returns the value of the price parameter for paid apps.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\PriceEnum {
   -__toString(): string: "2"
 }
 ```
+
+[Documentation](../../README.md) > [PriceEnum](README.md) > **PAID**

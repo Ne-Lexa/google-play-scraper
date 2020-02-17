@@ -2,13 +2,9 @@
 
 PHP Scraper to extract information about Android applications from the Google Play store.
 
-[![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg?style=popout)](https://packagist.org/packages/nelexa/google-play-scraper)
-![PHP from Packagist](https://img.shields.io/packagist/php-v/nelexa/google-play-scraper.svg?style=popout&color=yellowgreen)
-[![Build Status](https://secure.travis-ci.org/Ne-Lexa/google-play-scraper.png)](http://travis-ci.org/Ne-Lexa/google-play-scraper)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/build-status/master)
-[![License](https://img.shields.io/packagist/l/nelexa/google-play-scraper.svg?style=popout&color=01f176)](https://packagist.org/packages/nelexa/google-play-scraper)
+[![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg?style=popout&color=aa007f)](https://packagist.org/packages/nelexa/google-play-scraper) ![PHP from Packagist](https://img.shields.io/packagist/php-v/nelexa/google-play-scraper.svg?style=popout&color=d500a0) ![License](https://img.shields.io/packagist/l/nelexa/google-play-scraper.svg?style=popout&color=ff00bf)
+[![Build Status](https://secure.travis-ci.org/Ne-Lexa/google-play-scraper.png)](http://travis-ci.org/Ne-Lexa/google-play-scraper) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/build-status/master)
+
 
 The library allows you to receive information about Android applications from the Google Play store:
 

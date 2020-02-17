@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **HistogramRating**
+
 # The `Nelexa\GPlay\Model\HistogramRating` class
 
 ## Introduction
@@ -37,11 +39,11 @@ Nelexa\GPlay\Model\HistogramRating implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\HistogramRating {
-  -getFiveStars(): int: 476384
-  -getFourStars(): int: 69065
-  -getThreeStars(): int: 39189
-  -getTwoStars(): int: 20211
-  -getOneStar(): int: 52185
+  -getFiveStars(): int: 74180
+  -getFourStars(): int: 12644
+  -getThreeStars(): int: 5614
+  -getTwoStars(): int: 2159
+  -getOneStar(): int: 7191
   -asArray(): array: …
   -jsonSerialize(): mixed: …
 }
@@ -54,10 +56,12 @@ echo json_encode($histogramRating, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES |
 Output:
 ```json
 {
-    "five": 476384,
-    "four": 476384,
-    "three": 39189,
-    "two": 20211,
-    "one": 52185
+    "five": 74180,
+    "four": 74180,
+    "three": 5614,
+    "two": 2159,
+    "one": 7191
 }
 ```
+
+[Documentation](../../README.md) > **HistogramRating**

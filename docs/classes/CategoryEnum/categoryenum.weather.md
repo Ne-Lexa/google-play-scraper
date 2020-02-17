@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **WEATHER**
+
 # Nelexa\GPlay\Enum\CategoryEnum::WEATHER
 `Nelexa\GPlay\Enum\CategoryEnum::WEATHER` — Returns the category id 'Weather'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "WEATHER"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **WEATHER**

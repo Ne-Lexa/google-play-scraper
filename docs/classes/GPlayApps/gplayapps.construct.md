@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **__construct**
+
 # Nelexa\GPlay\GPlayApps::__construct
 `Nelexa\GPlay\GPlayApps::__construct` — Creates an object to retrieve data about Android applications from the Google Play store.
 
@@ -17,3 +19,5 @@ No value is returned.
 ## See Also
 * [Nelexa\GPlay\GPlayApps::DEFAULT_LOCALE](README.md#predefined-constants) - Default request locale.
 * [Nelexa\GPlay\GPlayApps::DEFAULT_COUNTRY](README.md#predefined-constants) - Default request country.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **__construct**

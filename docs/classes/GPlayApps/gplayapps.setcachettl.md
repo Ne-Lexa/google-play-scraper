@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **setCacheTtl**
+
 # Nelexa\GPlay\GPlayApps::setCacheTtl
 `Nelexa\GPlay\GPlayApps::setCacheTtl` — Sets cache ttl.
 
@@ -13,3 +15,4 @@ TTL cached data
 ## Return Values
 returns the current class instance to allow method chaining
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **setCacheTtl**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Review](README.md) > **asArray**
+
 # Nelexa\GPlay\Model\Review::asArray
 `Nelexa\GPlay\Model\Review::asArray` — Returns class properties as an array.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 class properties as an array
 
+[Documentation](../../README.md) > [Review](README.md) > **asArray**

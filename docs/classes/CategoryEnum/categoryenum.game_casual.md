@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_CASUAL**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_CASUAL
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_CASUAL` — Returns the category id 'Casual'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_CASUAL"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_CASUAL**

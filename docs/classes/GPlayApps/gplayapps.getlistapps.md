@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getListApps**
+
 # Nelexa\GPlay\GPlayApps::getListApps
 `Nelexa\GPlay\GPlayApps::getListApps` — Returns an array of applications from the Google Play store for the specified category.
 
@@ -28,19 +30,19 @@ $apps = $gplay->getListApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:180 [
-    "com.x3m.tx4" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.x3m.tx4"
+array:169 [
+    "com.combineinc.streetracing.driftthreeD" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.combineinc.streetracing.driftthreeD"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.x3m.tx4"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.x3m.tx4&hl=en_US&gl=us"
-      -getName(): string: "Trial Xtreme 4: extreme bike racing champions"
-      -getSummary(): ?string: "Less than 1% of the players managed to achieve ⭐⭐⭐ on all levels - can you?"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.combineinc.streetracing.driftthreeD"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.combineinc.streetracing.driftthreeD&hl=en_US&gl=us"
+      -getName(): string: "Street Racing 3D"
+      -getSummary(): ?string: "Street car racing has started, experience the drving skills!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "5042939762592943088"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5042939762592943088"
-        -getName(): string: "Deemedya INC"
+        -getId(): string: "6936794375735348055"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6936794375735348055"
+        -getName(): string: "Ivy"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -51,29 +53,29 @@ array:180 [
         -jsonSerialize(): mixed: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/3JzjZwWDGuk49msstnvR3k7tjd7vo_461jLMMiZIdvxlz_lhF6oXF0Ws4s_8599hdrBL"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/3JzjZwWDGuk49msstnvR3k7tjd7vo_461jLMMiZIdvxlz_lhF6oXF0Ws4s_8599hdrBL=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/xzMuAO5HWhJgEQlZd9qn_A1LK21FXOED2HVVqEh9uce-e9G8unFR5Vb8Xaq4nZuw06A"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/xzMuAO5HWhJgEQlZd9qn_A1LK21FXOED2HVVqEh9uce-e9G8unFR5Vb8Xaq4nZuw06A=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/3JzjZwWDGuk49msstnvR3k7tjd7vo_461jLMMiZIdvxlz_lhF6oXF0Ws4s_8599hdrBL"
+        -__toString(): string: "https://lh3.googleusercontent.com/xzMuAO5HWhJgEQlZd9qn_A1LK21FXOED2HVVqEh9uce-e9G8unFR5Vb8Xaq4nZuw06A"
       }
-      -getScore(): float: 4.247471
+      -getScore(): float: 4.363952
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
-    "com.herocraft.game.free.deadparadise" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.herocraft.game.free.deadparadise"
+    "com.gameloft.android.ANMP.GloftA9HM" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.gameloft.android.ANMP.GloftA9HM"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.herocraft.game.free.deadparadise"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.herocraft.game.free.deadparadise&hl=en_US&gl=us"
-      -getName(): string: "Dead Paradise: Race Shooter"
-      -getSummary(): ?string: "Race Shooter, Destruction, Cars Upgrades, Win The Death Race!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.android.ANMP.GloftA9HM"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.android.ANMP.GloftA9HM&hl=en_US&gl=us"
+      -getName(): string: "Asphalt 9: Legends - Epic Car Action Racing Game"
+      -getSummary(): ?string: "Tear up the Asphalt & become the next Legend in the ultimate arcade racing game."
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "5866306697629323411"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5866306697629323411"
-        -getName(): string: "SMOKOKO LTD"
+        -getId(): string: "4826827787946964969"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4826827787946964969"
+        -getName(): string: "Gameloft SE"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -84,12 +86,12 @@ array:180 [
         -jsonSerialize(): mixed: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/S0FPKiVK7AwibF8dZC3LvZAFXl-ugmqup3e6UImS67zqdyu4N30KadzpokZMfI_Ilu8"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/S0FPKiVK7AwibF8dZC3LvZAFXl-ugmqup3e6UImS67zqdyu4N30KadzpokZMfI_Ilu8=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/cQBJ7Jwvz0jex8sL7LjgLId-wOdmMajSZbpC-bzHDhS5uK9Zms0fFsXEVNGvlIUk_g"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/cQBJ7Jwvz0jex8sL7LjgLId-wOdmMajSZbpC-bzHDhS5uK9Zms0fFsXEVNGvlIUk_g=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/S0FPKiVK7AwibF8dZC3LvZAFXl-ugmqup3e6UImS67zqdyu4N30KadzpokZMfI_Ilu8"
+        -__toString(): string: "https://lh3.googleusercontent.com/cQBJ7Jwvz0jex8sL7LjgLId-wOdmMajSZbpC-bzHDhS5uK9Zms0fFsXEVNGvlIUk_g"
       }
-      -getScore(): float: 4.531811
+      -getScore(): float: 4.5014334
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -114,18 +116,18 @@ $apps = $gplay->getListApps(
 
 ```php
 array:100 [
-    "net.wooga.junes_journey_hidden_object_mystery_game" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "net.wooga.junes_journey_hidden_object_mystery_game"
+    "com.gameloft.car.tycoon.game" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.gameloft.car.tycoon.game"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=net.wooga.junes_journey_hidden_object_mystery_game"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=net.wooga.junes_journey_hidden_object_mystery_game&hl=en_US&gl=us"
-      -getName(): string: "June's Journey - Hidden Objects"
-      -getSummary(): ?string: "Find hidden objects in stunning vintage scenes to solve mind-teasing mysteries"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.car.tycoon.game"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.car.tycoon.game&hl=en_US&gl=us"
+      -getName(): string: "Overdrive City – Car Tycoon Game"
+      -getSummary(): ?string: "Build your car city and race! (Install requires 2.5 GB of disk space.)"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "5187629073610793871"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5187629073610793871"
-        -getName(): string: "Wooga"
+        -getId(): string: "4826827787946964969"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4826827787946964969"
+        -getName(): string: "Gameloft SE"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -136,29 +138,29 @@ array:100 [
         -jsonSerialize(): mixed: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/jq_PkkiyZGyEOx9eGgCVTU3Oyv2zHAea13zSxgj_9al0Rc_cp2PxWAySj1ywjpJ3y4U"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/jq_PkkiyZGyEOx9eGgCVTU3Oyv2zHAea13zSxgj_9al0Rc_cp2PxWAySj1ywjpJ3y4U=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/PctrUsXkExv1coL2YyoaQSPmYGzuqhBROWpDOCxEhA0a9jeEzl0kD580jlZCeV9CoGg"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/PctrUsXkExv1coL2YyoaQSPmYGzuqhBROWpDOCxEhA0a9jeEzl0kD580jlZCeV9CoGg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/jq_PkkiyZGyEOx9eGgCVTU3Oyv2zHAea13zSxgj_9al0Rc_cp2PxWAySj1ywjpJ3y4U"
+        -__toString(): string: "https://lh3.googleusercontent.com/PctrUsXkExv1coL2YyoaQSPmYGzuqhBROWpDOCxEhA0a9jeEzl0kD580jlZCeV9CoGg"
       }
-      -getScore(): float: 4.6209693
+      -getScore(): float: 4.3102565
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
-    "com.ea.games.simsfreeplay_row" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.ea.games.simsfreeplay_row"
+    "com.igg.android.mobileroyale" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.igg.android.mobileroyale"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.ea.games.simsfreeplay_row"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.ea.games.simsfreeplay_row&hl=en_US&gl=us"
-      -getName(): string: "The Sims FreePlay"
-      -getSummary(): ?string: "What’s your story? Create and customize every aspect of your Sims’ lives!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.igg.android.mobileroyale"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.igg.android.mobileroyale&hl=en_US&gl=us"
+      -getName(): string: "Mobile Royale MMORPG - Build a Strategy for Battle"
+      -getSummary(): ?string: "Enjoy this 3D fantasy world! Fight in a RTS multiplayer battle, build your city!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "6605125519975771237"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6605125519975771237"
-        -getName(): string: "ELECTRONIC ARTS"
+        -getId(): string: "8895734616362643252"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8895734616362643252"
+        -getName(): string: "IGG.COM"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -169,12 +171,12 @@ array:100 [
         -jsonSerialize(): mixed: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/0KahR-oT7Q6ziHAEru_KHYcrz8s7x_egKpm8RPqg1uuLmYpuri7qdMhnWHtUJq5NKNs"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/0KahR-oT7Q6ziHAEru_KHYcrz8s7x_egKpm8RPqg1uuLmYpuri7qdMhnWHtUJq5NKNs=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/iBHuomMtanzz3EIEARbv-x-_FmKBqCg-m7iYj2daqYYrYBOSJ6isDeiDixHl4i4J1fM"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/iBHuomMtanzz3EIEARbv-x-_FmKBqCg-m7iYj2daqYYrYBOSJ6isDeiDixHl4i4J1fM=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/0KahR-oT7Q6ziHAEru_KHYcrz8s7x_egKpm8RPqg1uuLmYpuri7qdMhnWHtUJq5NKNs"
+        -__toString(): string: "https://lh3.googleusercontent.com/iBHuomMtanzz3EIEARbv-x-_FmKBqCg-m7iYj2daqYYrYBOSJ6isDeiDixHl4i4J1fM"
       }
-      -getScore(): float: 3.9615788
+      -getScore(): float: 4.0906167
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -194,19 +196,19 @@ $apps = $gplay->getListApps();
   <summary>Results</summary>
 
 ```php
-array:682 [
-    "com.whatsapp" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.whatsapp"
+array:600 [
+    "com.water.balls" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.water.balls"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.whatsapp"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.whatsapp&hl=en_US&gl=us"
-      -getName(): string: "WhatsApp Messenger"
-      -getSummary(): ?string: "Simple. Personal. Secure."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.water.balls"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.water.balls&hl=en_US&gl=us"
+      -getName(): string: "Sand Balls"
+      -getSummary(): ?string: "Collect all balls!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "WhatsApp Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=WhatsApp+Inc."
-        -getName(): string: "WhatsApp Inc."
+        -getId(): string: "SayGames"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=SayGames"
+        -getName(): string: "SayGames"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -217,29 +219,29 @@ array:682 [
         -jsonSerialize(): mixed: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/U0hk5TisL-gYTm2anJElHtaNrJ52NdJnEjPjyygRnAXERW_tv2yo-wAVUM3sVIguf4CC"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/U0hk5TisL-gYTm2anJElHtaNrJ52NdJnEjPjyygRnAXERW_tv2yo-wAVUM3sVIguf4CC=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
+        -__toString(): string: "https://lh3.googleusercontent.com/U0hk5TisL-gYTm2anJElHtaNrJ52NdJnEjPjyygRnAXERW_tv2yo-wAVUM3sVIguf4CC"
       }
-      -getScore(): float: 4.2857103
+      -getScore(): float: 4.186313
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
-    "com.vkontakte.android" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.vkontakte.android"
+    "com.fingersoft.hillclimb" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.fingersoft.hillclimb"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.vkontakte.android"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.vkontakte.android&hl=en_US&gl=us"
-      -getName(): string: "VK — live chatting & free calls"
-      -getSummary(): ?string: "Social network with text messaging and photo stories"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb&hl=en_US&gl=us"
+      -getName(): string: "Hill Climb Racing"
+      -getSummary(): ?string: "Play the best physics based driving game ever made! For Free! 🚥🏎️🚗🏁🏆"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "VK.com"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=VK.com"
-        -getName(): string: "VK.com"
+        -getId(): string: "7064049075652771302"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7064049075652771302"
+        -getName(): string: "Fingersoft"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -250,12 +252,12 @@ array:682 [
         -jsonSerialize(): mixed: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/bgAuxUGArC8zH3NLJip3hn7CJur37IRotIqB5Xly--Zind-JD9r-ndCj30b1Wec7aOQ"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/bgAuxUGArC8zH3NLJip3hn7CJur37IRotIqB5Xly--Zind-JD9r-ndCj30b1Wec7aOQ=s0"
+        -getUrl(): string: "https://lh3.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/bgAuxUGArC8zH3NLJip3hn7CJur37IRotIqB5Xly--Zind-JD9r-ndCj30b1Wec7aOQ"
+        -__toString(): string: "https://lh3.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
       }
-      -getScore(): float: 3.7000844
+      -getScore(): float: 4.427317
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -269,3 +271,5 @@ array:682 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) - Limit for all available results.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getListApps**

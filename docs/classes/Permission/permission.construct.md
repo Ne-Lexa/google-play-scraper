@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Permission](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\Permission::__construct
 `Nelexa\GPlay\Model\Permission::__construct` — Permission constructor.
 
@@ -16,3 +18,5 @@ Nelexa\GPlay\Model\Permission::__construct ( string $label , Nelexa\GPlay\Model\
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [Permission](README.md) > **__construct**

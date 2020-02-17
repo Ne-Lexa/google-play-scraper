@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setHorizontalFlip**
+
 # Nelexa\GPlay\Model\GoogleImage::setHorizontalFlip
 `Nelexa\GPlay\Model\GoogleImage::setHorizontalFlip` — Sets the use of horizontal flip.
 
@@ -13,3 +15,4 @@ horizontal flip
 ## Return Values
 returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setHorizontalFlip**

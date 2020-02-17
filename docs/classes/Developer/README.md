@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **Developer**
+
 # The `Nelexa\GPlay\Model\Developer` class
 
 ## Introduction
@@ -88,3 +90,5 @@ Output:
     "address": null
 }
 ```
+
+[Documentation](../../README.md) > **Developer**

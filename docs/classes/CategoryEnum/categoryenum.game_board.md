@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_BOARD**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_BOARD
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_BOARD` — Returns the category id 'Board'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_BOARD"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_BOARD**

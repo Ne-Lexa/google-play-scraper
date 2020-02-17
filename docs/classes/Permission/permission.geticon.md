@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Permission](README.md) > **getIcon**
+
 # Nelexa\GPlay\Model\Permission::getIcon
 `Nelexa\GPlay\Model\Permission::getIcon`
 
@@ -17,3 +19,4 @@ This function has no parameters.
 ## Return Values
 Returns [Nelexa\GPlay\Model\GoogleImage](../GoogleImage/README.md)
 
+[Documentation](../../README.md) > [Permission](README.md) > **getIcon**

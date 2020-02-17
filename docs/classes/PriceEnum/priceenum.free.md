@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **FREE**
+
 # Nelexa\GPlay\Enum\PriceEnum::FREE
 `Nelexa\GPlay\Enum\PriceEnum::FREE` — Returns the value of the price parameter for free apps.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\PriceEnum {
   -__toString(): string: "1"
 }
 ```
+
+[Documentation](../../README.md) > [PriceEnum](README.md) > **FREE**

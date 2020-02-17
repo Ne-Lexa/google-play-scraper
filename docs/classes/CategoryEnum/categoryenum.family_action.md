@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_ACTION**
+
 # Nelexa\GPlay\Enum\CategoryEnum::FAMILY_ACTION
 `Nelexa\GPlay\Enum\CategoryEnum::FAMILY_ACTION` — Returns the category id 'Family Action & Adventure'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "FAMILY_ACTION"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **FAMILY_ACTION**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **SortEnum**
+
 # The `Nelexa\GPlay\Enum\SortEnum` class
 
 ## Introduction
@@ -41,9 +43,11 @@ Nelexa\GPlay\Enum\SortEnum extends Nelexa\Enum {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\SortEnum {
-  -name(): string: "NEWEST"
-  -value(): mixed: 2
-  -ordinal(): int: 1
-  -__toString(): string: "2"
+  -name(): string: "RATING"
+  -value(): mixed: 3
+  -ordinal(): int: 2
+  -__toString(): string: "3"
 }
 ```
+
+[Documentation](../../README.md) > **SortEnum**

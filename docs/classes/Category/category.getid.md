@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Category](README.md) > **getId**
+
 # Nelexa\GPlay\Model\Category::getId
 `Nelexa\GPlay\Model\Category::getId` — Returns category id.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 category id
 
+[Documentation](../../README.md) > [Category](README.md) > **getId**

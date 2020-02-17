@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **search**
+
 # Nelexa\GPlay\GPlayApps::search
 `Nelexa\GPlay\GPlayApps::search` — Returns a list of applications from the Google Play store for a search query.
 
@@ -60,7 +62,7 @@ array:150 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
       }
-      -getScore(): float: 4.328209
+      -getScore(): float: 4.3254695
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -93,7 +95,7 @@ array:150 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
       }
-      -getScore(): float: 4.3055086
+      -getScore(): float: 4.3090644
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -108,3 +110,5 @@ array:150 [
 ## See Also
 * [Nelexa\GPlay\Enum\PriceEnum](../PriceEnum/README.md) - Contains all valid values for the "price" parameter.
 * [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) - Limit for all available results.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **search**

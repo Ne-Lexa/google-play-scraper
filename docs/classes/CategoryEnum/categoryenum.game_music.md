@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_MUSIC**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_MUSIC
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_MUSIC` — Returns the category id 'Music'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_MUSIC"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_MUSIC**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Review](README.md) > **getUserName**
+
 # Nelexa\GPlay\Model\Review::getUserName
 `Nelexa\GPlay\Model\Review::getUserName` — Returns the username of the review author.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 author's username
 
+[Documentation](../../README.md) > [Review](README.md) > **getUserName**

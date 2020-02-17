@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getSearchSuggestions**
+
 # Nelexa\GPlay\GPlayApps::getSearchSuggestions
 `Nelexa\GPlay\GPlayApps::getSearchSuggestions` — Returns the Google Play search suggests.
 
@@ -37,3 +39,4 @@ array:5 [
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getSearchSuggestions**

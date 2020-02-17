@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppId](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\AppId::__construct
 `Nelexa\GPlay\Model\AppId::__construct` — Creates an \Nelexa\GPlay\Model\AppId object.
 
@@ -16,3 +18,5 @@ Country (affects prices). Default is 'us'.
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [AppId](README.md) > **__construct**

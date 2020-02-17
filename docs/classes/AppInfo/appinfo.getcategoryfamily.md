@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCategoryFamily**
+
 # Nelexa\GPlay\Model\AppInfo::getCategoryFamily
 `Nelexa\GPlay\Model\AppInfo::getCategoryFamily` — Returns family category.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 family category or `null`
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getCategoryFamily**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getSimilarApps**
+
 # Nelexa\GPlay\GPlayApps::getSimilarApps
 `Nelexa\GPlay\GPlayApps::getSimilarApps` — Returns an array of similar applications with basic information about them in the Google Play store.
 
@@ -42,8 +44,8 @@ array:161 [
       -getName(): string: "Центр программирования: научиться кодировать"
       -getSummary(): ?string: "Изучайте HTML,Python,Javascript,C,C ++,C #, Java и другие языки программирования"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Coding and Programming"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Coding+and+Programming"
+        -getId(): string: "8802462833480602617"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8802462833480602617"
         -getName(): string: "Coding and Programming"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
@@ -60,7 +62,7 @@ array:161 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/fy2SPeYLij4AC8WFaGSq0uxol14F22F3BGUU_Dq-UY9WjUiDc6Tz2FDCuxsgyQ4HPQ"
       }
-      -getScore(): float: 4.5916324
+      -getScore(): float: 4.5951314
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -93,7 +95,7 @@ array:161 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4"
       }
-      -getScore(): float: 4.674122
+      -getScore(): float: 4.6699705
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -107,3 +109,5 @@ array:161 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) - Limit for all available results.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getSimilarApps**

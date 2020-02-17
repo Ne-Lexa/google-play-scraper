@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setVerticalFlip**
+
 # Nelexa\GPlay\Model\GoogleImage::setVerticalFlip
 `Nelexa\GPlay\Model\GoogleImage::setVerticalFlip` — Sets the use of vertical flip.
 
@@ -13,3 +15,4 @@ vertical flip
 ## Return Values
 returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **setVerticalFlip**

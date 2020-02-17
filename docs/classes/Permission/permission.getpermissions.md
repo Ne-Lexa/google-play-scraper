@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Permission](README.md) > **getPermissions**
+
 # Nelexa\GPlay\Model\Permission::getPermissions
 `Nelexa\GPlay\Model\Permission::getPermissions`
 
@@ -17,3 +19,4 @@ This function has no parameters.
 ## Return Values
 Returns `string[]`
 
+[Documentation](../../README.md) > [Permission](README.md) > **getPermissions**

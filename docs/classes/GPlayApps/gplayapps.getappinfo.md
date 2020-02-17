@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppInfo**
+
 # Nelexa\GPlay\GPlayApps::getAppInfo
 `Nelexa\GPlay\GPlayApps::getAppInfo` — Returns the full detail of an application.
 
@@ -78,7 +80,7 @@ class Nelexa\GPlay\Model\AppInfo {
     -getBinaryImageContent(): string: …
     -__toString(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
   }
-  -getScore(): float: 4.4578714
+  -getScore(): float: 4.4607687
   -getPriceText(): ?string: "123,50 грн."
   -isFree(): bool: false
   -jsonSerialize(): mixed: …
@@ -130,13 +132,13 @@ class Nelexa\GPlay\Model\AppInfo {
     Різні виправлення помилок
     """
   -isEditorsChoice(): bool: true
-  -getInstalls(): int: 27323886
+  -getInstalls(): int: 27372757
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 2405993
-    -getFourStars(): int: 246493
-    -getThreeStars(): int: 118772
-    -getTwoStars(): int: 65780
-    -getOneStar(): int: 247742
+    -getFiveStars(): int: 2414726
+    -getFourStars(): int: 246520
+    -getThreeStars(): int: 118458
+    -getTwoStars(): int: 65428
+    -getOneStar(): int: 246899
     -asArray(): array: …
     -jsonSerialize(): mixed: …
   }
@@ -157,8 +159,8 @@ class Nelexa\GPlay\Model\AppInfo {
   -getUpdated(): ?DateTimeInterface: @1581031098 {
     date: 2020-02-06T23:18:18+00:00
   }
-  -getNumberVoters(): int: 3084782
-  -getNumberReviews(): int: 1595840
+  -getNumberVoters(): int: 3092034
+  -getNumberReviews(): int: 1599715
   -getReviews(): array:4 [
     0 => class Nelexa\GPlay\Model\Review {
       -getId(): string: "gp:AOqpTOEk-B-eP-WonMwF1mJJ5ki7W8GFSWJ764ctKyedW8kgZod2Th98ipVnpUGm7Bgew1mJ8rH-3ncav6WVcxE"
@@ -175,7 +177,7 @@ class Nelexa\GPlay\Model\AppInfo {
         date: 2019-09-13T08:58:29+00:00
       }
       -getScore(): int: 5
-      -getCountLikes(): int: 9712
+      -getCountLikes(): int: 10084
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
       -jsonSerialize(): mixed: …
@@ -195,7 +197,7 @@ class Nelexa\GPlay\Model\AppInfo {
         date: 2019-09-28T20:02:25+00:00
       }
       -getScore(): int: 1
-      -getCountLikes(): int: 4150
+      -getCountLikes(): int: 4316
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
       -jsonSerialize(): mixed: …
@@ -208,3 +210,4 @@ class Nelexa\GPlay\Model\AppInfo {
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppInfo**

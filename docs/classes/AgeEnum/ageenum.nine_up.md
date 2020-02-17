@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AgeEnum](README.md) > **NINE_UP**
+
 # Nelexa\GPlay\Enum\AgeEnum::NINE_UP
 `Nelexa\GPlay\Enum\AgeEnum::NINE_UP` — Returns the value of the age parameter for ages 9 and up.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\AgeEnum {
   -__toString(): string: "AGE_RANGE3"
 }
 ```
+
+[Documentation](../../README.md) > [AgeEnum](README.md) > **NINE_UP**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getDeveloperInfo**
+
 # Nelexa\GPlay\GPlayApps::getDeveloperInfo
 `Nelexa\GPlay\GPlayApps::getDeveloperInfo` — Returns information about the developer: name, icon, cover, description and website address.
 
@@ -59,3 +61,5 @@ class Nelexa\GPlay\Model\Developer {
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::getDeveloperInfoForLocales()](gplayapps.getdeveloperinfoforlocales.md) - Returns information about the developer for the locale array.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getDeveloperInfo**

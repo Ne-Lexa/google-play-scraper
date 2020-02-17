@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **values**
+
 # Nelexa\GPlay\Enum\CategoryEnum::values
 `Nelexa\GPlay\Enum\CategoryEnum::values` — Returns an array containing the constants of this enum type, in the order they're declared.
 
@@ -37,3 +39,5 @@ array:58 [
     …
   ]
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **values**

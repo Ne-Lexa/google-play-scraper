@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **existsApps**
+
 # Nelexa\GPlay\GPlayApps::existsApps
 `Nelexa\GPlay\GPlayApps::existsApps` — Checks if the specified applications exist in the Google Play store.
 
@@ -52,3 +54,5 @@ array:6 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::setConcurrency()](gplayapps.setconcurrency.md) - Sets the limit of concurrent HTTP requests.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **existsApps**

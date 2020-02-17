@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getDeveloperApps**
+
 # Nelexa\GPlay\GPlayApps::getDeveloperApps
 `Nelexa\GPlay\GPlayApps::getDeveloperApps` — Returns an array of applications from the Google Play store by developer id.
 
@@ -32,41 +34,8 @@ $apps = $gplay->getDeveloperApps($devId);
   <summary>Results</summary>
 
 ```php
-array:130 [
+array:129 [
     0 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.google.android.projection.gearhead"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.projection.gearhead"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.projection.gearhead&hl=en_US&gl=us"
-      -getName(): string: "Android Auto - Google Maps, Media & Messaging"
-      -getSummary(): ?string: "Control maps, media and messaging, with the Google Assistant while you drive"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "5700313618786177705"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
-        -getName(): string: "Google LLC"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/drnkC46hMwqPTdRLLLufhKgy_dRhA7uNTN14-tq2NxtI3deDakYOAR_4zeHcqbGg4Q"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/drnkC46hMwqPTdRLLLufhKgy_dRhA7uNTN14-tq2NxtI3deDakYOAR_4zeHcqbGg4Q=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/drnkC46hMwqPTdRLLLufhKgy_dRhA7uNTN14-tq2NxtI3deDakYOAR_4zeHcqbGg4Q"
-      }
-      -getScore(): float: 4.1934695
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    1 => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.google.android.play.games"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
@@ -93,7 +62,40 @@ array:130 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA"
       }
-      -getScore(): float: 4.353653
+      -getScore(): float: 4.354707
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): mixed: …
+    }
+    1 => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.google.android.apps.youtube.music"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music&hl=en_US&gl=us"
+      -getName(): string: "YouTube Music - Stream Songs & Music Videos"
+      -getSummary(): ?string: "The official YouTube app built just for music."
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "5700313618786177705"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
+        -getName(): string: "Google LLC"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): mixed: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -getUrl(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg"
+        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg=s0"
+        -getBinaryImageContent(): string: …
+        -__toString(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg"
+      }
+      -getScore(): float: 4.123365
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
@@ -105,3 +107,4 @@ array:130 [
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getDeveloperApps**

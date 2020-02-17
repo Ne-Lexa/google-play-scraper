@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_ROLE_PLAYING**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_ROLE_PLAYING
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_ROLE_PLAYING` — Returns the category id 'Role Playing'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_ROLE_PLAYING"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_ROLE_PLAYING**

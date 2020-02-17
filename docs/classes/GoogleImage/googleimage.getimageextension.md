@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **getImageExtension**
+
 # Nelexa\GPlay\Model\GoogleImage::getImageExtension
 `Nelexa\GPlay\Model\GoogleImage::getImageExtension`
 
@@ -18,3 +20,4 @@ Nelexa\GPlay\Model\GoogleImage::getImageExtension ( string $mimeType ) : string 
 ## Return Values
 Returns `string` or `null`
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **getImageExtension**

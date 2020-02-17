@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Video](README.md) > **getVideoUrl**
+
 # Nelexa\GPlay\Model\Video::getVideoUrl
 `Nelexa\GPlay\Model\Video::getVideoUrl` — Returns the video url.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 video url
 
+[Documentation](../../README.md) > [Video](README.md) > **getVideoUrl**

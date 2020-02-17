@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **ALL**
+
 # Nelexa\GPlay\Enum\PriceEnum::ALL
 `Nelexa\GPlay\Enum\PriceEnum::ALL` — Returns the value of the price parameter for all apps.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\PriceEnum {
   -__toString(): string: "0"
 }
 ```
+
+[Documentation](../../README.md) > [PriceEnum](README.md) > **ALL**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **values**
+
 # Nelexa\GPlay\Enum\PriceEnum::values
 `Nelexa\GPlay\Enum\PriceEnum::values` — Returns an array containing the constants of this enum type, in the order they're declared.
 
@@ -37,3 +39,5 @@ array:3 [
     …
   ]
 ```
+
+[Documentation](../../README.md) > [PriceEnum](README.md) > **values**

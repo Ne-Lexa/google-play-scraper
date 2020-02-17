@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getPrevious**
+
 # Nelexa\GPlay\Exception\GooglePlayException::getPrevious
 `Nelexa\GPlay\Exception\GooglePlayException::getPrevious`
 
@@ -16,3 +18,5 @@ This function has no parameters.
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [GooglePlayException](README.md) > **getPrevious**

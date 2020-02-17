@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [HistogramRating](README.md) > **getFiveStars**
+
 # Nelexa\GPlay\Model\HistogramRating::getFiveStars
 `Nelexa\GPlay\Model\HistogramRating::getFiveStars` — Returns the five-star rating of the application.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 five star rating app
 
+[Documentation](../../README.md) > [HistogramRating](README.md) > **getFiveStars**

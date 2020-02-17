@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppInfoForLocales**
+
 # Nelexa\GPlay\GPlayApps::getAppInfoForLocales
 `Nelexa\GPlay\GPlayApps::getAppInfoForLocales` — Returns the full details of an application in multiple languages.
 
@@ -62,7 +64,7 @@ array:5 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
       }
-      -getScore(): float: 4.370738
+      -getScore(): float: 4.371647
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -jsonSerialize(): mixed: …
@@ -103,15 +105,19 @@ array:5 [
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: "Thanks for choosing Chrome! This release includes stability and performance improvements."
+      -getRecentChanges(): ?string: """
+        Thanks for choosing Chrome! This release contains the following features, as well as stability and performance improvements: \n
+        \n
+        • Quieter notifications…
+        """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 6090507724
+      -getInstalls(): int: 6109119447
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 13585003
-        -getFourStars(): int: 2314160
-        -getThreeStars(): int: 1114345
-        -getTwoStars(): int: 545061
-        -getOneStar(): int: 1445057
+        -getFiveStars(): int: 13653105
+        -getFourStars(): int: 2319179
+        -getThreeStars(): int: 1115216
+        -getTwoStars(): int: 545239
+        -getOneStar(): int: 1451591
         -asArray(): array: …
         -jsonSerialize(): mixed: …
       }
@@ -129,55 +135,48 @@ array:5 [
       -getReleased(): ?DateTimeInterface: @1328572800 {
         date: 2012-02-07T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581455005 {
-        date: 2020-02-11T21:03:25+00:00
+      -getUpdated(): ?DateTimeInterface: @1581622298 {
+        date: 2020-02-13T19:31:38+00:00
       }
-      -getNumberVoters(): int: 19003628
-      -getNumberReviews(): int: 5552461
+      -getNumberVoters(): int: 19084332
+      -getNumberReviews(): int: 5581111
       -getReviews(): array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOEsmqp5FTgADw-dLlv2Rgdhnr5-aE2Ssv5yUNA55w6xFinXuBYTuUSfyEgpxxUfrRDAiYlEMrPDNyAIXl0"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOEsmqp5FTgADw-dLlv2Rgdhnr5-aE2Ssv5yUNA55w6xFinXuBYTuUSfyEgpxxUfrRD…"
-          -getUserName(): string: "Yanaica Reinink"
-          -getText(): string: "This app always worked fine but recently it's been having trouble on my device. I even had to switch to a different browser. Chrome won't load my page…"
+          -getId(): string: "gp:AOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZAUppOOGWOIwdUCDs"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZ…"
+          -getUserName(): string: "Stephen"
+          -getText(): string: "I thought it was just me (or my device - Samsung S10 tablet), but I see that many users are having crash problems with Chrome. I tried all of the fixe…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAlgN8IWBo27FAuQv8WTTT4mnEZyzPK5_n6s1wz=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAlgN8IWBo27FAuQv8WTTT4mnEZyzPK5_n6s1wz=s0"
+            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAlgN8IWBo27FAuQv8WTTT4mnEZyzPK5_n6s1wz=s64"
+            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581446345 {
-            date: 2020-02-11T18:39:05+00:00
+          -getDate(): ?DateTimeInterface: @1581778840 {
+            date: 2020-02-15T15:00:40+00:00
           }
-          -getScore(): int: 2
-          -getCountLikes(): int: 114
-          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-            -getDate(): DateTimeInterface: @1581447931 {
-              date: 2020-02-11T19:05:31+00:00
-            }
-            -getText(): string: "Hey Yanaica. Let's try resetting Chrome's app data. You can learn how in this help center article under the "Clear the app's cache" section: https://g…"
-            -asArray(): array: …
-            -jsonSerialize(): mixed: …
-          }
+          -getScore(): int: 1
+          -getCountLikes(): int: 260
+          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOE0uqCbq9NlXoyjCfnu0l5nRRKybZ0-hwT1T_RpJs7GlxyjtBtvVcL7yJbhY7RilHeMYfUya4gWM6xe0Tw"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOE0uqCbq9NlXoyjCfnu0l5nRRKybZ0-hwT1T_RpJs7GlxyjtBtvVcL7yJbhY7RilHe…"
-          -getUserName(): string: "Queen Lie"
-          -getText(): string: "Everyone can visit: ( BrowserGood. Com ) to install the best browser app. It's adblock and faster. Everytime I have chrome, and its not by choice, onl…"
+          -getId(): string: "gp:AOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkqoOZRUoC6qm4OXv7g"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkq…"
+          -getUserName(): string: "Janae Ask"
+          -getText(): string: "I've been a diehard chrome fan for years but I noticed today that my app updated and my home page button disappeared. I'm super annoyed and honestly I…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mADpm9XahajGfNYJRiRpG4lA6F_EU_Mri54vV-Q=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mADpm9XahajGfNYJRiRpG4lA6F_EU_Mri54vV-Q=s0"
+            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mADpm9XahajGfNYJRiRpG4lA6F_EU_Mri54vV-Q=s64"
+            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581353069 {
-            date: 2020-02-10T16:44:29+00:00
+          -getDate(): ?DateTimeInterface: @1581740061 {
+            date: 2020-02-15T04:14:21+00:00
           }
-          -getScore(): int: 2
-          -getCountLikes(): int: 77
+          -getScore(): int: 1
+          -getCountLikes(): int: 24
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
@@ -213,7 +212,7 @@ array:5 [
         -getBinaryImageContent(): string: …
         -__toString(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
       }
-      -getScore(): float: 4.370738
+      -getScore(): float: 4.371647
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -jsonSerialize(): mixed: …
@@ -256,13 +255,13 @@ array:5 [
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
       -getRecentChanges(): ?string: "Merci d'avoir choisi Chrome ! Cette version inclut des améliorations de la stabilité et des performances."
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 6090507724
+      -getInstalls(): int: 6109119447
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 13584963
-        -getFourStars(): int: 2314154
-        -getThreeStars(): int: 1114342
-        -getTwoStars(): int: 545059
-        -getOneStar(): int: 1445052
+        -getFiveStars(): int: 13653227
+        -getFourStars(): int: 2319199
+        -getThreeStars(): int: 1115226
+        -getTwoStars(): int: 545244
+        -getOneStar(): int: 1451604
         -asArray(): array: …
         -jsonSerialize(): mixed: …
       }
@@ -280,13 +279,33 @@ array:5 [
       -getReleased(): ?DateTimeInterface: @1328572800 {
         date: 2012-02-07T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581455005 {
-        date: 2020-02-11T21:03:25+00:00
+      -getUpdated(): ?DateTimeInterface: @1581622298 {
+        date: 2020-02-13T19:31:38+00:00
       }
-      -getNumberVoters(): int: 19003572
-      -getNumberReviews(): int: 5552448
+      -getNumberVoters(): int: 19084503
+      -getNumberReviews(): int: 5581172
       -getReviews(): array:4 [
         0 => class Nelexa\GPlay\Model\Review {
+          -getId(): string: "gp:AOqpTOHhVlm5JUKBgyuPv-Scje53SialWEXc2UMB9_fmrVbRLP1H9i9TYRR9uZSqIBk_XNKYalsOh78ISfMtlTo"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHhVlm5JUKBgyuPv-Scje53SialWEXc2UMB9_fmrVbRLP1H9i9TYRR9uZSqIBk_XNK…"
+          -getUserName(): string: "Dm Go"
+          -getText(): string: "Très bien jusqu'à la dernière mise à jour, le changement des onglets est devenu BEAUCOUP moins pratique qu'avant, où l'on pouvait facilement se repére…"
+          -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
+            -getUrl(): string: "https://lh3.googleusercontent.com/-yWvPQ0z6fjc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd3CK1CsmcQirNT0a5YpECXWUQoUg/s64/"
+            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-yWvPQ0z6fjc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd3CK1CsmcQirNT0a5YpECXWUQoUg/s0/"
+            -getBinaryImageContent(): string: …
+            -__toString(): string: "https://lh3.googleusercontent.com/-yWvPQ0z6fjc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd3CK1CsmcQirNT0a5YpECXWUQoUg/s64/"
+          }
+          -getDate(): ?DateTimeInterface: @1581813065 {
+            date: 2020-02-16T00:31:05+00:00
+          }
+          -getScore(): int: 3
+          -getCountLikes(): int: 10
+          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -asArray(): array: …
+          -jsonSerialize(): mixed: …
+        }
+        1 => class Nelexa\GPlay\Model\Review {
           -getId(): string: "gp:AOqpTOHqBCktJMi0UcJ3WV-txYU6EOJO5clMdr06hBUP7QgGHQjqBVNl83xNAd82uLEo3JYc28drRhCExmN0i3I"
           -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHqBCktJMi0UcJ3WV-txYU6EOJO5clMdr06hBUP7QgGHQjqBVNl83xNAd82uLEo3JY…"
           -getUserName(): string: "Dimitri Czech"
@@ -301,27 +320,7 @@ array:5 [
             date: 2020-02-11T18:11:49+00:00
           }
           -getScore(): int: 2
-          -getCountLikes(): int: 3
-          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
-          -asArray(): array: …
-          -jsonSerialize(): mixed: …
-        }
-        1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOGxjjr3zKl1nF6W2en68AvKH9FgP63BfZpbYkzN1_FAygaQ7gRPOzkGqKGPq6aLUgRmd52r6MtbsjTjDGE"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGxjjr3zKl1nF6W2en68AvKH9FgP63BfZpbYkzN1_FAygaQ7gRPOzkGqKGPq6aLUgR…"
-          -getUserName(): string: "Nicolas H."
-          -getText(): string: "La dernière mise à jour fait buguer complètement l'application. Elle ne charge plu aucune page, elle charge indéfiniment. Je suis donc retourner sur u…"
-          -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mBtaoOmitKuCzYW8g5sThZ28L42FJQzI-BQFBTWlA=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mBtaoOmitKuCzYW8g5sThZ28L42FJQzI-BQFBTWlA=s0"
-            -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mBtaoOmitKuCzYW8g5sThZ28L42FJQzI-BQFBTWlA=s64"
-          }
-          -getDate(): ?DateTimeInterface: @1579904128 {
-            date: 2020-01-24T22:15:28+00:00
-          }
-          -getScore(): int: 1
-          -getCountLikes(): int: 252
+          -getCountLikes(): int: 75
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
           -jsonSerialize(): mixed: …
@@ -338,3 +337,5 @@ array:5 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::setConcurrency()](gplayapps.setconcurrency.md) - Sets the limit of concurrent HTTP requests.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getAppInfoForLocales**

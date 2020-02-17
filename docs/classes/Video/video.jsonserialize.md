@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Video](README.md) > **jsonSerialize**
+
 # Nelexa\GPlay\Model\Video::jsonSerialize
 `Nelexa\GPlay\Model\Video::jsonSerialize` — Specify data which should be serialized to JSON.
 
@@ -16,3 +18,5 @@ which is a value of any type other than a `resource`
 
 ## See Also
 * :link: [https://php.net/manual/en/jsonserializable.jsonserialize.php](https://php.net/manual/en/jsonserializable.jsonserialize.php) - JsonSerializable::jsonSerialize
+
+[Documentation](../../README.md) > [Video](README.md) > **jsonSerialize**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Review](README.md) > **getText**
+
 # Nelexa\GPlay\Model\Review::getText
 `Nelexa\GPlay\Model\Review::getText` — Returns the text of the review.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 review text
 
+[Documentation](../../README.md) > [Review](README.md) > **getText**

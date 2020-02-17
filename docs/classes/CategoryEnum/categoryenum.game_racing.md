@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_RACING**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING` — Returns the category id 'Racing'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_RACING"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_RACING**

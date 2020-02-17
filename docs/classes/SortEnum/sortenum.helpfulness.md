@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [SortEnum](README.md) > **HELPFULNESS**
+
 # Nelexa\GPlay\Enum\SortEnum::HELPFULNESS
 `Nelexa\GPlay\Enum\SortEnum::HELPFULNESS` — Returns the value of the sorting of reviews by helpfulness.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\SortEnum {
   -__toString(): string: "1"
 }
 ```
+
+[Documentation](../../README.md) > [SortEnum](README.md) > **HELPFULNESS**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GoogleImage](README.md) > **useOriginalSize**
+
 # Nelexa\GPlay\Model\GoogleImage::useOriginalSize
 `Nelexa\GPlay\Model\GoogleImage::useOriginalSize` — Sets the original image size.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 returns the same object \Nelexa\GPlay\Model\GoogleImage to support the call chain
 
+[Documentation](../../README.md) > [GoogleImage](README.md) > **useOriginalSize**

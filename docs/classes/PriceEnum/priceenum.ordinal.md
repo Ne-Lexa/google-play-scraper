@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [PriceEnum](README.md) > **ordinal**
+
 # Nelexa\GPlay\Enum\PriceEnum::ordinal
 `Nelexa\GPlay\Enum\PriceEnum::ordinal` — Returns the ordinal of this enum constant.
 
@@ -13,3 +15,4 @@ This function has no parameters.
 ## Return Values
 Ordinal of this enumeration constant.
 
+[Documentation](../../README.md) > [PriceEnum](README.md) > **ordinal**

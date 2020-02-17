@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AgeEnum](README.md) > **value**
+
 # Nelexa\GPlay\Enum\AgeEnum::value
 `Nelexa\GPlay\Enum\AgeEnum::value` — Returns the scalar value of this enum constant.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 Constant value.
 
+[Documentation](../../README.md) > [AgeEnum](README.md) > **value**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **ANDROID_WEAR**
+
 # Nelexa\GPlay\Enum\CategoryEnum::ANDROID_WEAR
 `Nelexa\GPlay\Enum\CategoryEnum::ANDROID_WEAR` — Returns the category id 'Wear OS by Google'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "ANDROID_WEAR"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **ANDROID_WEAR**

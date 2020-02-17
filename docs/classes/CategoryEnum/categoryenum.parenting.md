@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PARENTING**
+
 # Nelexa\GPlay\Enum\CategoryEnum::PARENTING
 `Nelexa\GPlay\Enum\CategoryEnum::PARENTING` — Returns the category id 'Parenting'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "PARENTING"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PARENTING**

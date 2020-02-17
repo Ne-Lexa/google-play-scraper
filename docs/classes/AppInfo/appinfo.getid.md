@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getId**
+
 # Nelexa\GPlay\Model\AppInfo::getId
 `Nelexa\GPlay\Model\AppInfo::getId` — Returns the application ID (android package name).
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 application ID (android package name)
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getId**

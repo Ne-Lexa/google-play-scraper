@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **EVENTS**
+
 # Nelexa\GPlay\Enum\CategoryEnum::EVENTS
 `Nelexa\GPlay\Enum\CategoryEnum::EVENTS` — Returns the category id 'Events'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "EVENTS"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **EVENTS**

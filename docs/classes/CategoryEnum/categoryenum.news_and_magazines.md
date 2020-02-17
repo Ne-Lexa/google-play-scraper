@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **NEWS_AND_MAGAZINES**
+
 # Nelexa\GPlay\Enum\CategoryEnum::NEWS_AND_MAGAZINES
 `Nelexa\GPlay\Enum\CategoryEnum::NEWS_AND_MAGAZINES` — Returns the category id 'News & Magazines'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "NEWS_AND_MAGAZINES"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **NEWS_AND_MAGAZINES**

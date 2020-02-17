@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_STRATEGY**
+
 # Nelexa\GPlay\Enum\CategoryEnum::GAME_STRATEGY
 `Nelexa\GPlay\Enum\CategoryEnum::GAME_STRATEGY` — Returns the category id 'Strategy'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "GAME_STRATEGY"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **GAME_STRATEGY**

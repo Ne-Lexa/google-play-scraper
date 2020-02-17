@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Review](README.md) > **__construct**
+
 # Nelexa\GPlay\Model\Review::__construct
 `Nelexa\GPlay\Model\Review::__construct` — Creates an Android app review object in the Google Play store.
 
@@ -28,3 +30,5 @@ reply review
 
 ## Return Values
 No value is returned.
+
+[Documentation](../../README.md) > [Review](README.md) > **__construct**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Developer](README.md) > **getId**
+
 # Nelexa\GPlay\Model\Developer::getId
 `Nelexa\GPlay\Model\Developer::getId` — Returns developer id.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 developer id
 
+[Documentation](../../README.md) > [Developer](README.md) > **getId**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getCategories**
+
 # Nelexa\GPlay\GPlayApps::getCategories
 `Nelexa\GPlay\GPlayApps::getCategories` — Returns an array of application categories from the Google Play store.
 
@@ -51,3 +53,4 @@ array:58 [
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getCategories**

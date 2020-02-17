@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **CategoryEnum**
+
 # The `Nelexa\GPlay\Enum\CategoryEnum` class
 
 ## Introduction
@@ -151,9 +153,11 @@ Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\CategoryEnum {
-  -name(): string: "ENTERTAINMENT"
-  -value(): mixed: "ENTERTAINMENT"
-  -ordinal(): int: 11
-  -__toString(): string: "ENTERTAINMENT"
+  -name(): string: "FAMILY_PRETEND"
+  -value(): mixed: "FAMILY_PRETEND"
+  -ordinal(): int: 57
+  -__toString(): string: "FAMILY_PRETEND"
 }
 ```
+
+[Documentation](../../README.md) > **CategoryEnum**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Category](README.md) > **getName**
+
 # Nelexa\GPlay\Model\Category::getName
 `Nelexa\GPlay\Model\Category::getName` — Returns category name.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 category name
 
+[Documentation](../../README.md) > [Category](README.md) > **getName**

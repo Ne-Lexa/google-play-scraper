@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [AppInfo](README.md) > **getName**
+
 # Nelexa\GPlay\Model\AppInfo::getName
 `Nelexa\GPlay\Model\AppInfo::getName` — Returns application name.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 application name
 
+[Documentation](../../README.md) > [AppInfo](README.md) > **getName**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Developer](README.md) > **getIcon**
+
 # Nelexa\GPlay\Model\Developer::getIcon
 `Nelexa\GPlay\Model\Developer::getIcon` — Returns the developer icon.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 developer icon or `null`
 
+[Documentation](../../README.md) > [Developer](README.md) > **getIcon**

@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getCategoriesForAvailableLocales**
+
 # Nelexa\GPlay\GPlayApps::getCategoriesForAvailableLocales
 `Nelexa\GPlay\GPlayApps::getCategoriesForAvailableLocales` — Returns an array of categories from the Google Play store for all available locales.
 
@@ -1670,3 +1672,5 @@ array:78 [
 
 ## See Also
 * [Nelexa\GPlay\GPlayApps::setConcurrency()](gplayapps.setconcurrency.md) - Sets the limit of concurrent HTTP requests.
+
+[Documentation](../../README.md) > [GPlayApps](README.md) > **getCategoriesForAvailableLocales**

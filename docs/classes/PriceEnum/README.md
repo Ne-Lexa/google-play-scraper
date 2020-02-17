@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **PriceEnum**
+
 # The `Nelexa\GPlay\Enum\PriceEnum` class
 
 ## Introduction
@@ -47,3 +49,5 @@ class Nelexa\GPlay\Enum\PriceEnum {
   -__toString(): string: "0"
 }
 ```
+
+[Documentation](../../README.md) > **PriceEnum**

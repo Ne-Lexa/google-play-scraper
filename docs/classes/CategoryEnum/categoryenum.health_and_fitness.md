@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **HEALTH_AND_FITNESS**
+
 # Nelexa\GPlay\Enum\CategoryEnum::HEALTH_AND_FITNESS
 `Nelexa\GPlay\Enum\CategoryEnum::HEALTH_AND_FITNESS` — Returns the category id 'Health & Fitness'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "HEALTH_AND_FITNESS"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **HEALTH_AND_FITNESS**

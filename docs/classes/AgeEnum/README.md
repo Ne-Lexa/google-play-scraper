@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **AgeEnum**
+
 # The `Nelexa\GPlay\Enum\AgeEnum` class
 
 ## Introduction
@@ -41,9 +43,11 @@ Nelexa\GPlay\Enum\AgeEnum extends Nelexa\Enum {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\AgeEnum {
-  -name(): string: "NINE_UP"
-  -value(): mixed: "AGE_RANGE3"
-  -ordinal(): int: 2
-  -__toString(): string: "AGE_RANGE3"
+  -name(): string: "FIVE_UNDER"
+  -value(): mixed: "AGE_RANGE1"
+  -ordinal(): int: 0
+  -__toString(): string: "AGE_RANGE1"
 }
 ```
+
+[Documentation](../../README.md) > **AgeEnum**

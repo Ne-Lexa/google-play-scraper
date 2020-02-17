@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PERSONALIZATION**
+
 # Nelexa\GPlay\Enum\CategoryEnum::PERSONALIZATION
 `Nelexa\GPlay\Enum\CategoryEnum::PERSONALIZATION` — Returns the category id 'Personalization'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "PERSONALIZATION"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **PERSONALIZATION**

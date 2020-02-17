@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > **GoogleImage**
+
 # The `Nelexa\GPlay\Model\GoogleImage` class
 
 ## Introduction
@@ -165,7 +167,7 @@ $results = $gplay
     ->saveGoogleImages(
         $screenshots,
         static function (\Nelexa\GPlay\Model\GoogleImage $image): string {
-            return 'screenshots/' . $image->getHashUrl('md5', $parts = 1, $partsLength = 3) . '.ext';
+            return 'screenshots/' . $image->getHashUrl('md5', $parts = 1, $partsLength = 3) . '.{ext}';
         }
     )
 ;
@@ -176,24 +178,24 @@ $results = $gplay
 ```php
 array:15 [
     0 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/L615QU2G2qxv68di7WqB4V40mDsOgko4iKmz-NB6SzwLejM8x4i2CbAqgkIxBqZ3A9M=w700"
-      -getFilename(): string: "screenshots/3bd/3bd0a0c51b19cfb20afd2c9e102a103c.ext"
+      -getUrl(): string: "https://lh3.googleusercontent.com/ykwlyF-Lvnla20Omus2o6hnI2E3V4f_dU_oqElqUZmAxRdIZxQS4iB0xPZ4Khy9TZuA=w700"
+      -getFilename(): string: "screenshots/697/697778ef9aef9c243c0a5505f7c453e3.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 700
-      -getHeight(): int: 1245
-      -getFilesize(): int: 610385
+      -getHeight(): int: 934
+      -getFilesize(): int: 493845
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
     1 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/d6CY2BSvBXFLK8J3WqJEdDr53_OZ43Aijr43CjG1QKUfHXt4E_zDNBZWoMqkxONzOQ=w700"
-      -getFilename(): string: "screenshots/454/454e644fccccb899f32647a102320f46.ext"
+      -getUrl(): string: "https://lh3.googleusercontent.com/LTPRCiZKBqBGfgxVCOPo5A6qgDdAjebkLU6tAkvirmBjHdlkY5SjOiBMUaIp7o8_K5k=w700"
+      -getFilename(): string: "screenshots/e82/e8287583381d282d9688082aecf09f14.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 700
-      -getHeight(): int: 1245
-      -getFilesize(): int: 815830
+      -getHeight(): int: 934
+      -getFilesize(): int: 635907
       -asArray(): array: …
       -jsonSerialize(): mixed: …
     }
@@ -229,3 +231,5 @@ array:15 [
 * :link: [https://developers.google.com/people/image-sizing](https://developers.google.com/people/image-sizing) - Goolge People API - Image Sizing.
 * :link: [https://github.com/null-dev/libGoogleUserContent](https://github.com/null-dev/libGoogleUserContent) - Java library to create googleusercontent.com URLs.
 * :link: [https://sites.google.com/site/picasaresources/Home/Picasa-FAQ/google-photos-1/how-to/how-to-get-a-direct-link-to-an-image](https://sites.google.com/site/picasaresources/Home/Picasa-FAQ/google-photos-1/how-to/how-to-get-a-direct-link-to-an-image) - Google Photos and Picasa: How to get a direct link to an image (of a specific size)
+
+[Documentation](../../README.md) > **GoogleImage**

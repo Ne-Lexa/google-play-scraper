@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Review](README.md) > **getId**
+
 # Nelexa\GPlay\Model\Review::getId
 `Nelexa\GPlay\Model\Review::getId` — Returns review id.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 review id
 
+[Documentation](../../README.md) > [Review](README.md) > **getId**

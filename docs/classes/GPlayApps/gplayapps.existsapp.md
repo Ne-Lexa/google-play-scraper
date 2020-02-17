@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [GPlayApps](README.md) > **existsApp**
+
 # Nelexa\GPlay\GPlayApps::existsApp
 `Nelexa\GPlay\GPlayApps::existsApp` — Checks if the specified application exists in the Google Play store.
 
@@ -48,3 +50,4 @@ false
 
 </details>
 
+[Documentation](../../README.md) > [GPlayApps](README.md) > **existsApp**

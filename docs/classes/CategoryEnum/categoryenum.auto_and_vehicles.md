@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **AUTO_AND_VEHICLES**
+
 # Nelexa\GPlay\Enum\CategoryEnum::AUTO_AND_VEHICLES
 `Nelexa\GPlay\Enum\CategoryEnum::AUTO_AND_VEHICLES` — Returns the category id 'Auto & Vehicles'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "AUTO_AND_VEHICLES"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **AUTO_AND_VEHICLES**

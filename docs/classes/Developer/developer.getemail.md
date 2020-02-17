@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [Developer](README.md) > **getEmail**
+
 # Nelexa\GPlay\Model\Developer::getEmail
 `Nelexa\GPlay\Model\Developer::getEmail` — Returns developer email.
 
@@ -12,3 +14,4 @@ This function has no parameters.
 ## Return Values
 developer email or `null`
 
+[Documentation](../../README.md) > [Developer](README.md) > **getEmail**

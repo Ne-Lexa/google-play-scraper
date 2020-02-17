@@ -1,3 +1,5 @@
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **MEDICAL**
+
 # Nelexa\GPlay\Enum\CategoryEnum::MEDICAL
 `Nelexa\GPlay\Enum\CategoryEnum::MEDICAL` — Returns the category id 'Medical'.
 
@@ -21,3 +23,5 @@ class Nelexa\GPlay\Enum\CategoryEnum {
   -__toString(): string: "MEDICAL"
 }
 ```
+
+[Documentation](../../README.md) > [CategoryEnum](README.md) > **MEDICAL**
