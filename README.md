@@ -1,42 +1,39 @@
 # nelexa/google-play-scraper
 
-PHP Scraper to extract information about Android applications from the Google Play store.
-
 [![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg?style=popout&color=aa007f)](https://packagist.org/packages/nelexa/google-play-scraper) ![PHP from Packagist](https://img.shields.io/packagist/php-v/nelexa/google-play-scraper.svg?style=popout&color=d500a0) ![License](https://img.shields.io/packagist/l/nelexa/google-play-scraper.svg?style=popout&color=ff00bf)
 [![Build Status](https://secure.travis-ci.org/Ne-Lexa/google-play-scraper.png)](http://travis-ci.org/Ne-Lexa/google-play-scraper) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/build-status/master)
 
+PHP library to scrape application data from the Google Play store.
 
-The library allows you to receive information about Android applications from the Google Play store:
-
-- checks the availability of an application on Google Play;
-- gets the full information about an application;
-- gets a list of similar applications;
-- gets reviews on an application;
-- gets a list of application permissions;
-- gets the current list of categories;
-- gets a list of application categories;
-- gets information from the personal page of the developer;
-- gets a list of developer applications;
-- gets application search results and search hints
-- parallel extraction of information about multiple applications/locales;
-- parallel saving of images with the possibility of resizing before saving;
+- Checking the exists of the app on Google Play.
+- Retrieving full app info.
+- Retrieving reviews on the app.
+- Retrieving a list of app permissions.
+- Retrieving a list of similar apps.
+- Retrieving a list of categories.
+- Retrieving a list of new and the best apps.
+- Retrieving a list of apps by the category.
+- Retrieving a list of apps by the developer.
+- Retrieving info about the developer.
+- Retrieving search results.
+- Downloading images for the specified size.
 
 ## Installation
-Add `nelexa/google-play-scraper` as a require dependency in your composer.json file:
-
 ```shell
 composer require nelexa/google-play-scraper
 ```
 
 ## Documentation
-Documentation is available on the [docs](https://github.com/Ne-Lexa/google-play-scraper/tree/master/docs) folder.
+[docs/README.md](https://github.com/Ne-Lexa/google-play-scraper/tree/master/docs/README.md)
 
 ## Example
 ```php
-$gplay = new \Nelexa\GPlay\GPlayApps($locale = 'un_US', $country = 'us');
+// Retrieving full app info
+
+$gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'un_US', $defaultCountry = 'us');
 $appInfo = $gplay->getAppInfo('com.mojang.minecraftpe');
 ```
-Output:
+Result:
 ```php
 class Nelexa\GPlay\Model\AppInfo {
   -getId(): string: "com.mojang.minecraftpe"
@@ -86,7 +83,7 @@ class Nelexa\GPlay\Model\AppInfo {
     -getBinaryImageContent(): string: …
     -__toString(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
   }
-  -getScreenshots(): array: array:8 [
+  -getScreenshots(): array:8 [
     0 => class Nelexa\GPlay\Model\GoogleImage {
       -getUrl(): string: "https://lh3.googleusercontent.com/4r8nWBGPNKid_7q7965C86DSo_BvEkp-CdMxETYJZ-x7eKrKP_SQU5ntCkQxAuhGfjk"
       -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/4r8nWBGPNKid_7q7965C86DSo_BvEkp-CdMxETYJZ-x7eKrKP_SQU5ntCkQxAuhGfjk=s0"
@@ -149,7 +146,7 @@ class Nelexa\GPlay\Model\AppInfo {
   }
   -getNumberVoters(): int: 3084782
   -getNumberReviews(): int: 1595840
-  -getReviews(): array: array:4 [
+  -getReviews(): array:4 [
     0 => class Nelexa\GPlay\Model\Review {
       -getId(): string: "gp:AOqpTOHcJnoVedKr1Hc-4-Ng4IaQsM8bb3qPmctvwtr7nwcG2Fbg4Z_wGzHofWC5ErLv7OvMSefn9ZeburJvAyU"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOHcJnoVedKr1Hc-4-Ng4IaQsM8bb3qPmctvwtr7nwcG2Fbg4Z_wGzHofWC5ErL…"
@@ -198,10 +195,8 @@ class Nelexa\GPlay\Model\AppInfo {
 
 # Changelog
 
-Changes are documented in the [releases page](https://github.com/Ne-Lexa/goolge-play-scraper/releases).
+Changes are documented in the [releases page](https://github.com/Ne-Lexa/google-play-scraper/releases).
 
 # License
 
-The files in this archive are released under the `MIT License`.
- 
-You can find a copy of this license in `LICENSE` file.
+The library is open-sourced software licensed under the [MIT License](https://github.com/Ne-Lexa/google-play-scraper/blob/master/LICENSE).

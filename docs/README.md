@@ -1,13 +1,11 @@
-# nelexa/google-play-scraper
+# Documentation
 
-PHP Scraper to extract information about Android applications from the Google Play store.
+PHP library to scrape application data from the Google Play store.
 
 [![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg?style=popout&color=aa007f)](https://packagist.org/packages/nelexa/google-play-scraper) ![PHP from Packagist](https://img.shields.io/packagist/php-v/nelexa/google-play-scraper.svg?style=popout&color=d500a0) 
 [![Build Status](https://secure.travis-ci.org/Ne-Lexa/google-play-scraper.png)](http://travis-ci.org/Ne-Lexa/google-play-scraper) [![Code Coverage](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master)
 
 ## Installation
-Add `nelexa/google-play-scraper` as a require dependency in your composer.json file:
-
 ```shell
 composer require nelexa/google-play-scraper
 ```
@@ -19,12 +17,12 @@ Create an instance of `\Nelexa\GPlay\GPlayApps`:
 $gplay = new \Nelexa\GPlay\GPlayApps();
 ```
 
-By default, the information is extracted for the `en_US` locale and for the country `US`.
+By default, information is retrieved for the `en_US` locale and for the` US` country.
 
-The locale affects which language the information will be extracted for.  
-Country affects the price and currency of paid applications.
+The locale affects, which language the information will be extracted for.  
+The country affects the price and currency of paid applications.
 
-You can set the locale and country for all requests.
+You can set the default locale and country for all requests.
 ```php
 $gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'uk', $defaultCountry = 'ua');
 ```
@@ -38,7 +36,7 @@ $gplay
 #### Caching
 Since each library method performs one or more HTTP-requests to the Google Play server, it is sometimes useful to cache the results so as not to request the same data twice. 
 
-Use [PSR-16 Simple Cache](https://packagist.org/providers/psr/simple-cache-implementation) compliant cache provider.
+Use the [PSR-16 Simple Cache](https://packagist.org/providers/psr/simple-cache-implementation) compatible cache provider.
 
 For example, `symfony/cache`:
 ```shell
