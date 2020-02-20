@@ -52,6 +52,7 @@ class AppInfoScraper implements ResponseHandlerInterface
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
         $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
+        /** @var array|null $scriptDataRating */
         [
             $scriptDataInfo,
             $scriptDataRating,
@@ -64,7 +65,17 @@ class AppInfoScraper implements ResponseHandlerInterface
         $description = $this->extractDescription($scriptDataInfo);
         $translatedFromLocale = $this->extractTranslatedFromLocale($scriptDataInfo, $locale);
         $developer = $this->extractDeveloper($scriptDataInfo);
-        $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
+        if (isset($scriptDataInfo[0][12][13][0][0])) {
+            $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
+        }
+        elseif (!empty($data[0][12][13][25])){
+            $genreId = (string) $data[0][12][13][25];
+            $genreName = ucwords(strtolower(str_replace(['_', 'AND'],[' ', '&'], $genreId)));
+            $category = new Category($genreId, $genreName);
+        }
+        else{
+            throw new GooglePlayException('No data to create object '.Category::class);
+        }
         $summary = $this->extractSummary($scriptDataInfo);
         $installs = $scriptDataInfo[0][12][9][2] ?? 0;
         $score = (float) ($scriptDataRating[0][6][0][1] ?? 0);
@@ -190,7 +201,6 @@ class AppInfoScraper implements ResponseHandlerInterface
 
         if (
             $scriptDataInfo === null ||
-            $scriptDataRating === null ||
             $scriptDataPrice === null ||
             $scriptDataVersion === null
         ) {
@@ -273,11 +283,11 @@ class AppInfoScraper implements ResponseHandlerInterface
     /**
      * @param array $data
      *
-     * @return Category|null
+     * @return Category
      */
     private function extractCategory(array $data): ?Category
     {
-        if (isset($data[0]) && $data[0] !== null && $data[2] !== null) {
+        if (isset($data[0], $data[2])) {
             $genreId = (string) $data[2];
             $genreName = (string) $data[0];
 
@@ -288,11 +298,11 @@ class AppInfoScraper implements ResponseHandlerInterface
     }
 
     /**
-     * @param array $scriptDataRating
+     * @param array|null $scriptDataRating
      *
      * @return HistogramRating
      */
-    private function extractHistogramRating(array $scriptDataRating): HistogramRating
+    private function extractHistogramRating(?array $scriptDataRating): HistogramRating
     {
         return new HistogramRating(
             $scriptDataRating[0][6][1][5][1] ?? 0,
