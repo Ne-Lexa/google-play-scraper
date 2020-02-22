@@ -30,7 +30,7 @@ composer require nelexa/google-play-scraper
 ```php
 // Retrieving full app info
 
-$gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'un_US', $defaultCountry = 'us');
+$gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'en_US', $defaultCountry = 'us');
 $appInfo = $gplay->getAppInfo('com.mojang.minecraftpe');
 ```
 Result:
