@@ -154,13 +154,6 @@ final class AppBuilderTest extends TestCase
         $builder->setScreenshots($data['screenshots']);
         self::assertSame($builder->getScreenshots(), $data['screenshots']);
 
-        try {
-            $builder->buildDetailInfo();
-            self::fail('Application category is null');
-        } catch (\InvalidArgumentException $e) {
-            self::assertStringContainsString('Application category cannot be null', $e->getMessage());
-        }
-
         $category = new Category($data['categoryId'], $data['categoryName']);
         $builder->setCategory($category);
 

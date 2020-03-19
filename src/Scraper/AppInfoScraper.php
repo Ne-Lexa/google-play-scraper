@@ -74,7 +74,7 @@ class AppInfoScraper implements ResponseHandlerInterface
             $category = new Category($genreId, $genreName);
         }
         else{
-            throw new GooglePlayException('No data to create object '.Category::class);
+            $category = null;
         }
         $summary = $this->extractSummary($scriptDataInfo);
         $installs = $scriptDataInfo[0][12][9][2] ?? 0;
@@ -82,9 +82,9 @@ class AppInfoScraper implements ResponseHandlerInterface
         $numberVoters = (int) ($scriptDataRating[0][6][2][1] ?? 0);
         $numberReviews = (int) ($scriptDataRating[0][6][3][1] ?? 0);
         $histogramRating = $this->extractHistogramRating($scriptDataRating);
-        $price = $this->extractPrice($scriptDataPrice);
-        $currency = $scriptDataPrice[0][2][0][0][0][1][0][1];
-        $priceText = $scriptDataPrice[0][2][0][0][0][1][0][2] ?: null;
+        $price = $scriptDataPrice !== null ? $this->extractPrice($scriptDataPrice) : 0.0;
+        $currency = $scriptDataPrice[0][2][0][0][0][1][0][1] ?? 'USD';
+        $priceText = $scriptDataPrice[0][2][0][0][0][1][0][2] ?? null;
         $offersIAPCost = $scriptDataInfo[0][12][12][0] ?? null;
         $containsAds = (bool) ($scriptDataInfo[0][12][14][0] ?? false);
 
@@ -201,7 +201,6 @@ class AppInfoScraper implements ResponseHandlerInterface
 
         if (
             $scriptDataInfo === null ||
-            $scriptDataPrice === null ||
             $scriptDataVersion === null
         ) {
             throw (new GooglePlayException('Unable to get data for this application.'))->setUrl(
@@ -314,7 +313,7 @@ class AppInfoScraper implements ResponseHandlerInterface
     }
 
     /**
-     * @param $scriptDataPrice
+     * @param array $scriptDataPrice
      *
      * @return float
      */
