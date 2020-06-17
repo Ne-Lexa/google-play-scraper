@@ -52,7 +52,7 @@ final class AppInfo extends App
     /** @var GoogleImage[] Screenshots of the application. */
     private $screenshots;
 
-    /** @var Category Application category. */
+    /** @var Category|null Application category. */
     private $category;
 
     /** @var Category|null Family category or null/ */
@@ -138,12 +138,6 @@ final class AppInfo extends App
         if (empty($builder->getScreenshots())) {
             throw new \InvalidArgumentException(
                 'Screenshots of the application must contain at least one screenshot. Solution: $appBuilder->setScreenshots(...); or $appBuilder->addScreenshot(...);'
-            );
-        }
-
-        if ($builder->getCategory() === null) {
-            throw new \InvalidArgumentException(
-                'Application category cannot be null. Solution: $appBuilder->setCategory(...);'
             );
         }
 
@@ -255,9 +249,9 @@ final class AppInfo extends App
     /**
      * Returns the category of the application.
      *
-     * @return Category category of application
+     * @return Category|null category of application or `null`
      */
-    public function getCategory(): Category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }

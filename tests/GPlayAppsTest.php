@@ -544,7 +544,7 @@ final class GPlayAppsTest extends TestCase
 
     /**
      * @dataProvider provideNullCategory
-     * @dataProvider provideRandomCategoryApps
+     * @dataProvider provideCategoryApps
      *
      * @param CategoryEnum|null $category
      */
@@ -560,11 +560,14 @@ final class GPlayAppsTest extends TestCase
     /**
      * @return \Generator
      */
-    public function provideRandomCategoryApps(): ?\Generator
+    public function provideCategoryApps(): ?\Generator
     {
-        $categories = CategoryEnum::values();
-        shuffle($categories);
-        $categories = \array_slice($categories, 0, 10);
+        $categories = [
+            CategoryEnum::GAME_ARCADE(),
+            CategoryEnum::GAME_PUZZLE(),
+            CategoryEnum::PHOTOGRAPHY(),
+            CategoryEnum::MAPS_AND_NAVIGATION(),
+        ];
 
         foreach ($categories as $category) {
             yield $category->value() => [$category];
@@ -573,7 +576,7 @@ final class GPlayAppsTest extends TestCase
 
     /**
      * @dataProvider provideNullCategory
-     * @dataProvider provideRandomCategoryApps
+     * @dataProvider provideCategoryApps
      *
      * @param CategoryEnum|null $category
      */
@@ -595,7 +598,7 @@ final class GPlayAppsTest extends TestCase
 
     /**
      * @dataProvider provideNullCategory
-     * @dataProvider provideRandomCategoryApps
+     * @dataProvider provideCategoryApps
      *
      * @param CategoryEnum|null $category
      */

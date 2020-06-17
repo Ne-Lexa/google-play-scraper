@@ -31,7 +31,7 @@ class ScraperUtil
                 static function ($carry, $item) {
                     if (
                         preg_match("/(ds:.*?)'/", $item, $keyMatch) &&
-                        preg_match('/return ([\s\S]*?)}}\);<\//', $item, $valueMatch)
+                        preg_match('/data:([\s\S]*?)}\);<\//', $item, $valueMatch)
                     ) {
                         $carry[$keyMatch[1]] = \GuzzleHttp\json_decode($valueMatch[1], true);
                     }
