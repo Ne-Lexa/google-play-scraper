@@ -107,7 +107,7 @@ final class SaveGoogleImagesTest extends TestCase
     public function testSaveNotFoundImage(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('404 Not Found');
+        $this->expectExceptionMessage('400 Bad Request');
 
         $invalidImage = new GoogleImage(
             'https://lh3.googleusercontent.com/DKoidc0T3T1KvYC2stChcX9zwmjKj1pgmg3hXzGBDQXM8RG_7JjgiuS0CLOh8DUa000'
