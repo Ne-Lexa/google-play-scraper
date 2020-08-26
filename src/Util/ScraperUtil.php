@@ -25,13 +25,13 @@ class ScraperUtil
     {
         $scripts = [];
 
-        if (preg_match_all('/>AF_initDataCallback[\s\S]*?<\/script/', $html, $matches)) {
+        if (preg_match_all('/>AF_initDataCallback\((.*?)\);<\/script/s', $html, $matches)) {
             $scripts = array_reduce(
                 $matches[0],
                 static function ($carry, $item) {
                     if (
                         preg_match("/(ds:.*?)'/", $item, $keyMatch) &&
-                        preg_match('/data:([\s\S]*?)}\);<\//', $item, $valueMatch)
+                        preg_match('/data:([\s\S]*?)(, }\);<\/|, sideChannel:)/', $item, $valueMatch)
                     ) {
                         $carry[$keyMatch[1]] = \GuzzleHttp\json_decode($valueMatch[1], true);
                     }
