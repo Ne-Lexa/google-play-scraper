@@ -20,6 +20,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\SimpleCache\CacheInterface;
 
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\Psr7\parse_query;
+
 /**
  * Contains methods for extracting information about Android applications from the Google Play store.
  */
@@ -848,6 +851,16 @@ class GPlayApps
         if ($limit < self::UNLIMIT || $limit === 0) {
             throw new \InvalidArgumentException(sprintf('Invalid limit: %d', $limit));
         }
+
+        $clusterPageComponents = parse_url($clusterPageUrl);
+        $query = parse_query($clusterPageComponents['query'] ?? '');
+        $query[self::REQ_PARAM_LOCALE] = $locale;
+        $query[self::REQ_PARAM_COUNTRY] = $country;
+
+        $clusterPageUrl = $clusterPageComponents['scheme'] . '://' .
+            $clusterPageComponents['host'] .
+            $clusterPageComponents['path'] .
+            '?' . build_query($query);
 
         try {
             [$apps, $token] = $this->getHttpClient()->request(
