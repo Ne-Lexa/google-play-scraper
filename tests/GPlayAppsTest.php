@@ -653,63 +653,6 @@ final class GPlayAppsTest extends TestCase
         self::assertContainsOnly(App::class, $developerAppsByName);
     }
 
-    /**
-     * @throws GooglePlayException
-     * @group proxy
-     */
-    public function testUseProxy(): void
-    {
-        $torProxy = 'socks5://127.0.0.1:9050';
-
-        if (!$this->isSocks5Proxy($torProxy)) {
-            self::markTestSkipped('Tor is not available');
-
-            return;
-        }
-
-        $appId = 'com.google.android.googlequicksearchbox';
-        $appInfo = $this->gplay
-            ->setProxy($torProxy)
-            ->setTimeout(20.0)
-            ->setConnectTimeout(20.0)
-            ->setCache(null)
-            ->getAppInfo($appId)
-        ;
-
-        self::assertSame($appInfo->getId(), $appId);
-    }
-
-    /**
-     * @param string $proxy
-     *
-     * @return bool
-     */
-    private function isSocks5Proxy(string $proxy): bool
-    {
-        $urlComponents = parse_url($proxy);
-
-        if ($urlComponents === false || empty($urlComponents['host']) || empty($urlComponents['port'])) {
-            return false;
-        }
-        $socket = fsockopen($urlComponents['host'], $urlComponents['port']);
-
-        if ($socket !== false) {
-            try {
-                fwrite($socket, pack('C3', 0x05, 0x01, 0x00));
-                $buffer = fread($socket, 2);
-                $response = unpack('Cversion/Cmethod', $buffer);
-
-                if ($response['version'] === 0x05 && $response['method'] === 0x00) {
-                    return true;
-                }
-            } finally {
-                fclose($socket);
-            }
-        }
-
-        return false;
-    }
-
     public function testClone(): void
     {
         $this->gplay->setDefaultLocale('ko_KR')->setDefaultCountry('ko');
@@ -748,6 +691,7 @@ final class GPlayAppsTest extends TestCase
 
         foreach ($appInfos as $appInfo) {
             $released = $appInfo->getReleased();
+            self::assertNotNull($released);
             $errorMessage = 'Error equals released date in ' . $appInfo->getLocale() . ' locale';
             self::assertSame(
                 $released->format('Y.m.d'),
