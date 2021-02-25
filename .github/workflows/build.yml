@@ -56,7 +56,7 @@ jobs:
                     extensions:  ${{ env.extensions }}
                     coverage:    pcov
                     ini-values:  ${{ env.PHP_INI }}
-                    tools:       composer:v2, cs2pr
+                    tools:       composer:v2
 
             -
                 name: Determine composer cache directory
@@ -74,6 +74,10 @@ jobs:
                     path:         ${{ env.COMPOSER_CACHE_DIR }}
                     key:          php${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}
                     restore-keys: php${{ matrix.php }}-composer-
+
+            -
+                name: Installing TOR for testing scraper through a proxy
+                run:  sudo apt-get install tor
 
             -
                 name: Check PHP Version
