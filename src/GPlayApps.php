@@ -19,7 +19,6 @@ use Nelexa\HttpClient\Options;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\SimpleCache\CacheInterface;
-
 use function GuzzleHttp\Psr7\build_query;
 use function GuzzleHttp\Psr7\parse_query;
 

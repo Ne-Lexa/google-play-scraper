@@ -76,10 +76,6 @@ jobs:
                     restore-keys: php${{ matrix.php }}-composer-
 
             -
-                name: Installing TOR for testing scraper through a proxy
-                run:  sudo apt-get install tor
-
-            -
                 name: Check PHP Version
                 run:  php -v
 
