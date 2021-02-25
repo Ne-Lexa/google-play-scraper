@@ -65,15 +65,14 @@ class AppInfoScraper implements ResponseHandlerInterface
         $description = $this->extractDescription($scriptDataInfo);
         $translatedFromLocale = $this->extractTranslatedFromLocale($scriptDataInfo, $locale);
         $developer = $this->extractDeveloper($scriptDataInfo);
+
         if (isset($scriptDataInfo[0][12][13][0][0])) {
             $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
-        }
-        elseif (!empty($data[0][12][13][25])){
+        } elseif (!empty($data[0][12][13][25])) {
             $genreId = (string) $data[0][12][13][25];
-            $genreName = ucwords(strtolower(str_replace(['_', 'AND'],[' ', '&'], $genreId)));
+            $genreName = ucwords(strtolower(str_replace(['_', 'AND'], [' ', '&'], $genreId)));
             $category = new Category($genreId, $genreName);
-        }
-        else{
+        } else {
             $category = null;
         }
         $summary = $this->extractSummary($scriptDataInfo);

@@ -748,6 +748,7 @@ final class GPlayAppsTest extends TestCase
 
         foreach ($appInfos as $appInfo) {
             $released = $appInfo->getReleased();
+            self::assertNotNull($released);
             $errorMessage = 'Error equals released date in ' . $appInfo->getLocale() . ' locale';
             self::assertSame(
                 $released->format('Y.m.d'),
