@@ -557,9 +557,9 @@ final class AppInfo extends App
         $array['androidVersion'] = $this->androidVersion;
         $array['minAndroidVersion'] = $this->minAndroidVersion;
         $array['contentRating'] = $this->contentRating;
-        $array['released'] = $this->released !== null ? $this->released->format(\DateTimeInterface::RFC3339) : null;
+        $array['released'] = $this->released !== null ? $this->released->format(\DateTime::RFC3339) : null;
         $array['releasedTimestamp'] = $this->released !== null ? $this->released->getTimestamp() : 0;
-        $array['updated'] = $this->updated !== null ? $this->updated->format(\DateTimeInterface::RFC3339) : null;
+        $array['updated'] = $this->updated !== null ? $this->updated->format(\DateTime::RFC3339) : null;
         $array['updatedTimestamp'] = $this->updated !== null ? $this->updated->getTimestamp() : 0;
         $array['numberReviews'] = $this->numberReviews;
         $array['reviews'] = array_map(

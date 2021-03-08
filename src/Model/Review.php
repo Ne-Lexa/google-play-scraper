@@ -190,7 +190,7 @@ class Review implements \JsonSerializable
             'userName' => $this->userName,
             'text' => $this->text,
             'avatar' => $this->avatar->getUrl(),
-            'date' => $this->date->format(\DateTimeInterface::RFC3339),
+            'date' => $this->date->format(\DateTime::RFC3339),
             'timestamp' => $this->date->getTimestamp(),
             'score' => $this->score,
             'countLikes' => $this->countLikes,

@@ -71,7 +71,7 @@ class ReplyReview implements \JsonSerializable
     public function asArray(): array
     {
         return [
-            'date' => $this->date->format(\DateTimeInterface::RFC3339),
+            'date' => $this->date->format(\DateTime::RFC3339),
             'timestamp' => $this->date->getTimestamp(),
             'text' => $this->text,
         ];
