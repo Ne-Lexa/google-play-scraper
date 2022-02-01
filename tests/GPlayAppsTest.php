@@ -471,7 +471,7 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperInfoIncorrectArgument2(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('Developer "Facebook" does not have a personalized page on Google Play.');
+        $this->expectExceptionMessage('Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.');
 
         $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app);
@@ -483,7 +483,7 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperInfoIncorrectArgument3(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('Developer "Facebook" does not have a personalized page on Google Play.');
+        $this->expectExceptionMessage('Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.');
 
         $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app->getDeveloper());
