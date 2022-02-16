@@ -17,17 +17,16 @@ class SuggestScraper implements ResponseHandlerInterface
      * @param RequestInterface  $request
      * @param ResponseInterface $response
      *
-     * @return mixed
+     * @return string[]
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response)
+    public function __invoke(RequestInterface $request, ResponseInterface $response): array
     {
-        $json = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $contents = substr($response->getBody()->getContents(), 5);
+        $json = \GuzzleHttp\json_decode($contents, true);
+        $suggests = \GuzzleHttp\json_decode($json[0][2], true);
 
-        return array_map(
-            static function (array $v) {
-                return $v['s'];
-            },
-            $json
-        );
+        return array_map(static function (array $suggest): string {
+            return (string) $suggest[0];
+        }, $suggests[0][0] ?? []);
     }
 }
