@@ -21,10 +21,10 @@ jobs:
                 os:
                     - ubuntu-latest
                 php:
-                    - '7.1'
+#                    - '7.1'
 #                    - '7.2'
 #                    - '7.3'
-#                    - '7.4'
+                    - '7.4'
 #                    - '8.0'
 #                    - '8.1'
 
@@ -66,7 +66,7 @@ jobs:
 
             -
                 name: Set coverage args
-                if:   matrix.php == '7.1'
+                if:   matrix.php == '7.4'
                 run:  echo "PHPUNIT_COVERAGE=1" >> $GITHUB_ENV
 
             -
