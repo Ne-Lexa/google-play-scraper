@@ -1780,14 +1780,36 @@ tools:
 */
 
 if (\PHP_SAPI === 'cli' && !class_exists(\PhpCsFixer\Config::class)) {
-    $binFixer = __DIR__ . '/vendor/bin/php-cs-fixer';
+    $which = static function ($program, $default = null) {
+        exec(sprintf('command -v %s', escapeshellarg($program)), $output, $resultCode);
+        if ($resultCode === 0) {
+            return trim($output[0]);
+        }
 
-    if (!is_file($binFixer)) {
-        $binFixer = 'php-cs-fixer';
-    }
+        return $default;
+    };
+    $findExistsFile = static function (array $files): ?string {
+        foreach ($files as $file) {
+            if ($file !== null && is_file($file)) {
+                return $file;
+            }
+        }
+
+        return null;
+    };
+
+    $fixerBinaries = [
+        __DIR__ . '/vendor/bin/php-cs-fixer',
+        __DIR__ . '/tools/php-cs-fixer/vendor/bin/php-cs-fixer',
+        $which('php-cs-fixer'),
+        isset($_SERVER['COMPOSER_HOME']) ? $_SERVER['COMPOSER_HOME'] . '/vendor/bin/php-cs-fixer' : null,
+    ];
+    $fixerBin = $findExistsFile($fixerBinaries) ?? 'php-cs-fixer';
+    $phpBin = $_SERVER['_'] ?? 'php';
+
     $dryRun = !in_array('--force', $_SERVER['argv'], true);
 
-    $command = escapeshellarg($binFixer) . ' fix --config ' . escapeshellarg(__FILE__) . ' --diff-format udiff --ansi -vv';
+    $command = escapeshellarg($phpBin) . ' ' . escapeshellarg($fixerBin) . ' fix --config ' . escapeshellarg(__FILE__) . ' --diff-format udiff --ansi -vv';
 
     if ($dryRun) {
         $command .= ' --dry-run';

@@ -35,7 +35,7 @@ final class SaveGoogleImagesTest extends TestCase
         parent::tearDown();
 
         if (is_dir($this->destDirectory)) {
-            $it = new \RecursiveDirectoryIterator($this->destDirectory, \RecursiveDirectoryIterator::SKIP_DOTS);
+            $it = new \RecursiveDirectoryIterator($this->destDirectory, \FilesystemIterator::SKIP_DOTS);
             $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
 
             foreach ($files as $file) {
