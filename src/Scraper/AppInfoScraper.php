@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Scraper;
 
+use GuzzleHttp\Psr7\Query;
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\AppId;
@@ -46,7 +47,7 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response): AppInfo
     {
-        $query = parse_query($request->getUri()->getQuery());
+        $query = Query::parse($request->getUri()->getQuery());
 
         $id = $query[GPlayApps::REQ_PARAM_ID];
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;

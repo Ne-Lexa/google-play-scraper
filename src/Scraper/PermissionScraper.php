@@ -46,6 +46,9 @@ class PermissionScraper implements ResponseHandlerInterface
             }
 
             foreach ($items as $values) {
+                if (empty($values)) {
+                    continue;
+                }
                 $permissionName = $values[0];
                 $permissions[$permissionName] = [
                     'name' => $permissionName,

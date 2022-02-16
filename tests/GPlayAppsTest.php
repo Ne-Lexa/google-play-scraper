@@ -67,7 +67,7 @@ final class GPlayAppsTest extends TestCase
      * @param string      $actualLocale
      * @param string      $actualCountry
      */
-    public function testConstruct($defaultLocale, $defaultCountry, $actualLocale, $actualCountry): void
+    public function testConstruct(?string $defaultLocale, ?string $defaultCountry, string $actualLocale, string $actualCountry): void
     {
         $gplay = new GPlayApps($defaultLocale, $defaultCountry);
         self::assertSame($gplay->getDefaultLocale(), $actualLocale);
@@ -117,7 +117,7 @@ final class GPlayAppsTest extends TestCase
 
         $app2 = $this->gplay->getAppInfo($appId);
         self::assertEquals($app2->getId(), $appId);
-        self::assertEquals($app2->getLocale(), GPlayApps::DEFAULT_LOCALE);
+        self::assertEquals(GPlayApps::DEFAULT_LOCALE, $app2->getLocale());
         self::assertNotEquals($app2, $app);
 
         $this->gplay
@@ -181,9 +181,6 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetAppsInfo(): void
     {
-        /**
-         * @var AppId[] $requests
-         */
         $requests = [
             'com.google.android.googlequicksearchbox' => new AppId('com.vkontakte.android'),
             'com.android.chrome' => new AppId('com.android.chrome'),
@@ -471,7 +468,7 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperInfoIncorrectArgument2(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('Developer "Facebook" does not have a personalized page on Google Play.');
+        $this->expectExceptionMessage('Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.');
 
         $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app);
@@ -483,7 +480,7 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperInfoIncorrectArgument3(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('Developer "Facebook" does not have a personalized page on Google Play.');
+        $this->expectExceptionMessage('Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.');
 
         $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app->getDeveloper());
@@ -518,6 +515,15 @@ final class GPlayAppsTest extends TestCase
     {
         $suggest = $this->gplay->setDefaultLocale('ar')->getSearchSuggestions('Maps');
         self::assertNotEmpty($suggest);
+    }
+
+    /**
+     * @throws GooglePlayException
+     */
+    public function testSuggestEmpty(): void
+    {
+        $suggest = $this->gplay->setDefaultLocale('en')->getSearchSuggestions('sfdgdsfsafsd"saafdffsdga"safs fdgra affgfdgfds');
+        self::assertEmpty($suggest);
     }
 
     /**
@@ -657,22 +663,22 @@ final class GPlayAppsTest extends TestCase
     {
         $this->gplay->setDefaultLocale('ko_KR')->setDefaultCountry('ko');
 
-        self::assertEquals($this->gplay->getDefaultLocale(), 'ko_KR');
-        self::assertEquals($this->gplay->getDefaultCountry(), 'ko');
+        self::assertEquals('ko_KR', $this->gplay->getDefaultLocale());
+        self::assertEquals('ko', $this->gplay->getDefaultCountry());
 
         $anotherGplay = clone $this->gplay;
 
         self::assertNotSame($anotherGplay, $this->gplay);
 
-        self::assertEquals($anotherGplay->getDefaultLocale(), 'ko_KR');
-        self::assertEquals($anotherGplay->getDefaultCountry(), 'ko');
+        self::assertEquals('ko_KR', $anotherGplay->getDefaultLocale());
+        self::assertEquals('ko', $anotherGplay->getDefaultCountry());
 
         $anotherGplay->setDefaultLocale('es_ES')->setDefaultCountry('es');
-        self::assertEquals($anotherGplay->getDefaultLocale(), 'es_ES');
-        self::assertEquals($anotherGplay->getDefaultCountry(), 'es');
+        self::assertEquals('es_ES', $anotherGplay->getDefaultLocale());
+        self::assertEquals('es', $anotherGplay->getDefaultCountry());
 
-        self::assertEquals($this->gplay->getDefaultLocale(), 'ko_KR');
-        self::assertEquals($this->gplay->getDefaultCountry(), 'ko');
+        self::assertEquals('ko_KR', $this->gplay->getDefaultLocale());
+        self::assertEquals('ko', $this->gplay->getDefaultCountry());
     }
 
     /**
@@ -691,12 +697,11 @@ final class GPlayAppsTest extends TestCase
 
         foreach ($appInfos as $appInfo) {
             $released = $appInfo->getReleased();
-            self::assertNotNull($released);
-            $errorMessage = 'Error equals released date in ' . $appInfo->getLocale() . ' locale';
+            self::assertNotNull($released, 'Null released date in ' . $appInfo->getLocale() . ' locale (' . $appInfo->getFullUrl() . ')');
             self::assertSame(
                 $released->format('Y.m.d'),
                 $actualReleaseDate,
-                $errorMessage
+                'Error equals released date in ' . $appInfo->getLocale() . ' locale (' . $appInfo->getFullUrl() . ')'
             );
         }
     }
@@ -706,17 +711,17 @@ final class GPlayAppsTest extends TestCase
      */
     public function provideReleaseApps(): ?\Generator
     {
-        yield ['2016.01.11', 'com.skgames.trafficrider'];
-        yield ['2019.02.28', 'com.budgestudios.googleplay.MyLittlePonyPocketPonies'];
-        yield ['2011.03.06', 'sp.app.bubblePop'];
-        yield ['2014.04.30', 'com.google.android.apps.docs.editors.docs'];
-        yield ['2010.05.24', 'com.adobe.reader'];
-        yield ['2015.06.17', 'com.disney.thoughtbubbles_goo'];
-        yield ['2011.07.19', 'com.viber.voip'];
-        yield ['2010.08.12', 'com.google.android.googlequicksearchbox'];
-        yield ['2012.09.26', 'com.rovio.BadPiggiesHD'];
-        yield ['2014.10.22', 'com.gamehouse.slingo'];
-        yield ['2010.11.01', 'com.maxmpz.audioplayer'];
-        yield ['2014.12.22', 'ru.cian.main'];
+        yield 'jan' => ['2016.01.11', 'com.skgames.trafficrider'];
+        yield 'feb' => ['2019.02.28', 'com.budgestudios.googleplay.MyLittlePonyPocketPonies'];
+        yield 'mar' => ['2011.03.06', 'sp.app.bubblePop'];
+        yield 'apr' => ['2014.04.30', 'com.google.android.apps.docs.editors.docs'];
+        yield 'may' => ['2010.05.24', 'com.adobe.reader'];
+        yield 'jun' => ['2015.06.17', 'com.disney.thoughtbubbles_goo'];
+        yield 'jul' => ['2011.07.19', 'com.viber.voip'];
+        yield 'aug' => ['2010.08.12', 'com.google.android.googlequicksearchbox'];
+        yield 'sep' => ['2012.09.26', 'com.rovio.BadPiggiesHD'];
+        yield 'oct' => ['2014.10.22', 'com.gamehouse.slingo'];
+        yield 'nov' => ['2010.11.01', 'com.maxmpz.audioplayer'];
+        yield 'dec' => ['2014.12.22', 'ru.cian.main'];
     }
 }

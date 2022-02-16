@@ -12,11 +12,11 @@ declare(strict_types=1);
 namespace Nelexa\GPlay\Scraper;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Utils;
 use Nelexa\GPlay\Enum\SortEnum;
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\AppId;
 use Psr\Http\Message\RequestInterface;
-use function GuzzleHttp\Psr7\stream_for;
 
 /**
  * @internal
@@ -32,6 +32,8 @@ class PlayStoreUiRequest
     private const RPC_ID_APPS = 'qnKhOb';
 
     private const RPC_ID_PERMISSIONS = 'xdSrCf';
+
+    private const RPC_ID_SUGGEST = 'IJ4APc';
 
     /**
      * @param AppId       $requestApp
@@ -60,13 +62,13 @@ class PlayStoreUiRequest
         $url = GPlayApps::GOOGLE_PLAY_URL . '/_/PlayStoreUi/data/batchexecute?' . http_build_query($queryParams);
         $formParams = [
             'f.req' => '[[["' . self::RPC_ID_REVIEWS . '","[null,null,[2,' . $sort->value(
-                ) . ',[' . $limit . ',null,' . ($token === null ? 'null' : '\\"' . $token . '\\"') . ']],[\\"' . $requestApp->getId(
-                ) . '\\",7]]",null,"generic"]]]',
+                ) . ',[' . $limit . ',null,' . ($token === null ? 'null' : '\\"' . $token . '\\"') .
+                ']],[\\"' . $requestApp->getId() . '\\",7]]",null,"generic"]]]',
         ];
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
-        $body = stream_for(http_build_query($formParams));
+        $body = Utils::streamFor(http_build_query($formParams));
 
         return new Request('POST', $url, $headers, $body);
     }
@@ -97,7 +99,7 @@ class PlayStoreUiRequest
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
-        $body = stream_for(http_build_query($formParams));
+        $body = Utils::streamFor(http_build_query($formParams));
 
         return new Request('POST', $url, $headers, $body);
     }
@@ -127,7 +129,45 @@ class PlayStoreUiRequest
         $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
         ];
-        $body = stream_for(http_build_query($formParams));
+        $body = Utils::streamFor(http_build_query($formParams));
+
+        return new Request('POST', $url, $headers, $body);
+    }
+
+    /**
+     * @param string $query
+     * @param string $locale
+     * @param string $country
+     *
+     * @throws \Exception
+     *
+     * @return RequestInterface
+     */
+    public static function getSuggestRequest(
+        string $query,
+        string $locale = GPlayApps::DEFAULT_LOCALE,
+        string $country = GPlayApps::DEFAULT_COUNTRY
+    ): RequestInterface {
+        $queryParams = [
+            'rpcids' => self::RPC_ID_SUGGEST,
+            GPlayApps::REQ_PARAM_LOCALE => $locale,
+            GPlayApps::REQ_PARAM_COUNTRY => $country,
+            'source-path' => '/store/apps',
+            'authuser' => null,
+            'soc-app' => 121,
+            'soc-platform' => 1,
+            'soc-device' => 1,
+        ];
+        $url = GPlayApps::GOOGLE_PLAY_URL . '/_/PlayStoreUi/data/batchexecute?' . http_build_query($queryParams);
+        $formParams = [
+            'f.req' => '[[["' . self::RPC_ID_SUGGEST . '","[[null,[\"' .
+                str_replace('"', '\\\\\\"', $query) .
+                '\"],[10],[2],4]]",null,"generic"]]]',
+        ];
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded;charset=utf-8',
+        ];
+        $body = Utils::streamFor(http_build_query($formParams));
 
         return new Request('POST', $url, $headers, $body);
     }

@@ -13,14 +13,12 @@ namespace Nelexa\GPlay;
 
 use GuzzleHttp\Promise\EachPromise;
 use GuzzleHttp\Promise\FulfilledPromise;
+use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\RequestOptions;
 use Nelexa\HttpClient\HttpClient;
 use Nelexa\HttpClient\Options;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Psr\SimpleCache\CacheInterface;
-use function GuzzleHttp\Psr7\build_query;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * Contains methods for extracting information about Android applications from the Google Play store.
@@ -122,12 +120,19 @@ class GPlayApps
         static $httpClient;
 
         if ($httpClient === null) {
+            $proxy = getenv('HTTP_PROXY');
+
+            if ($proxy === false) {
+                $proxy = null;
+            }
+
             $httpClient = new HttpClient(
                 [
-                    Options::TIMEOUT => 10.0,
+                    Options::TIMEOUT => 15.0,
                     Options::HEADERS => [
-                        'User-Agent' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0',
+                        'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
                     ],
+                    Options::PROXY => $proxy,
                 ]
             );
         }
@@ -256,8 +261,8 @@ class GPlayApps
      *
      * @throws Exception\GooglePlayException if the application is not exists or other HTTP error
      *
-     * @return Model\AppInfo[] An array of detailed information for each locale.
-     *                         The array key is the locale.
+     * @return array<string, Model\AppInfo> An array of detailed information for each locale.
+     *                       The array key is the locale.
      *
      * @see GPlayApps::setConcurrency() Sets the limit of concurrent HTTP requests.
      *
@@ -287,8 +292,8 @@ class GPlayApps
      *
      * @throws Exception\GooglePlayException if the application is not exists or other HTTP error
      *
-     * @return Model\AppInfo[] An array with detailed information about the application
-     *                         on all available locales. The array key is the locale.
+     * @return array<string, Model\AppInfo> An array with detailed information about the application
+     *                       on all available locales. The array key is the locale.
      *
      * @see GPlayApps::setConcurrency() Sets the limit of concurrent HTTP requests.
      *
@@ -852,14 +857,14 @@ class GPlayApps
         }
 
         $clusterPageComponents = parse_url($clusterPageUrl);
-        $query = parse_query($clusterPageComponents['query'] ?? '');
+        $query = Query::parse($clusterPageComponents['query'] ?? '');
         $query[self::REQ_PARAM_LOCALE] = $locale;
         $query[self::REQ_PARAM_COUNTRY] = $country;
 
         $clusterPageUrl = $clusterPageComponents['scheme'] . '://' .
             $clusterPageComponents['host'] .
             $clusterPageComponents['path'] .
-            '?' . build_query($query);
+            '?' . Query::build($query);
 
         try {
             [$apps, $token] = $this->getHttpClient()->request(
@@ -973,21 +978,13 @@ class GPlayApps
             return [];
         }
 
-        $url = 'https://market.android.com/suggest/SuggRequest';
-
         try {
+            $request = Scraper\PlayStoreUiRequest::getSuggestRequest($query, $this->defaultLocale, $this->defaultCountry);
+
             /** @var string[] $suggestions */
-            $suggestions = $this->getHttpClient()->request(
-                'GET',
-                $url,
+            $suggestions = $this->getHttpClient()->send(
+                $request,
                 [
-                    RequestOptions::QUERY => [
-                        'json' => 1,
-                        'c' => 3,
-                        'query' => $query,
-                        self::REQ_PARAM_LOCALE => $this->defaultLocale,
-                        self::REQ_PARAM_COUNTRY => $this->defaultCountry,
-                    ],
                     Options::HANDLER_RESPONSE => new Scraper\SuggestScraper(),
                 ]
             );
@@ -1211,7 +1208,7 @@ class GPlayApps
      * @param Model\GoogleImage[] $images           array of {@see Model\GoogleImage} objects
      * @param callable            $destPathCallback The function to which the
      *                                              {@see Model\GoogleImage} object is
-     *                                              passed and you must return the full
+     *                                              passed, and you must return the full
      *                                              output. path to save this file.
      * @param bool                $overwrite        overwrite files if exists
      *
@@ -1227,7 +1224,7 @@ class GPlayApps
         callable $destPathCallback,
         bool $overwrite = false
     ): array {
-        /** @var array<string, StreamInterface> $mapping */
+        /** @var array<string, \Nelexa\GPlay\Util\LazyStream> $mapping */
         $mapping = [];
 
         foreach ($images as $image) {
@@ -1283,7 +1280,7 @@ class GPlayApps
          * @var Model\ImageInfo[] $imageInfoList
          */
         $imageInfoList = [];
-        (new EachPromise(
+        $eachPromise = (new EachPromise(
             $promises,
             [
                 'concurrency' => $this->concurrency,
@@ -1306,7 +1303,11 @@ class GPlayApps
                     );
                 },
             ]
-        ))->promise()->wait();
+        ))->promise();
+
+        if ($eachPromise !== null) {
+            $eachPromise->wait();
+        }
 
         return $imageInfoList;
     }
