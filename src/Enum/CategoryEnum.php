@@ -53,6 +53,7 @@ use Nelexa\Enum;
  * @method static CategoryEnum TRAVEL_AND_LOCAL()    Returns the category id 'Travel & Local'.
  * @method static CategoryEnum VIDEO_PLAYERS()       Returns the category id 'Video Players & Editors'.
  * @method static CategoryEnum ANDROID_WEAR()        Returns the category id 'Wear OS by Google'.
+ * @method static CategoryEnum WATCH_FACE()          Returns the category id 'Watch Face'.
  * @method static CategoryEnum WEATHER()             Returns the category id 'Weather'.
  * @method static CategoryEnum GAME_ACTION()         Returns the category id 'Action'.
  * @method static CategoryEnum GAME_ADVENTURE()      Returns the category id 'Adventure'.
@@ -148,6 +149,8 @@ class CategoryEnum extends Enum
 
     private const ANDROID_WEAR = 'ANDROID_WEAR';
 
+    private const WATCH_FACE = 'WATCH_FACE';
+
     private const WEATHER = 'WEATHER';
 
     private const GAME_ACTION = 'GAME_ACTION';
@@ -184,15 +187,21 @@ class CategoryEnum extends Enum
 
     private const GAME_WORD = 'GAME_WORD';
 
+    /** @deprecated */
     private const FAMILY_ACTION = 'FAMILY_ACTION';
 
+    /** @deprecated */
     private const FAMILY_BRAINGAMES = 'FAMILY_BRAINGAMES';
 
+    /** @deprecated */
     private const FAMILY_CREATE = 'FAMILY_CREATE';
 
+    /** @deprecated */
     private const FAMILY_EDUCATION = 'FAMILY_EDUCATION';
 
+    /** @deprecated */
     private const FAMILY_MUSICVIDEO = 'FAMILY_MUSICVIDEO';
 
+    /** @deprecated */
     private const FAMILY_PRETEND = 'FAMILY_PRETEND';
 }

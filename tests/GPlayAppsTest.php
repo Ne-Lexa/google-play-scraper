@@ -76,8 +76,12 @@ final class GPlayAppsTest extends TestCase
      * @param string      $actualLocale
      * @param string      $actualCountry
      */
-    public function testConstruct(?string $defaultLocale, ?string $defaultCountry, string $actualLocale, string $actualCountry): void
-    {
+    public function testConstruct(
+        ?string $defaultLocale,
+        ?string $defaultCountry,
+        string $actualLocale,
+        string $actualCountry
+    ): void {
         $gplay = new GPlayApps($defaultLocale, $defaultCountry);
         self::assertSame($gplay->getDefaultLocale(), $actualLocale);
         self::assertSame($gplay->getDefaultCountry(), $actualCountry);
@@ -477,7 +481,9 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperInfoIncorrectArgument2(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.');
+        $this->expectExceptionMessage(
+            'Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.'
+        );
 
         $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app);
@@ -489,7 +495,9 @@ final class GPlayAppsTest extends TestCase
     public function testDeveloperInfoIncorrectArgument3(): void
     {
         $this->expectException(GooglePlayException::class);
-        $this->expectExceptionMessage('Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.');
+        $this->expectExceptionMessage(
+            'Developer "Meta Platforms, Inc." does not have a personalized page on Google Play.'
+        );
 
         $app = $this->gplay->getAppInfo(new AppId('com.facebook.katana'));
         $this->gplay->getDeveloperInfo($app->getDeveloper());
@@ -531,7 +539,9 @@ final class GPlayAppsTest extends TestCase
      */
     public function testSuggestEmpty(): void
     {
-        $suggest = $this->gplay->setDefaultLocale('en')->getSearchSuggestions('sfdgdsfsafsd"saafdffsdga"safs fdgra affgfdgfds');
+        $suggest = $this->gplay->setDefaultLocale('en')->getSearchSuggestions(
+            'sfdgdsfsafsd"saafdffsdga"safs fdgra affgfdgfds'
+        );
         self::assertEmpty($suggest);
     }
 
@@ -597,7 +607,7 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetNewApps(?CategoryEnum $category): void
     {
-//        $this->gplay->setCache($this->getCacheInterface());
+        $this->gplay->setCache($this->getCacheInterface());
         $apps = $this->gplay->getNewApps($category);
 
         self::assertContainsOnlyInstancesOf(App::class, $apps);
@@ -711,7 +721,10 @@ final class GPlayAppsTest extends TestCase
 
         foreach ($appInfos as $appInfo) {
             $released = $appInfo->getReleased();
-            self::assertNotNull($released, 'Null released date in ' . $appInfo->getLocale() . ' locale (' . $appInfo->getFullUrl() . ')');
+            self::assertNotNull(
+                $released,
+                'Null released date in ' . $appInfo->getLocale() . ' locale (' . $appInfo->getFullUrl() . ')'
+            );
             self::assertSame(
                 $released->format('Y.m.d'),
                 $actualReleaseDate,
@@ -766,6 +779,7 @@ final class GPlayAppsTest extends TestCase
      * @param string|Category|CategoryEnum|null $category
      * @param AgeEnum|null                      $age
      * @param string|null                       $path
+     *
      * @dataProvider provideGetClusterPages
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
@@ -793,5 +807,26 @@ final class GPlayAppsTest extends TestCase
         yield 'Top Game Card' => ['GAME_CARD', null, 'top'];
 
         yield 'Games category' => ['GAME', null, null];
+    }
+
+    /**
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     */
+    public function testEnumCategories(): void
+    {
+        $enumCategories = array_map(
+            static function (CategoryEnum $enum): string {
+                return $enum->value();
+            },
+            CategoryEnum::values()
+        );
+        sort($enumCategories);
+
+        $categories = array_map(static function (Category $category) {
+            return $category->getId();
+        }, $this->gplay->getCategories());
+        sort($categories);
+
+        self::assertEmpty(array_diff($categories, $enumCategories));
     }
 }
