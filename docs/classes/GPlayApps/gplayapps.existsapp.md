@@ -10,7 +10,8 @@ Nelexa\GPlay\GPlayApps::existsApp ( string | Nelexa\GPlay\Model\AppId $appId ) :
 
 ## Parameters
 * **$appId** (string | [Nelexa\GPlay\Model\AppId](../AppId/README.md))  
-application ID (Android package name) as a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
+application ID (Android package name) as
+a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
 
 ## Return Values
 returns `true` if the application exists, or `false` if not

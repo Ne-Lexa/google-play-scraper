@@ -19,7 +19,7 @@ Returns the category id 'Music'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_MUSIC"
   -value(): mixed: "GAME_MUSIC"
-  -ordinal(): int: 43
+  -ordinal(): int: 44
   -__toString(): string: "GAME_MUSIC"
 }
 ```

@@ -10,7 +10,8 @@ Nelexa\GPlay\GPlayApps::getReviewById ( string | Nelexa\GPlay\Model\AppId $appId
 
 ## Parameters
 * **$appId** (string | [Nelexa\GPlay\Model\AppId](../AppId/README.md))  
-application ID (Android package name) as a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
+application ID (Android package name) as
+a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
 * **$reviewId** (string)  
 review id
 
@@ -42,16 +43,16 @@ class Nelexa\GPlay\Model\Review {
   -getUserName(): string: "rih"
   -getText(): string: "images are not saved on gallery even though it is in automatic download mode. fix this problem fast."
   -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/-7fis3zoKasI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcxiuziW9IC_qbC3i_TPbxOkpmx5A/s64/"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-7fis3zoKasI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcxiuziW9IC_qbC3i_TPbxOkpmx5A/s0/"
+    -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJziqSeotXUfYPXZWqlg_qfxBBER-0bPb4Tt-in8=s64"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJziqSeotXUfYPXZWqlg_qfxBBER-0bPb4Tt-in8=s64"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJziqSeotXUfYPXZWqlg_qfxBBER-0bPb4Tt-in8=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/-7fis3zoKasI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcxiuziW9IC_qbC3i_TPbxOkpmx5A/s64/"
   }
   -getDate(): ?DateTimeInterface: @1581236842 {
     date: 2020-02-09T08:27:22+00:00
   }
   -getScore(): int: 1
-  -getCountLikes(): int: 2
+  -getCountLikes(): int: 8
   -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
     -getDate(): DateTimeInterface: @1581348449 {
       date: 2020-02-10T15:27:29+00:00
@@ -61,10 +62,10 @@ class Nelexa\GPlay\Model\Review {
       Thank you for letting us know, please also provide our support team this information allowing us to investigate it and assist you as soon as p…
       """
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 

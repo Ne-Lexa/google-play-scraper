@@ -19,7 +19,7 @@ Returns the category id 'Creativity'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "FAMILY_CREATE"
   -value(): mixed: "FAMILY_CREATE"
-  -ordinal(): int: 54
+  -ordinal(): int: 55
   -__toString(): string: "FAMILY_CREATE"
 }
 ```

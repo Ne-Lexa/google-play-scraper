@@ -19,7 +19,7 @@ Returns the category id 'Education'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "FAMILY_EDUCATION"
   -value(): mixed: "FAMILY_EDUCATION"
-  -ordinal(): int: 55
+  -ordinal(): int: 56
   -__toString(): string: "FAMILY_EDUCATION"
 }
 ```

@@ -19,7 +19,7 @@ Returns the category id 'Weather'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "WEATHER"
   -value(): mixed: "WEATHER"
-  -ordinal(): int: 34
+  -ordinal(): int: 35
   -__toString(): string: "WEATHER"
 }
 ```

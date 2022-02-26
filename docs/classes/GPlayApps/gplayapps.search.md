@@ -41,7 +41,7 @@ array:150 [
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps&hl=en_US&gl=us"
-      -getName(): string: "Maps - Navigate & Explore"
+      -getName(): string: "Google Maps"
       -getSummary(): ?string: "Real-time GPS navigation & local suggestions for food, events, & activities"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
@@ -54,19 +54,19 @@ array:150 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
       }
-      -getScore(): float: 4.3254695
+      -getScore(): float: 3.8799007
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.google.android.apps.mapslite"
@@ -74,7 +74,7 @@ array:150 [
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.mapslite"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.mapslite&hl=en_US&gl=us"
-      -getName(): string: "Google Maps Go - Directions, Traffic & Transit"
+      -getName(): string: "Google Maps Go"
       -getSummary(): ?string: "Get real-time traffic, directions, search and find places"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
@@ -87,19 +87,19 @@ array:150 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
       }
-      -getScore(): float: 4.3090644
+      -getScore(): float: 4.3178163
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]

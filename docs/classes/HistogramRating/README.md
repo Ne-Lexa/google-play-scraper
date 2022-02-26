@@ -17,12 +17,12 @@ Nelexa\GPlay\Model\HistogramRating implements JsonSerializable {
     public getTwoStars ( void ) : int
     public getOneStar ( void ) : int
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\HistogramRating::__construct](histogramrating.construct.md) - Creates an object with information about the rating of Android applications from the Google Play store.
+* [Nelexa\GPlay\Model\HistogramRating::__construct](histogramrating.__construct.md) - Creates an object with information about the rating of Android applications from the Google Play store.
 * [Nelexa\GPlay\Model\HistogramRating::getFiveStars](histogramrating.getfivestars.md) - Returns the five-star rating of the application.
 * [Nelexa\GPlay\Model\HistogramRating::getFourStars](histogramrating.getfourstars.md) - Returns the four-star rating of the application.
 * [Nelexa\GPlay\Model\HistogramRating::getThreeStars](histogramrating.getthreestars.md) - Returns the three-star rating of the application.
@@ -39,13 +39,13 @@ Nelexa\GPlay\Model\HistogramRating implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\HistogramRating {
-  -getFiveStars(): int: 74180
-  -getFourStars(): int: 12644
-  -getThreeStars(): int: 5614
-  -getTwoStars(): int: 2159
-  -getOneStar(): int: 7191
+  -getFiveStars(): int: 499330
+  -getFourStars(): int: 95118
+  -getThreeStars(): int: 69838
+  -getTwoStars(): int: 41725
+  -getOneStar(): int: 91400
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -56,11 +56,11 @@ echo json_encode($histogramRating, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES |
 Output:
 ```json
 {
-    "five": 74180,
-    "four": 74180,
-    "three": 5614,
-    "two": 2159,
-    "one": 7191
+    "five": 499330,
+    "four": 499330,
+    "three": 69838,
+    "two": 41725,
+    "one": 91400
 }
 ```
 

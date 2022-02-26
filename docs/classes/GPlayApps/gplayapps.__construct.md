@@ -10,9 +10,11 @@ Nelexa\GPlay\GPlayApps::__construct ( [ string $locale = "en_US" ] [, string $co
 
 ## Parameters
 * **$locale** (string)  
-locale (language) for HTTP requests to Google Play or [Nelexa\GPlay\GPlayApps::DEFAULT_LOCALE](README.md#predefined-constants)
+locale (language) for HTTP requests to Google Play
+or [Nelexa\GPlay\GPlayApps::DEFAULT_LOCALE](README.md#predefined-constants)
 * **$country** (string)  
-country for HTTP requests to Google Play or [Nelexa\GPlay\GPlayApps::DEFAULT_COUNTRY](README.md#predefined-constants)
+country for HTTP requests to Google Play
+or [Nelexa\GPlay\GPlayApps::DEFAULT_COUNTRY](README.md#predefined-constants)
 
 ## Return Values
 No value is returned.

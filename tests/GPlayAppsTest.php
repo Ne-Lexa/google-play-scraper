@@ -23,6 +23,7 @@ use Nelexa\GPlay\Model\App;
 use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
+use Nelexa\GPlay\Model\ClusterPage;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\Permission;
 use Nelexa\GPlay\Model\Review;
@@ -793,10 +794,9 @@ final class GPlayAppsTest extends TestCase
         ;
 
         foreach ($clusterPagesGenerator as $clusterPage) {
-            self::assertArrayHasKey('url', $clusterPage);
-            self::assertArrayHasKey('name', $clusterPage);
-            self::assertNotEmpty($clusterPage['url']);
-            self::assertNotEmpty($clusterPage['name']);
+            self::assertInstanceOf(ClusterPage::class, $clusterPage);
+            self::assertNotEmpty($clusterPage->getTitle());
+            self::assertNotEmpty($clusterPage->getUrl());
         }
     }
 

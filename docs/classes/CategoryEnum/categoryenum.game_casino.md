@@ -19,7 +19,7 @@ Returns the category id 'Casino'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_CASINO"
   -value(): mixed: "GAME_CASINO"
-  -ordinal(): int: 40
+  -ordinal(): int: 41
   -__toString(): string: "GAME_CASINO"
 }
 ```

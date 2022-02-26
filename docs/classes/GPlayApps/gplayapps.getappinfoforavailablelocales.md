@@ -5,7 +5,7 @@
 
 ## Description
 ```php
-Nelexa\GPlay\GPlayApps::getAppInfoForAvailableLocales ( string | Nelexa\GPlay\Model\AppId $appId ) : Nelexa\GPlay\Model\AppInfo[]
+Nelexa\GPlay\GPlayApps::getAppInfoForAvailableLocales ( string | Nelexa\GPlay\Model\AppId $appId ) : array<string, Nelexa\GPlay\Model\AppInfo>
 ```
 Information is returned only for the description loaded by the developer.
 All locales with automated translation from Google Translate will be ignored.
@@ -13,7 +13,8 @@ HTTP requests are executed in parallel.
 
 ## Parameters
 * **$appId** (string | [Nelexa\GPlay\Model\AppId](../AppId/README.md))  
-application ID (Android package name) as a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
+application ID (Android package name) as
+a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
 
 ## Return Values
 An array with detailed information about the application
@@ -56,72 +57,75 @@ array:3 [
         -getEmail(): ?string: "info@nederland.fm"
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
       }
-      -getScore(): float: 3.851852
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 3.9333334
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: "Online, live, gratis en eenvoudig luisteren naar de beste radio stations van Nederland !"
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
       }
-      -getScreenshots(): array:6 [
+      -getScreenshots(): array: array:9 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "MUSIC_AND_AUDIO"
         -getName(): string: "Muziek en audio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: "Problemen opgelost"
+      -getRecentChanges(): ?string: """
+        - Geschikt voor Android Auto\n
+        - Problemen opgelost
+        """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 596014
+      -getInstalls(): int: 728301
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 1281
-        -getFourStars(): int: 191
-        -getThreeStars(): int: 151
-        -getTwoStars(): int: 211
-        -getOneStar(): int: 343
+        -getFiveStars(): int: 649
+        -getFourStars(): int: 1137
+        -getThreeStars(): int: 487
+        -getTwoStars(): int: 162
+        -getOneStar(): int: 0
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: true
-      -getSize(): ?string: "5,1M"
-      -getAppVersion(): ?string: "4.0"
+      -getSize(): ?string: "6,5M"
+      -getAppVersion(): ?string: "7.0"
       -getAndroidVersion(): ?string: "4.1 en hoger"
       -getMinAndroidVersion(): ?string: "4.1"
       -getContentRating(): ?string: "Iedereen"
@@ -129,51 +133,51 @@ array:3 [
       -getReleased(): ?DateTimeInterface: @1502236800 {
         date: 2017-08-09T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581600058 {
-        date: 2020-02-13T13:20:58+00:00
+      -getUpdated(): ?DateTimeInterface: @1625992062 {
+        date: 2021-07-11T08:27:42+00:00
       }
-      -getNumberVoters(): int: 2180
-      -getNumberReviews(): int: 558
-      -getReviews(): array:4 [
+      -getNumberVoters(): int: 2437
+      -getNumberReviews(): int: 0
+      -getReviews(): array: array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOFi7Kk_jVOllPRPnIosMlgQKqGd2uLTWb5TldsE4KjAOpnLMlxGW6eLrjT8wOQ8ziGNCTukqmr8vMBBFg"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOFi7Kk_jVOllPRPnIosMlgQKqGd2uLTWb5TldsE4KjAOpnLMlxGW6eLrjT8wOQ8ziGN…"
-          -getUserName(): string: "Bas Peters"
-          -getText(): string: "Het was altijd een hele goede app maar sinds kort krijg ik midden in een liedje gewoon reclame en dat slaat echt nergens op. Ben best bereid om wat te…"
+          -getId(): string: "gp:AOqpTOF4FLkx0AUXd_kG6F2iYnIP1ixCa17iis6SO2octmf0WbdLHP3B80m4tc7tGUjuj7259RbuAsKDYlvK_g"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOF4FLkx0AUXd_kG6F2iYnIP1ixCa17iis6SO2octmf0WbdLHP3B80m4tc7tGUjuj725…"
+          -getUserName(): string: "Max Rex"
+          -getText(): string: "Fantastic app pity you cannot move it to sd card.but its worth 5,better than ever was well done even better app now great work thank you."
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/-KRpT8HPwTCg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdzAg8vO7wkLfrQYznvZJ1pjfoyrQ/s64/"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-KRpT8HPwTCg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdzAg8vO7wkLfrQYznvZJ1pjfoyrQ/s0/"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/-KRpT8HPwTCg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdzAg8vO7wkLfrQYznvZJ1pjfoyrQ/s64/"
           }
-          -getDate(): ?DateTimeInterface: @1543226196 {
-            date: 2018-11-26T09:56:36+00:00
+          -getDate(): ?DateTimeInterface: @1636736376 {
+            date: 2021-11-12T16:59:36+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 15
+          -getScore(): int: 5
+          -getCountLikes(): int: 6
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOE8md2QM60-iEAviKEt73gXeN3Al1w8GiYUF6CLNWBVjZPRM98Aq3NYhqBwtkY8w3u1Zp3hrPOSgRgjfw"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOE8md2QM60-iEAviKEt73gXeN3Al1w8GiYUF6CLNWBVjZPRM98Aq3NYhqBwtkY8w3u1…"
-          -getUserName(): string: "Verg"
-          -getText(): string: "Even verbinding kwijt? RECLAME. Even op pauze? RECLAME. Radio luisteren in de trein? RECLAME RECLAME RECLAME RECLAME. Ik verbaas me dat jullie blijkba…"
+          -getId(): string: "gp:AOqpTOEBa_5koHnvNNFEmKIoGpW3uWp2Ouu6-47HHADnYzIrKX_VUHd8uEshJKwx3kNwtQQzHlbyzv-o93cbEQ"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOEBa_5koHnvNNFEmKIoGpW3uWp2Ouu6-47HHADnYzIrKX_VUHd8uEshJKwx3kNwtQQz…"
+          -getUserName(): string: "Fred Zeeuw"
+          -getText(): string: "Bij direct via telefoon luisteren gaat het prima. Als je radio gaat casten dan valt na 30 seconden het geluid weg. En niet alleen bij mij maar ook via…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/-4Nyg4U_H_7s/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reMSyniGDA-kcSKIj85b7jCgAcAZA/s64/"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-4Nyg4U_H_7s/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reMSyniGDA-kcSKIj85b7jCgAcAZA/s0/"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/-4Nyg4U_H_7s/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reMSyniGDA-kcSKIj85b7jCgAcAZA/s64/"
           }
-          -getDate(): ?DateTimeInterface: @1545823880 {
-            date: 2018-12-26T11:31:20+00:00
+          -getDate(): ?DateTimeInterface: @1635352879 {
+            date: 2021-10-27T16:41:19+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 57
+          -getCountLikes(): int: 9
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         …
       ]
@@ -198,72 +202,75 @@ array:3 [
         -getEmail(): ?string: "info@nederland.fm"
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
       }
-      -getScore(): float: 3.851852
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 3.9333334
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: "Առցանց, ապրում, ազատ եւ հեշտ է լսել լավագույն ռադիոկայանների Նիդեռլանդներում."
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
       }
-      -getScreenshots(): array:6 [
+      -getScreenshots(): array: array:9 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "MUSIC_AND_AUDIO"
         -getName(): string: "Երաժշտություն և աուդիո"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: "Problemen opgelost"
+      -getRecentChanges(): ?string: """
+        - Geschikt voor Android Auto\n
+        - Problemen opgelost
+        """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 596014
+      -getInstalls(): int: 728301
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 1281
-        -getFourStars(): int: 191
-        -getThreeStars(): int: 151
-        -getTwoStars(): int: 211
-        -getOneStar(): int: 343
+        -getFiveStars(): int: 649
+        -getFourStars(): int: 1137
+        -getThreeStars(): int: 487
+        -getTwoStars(): int: 162
+        -getOneStar(): int: 0
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: true
-      -getSize(): ?string: "5.1M"
-      -getAppVersion(): ?string: "4.0"
+      -getSize(): ?string: "6,5M"
+      -getAppVersion(): ?string: "7.0"
       -getAndroidVersion(): ?string: "4.1 և ավելի բարձր"
       -getMinAndroidVersion(): ?string: "4.1"
       -getContentRating(): ?string: "Բոլորի համար"
@@ -271,12 +278,12 @@ array:3 [
       -getReleased(): ?DateTimeInterface: @1502236800 {
         date: 2017-08-09T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581600058 {
-        date: 2020-02-13T13:20:58+00:00
+      -getUpdated(): ?DateTimeInterface: @1625992062 {
+        date: 2021-07-11T08:27:42+00:00
       }
-      -getNumberVoters(): int: 2180
-      -getNumberReviews(): int: 558
-      -getReviews(): array:0 []
+      -getNumberVoters(): int: 2437
+      -getNumberReviews(): int: 0
+      -getReviews(): array: array:0 []
       -asArray(): array: …
     }
     …

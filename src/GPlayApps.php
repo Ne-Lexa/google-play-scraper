@@ -19,7 +19,6 @@ use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Request as PsrRequest;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
-use Nelexa\GPlay\Enum\AgeEnum;
 use Nelexa\GPlay\HttpClient\HttpClient;
 use Nelexa\GPlay\HttpClient\Request;
 use Psr\Http\Message\ResponseInterface;
@@ -787,11 +786,13 @@ class GPlayApps
     }
 
     /**
-     * @param string $clusterPageUrl
+     * Returns an iterator of applications from the Google Play store for the specified cluster page.
+     *
+     * @param string $clusterPageUrl cluster page url
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
-     * @return \Generator<Model\App>
+     * @return \Generator<Model\App> an iterator with basic information about applications
      */
     public function getClusterApps(string $clusterPageUrl): iterable
     {
@@ -851,8 +852,6 @@ class GPlayApps
      * Returns a list of applications with basic information.
      *
      * @param string $clusterPageUrl cluster page URL
-     * @param string $locale         locale
-     * @param string $country        country
      * @param int    $limit          Maximum number of applications. To extract all
      *                               applications, use {@see GPlayApps::UNLIMIT}.
      *
@@ -926,13 +925,20 @@ class GPlayApps
     }
 
     /**
-     * @param string|Model\Category|Enum\CategoryEnum|null $category
-     * @param Enum\AgeEnum|null                            $age
-     * @param string|null                                  $path
+     * Returns an iterator of cluster pages.
      *
-     * @return iterable
+     * @param string|Model\Category|Enum\CategoryEnum|null $category application category as
+     *                                                               string, {@see Model\Category},
+     *                                                               {@see Enum\CategoryEnum} or
+     *                                                               `null` for all categories
+     * @param Enum\AgeEnum|null                            $age      age limit or `null` for no limit
+     * @param string|null                                  $path     `top`, `new` or `null`
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     *
+     * @return iterable<Model\ClusterPage> an iterator of cluster pages
      */
-    public function getClusterPages($category = null, ?AgeEnum $age = null, ?string $path = null): iterable
+    public function getClusterPages($category = null, ?Enum\AgeEnum $age = null, ?string $path = null): iterable
     {
         $queryParams = [
             self::REQ_PARAM_LOCALE => $this->defaultLocale,
@@ -1161,8 +1167,8 @@ class GPlayApps
     {
         $apps = [];
         $count = 0;
-        foreach ($this->getClusterPages($category, $age, $path) as ['url' => $clusterUrl]) {
-            foreach ($this->getClusterApps($clusterUrl) as $app) {
+        foreach ($this->getClusterPages($category, $age, $path) as $clusterPage) {
+            foreach ($this->getClusterApps($clusterPage->getUrl()) as $app) {
                 if (!isset($apps[$app->getId()])) {
                     $apps[$app->getId()] = $app;
                     ++$count;

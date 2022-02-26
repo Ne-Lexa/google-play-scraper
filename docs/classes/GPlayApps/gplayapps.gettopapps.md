@@ -12,15 +12,21 @@ Nelexa\GPlay\GPlayApps::getTopApps ( [ string | Nelexa\GPlay\Model\Category | Ne
 
 ## Parameters
 * **$category** (string | [Nelexa\GPlay\Model\Category](../Category/README.md) | [Nelexa\GPlay\Enum\CategoryEnum](../CategoryEnum/README.md) | null)  
-application category as string, [Nelexa\GPlay\Model\Category](../Category/README.md),
+application category as
+string, [Nelexa\GPlay\Model\Category](../Category/README.md),
 * **$age** ([Nelexa\GPlay\Enum\AgeEnum](../AgeEnum/README.md) | null)  
 age limit or null for no limit
 * **$limit** (int)  
-limit on the number of results or [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) for no limit
+limit on the number of results
+or [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants)
+for no limit
 
 ## Return Values
 an array of applications with basic information
 
+
+## Errors/Exceptions
+* Throws [Nelexa\GPlay\Exception\GooglePlayException](../GooglePlayException/README.md)
 ## Examples
 **Example 1. Gets top apps by category.**
 ```php
@@ -30,19 +36,19 @@ $apps = $gplay->getTopApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:280 [
-    "com.gym.racegame" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.gym.racegame"
+array:314 [
+    "com.easygames.race" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.easygames.race"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame&hl=en_US&gl=us"
-      -getName(): string: "Epic Race 3D"
-      -getSummary(): ?string: "50% Luck, 70% Skill, 30% Will"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.easygames.race"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.easygames.race&hl=en_US&gl=us"
+      -getName(): string: "Race Master 3D - Car Racing"
+      -getSummary(): ?string: "Become a track master in the wackiest, wildest, winningest racing game!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Good Job Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Good+Job+Games"
-        -getName(): string: "Good Job Games"
+        -getId(): string: "6392896734092635573"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6392896734092635573"
+        -getName(): string: "SayGames Ltd"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -50,32 +56,32 @@ array:280 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/qW1SrW0Gyr3JRMNrTqMjFwcvZVjLP6-Wp2tDY8Z9UWzf2_XteCit8n9CNEGpnHOEFS8"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/qW1SrW0Gyr3JRMNrTqMjFwcvZVjLP6-Wp2tDY8Z9UWzf2_XteCit8n9CNEGpnHOEFS8"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/qW1SrW0Gyr3JRMNrTqMjFwcvZVjLP6-Wp2tDY8Z9UWzf2_XteCit8n9CNEGpnHOEFS8=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
       }
-      -getScore(): float: 3.8746777
+      -getScore(): float: 4.3804564
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.slippy.linerusher" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.slippy.linerusher"
+    "com.luna.theyarecoming" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.luna.theyarecoming"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.slippy.linerusher"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.slippy.linerusher&hl=en_US&gl=us"
-      -getName(): string: "Fun Race 3D"
-      -getSummary(): ?string: "Once You Start, You Can’t Stop"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.luna.theyarecoming"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.luna.theyarecoming&hl=en_US&gl=us"
+      -getName(): string: "They Are Coming"
+      -getSummary(): ?string: "Defeat all enemies and win!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Good Job Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Good+Job+Games"
-        -getName(): string: "Good Job Games"
+        -getId(): string: "6018074114375198913"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6018074114375198913"
+        -getName(): string: "Rollic Games"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -83,19 +89,19 @@ array:280 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/3YCNUp1tvYhjT5lBRdmUYRVp1GISq-g_8Uk8tdm4wLtRmZPnJljVa7OBnS8PPYdabx4"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/3YCNUp1tvYhjT5lBRdmUYRVp1GISq-g_8Uk8tdm4wLtRmZPnJljVa7OBnS8PPYdabx4"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/3YCNUp1tvYhjT5lBRdmUYRVp1GISq-g_8Uk8tdm4wLtRmZPnJljVa7OBnS8PPYdabx4=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk"
       }
-      -getScore(): float: 4.1582165
+      -getScore(): float: 1.583815
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -115,15 +121,48 @@ $apps = $gplay->getTopApps(
   <summary>Results</summary>
 
 ```php
-array:530 [
-    "com.BallGames.Woodturning" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.BallGames.Woodturning"
+array:572 [
+    "com.fusee.MergeMaster" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.fusee.MergeMaster"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.BallGames.Woodturning"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.BallGames.Woodturning&hl=en_US&gl=us"
-      -getName(): string: "Woodturning"
-      -getSummary(): ?string: "One lathe to rule them all"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fusee.MergeMaster"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fusee.MergeMaster&hl=en_US&gl=us"
+      -getName(): string: "Merge Master - Dinosaur Fusion"
+      -getSummary(): ?string: "Are you ready to fight and become a merge master?"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "4656343638685426415"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4656343638685426415"
+        -getName(): string: "HOMA GAMES"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/LUxutPFfkpuhZlK9mlBxlZI2J1ECDW-SPfNWnGtgENhasceP8r1vYNkwWf3-yHoZNII"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/LUxutPFfkpuhZlK9mlBxlZI2J1ECDW-SPfNWnGtgENhasceP8r1vYNkwWf3-yHoZNII"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/LUxutPFfkpuhZlK9mlBxlZI2J1ECDW-SPfNWnGtgENhasceP8r1vYNkwWf3-yHoZNII=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.043062
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    "com.arkhe.batteryrun" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.arkhe.batteryrun"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.arkhe.batteryrun"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.arkhe.batteryrun&hl=en_US&gl=us"
+      -getName(): string: "Battery Run"
+      -getSummary(): ?string: "Collect Batteries"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "VOODOO"
         -getUrl(): string: "https://play.google.com/store/apps/developer?id=VOODOO"
@@ -135,52 +174,19 @@ array:530 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/D8hlXQPeRnqMlTxd3kkvaVtEuGoPIVtrJjsDDfkXlKc-81CTyLCcD8BJO_yJr8xNbA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/D8hlXQPeRnqMlTxd3kkvaVtEuGoPIVtrJjsDDfkXlKc-81CTyLCcD8BJO_yJr8xNbA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/D8hlXQPeRnqMlTxd3kkvaVtEuGoPIVtrJjsDDfkXlKc-81CTyLCcD8BJO_yJr8xNbA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ"
       }
-      -getScore(): float: 3.7703204
+      -getScore(): float: 4.0819674
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    "com.trianglegames.squarebird" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.trianglegames.squarebird"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.trianglegames.squarebird"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.trianglegames.squarebird&hl=en_US&gl=us"
-      -getName(): string: "Square Bird"
-      -getSummary(): ?string: "Build the perfect egg tower!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "MOONEE PUBLISHING LTD"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=MOONEE+PUBLISHING+LTD"
-        -getName(): string: "MOONEE PUBLISHING LTD"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM"
-      }
-      -getScore(): float: 4.1803513
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -196,52 +202,19 @@ $apps = $gplay->getTopApps();
   <summary>Results</summary>
 
 ```php
-array:1074 [
-    "com.whatsapp" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.whatsapp"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.whatsapp"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.whatsapp&hl=en_US&gl=us"
-      -getName(): string: "WhatsApp Messenger"
-      -getSummary(): ?string: "Simple. Personal. Secure."
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "WhatsApp Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=WhatsApp+Inc."
-        -getName(): string: "WhatsApp Inc."
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
-      }
-      -getScore(): float: 4.28501
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
+array:1141 [
     "com.zhiliaoapp.musically" => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.zhiliaoapp.musically"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically&hl=en_US&gl=us"
-      -getName(): string: "TikTok - Make Your Day"
-      -getSummary(): ?string: "Real People. Real Videos."
+      -getName(): string: "TikTok"
+      -getSummary(): ?string: "Join your friends and discover videos you love, only on TikTok"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "TikTok Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=TikTok+Inc."
-        -getName(): string: "TikTok Inc."
+        -getId(): string: "TikTok Pte. Ltd."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=TikTok+Pte.+Ltd."
+        -getName(): string: "TikTok Pte. Ltd."
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -249,19 +222,52 @@ array:1074 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d"
       }
-      -getScore(): float: 4.581792
+      -getScore(): float: 4.53434
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
+    }
+    "com.picture.magic.imager" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.picture.magic.imager"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.picture.magic.imager"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.picture.magic.imager&hl=en_US&gl=us"
+      -getName(): string: "Magic Photo Editor:Foto Repair"
+      -getSummary(): ?string: "Handy photo editor : photo repair & coloring"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Zachary Holt"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Zachary+Holt"
+        -getName(): string: "Zachary Holt"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/eZHrfJNrI0_dfxVvk8Ng_qGPqLj9TVRTQpsozVN_RbLFymXirvboqTeP2rKUNi5gpg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/eZHrfJNrI0_dfxVvk8Ng_qGPqLj9TVRTQpsozVN_RbLFymXirvboqTeP2rKUNi5gpg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/eZHrfJNrI0_dfxVvk8Ng_qGPqLj9TVRTQpsozVN_RbLFymXirvboqTeP2rKUNi5gpg=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 3.7973423
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
     }
     …
   ]

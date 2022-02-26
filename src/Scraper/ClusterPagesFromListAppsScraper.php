@@ -16,6 +16,7 @@ namespace Nelexa\GPlay\Scraper;
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Model\App;
+use Nelexa\GPlay\Model\ClusterPage;
 use Nelexa\GPlay\Util\ScraperUtil;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -30,7 +31,7 @@ class ClusterPagesFromListAppsScraper implements ParseHandlerInterface
      * @param ResponseInterface $response
      * @param array             $options
      *
-     * @return App[]
+     * @return array
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): array
     {
@@ -43,10 +44,10 @@ class ClusterPagesFromListAppsScraper implements ParseHandlerInterface
             if (isset($v[0][1][0][0][1], $v[0][1][0][0][3][4][2])) {
                 foreach ($v[0][1] as $a) {
                     if (isset($a[0][1], $a[0][3][4][2])) {
-                        $results[] = [
-                            'name' => trim($a[0][1]),
-                            'url' => GPlayApps::GOOGLE_PLAY_URL . $a[0][3][4][2],
-                        ];
+                        $results[] = new ClusterPage(
+                            trim($a[0][1]),
+                            GPlayApps::GOOGLE_PLAY_URL . $a[0][3][4][2]
+                        );
                     }
                 }
                 $token = $v[0][3][1] ?? null;
@@ -56,10 +57,10 @@ class ClusterPagesFromListAppsScraper implements ParseHandlerInterface
             if (isset($v[0][1][0][20][0], $v[0][1][0][20][2][4][2])) {
                 foreach ($v[0][1] as $a) {
                     if (isset($a[20][0], $a[20][2][4][2])) {
-                        $results[] = [
-                            'name' => trim($a[20][0]),
-                            'url' => GPlayApps::GOOGLE_PLAY_URL . $a[20][2][4][2],
-                        ];
+                        $results[] = new ClusterPage(
+                            trim($a[20][0]),
+                            GPlayApps::GOOGLE_PLAY_URL . $a[20][2][4][2]
+                        );
                     }
                 }
                 $token = $v[0][3][1] ?? null;

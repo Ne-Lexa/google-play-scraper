@@ -9,7 +9,7 @@ Nelexa\GPlay\GPlayApps::setCacheTtl ( DateInterval | int | null $cacheTtl ) : Ne
 ```
 
 ## Parameters
-* **$cacheTtl** ([DateInterval](https://www.php.net/manual/class.dateinterval.php) | int | null)  
+* **$cacheTtl** ([DateInterval](../../https:/www.php.net/manual/class.dateinterval.php) | int | null)  
 TTL cached data
 
 ## Return Values

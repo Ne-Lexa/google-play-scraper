@@ -15,12 +15,12 @@ Nelexa\GPlay\Model\Permission implements JsonSerializable {
     public getIcon ( void ) : Nelexa\GPlay\Model\GoogleImage
     public getPermissions ( void ) : string[]
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\Permission::__construct](permission.construct.md) - Permission constructor.
+* [Nelexa\GPlay\Model\Permission::__construct](permission.__construct.md) - Permission constructor.
 * [Nelexa\GPlay\Model\Permission::getLabel](permission.getlabel.md)
 * [Nelexa\GPlay\Model\Permission::getIcon](permission.geticon.md)
 * [Nelexa\GPlay\Model\Permission::getPermissions](permission.getpermissions.md)
@@ -31,19 +31,20 @@ Nelexa\GPlay\Model\Permission implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Permission {
-  -getLabel(): string: "Storage"
+  -getLabel(): string: "Other"
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ"
   }
-  -getPermissions(): array:2 [
-    0 => "read the contents of your USB storage"
-    1 => "modify or delete the contents of your USB storage"
+  -getPermissions(): array: array:7 [
+    0 => "receive data from Internet"
+    1 => "view network connections"
+    …
   ]
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -54,11 +55,16 @@ echo json_encode($permission, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON
 Output:
 ```json
 {
-    "label": "Storage",
-    "icon": "https://lh3.googleusercontent.com/aWNKQedLTpw6u6yyMjQObmuoKu67A1czWnIcvID86oAmMT02r5mNdRn6l9ZN2t2MIyH6tNy-01v7ukeQ",
+    "label": "Other",
+    "icon": "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA",
     "permissions": [
-        "read the contents of your USB storage",
-        "modify or delete the contents of your USB storage"
+        "receive data from Internet",
+        "view network connections",
+        "full network access",
+        "run at startup",
+        "control vibration",
+        "prevent device from sleeping",
+        "Google Play license check"
     ]
 }
 ```

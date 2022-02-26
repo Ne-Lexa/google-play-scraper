@@ -28,8 +28,8 @@ Nelexa\GPlay\Exception\GooglePlayException extends Exception implements Throwabl
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Exception\GooglePlayException::__construct](googleplayexception.construct.md) - Construct the GooglePlayException.
-* [Nelexa\GPlay\Exception\GooglePlayException::__wakeup](googleplayexception.wakeup.md)
+* [Nelexa\GPlay\Exception\GooglePlayException::__construct](googleplayexception.__construct.md) - Construct the GooglePlayException.
+* [Nelexa\GPlay\Exception\GooglePlayException::__wakeup](googleplayexception.__wakeup.md)
 * [Nelexa\GPlay\Exception\GooglePlayException::getMessage](googleplayexception.getmessage.md)
 * [Nelexa\GPlay\Exception\GooglePlayException::getCode](googleplayexception.getcode.md)
 * [Nelexa\GPlay\Exception\GooglePlayException::getFile](googleplayexception.getfile.md)
@@ -37,7 +37,7 @@ Nelexa\GPlay\Exception\GooglePlayException extends Exception implements Throwabl
 * [Nelexa\GPlay\Exception\GooglePlayException::getTrace](googleplayexception.gettrace.md)
 * [Nelexa\GPlay\Exception\GooglePlayException::getPrevious](googleplayexception.getprevious.md)
 * [Nelexa\GPlay\Exception\GooglePlayException::getTraceAsString](googleplayexception.gettraceasstring.md)
-* [Nelexa\GPlay\Exception\GooglePlayException::__toString](googleplayexception.tostring.md)
+* [Nelexa\GPlay\Exception\GooglePlayException::__toString](googleplayexception.__tostring.md)
 * [Nelexa\GPlay\Exception\GooglePlayException::setUrl](googleplayexception.seturl.md) - Set the URL associated with the exception.
 * [Nelexa\GPlay\Exception\GooglePlayException::getUrl](googleplayexception.geturl.md) - Returns the URL with which the exception is associated.
 * [Nelexa\GPlay\Exception\GooglePlayException::getRequest](googleplayexception.getrequest.md) - Returns an HTTP request if present.
@@ -53,7 +53,7 @@ class Nelexa\GPlay\Exception\GooglePlayException {
     """
   -getCode(): mixed: 1
   -getFile(): mixed: …
-  -getLine(): mixed: 225
+  -getLine(): mixed: 219
   -getTrace(): mixed: …
   -getTraceAsString(): mixed: …
   -getUrl(): ?string: "https://play.google.com/store/apps/details?id=com.invalid.app.test&hl=en_US&gl=us"

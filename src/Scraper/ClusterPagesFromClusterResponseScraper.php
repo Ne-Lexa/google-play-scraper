@@ -15,6 +15,7 @@ namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
+use Nelexa\GPlay\Model\ClusterPage;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -38,10 +39,10 @@ class ClusterPagesFromClusterResponseScraper implements ParseHandlerInterface
 
         $results = [];
         foreach ($json[0][1] as $items) {
-            $results[] = [
-                'name' => $items[0][1],
-                'url' => GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2],
-            ];
+            $results[] = new ClusterPage(
+                $items[0][1],
+                GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2]
+            );
         }
         $token = $json[0][3][1] ?? null;
 

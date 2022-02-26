@@ -22,7 +22,7 @@ Nelexa\GPlay\Model\AppId {
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\AppId::__construct](appid.construct.md) - Creates an \Nelexa\GPlay\Model\AppId object.
+* [Nelexa\GPlay\Model\AppId::__construct](appid.__construct.md) - Creates an \Nelexa\GPlay\Model\AppId object.
 * [Nelexa\GPlay\Model\AppId::getId](appid.getid.md) - Returns the application ID (android package name).
 * [Nelexa\GPlay\Model\AppId::getLocale](appid.getlocale.md) - Returns the locale (site language) for which the information was received.
 * [Nelexa\GPlay\Model\AppId::getCountry](appid.getcountry.md) - Returns the country of the request for information about the application.
@@ -36,11 +36,11 @@ Nelexa\GPlay\Model\AppId {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\AppId {
-  -getId(): string: "com.kristanix.android.jigsawpuzzleepic"
-  -getLocale(): string: "en_GB"
-  -getCountry(): string: "gb"
-  -getUrl(): string: "https://play.google.com/store/apps/details?id=com.kristanix.android.jigsawpuzzleepic"
-  -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.kristanix.android.jigsawpuzzleepic&hl=en_GB&gl=gb"
+  -getId(): string: "jp.co.ofcr.cm00"
+  -getLocale(): string: "en_US"
+  -getCountry(): string: "us"
+  -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00"
+  -getFullUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&hl=en_US&gl=us"
 }
 ```
 

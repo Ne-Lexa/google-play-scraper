@@ -28,7 +28,7 @@ $categories = $gplay
   <summary>Results</summary>
 
 ```php
-array:58 [
+array:53 [
     0 => class Nelexa\GPlay\Model\Category {
       -getId(): string: "ART_AND_DESIGN"
       -getName(): string: "Art & Design"
@@ -36,7 +36,7 @@ array:58 [
       -isFamilyCategory(): bool: false
       -isApplicationCategory(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Category {
       -getId(): string: "AUTO_AND_VEHICLES"
@@ -45,7 +45,7 @@ array:58 [
       -isFamilyCategory(): bool: false
       -isApplicationCategory(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]

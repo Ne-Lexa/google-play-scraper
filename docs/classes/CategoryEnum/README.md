@@ -44,6 +44,7 @@ Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum {
     public static TRAVEL_AND_LOCAL ( void ) : Nelexa\GPlay\Enum\CategoryEnum
     public static VIDEO_PLAYERS ( void ) : Nelexa\GPlay\Enum\CategoryEnum
     public static ANDROID_WEAR ( void ) : Nelexa\GPlay\Enum\CategoryEnum
+    public static WATCH_FACE ( void ) : Nelexa\GPlay\Enum\CategoryEnum
     public static WEATHER ( void ) : Nelexa\GPlay\Enum\CategoryEnum
     public static GAME_ACTION ( void ) : Nelexa\GPlay\Enum\CategoryEnum
     public static GAME_ADVENTURE ( void ) : Nelexa\GPlay\Enum\CategoryEnum
@@ -115,6 +116,7 @@ Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum {
 * [Nelexa\GPlay\Enum\CategoryEnum::TRAVEL_AND_LOCAL](categoryenum.travel_and_local.md) - Returns the category id 'Travel & Local'.
 * [Nelexa\GPlay\Enum\CategoryEnum::VIDEO_PLAYERS](categoryenum.video_players.md) - Returns the category id 'Video Players & Editors'.
 * [Nelexa\GPlay\Enum\CategoryEnum::ANDROID_WEAR](categoryenum.android_wear.md) - Returns the category id 'Wear OS by Google'.
+* [Nelexa\GPlay\Enum\CategoryEnum::WATCH_FACE](categoryenum.watch_face.md) - Returns the category id 'Watch Face'.
 * [Nelexa\GPlay\Enum\CategoryEnum::WEATHER](categoryenum.weather.md) - Returns the category id 'Weather'.
 * [Nelexa\GPlay\Enum\CategoryEnum::GAME_ACTION](categoryenum.game_action.md) - Returns the category id 'Action'.
 * [Nelexa\GPlay\Enum\CategoryEnum::GAME_ADVENTURE](categoryenum.game_adventure.md) - Returns the category id 'Adventure'.
@@ -147,16 +149,16 @@ Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum {
 * [Nelexa\GPlay\Enum\CategoryEnum::containsValue](categoryenum.containsvalue.md) - Checks if enum contains a passed value.
 * [Nelexa\GPlay\Enum\CategoryEnum::fromValue](categoryenum.fromvalue.md) - Returns first enum of the specified constant value.
 * [Nelexa\GPlay\Enum\CategoryEnum::ordinal](categoryenum.ordinal.md) - Returns the ordinal of this enum constant.
-* [Nelexa\GPlay\Enum\CategoryEnum::__toString](categoryenum.tostring.md) - Returns the value of this enum constant, as contained in the declaration.
+* [Nelexa\GPlay\Enum\CategoryEnum::__toString](categoryenum.__tostring.md) - Returns the value of this enum constant, as contained in the declaration.
 
 
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\CategoryEnum {
-  -name(): string: "FAMILY_PRETEND"
-  -value(): mixed: "FAMILY_PRETEND"
+  -name(): string: "FAMILY_MUSICVIDEO"
+  -value(): mixed: "FAMILY_MUSICVIDEO"
   -ordinal(): int: 57
-  -__toString(): string: "FAMILY_PRETEND"
+  -__toString(): string: "FAMILY_MUSICVIDEO"
 }
 ```
 

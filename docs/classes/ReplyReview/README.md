@@ -14,12 +14,12 @@ Nelexa\GPlay\Model\ReplyReview implements JsonSerializable {
     public getDate ( void ) : DateTimeInterface
     public getText ( void ) : string
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\ReplyReview::__construct](replyreview.construct.md) - Creates an object with information about the developer’s response to a review of an application in the Google Play store.
+* [Nelexa\GPlay\Model\ReplyReview::__construct](replyreview.__construct.md) - Creates an object with information about the developer’s response to a review of an application in the Google Play store.
 * [Nelexa\GPlay\Model\ReplyReview::getDate](replyreview.getdate.md) - Returns reply date.
 * [Nelexa\GPlay\Model\ReplyReview::getText](replyreview.gettext.md) - Returns reply text.
 * [Nelexa\GPlay\Model\ReplyReview::asArray](replyreview.asarray.md) - Returns class properties as an array.
@@ -32,12 +32,12 @@ Nelexa\GPlay\Model\ReplyReview implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ReplyReview {
-  -getDate(): DateTimeInterface: @1581879989 {
-    date: 2020-02-16T19:06:29+00:00
+  -getDate(): DateTimeInterface: @1563092813 {
+    date: 2019-07-14T08:26:53+00:00
   }
-  -getText(): string: "We will think about adding UK maps in the near future. Thank you for the feedback!"
+  -getText(): string: "Please contact our support team and tell us more about that type of situation: app-maps@support.yandex.ru"
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -48,9 +48,9 @@ echo json_encode($replyReview, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSO
 Output:
 ```json
 {
-    "date": "2020-02-16T19:06:29+00:00",
-    "timestamp": 1581879989,
-    "text": "We will think about adding UK maps in the near future. Thank you for the feedback!"
+    "date": "2019-07-14T08:26:53+00:00",
+    "timestamp": 1563092813,
+    "text": "Please contact our support team and tell us more about that type of situation: app-maps@support.yandex.ru"
 }
 ```
 

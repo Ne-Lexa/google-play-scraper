@@ -5,7 +5,7 @@
 
 ## Description
 ```php
-Nelexa\GPlay\Model\AppInfo::jsonSerialize ( void ) : mixed
+Nelexa\GPlay\Model\AppInfo::jsonSerialize ( void ) : array
 ```
 Serializes the object to a value that can be serialized natively by `json_encode()`.
 

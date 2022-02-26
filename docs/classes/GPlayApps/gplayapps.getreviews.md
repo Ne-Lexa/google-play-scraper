@@ -11,11 +11,14 @@ Getting a lot of reviews can take a lot of time.
 
 ## Parameters
 * **$appId** (string | [Nelexa\GPlay\Model\AppId](../AppId/README.md))  
-application ID (Android package name) as a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
+application ID (Android package name) as
+a string or [Nelexa\GPlay\Model\AppId](../AppId/README.md) object
 * **$limit** (int)  
-Maximum number of reviews. To extract all reviews, use [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants).
+Maximum number of reviews. To extract all
+reviews, use [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants).
 * **$sort** ([Nelexa\GPlay\Enum\SortEnum](../SortEnum/README.md) | null)  
-Sort reviews of the application. If null, then sort by the newest reviews.
+Sort reviews of the application.
+If null, then sort by the newest reviews.
 
 ## Return Values
 app reviews
@@ -42,58 +45,58 @@ $reviews = $gplay->getReviews(
 ```php
 array:1000 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOGMp3ybCbJiOqLVaUuFuC9OJnYcVQ17YcqBw1o78rC3Rc7eD0WGwuqgqrHDbTtO6J2hgzcWR7FtK97oyzw"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGMp3ybCbJiOqLVaUuFuC9OJnYcVQ17YcqBw1o78rC3Rc7eD0WGwuqgqrHDbTtO6J2hgz…"
-      -getUserName(): string: "Ury Kamensky"
-      -getText(): string: "Добавьте возможность закрывать (или уберите насовсем, но на это особо не надеюсь) иконку/кнопку/ссылку с предложением заказать такси, она ОЧЕНЬ РАЗДРА…"
+      -getId(): string: "gp:AOqpTOGobbFWlkxiu3je21EbN0izjZYCj888IJdkBfysY5aNS-hIsIsFVc_6yDusSX6MHpWUQsNT-MdlqPgMKG8"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGobbFWlkxiu3je21EbN0izjZYCj888IJdkBfysY5aNS-hIsIsFVc_6yDusSX6MHpWUQs…"
+      -getUserName(): string: "Татьяна Борисова"
+      -getText(): string: "Удобное приложение. Всё варианты пересадок и время в пути показывает, временные закрытия станций - тоже. Это про Московское метро. Но схемы есть и дру…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s0/"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJz1CMv1CYyC64JggEWAkCwXOZBlgU4DakbQKRLo=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJz1CMv1CYyC64JggEWAkCwXOZBlgU4DakbQKRLo=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJz1CMv1CYyC64JggEWAkCwXOZBlgU4DakbQKRLo=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s64/"
       }
-      -getDate(): ?DateTimeInterface: @1581494510 {
-        date: 2020-02-12T08:01:50+00:00
+      -getDate(): ?DateTimeInterface: @1645609417 {
+        date: 2022-02-23T09:43:37+00:00
       }
-      -getScore(): int: 2
-      -getCountLikes(): int: 12
-      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-        -getDate(): DateTimeInterface: @1581510687 {
-          date: 2020-02-12T12:31:27+00:00
-        }
-        -getText(): string: "Спасибо за отзыв и замечание к отображению этой кнопки, мы обязательно рассмотрим его подробнее!"
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOGXiWwiyPHHUCXsx5JPJtDtKIa7CCXTUK8xhAJ9eyNv_jkm4coeSOqKHn3Eu5s52AMTOvPLPL0RbAJV25Y"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGXiWwiyPHHUCXsx5JPJtDtKIa7CCXTUK8xhAJ9eyNv_jkm4coeSOqKHn3Eu5s52AMTOv…"
-      -getUserName(): string: "Рии Эн"
-      -getText(): string: "Диаметры то появляются, то исчезают. Время отличается от рассчитанного на сайте. Предлагает ехать через закрытую каховскую ветку. Единственное, что ра…"
-      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-Zos3KoSJTjU/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfZKhn84y4kq0BVajR1VBK8JSNuFQ/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-Zos3KoSJTjU/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfZKhn84y4kq0BVajR1VBK8JSNuFQ/s0/"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-Zos3KoSJTjU/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfZKhn84y4kq0BVajR1VBK8JSNuFQ/s64/"
-      }
-      -getDate(): ?DateTimeInterface: @1581341597 {
-        date: 2020-02-10T13:33:17+00:00
-      }
-      -getScore(): int: 3
+      -getScore(): int: 5
       -getCountLikes(): int: 0
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-        -getDate(): DateTimeInterface: @1581359256 {
-          date: 2020-02-10T18:27:36+00:00
+        -getDate(): DateTimeInterface: @1645612425 {
+          date: 2022-02-23T10:33:45+00:00
         }
-        -getText(): string: "Пожалуйста, напишите нам на app-metro@support.yandex.ru или через меню «Настройки» — «Обратная связь», покажите на скриншотах ситуации, которые вызыва…"
+        -getText(): string: "Татьяна, спасибо, что пользуетесь сервисами Яндекса! Мы очень ценим ваше доверие и рады, что приложение оказалось полезным для вас."
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
+    }
+    1 => class Nelexa\GPlay\Model\Review {
+      -getId(): string: "gp:AOqpTOGYqhgzbm47kLyxoHYlFHzF2v4k94k7i0ySzz43DWTQPIr5pLXrNBA5UL78PD0sk2stVg71MWKay-Jmpl8"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGYqhgzbm47kLyxoHYlFHzF2v4k94k7i0ySzz43DWTQPIr5pLXrNBA5UL78PD0sk2stVg…"
+      -getUserName(): string: "Анна Батлер"
+      -getText(): string: "Очень удобное приложение , показывает в какой вагон удобнее сесть для перехода на другую ветку, сколько времени займет переход , в том числе и наземны…"
+      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJySgKDLGlL5yp4zPkFC6CnajA2YXlXxsQNig7jh=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJySgKDLGlL5yp4zPkFC6CnajA2YXlXxsQNig7jh=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJySgKDLGlL5yp4zPkFC6CnajA2YXlXxsQNig7jh=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getDate(): ?DateTimeInterface: @1645708636 {
+        date: 2022-02-24T13:17:16+00:00
+      }
+      -getScore(): int: 5
+      -getCountLikes(): int: 0
+      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
+        -getDate(): DateTimeInterface: @1645740299 {
+          date: 2022-02-24T22:04:59+00:00
+        }
+        -getText(): string: "Анна, спасибо вам за оценку! Мы рады, что вам нравится наше приложение :)"
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -asArray(): array: …
+      -jsonSerialize(): array: …
     }
     …
   ]

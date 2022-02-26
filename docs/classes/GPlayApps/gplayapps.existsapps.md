@@ -11,7 +11,8 @@ HTTP requests are executed in parallel.
 
 ## Parameters
 * **$appIds** (string[] | [Nelexa\GPlay\Model\AppId](../AppId/README.md)[])  
-Array of application identifiers. The keys of the returned array correspond to the transferred array.
+Array of application identifiers.
+The keys of the returned array correspond to the transferred array.
 
 ## Return Values
 An array of information about the existence of each
@@ -25,16 +26,14 @@ array matches to the passed array.
 ```php
 $gplay->setConcurrency(8);
 
-$exists = $gplay->existsApps(
-    [
-        'maps' => 'com.google.android.apps.maps',
-        'docs' => new \Nelexa\GPlay\Model\AppId('com.google.android.apps.docs'),
-        /* 0 => */ 'com.google.android.apps.googleassistant',
-        /* 1 => */ 'com.google.android.keep',
-        'invalid' => 'com.android.test',
-        'com.google.android.apps.authenticator2' => 'com.google.android.apps.authenticator2',
-    ]
-);
+$exists = $gplay->existsApps([
+    'maps' => 'com.google.android.apps.maps',
+    'docs' => new \Nelexa\GPlay\Model\AppId('com.google.android.apps.docs'),
+    /* 0 => */ 'com.google.android.apps.googleassistant',
+    /* 1 => */ 'com.google.android.keep',
+    'invalid' => 'com.android.test',
+    'com.google.android.apps.authenticator2' => 'com.google.android.apps.authenticator2',
+]);
 ```
 <details>
   <summary>Results</summary>
