@@ -30,6 +30,7 @@ build:
                 override:
                     - command: |
                           php ./vendor/bin/phpunit --configuration phpunit.xml.dist --coverage-clover=coverage.clover
+                      idle_timeout: 600    # 10 minutes
                       on_node: 1
                       coverage:
                           file: coverage.clover
