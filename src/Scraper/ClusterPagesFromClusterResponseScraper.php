@@ -13,53 +13,41 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Scraper;
 
+use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
-use Nelexa\GPlay\Model\AppId;
-use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * @internal
  */
-class ReviewsScraper implements ParseHandlerInterface
+class ClusterPagesFromClusterResponseScraper implements ParseHandlerInterface
 {
-    /** @var AppId */
-    private $requestApp;
-
-    /**
-     * ReviewsScraper constructor.
-     *
-     * @param AppId $requestApp
-     */
-    public function __construct(AppId $requestApp)
-    {
-        $this->requestApp = $requestApp;
-    }
-
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
      * @param array             $options
      *
-     * @return array
+     * @return string[]
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): array
     {
         $contents = substr($response->getBody()->getContents(), 5);
         $json = \GuzzleHttp\json_decode($contents, true);
-
-        if (!isset($json[0][2])) {
-            return [[], null];
-        }
         $json = \GuzzleHttp\json_decode($json[0][2], true);
 
-        if (empty($json[0])) {
-            return [[], null];
+        $results = [];
+        foreach ($json[0][1] as $items) {
+            $results[] = [
+                'name' => $items[0][1],
+                'url' => GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2],
+            ];
         }
-        $reviews = ReviewsExtractor::extractReviews($this->requestApp, $json[0]);
-        $nextToken = $json[1][1] ?? null;
+        $token = $json[0][3][1] ?? null;
 
-        return [$reviews, $nextToken];
+        return [
+            'results' => $results,
+            'token' => $token,
+        ];
     }
 }

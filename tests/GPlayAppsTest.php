@@ -2,6 +2,15 @@
 
 declare(strict_types=1);
 
+/*
+ * Copyright (c) Ne-Lexa
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Tests;
 
 use Nelexa\GPlay\Enum\AgeEnum;
@@ -553,12 +562,12 @@ final class GPlayAppsTest extends TestCase
      * @dataProvider provideCategoryApps
      *
      * @param CategoryEnum|null $category
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      */
     public function testGetCategoryApps(?CategoryEnum $category): void
     {
-        $this->gplay->setCache($this->getCacheInterface());
         $apps = $this->gplay->getListApps($category);
-
         self::assertNotEmpty($apps);
         self::assertContainsOnlyInstancesOf(App::class, $apps);
     }
@@ -588,7 +597,7 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetNewApps(?CategoryEnum $category): void
     {
-        $this->gplay->setCache($this->getCacheInterface());
+//        $this->gplay->setCache($this->getCacheInterface());
         $apps = $this->gplay->getNewApps($category);
 
         self::assertContainsOnlyInstancesOf(App::class, $apps);
@@ -607,6 +616,8 @@ final class GPlayAppsTest extends TestCase
      * @dataProvider provideCategoryApps
      *
      * @param CategoryEnum|null $category
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      */
     public function testGetTopApps(?CategoryEnum $category): void
     {
@@ -617,6 +628,9 @@ final class GPlayAppsTest extends TestCase
         self::assertContainsOnlyInstancesOf(App::class, $apps);
     }
 
+    /**
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     */
     public function testGetListAppLimit(): void
     {
         $limit = 100;
@@ -723,5 +737,61 @@ final class GPlayAppsTest extends TestCase
         yield 'oct' => ['2014.10.22', 'com.gamehouse.slingo'];
         yield 'nov' => ['2010.11.01', 'com.maxmpz.audioplayer'];
         yield 'dec' => ['2014.12.22', 'ru.cian.main'];
+    }
+
+    /**
+     * @dataProvider provideGetClusterApps
+     *
+     * @param string $clusterPage
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     */
+    public function testGetClusterApps(string $clusterPage): void
+    {
+        $count = 0;
+        foreach ($this->gplay->getClusterApps($clusterPage) as $clusterApp) {
+            self::assertInstanceOf(App::class, $clusterApp);
+            ++$count;
+        }
+
+        self::assertGreaterThan(50, $count);
+    }
+
+    public function provideGetClusterApps(): iterable
+    {
+        yield 'premium apps' => ['https://play.google.com/store/apps/collection/cluster?clp=ogoKCA0qAggBUgIIAQ%3D%3D:S:ANO1ljJJQho&gsr=Cg2iCgoIDSoCCAFSAggB:S:ANO1ljJDbNY&hl=en'];
+    }
+
+    /**
+     * @param string|Category|CategoryEnum|null $category
+     * @param AgeEnum|null                      $age
+     * @param string|null                       $path
+     * @dataProvider provideGetClusterPages
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     */
+    public function testGetClusterPages($category, ?AgeEnum $age, ?string $path): void
+    {
+        $clusterPagesGenerator = $this->gplay
+            ->setDefaultLocale('en_US')
+            ->setDefaultCountry('us')
+            ->getClusterPages($category, $age, $path)
+        ;
+
+        foreach ($clusterPagesGenerator as $clusterPage) {
+            self::assertArrayHasKey('url', $clusterPage);
+            self::assertArrayHasKey('name', $clusterPage);
+            self::assertNotEmpty($clusterPage['url']);
+            self::assertNotEmpty($clusterPage['name']);
+        }
+    }
+
+    public function provideGetClusterPages(): iterable
+    {
+        yield 'Index' => [null, null, null];
+
+        yield 'Top Game Card' => ['GAME_CARD', null, 'top'];
+
+        yield 'Games category' => ['GAME', null, null];
     }
 }

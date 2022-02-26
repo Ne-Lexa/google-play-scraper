@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Util;
@@ -30,8 +32,8 @@ class ScraperUtil
                 $matches[0],
                 static function ($carry, $item) {
                     if (
-                        preg_match("/(ds:.*?)'/", $item, $keyMatch) &&
-                        preg_match('/data:([\s\S]*?)(, }\);<\/|, sideChannel:)/', $item, $valueMatch)
+                        preg_match("/(ds:.*?)'/", $item, $keyMatch)
+                        && preg_match('/data:([\s\S]*?)(, }\);<\/|, sideChannel:)/', $item, $valueMatch)
                     ) {
                         $carry[$keyMatch[1]] = \GuzzleHttp\json_decode($valueMatch[1], true);
                     }
@@ -56,8 +58,7 @@ class ScraperUtil
         $internalErrors = libxml_use_internal_errors(true);
 
         if (!$doc->loadHTML('<?xml encoding="utf-8"?>' . $html)) {
-            throw new
-            \RuntimeException(
+            throw new \RuntimeException(
                 'error load html: ' . $html
             );
         }

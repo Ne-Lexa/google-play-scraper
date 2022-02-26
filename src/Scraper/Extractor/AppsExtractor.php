@@ -2,21 +2,23 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper\Extractor;
 
+use GuzzleHttp\Psr7\Query;
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\App;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Util\ScraperUtil;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * @internal
@@ -63,7 +65,7 @@ class AppsExtractor
     {
         $developerName = $data[4][0][0][0];
         $developerPage = GPlayApps::GOOGLE_PLAY_URL . $data[4][0][0][1][4][2];
-        $developerId = parse_query(parse_url($developerPage, \PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
+        $developerId = Query::parse(parse_url($developerPage, \PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
 
         return new Developer(
             Developer::newBuilder()
@@ -74,14 +76,14 @@ class AppsExtractor
     }
 
     /**
-     * @param $scriptDataInfo
+     * @param array $scriptDataInfo
      *
      * @return string|null
      */
     private static function extractSummary(array $scriptDataInfo): ?string
     {
-        return empty($scriptDataInfo[4][1][1][1][1]) ?
-            null :
-            ScraperUtil::html2text($scriptDataInfo[4][1][1][1][1]);
+        return empty($scriptDataInfo[4][1][1][1][1])
+            ? null
+            : ScraperUtil::html2text($scriptDataInfo[4][1][1][1][1]);
     }
 }

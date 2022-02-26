@@ -2,19 +2,22 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
 
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\RequestOptions;
 use Nelexa\GPlay\Exception\GooglePlayException;
+use Nelexa\GPlay\HttpClient\HttpClient;
 use Nelexa\GPlay\Util\LazyStream;
-use Nelexa\HttpClient\HttpClient;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -168,8 +171,8 @@ class GoogleImage
         $httpComponents = parse_url($url);
 
         if (
-            !isset($httpComponents['host']) ||
-            !preg_match('~\.(googleusercontent\.com|ggpht\.com|bp\.blogspot\.com)$~i', $httpComponents['host'])
+            !isset($httpComponents['host'])
+            || !preg_match('~\.(googleusercontent\.com|ggpht\.com|bp\.blogspot\.com)$~i', $httpComponents['host'])
         ) {
             throw new \InvalidArgumentException(sprintf('Unsupported URL: %s', $url));
         }
@@ -195,6 +198,29 @@ class GoogleImage
         if ($keepParams && $paramString !== null) {
             $this->parseParams($paramString);
         }
+    }
+
+    /**
+     * @return array
+     * @ignore
+     */
+    public function __debugInfo(): array
+    {
+        return [
+            'url' => $this->getUrl(),
+        ];
+    }
+
+    /**
+     * Returns the URL of the image.
+     *
+     * This method is equivalent to {@see GoogleImage::getUrl()}.
+     *
+     * @return string image URL
+     */
+    public function __toString(): string
+    {
+        return $this->getUrl();
     }
 
     /**
@@ -314,9 +340,9 @@ class GoogleImage
     private function isValidSmartCrop(): bool
     {
         return $this->smartCrop && (
-            $this->size !== null ||
-                ($this->width !== null && $this->height !== null) ||
-                ($this->size === null && $this->width === null && $this->height === null)
+            $this->size !== null
+                || ($this->width !== null && $this->height !== null)
+                || ($this->size === null && $this->width === null && $this->height === null)
         );
     }
 
@@ -355,7 +381,7 @@ class GoogleImage
         if ($parts > 0) {
             $partLength = max(1, min($partLength, (int) ($hashLength / $parts)));
             $partsBuild = [];
-            for ($i = 0; $i < $parts; $i++) {
+            for ($i = 0; $i < $parts; ++$i) {
                 $partsBuild[] = substr($hash, $i * $partLength, $partLength);
             }
             $hash = implode('/', $partsBuild) . '/' . $hash;
@@ -695,14 +721,14 @@ class GoogleImage
     }
 
     /**
-     * @return HttpClient
+     * @return GuzzleClient
      */
-    private function getHttpClient(): HttpClient
+    private function getHttpClient(): GuzzleClient
     {
         static $httpClient;
 
         if ($httpClient === null) {
-            $httpClient = new HttpClient();
+            $httpClient = (new HttpClient())->getClient();
         }
 
         return $httpClient;
@@ -735,28 +761,5 @@ class GoogleImage
 
             throw $ge;
         }
-    }
-
-    /**
-     * @return array
-     * @ignore
-     */
-    public function __debugInfo()
-    {
-        return [
-            'url' => $this->getUrl(),
-        ];
-    }
-
-    /**
-     * Returns the URL of the image.
-     *
-     * This method is equivalent to {@see GoogleImage::getUrl()}.
-     *
-     * @return string image URL
-     */
-    public function __toString()
-    {
-        return $this->getUrl();
     }
 }

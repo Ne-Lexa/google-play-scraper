@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Exception;
@@ -30,7 +32,7 @@ class GooglePlayException extends \Exception
      * @param int        $code     the Exception code
      * @param \Throwable $previous the previous throwable used for the exception chaining
      */
-    public function __construct($message = '', $code = 0, ?\Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, ?\Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
 

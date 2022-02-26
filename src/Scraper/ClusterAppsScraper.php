@@ -2,35 +2,38 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
 
+use GuzzleHttp\Psr7\Query;
 use Nelexa\GPlay\GPlayApps;
+use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Scraper\Extractor\AppsExtractor;
 use Nelexa\GPlay\Util\ScraperUtil;
-use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * @internal
  */
-class ClusterAppsScraper implements ResponseHandlerInterface
+class ClusterAppsScraper implements ParseHandlerInterface
 {
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
+     * @param array             $options
      *
      * @return array
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response): array
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): array
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
         $scriptDataInfo = null;
@@ -46,7 +49,7 @@ class ClusterAppsScraper implements ResponseHandlerInterface
             return [[], null];
         }
 
-        $query = parse_query($request->getUri()->getQuery());
+        $query = Query::parse($request->getUri()->getQuery());
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
         $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
