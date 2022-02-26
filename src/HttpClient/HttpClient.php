@@ -71,8 +71,10 @@ class HttpClient
                     ) {
                         return $retries < 3 && (
                             $exception instanceof ConnectException
-                                || ($response !== null && ($response->getStatusCode() === 429 || $response->getStatusCode(
-                                        ) >= 500))
+                                || (
+                                    $response !== null
+                                    && \in_array($response->getStatusCode(), [408, 429, 500, 502, 503, 522], true)
+                                )
                         );
                     },
                     static function (int $retries) {
