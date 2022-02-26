@@ -2,41 +2,44 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
 
+use GuzzleHttp\Psr7\Query;
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
+use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Util\ScraperUtil;
-use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * @internal
  */
-class DeveloperInfoScraper implements ResponseHandlerInterface
+class DeveloperInfoScraper implements ParseHandlerInterface
 {
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
+     * @param array             $options
      *
-     * @throws GooglePlayException
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
-     * @return mixed
+     * @return \Nelexa\GPlay\Model\Developer
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response)
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): Developer
     {
-        $query = parse_query($request->getUri()->getQuery());
+        $query = Query::parse($request->getUri()->getQuery());
         $developerId = $query[GPlayApps::REQ_PARAM_ID];
         $url = (string) $request->getUri()->withQuery(http_build_query([GPlayApps::REQ_PARAM_ID => $developerId]));
 
@@ -44,12 +47,12 @@ class DeveloperInfoScraper implements ResponseHandlerInterface
 
         $name = $scriptDataInfo[0][0][0];
 
-        $cover = empty($scriptDataInfo[0][9][0][3][2]) ?
-            null :
-            new GoogleImage($scriptDataInfo[0][9][0][3][2]);
-        $icon = empty($scriptDataInfo[0][9][1][3][2]) ?
-            null :
-            new GoogleImage($scriptDataInfo[0][9][1][3][2]);
+        $cover = empty($scriptDataInfo[0][9][0][3][2])
+            ? null
+            : new GoogleImage($scriptDataInfo[0][9][0][3][2]);
+        $icon = empty($scriptDataInfo[0][9][1][3][2])
+            ? null
+            : new GoogleImage($scriptDataInfo[0][9][1][3][2]);
         $developerSite = $scriptDataInfo[0][9][2][0][5][2] ?? null;
         $description = $scriptDataInfo[0][10][1][1] ?? '';
 
@@ -79,7 +82,7 @@ class DeveloperInfoScraper implements ResponseHandlerInterface
 
         $scriptDataInfo = null;
 
-        foreach ($scriptData as $key => $scriptValue) {
+        foreach ($scriptData as $scriptValue) {
             if (isset($scriptValue[0][21])) {
                 $scriptDataInfo = $scriptValue; // ds:5
                 break;

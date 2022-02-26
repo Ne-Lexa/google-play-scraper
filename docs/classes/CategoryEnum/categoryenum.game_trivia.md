@@ -19,7 +19,7 @@ Returns the category id 'Trivia'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_TRIVIA"
   -value(): mixed: "GAME_TRIVIA"
-  -ordinal(): int: 50
+  -ordinal(): int: 51
   -__toString(): string: "GAME_TRIVIA"
 }
 ```

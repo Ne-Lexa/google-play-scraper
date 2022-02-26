@@ -2,29 +2,31 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
 
+use GuzzleHttp\Psr7\Query;
 use Nelexa\GPlay\Exception\GooglePlayException;
+use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Nelexa\GPlay\Util\ScraperUtil;
-use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * @internal
  */
-class AppSpecificReviewScraper implements ResponseHandlerInterface
+class AppSpecificReviewScraper implements ParseHandlerInterface
 {
     /** @var AppId */
     private $requestApp;
@@ -42,14 +44,15 @@ class AppSpecificReviewScraper implements ResponseHandlerInterface
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
+     * @param array             $options
      *
-     * @throws GooglePlayException
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
      * @return Review
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response): Review
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): Review
     {
-        $reviewId = parse_query($request->getUri()->getQuery())['reviewId'];
+        $reviewId = Query::parse($request->getUri()->getQuery())['reviewId'];
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
         foreach ($scriptData as $key => $value) {

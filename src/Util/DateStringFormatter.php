@@ -3,11 +3,13 @@
 /** @noinspection PhpUnusedPrivateMethodInspection */
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Util;
@@ -1206,7 +1208,7 @@ class DateStringFormatter
 
         if (isset($datePatternObj['convert'])) {
             $convertedText = forward_static_call($datePatternObj['convert'], $dateText);
-            if ($convertedText !== false){
+            if ($convertedText !== false) {
                 $dateText = (string) $convertedText;
             }
         }
@@ -1219,8 +1221,8 @@ class DateStringFormatter
             if (isset($datePatternObj['months'])) {
                 if (!isset($datePatternObj['months'][$month])) {
                     throw new \RuntimeException(
-                        'Error convert date. Locale ' . $locale . '. Date: ' . $dateText .
-                        '. Matches: ' . var_export($match, true)
+                        'Error convert date. Locale ' . $locale . '. Date: ' . $dateText
+                        . '. Matches: ' . var_export($match, true)
                     );
                 }
                 $month = $datePatternObj['months'][$month];
@@ -1316,12 +1318,12 @@ class DateStringFormatter
         $leap = true;
 
         if ($gregorianDayNo >= 36525) {
-            $gregorianDayNo--;
+            --$gregorianDayNo;
             $gregorianYear += 100 * floor($gregorianDayNo / 36524);
             $gregorianDayNo %= 36524;
 
             if ($gregorianDayNo >= 365) {
-                $gregorianDayNo++;
+                ++$gregorianDayNo;
             } else {
                 $leap = false;
             }
@@ -1331,11 +1333,11 @@ class DateStringFormatter
 
         if ($gregorianDayNo >= 366) {
             $leap = false;
-            $gregorianDayNo--;
+            --$gregorianDayNo;
             $gregorianYear += floor($gregorianDayNo / 365);
             $gregorianDayNo %= 365;
         }
-        for ($i = 0; $gregorianDayNo >= $gregorianDaysInMonth[$i] + ($i === 1 && $leap); $i++) {
+        for ($i = 0; $gregorianDayNo >= $gregorianDaysInMonth[$i] + ($i === 1 && $leap); ++$i) {
             $gregorianDayNo -= $gregorianDaysInMonth[$i] + ($i === 1 && $leap);
         }
         $gregorianMonth = $i + 1;

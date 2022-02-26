@@ -19,7 +19,7 @@ Returns the category id 'Family Action & Adventure'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "FAMILY_ACTION"
   -value(): mixed: "FAMILY_ACTION"
-  -ordinal(): int: 52
+  -ordinal(): int: 53
   -__toString(): string: "FAMILY_ACTION"
 }
 ```

@@ -3,11 +3,13 @@
 /** @noinspection MultiAssignmentUsageInspection */
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
@@ -15,6 +17,7 @@ namespace Nelexa\GPlay\Scraper;
 use GuzzleHttp\Psr7\Query;
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
+use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Model\AppId;
 use Nelexa\GPlay\Model\AppInfo;
 use Nelexa\GPlay\Model\Category;
@@ -27,25 +30,24 @@ use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Nelexa\GPlay\Util\DateStringFormatter;
 use Nelexa\GPlay\Util\LocaleHelper;
 use Nelexa\GPlay\Util\ScraperUtil;
-use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * @internal
  */
-class AppInfoScraper implements ResponseHandlerInterface
+class AppInfoScraper implements ParseHandlerInterface
 {
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
+     * @param array             $options
      *
-     * @throws GooglePlayException
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
      * @return AppInfo
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response): AppInfo
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): AppInfo
     {
         $query = Query::parse($request->getUri()->getQuery());
 
@@ -200,8 +202,8 @@ class AppInfoScraper implements ResponseHandlerInterface
         }
 
         if (
-            $scriptDataInfo === null ||
-            $scriptDataVersion === null
+            $scriptDataInfo === null
+            || $scriptDataVersion === null
         ) {
             throw (new GooglePlayException('Unable to get data for this application.'))->setUrl(
                 $request->getUri()->__toString()
@@ -219,12 +221,12 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     private function extractTranslatedFromLocale(array $scriptDataInfo, string $locale): ?string
     {
-        return isset($scriptDataInfo[0][19][1]) ?
-            LocaleHelper::findPreferredLanguage(
+        return isset($scriptDataInfo[0][19][1])
+            ? LocaleHelper::findPreferredLanguage(
                 $locale,
                 $scriptDataInfo[0][19][1]
-            ) :
-            null;
+            )
+            : null;
     }
 
     /**
@@ -248,9 +250,9 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     private function extractSummary(array $scriptDataInfo): ?string
     {
-        return empty($scriptDataInfo[0][10][1][1]) ?
-            null :
-            ScraperUtil::html2text($scriptDataInfo[0][10][1][1]);
+        return empty($scriptDataInfo[0][10][1][1])
+            ? null
+            : ScraperUtil::html2text($scriptDataInfo[0][10][1][1]);
     }
 
     /**
@@ -261,7 +263,7 @@ class AppInfoScraper implements ResponseHandlerInterface
     private function extractDeveloper(array $scriptDataInfo): Developer
     {
         $developerPage = GPlayApps::GOOGLE_PLAY_URL . $scriptDataInfo[0][12][5][5][4][2];
-        $developerId = parse_query(parse_url($developerPage, \PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
+        $developerId = Query::parse(parse_url($developerPage, \PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
         $developerName = $scriptDataInfo[0][12][5][1];
         $developerEmail = $scriptDataInfo[0][12][5][2][0] ?? null;
         $developerWebsite = $scriptDataInfo[0][12][5][3][5][2] ?? null;
@@ -319,9 +321,9 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     protected function extractPrice(array $scriptDataPrice): ?float
     {
-        return isset($scriptDataPrice[0][2][0][0][0][1][0][0]) ?
-            (float) ($scriptDataPrice[0][2][0][0][0][1][0][0] / 1000000) :
-            0.0;
+        return isset($scriptDataPrice[0][2][0][0][0][1][0][0])
+            ? (float) ($scriptDataPrice[0][2][0][0][0][1][0][0] / 1000000)
+            : 0.0;
     }
 
     /**
@@ -331,9 +333,9 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     protected function extractIcon(array $scriptDataInfo): ?GoogleImage
     {
-        return empty($scriptDataInfo[0][12][1][3][2]) ?
-            null :
-            new GoogleImage($scriptDataInfo[0][12][1][3][2]);
+        return empty($scriptDataInfo[0][12][1][3][2])
+            ? null
+            : new GoogleImage($scriptDataInfo[0][12][1][3][2]);
     }
 
     /**
@@ -343,9 +345,9 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     protected function extractCover(array $scriptDataInfo): ?GoogleImage
     {
-        return empty($scriptDataInfo[0][12][2][3][2]) ?
-            null :
-            new GoogleImage($scriptDataInfo[0][12][2][3][2]);
+        return empty($scriptDataInfo[0][12][2][3][2])
+            ? null
+            : new GoogleImage($scriptDataInfo[0][12][2][3][2]);
     }
 
     /**
@@ -371,9 +373,9 @@ class AppInfoScraper implements ResponseHandlerInterface
     private function extractVideo(array $scriptDataInfo): ?Video
     {
         if (
-            isset($scriptDataInfo[0][12][3][0][3][2]) &&
-            $scriptDataInfo[0][12][3][0][3][2] !== null &&
-            $scriptDataInfo[0][12][3][1][3][2] !== null
+            isset($scriptDataInfo[0][12][3][0][3][2])
+            && $scriptDataInfo[0][12][3][0][3][2] !== null
+            && $scriptDataInfo[0][12][3][1][3][2] !== null
         ) {
             $videoThumb = (string) $scriptDataInfo[0][12][3][1][3][2];
             $videoUrl = (string) $scriptDataInfo[0][12][3][0][3][2];
@@ -420,9 +422,9 @@ class AppInfoScraper implements ResponseHandlerInterface
      */
     protected function extractRecentChanges($scriptDataInfo): ?string
     {
-        return empty($scriptDataInfo[0][12][6][1]) ?
-            null :
-            ScraperUtil::html2text($scriptDataInfo[0][12][6][1]);
+        return empty($scriptDataInfo[0][12][6][1])
+            ? null
+            : ScraperUtil::html2text($scriptDataInfo[0][12][6][1]);
     }
 
     /**

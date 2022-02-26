@@ -23,7 +23,7 @@ An array of constants of this type enum in the order they are declared.
 
 ## Sample object content
 ```php
-array:58 [
+array:59 [
     0 => class Nelexa\GPlay\Enum\CategoryEnum {
       -name(): string: "GAME"
       -value(): mixed: "GAME"

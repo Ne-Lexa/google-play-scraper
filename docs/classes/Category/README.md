@@ -17,12 +17,12 @@ Nelexa\GPlay\Model\Category implements JsonSerializable {
     public isFamilyCategory ( void ) : bool
     public isApplicationCategory ( void ) : bool
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\Category::__construct](category.construct.md) - Creates an object with application category information.
+* [Nelexa\GPlay\Model\Category::__construct](category.__construct.md) - Creates an object with application category information.
 * [Nelexa\GPlay\Model\Category::getId](category.getid.md) - Returns category id.
 * [Nelexa\GPlay\Model\Category::getName](category.getname.md) - Returns category name.
 * [Nelexa\GPlay\Model\Category::isGamesCategory](category.isgamescategory.md) - Checks if a category is a category with games.
@@ -39,13 +39,13 @@ Nelexa\GPlay\Model\Category implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Category {
-  -getId(): string: "FAMILY_PRETEND"
-  -getName(): string: "Pretend Play"
-  -isGamesCategory(): bool: false
-  -isFamilyCategory(): bool: true
+  -getId(): string: "GAME_CARD"
+  -getName(): string: "Card"
+  -isGamesCategory(): bool: true
+  -isFamilyCategory(): bool: false
   -isApplicationCategory(): bool: false
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -56,8 +56,8 @@ echo json_encode($category, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_U
 Output:
 ```json
 {
-    "id": "FAMILY_PRETEND",
-    "name": "Pretend Play"
+    "id": "GAME_CARD",
+    "name": "Card"
 }
 ```
 

@@ -19,7 +19,7 @@ Returns the category id 'Family Music and Video'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "FAMILY_MUSICVIDEO"
   -value(): mixed: "FAMILY_MUSICVIDEO"
-  -ordinal(): int: 56
+  -ordinal(): int: 57
   -__toString(): string: "FAMILY_MUSICVIDEO"
 }
 ```

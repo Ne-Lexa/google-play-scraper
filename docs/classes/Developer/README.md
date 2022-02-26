@@ -20,7 +20,7 @@ Nelexa\GPlay\Model\Developer implements JsonSerializable {
     public getEmail ( void ) : string | null
     public getAddress ( void ) : string | null
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
@@ -54,21 +54,21 @@ class Nelexa\GPlay\Model\Developer {
   -getDescription(): ?string: "From the moment you tap START on an app, it&#39;s our mission to transport you to a world of incredible fun through the medium of games."
   -getWebsite(): ?string: "http://www.ofcr.co.jp/"
   -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s"
   }
   -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY"
   }
   -getEmail(): ?string: null
   -getAddress(): ?string: null
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -84,8 +84,8 @@ Output:
     "name": "Office Create Corp.",
     "description": "From the moment you tap START on an app, it&#39;s our mission to transport you to a world of incredible fun through the medium of games.",
     "website": "http://www.ofcr.co.jp/",
-    "icon": "https://lh3.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s",
-    "cover": "https://lh3.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY",
+    "icon": "https://play-lh.googleusercontent.com/RUQ4B-dsqXPU_d7bmi7eI_liVPv8Ui9G0OALgX7Cgo9cuB33FaQF18p_Czb9JCzAGz1s",
+    "cover": "https://play-lh.googleusercontent.com/FhKN9GIY1SVMTNhdFwX6iaPay2WNDF88hunE6r_cxK0hv1IiCzUPB4iyzGzIviN-DiY",
     "email": null,
     "address": null
 }

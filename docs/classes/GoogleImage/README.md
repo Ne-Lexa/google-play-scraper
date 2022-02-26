@@ -73,6 +73,7 @@ Nelexa\GPlay\Model\GoogleImage {
 
     /* Methods */
     public __construct ( string $url [, bool $keepParams = true ] ) 
+    public __toString ( void ) : string
     public getUrl ( void ) : string
     public getOriginalSizeUrl ( void ) : string
     public getHashUrl ( [ string $hashAlgorithm = "md5" ] [, int $parts = 0 ] [, int $partLength = 2 ] ) : string
@@ -90,7 +91,6 @@ Nelexa\GPlay\Model\GoogleImage {
     public saveAs ( string $destPath ) : Nelexa\GPlay\Model\ImageInfo
     public static getImageExtension ( string $mimeType ) : string | null
     public getBinaryImageContent ( void ) : string
-    public __toString ( void ) : string
 }
 ```
 
@@ -122,7 +122,7 @@ foreach ($iconSize as $key => $size) {
 ```php
 array:6 [
     "mdpi" => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/iOi6YJxQwMenT5UQWGPWTrFMQFm68IC4uKlFtARveZzVD5lTZ7fC47_rnnF7Tk48DpY=s48"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/iOi6YJxQwMenT5UQWGPWTrFMQFm68IC4uKlFtARveZzVD5lTZ7fC47_rnnF7Tk48DpY=s48"
       -getFilename(): string: "icon/com.rovio.angrybirds/mdpi.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
@@ -130,10 +130,10 @@ array:6 [
       -getHeight(): int: 48
       -getFilesize(): int: 4274
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     "hdpi" => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/iOi6YJxQwMenT5UQWGPWTrFMQFm68IC4uKlFtARveZzVD5lTZ7fC47_rnnF7Tk48DpY=s72"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/iOi6YJxQwMenT5UQWGPWTrFMQFm68IC4uKlFtARveZzVD5lTZ7fC47_rnnF7Tk48DpY=s72"
       -getFilename(): string: "icon/com.rovio.angrybirds/hdpi.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
@@ -141,7 +141,7 @@ array:6 [
       -getHeight(): int: 72
       -getFilesize(): int: 7463
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -155,21 +155,15 @@ $app = $gplay->getAppInfo('com.rovio.angrybirds');
 $screenshots = $app->getScreenshots();
 
 // set the width to 700 for all screenshots
-array_walk(
-    $screenshots,
-    static function (\Nelexa\GPlay\Model\GoogleImage $image): void {
-        $image->setWidth(700);
-    }
-);
+array_walk($screenshots, static function (Nelexa\GPlay\Model\GoogleImage $image): void {
+    $image->setWidth(700);
+});
 
 $results = $gplay
     ->setConcurrency(10)
-    ->saveGoogleImages(
-        $screenshots,
-        static function (\Nelexa\GPlay\Model\GoogleImage $image): string {
-            return 'screenshots/' . $image->getHashUrl('md5', $parts = 1, $partsLength = 3) . '.{ext}';
-        }
-    )
+    ->saveGoogleImages($screenshots, static function (Nelexa\GPlay\Model\GoogleImage $image): string {
+        return 'screenshots/' . $image->getHashUrl('md5', $parts = 1, $partsLength = 3);
+    })
 ;
 ```
 <details>
@@ -178,26 +172,26 @@ $results = $gplay
 ```php
 array:15 [
     0 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/ykwlyF-Lvnla20Omus2o6hnI2E3V4f_dU_oqElqUZmAxRdIZxQS4iB0xPZ4Khy9TZuA=w700"
-      -getFilename(): string: "screenshots/697/697778ef9aef9c243c0a5505f7c453e3.png"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/L615QU2G2qxv68di7WqB4V40mDsOgko4iKmz-NB6SzwLejM8x4i2CbAqgkIxBqZ3A9M=w700"
+      -getFilename(): string: "screenshots/37e/37eebc70b829870d51568c92ce522177"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 700
-      -getHeight(): int: 934
-      -getFilesize(): int: 493845
+      -getHeight(): int: 1245
+      -getFilesize(): int: 610385
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/LTPRCiZKBqBGfgxVCOPo5A6qgDdAjebkLU6tAkvirmBjHdlkY5SjOiBMUaIp7o8_K5k=w700"
-      -getFilename(): string: "screenshots/e82/e8287583381d282d9688082aecf09f14.png"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/d6CY2BSvBXFLK8J3WqJEdDr53_OZ43Aijr43CjG1QKUfHXt4E_zDNBZWoMqkxONzOQ=w700"
+      -getFilename(): string: "screenshots/6ea/6eab90ada1ab05ef19949da287f374ca"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 700
-      -getHeight(): int: 934
-      -getFilesize(): int: 635907
+      -getHeight(): int: 1245
+      -getFilesize(): int: 815830
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -206,7 +200,8 @@ array:15 [
 </details>
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\GoogleImage::__construct](googleimage.construct.md) - Creates a GoogleImage object from the URL of the googleusercontent.com.
+* [Nelexa\GPlay\Model\GoogleImage::__construct](googleimage.__construct.md) - Creates a GoogleImage object from the URL of the googleusercontent.com.
+* [Nelexa\GPlay\Model\GoogleImage::__toString](googleimage.__tostring.md) - Returns the URL of the image.
 * [Nelexa\GPlay\Model\GoogleImage::getUrl](googleimage.geturl.md) - Returns the URL of the image with all the parameters set.
 * [Nelexa\GPlay\Model\GoogleImage::getOriginalSizeUrl](googleimage.getoriginalsizeurl.md) - Returns a URL with the original image size.
 * [Nelexa\GPlay\Model\GoogleImage::getHashUrl](googleimage.gethashurl.md) - Returns a hash value for this object.
@@ -224,7 +219,6 @@ array:15 [
 * [Nelexa\GPlay\Model\GoogleImage::saveAs](googleimage.saveas.md) - Save image to disk.
 * [Nelexa\GPlay\Model\GoogleImage::getImageExtension](googleimage.getimageextension.md)
 * [Nelexa\GPlay\Model\GoogleImage::getBinaryImageContent](googleimage.getbinaryimagecontent.md) - Returns binary image contents.
-* [Nelexa\GPlay\Model\GoogleImage::__toString](googleimage.tostring.md) - Returns the URL of the image.
 
 
 ## See Also

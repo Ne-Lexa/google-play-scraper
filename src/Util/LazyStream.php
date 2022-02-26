@@ -2,12 +2,20 @@
 
 declare(strict_types=1);
 
+/*
+ * Copyright (c) Ne-Lexa
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
+ */
+
 namespace Nelexa\GPlay\Util;
 
 use GuzzleHttp\Psr7\StreamDecoratorTrait;
+use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\StreamInterface;
-use function GuzzleHttp\Psr7\stream_for;
-use function GuzzleHttp\Psr7\try_fopen;
 
 /**
  * Lazily reads or writes to a file that is opened only after an IO operation
@@ -22,7 +30,7 @@ final class LazyStream implements StreamInterface
     /** @var string File to open */
     private $filename;
 
-    /** @var string $mode */
+    /** @var string */
     private $mode;
 
     /**
@@ -65,7 +73,7 @@ final class LazyStream implements StreamInterface
      *
      * @return StreamInterface
      */
-    protected function createStream()
+    protected function createStream(): StreamInterface
     {
         $dir = \dirname($this->filename);
 
@@ -73,6 +81,6 @@ final class LazyStream implements StreamInterface
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
 
-        return stream_for(try_fopen($this->filename, $this->mode));
+        return Utils::streamFor(Utils::tryFopen($this->filename, $this->mode));
     }
 }

@@ -5,7 +5,7 @@
 
 ## Description
 ```php
-Nelexa\GPlay\Model\HistogramRating::jsonSerialize ( void ) : mixed
+Nelexa\GPlay\Model\HistogramRating::jsonSerialize ( void ) : array
 ```
 Serializes the object to a value that can be serialized natively by `json_encode()`.
 

@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
@@ -82,22 +84,22 @@ class Developer implements \JsonSerializable
 
         if (empty($this->id)) {
             throw new \InvalidArgumentException(
-                'Developer id cannot be null or empty. ' .
-                'Solution: $developerBuilder->setId(...);'
+                'Developer id cannot be null or empty. '
+                . 'Solution: $developerBuilder->setId(...);'
             );
         }
 
         if (empty($this->url)) {
             throw new \InvalidArgumentException(
-                'Developer url cannot be null or empty. ' .
-                'Solution: $developerBuilder->setUrl(...);'
+                'Developer url cannot be null or empty. '
+                . 'Solution: $developerBuilder->setUrl(...);'
             );
         }
 
         if (empty($this->name)) {
             throw new \InvalidArgumentException(
-                'Developer name cannot be null or empty. ' .
-                'Solution: $developerBuilder->setName(...);'
+                'Developer name cannot be null or empty. '
+                . 'Solution: $developerBuilder->setName(...);'
             );
         }
     }
@@ -236,15 +238,15 @@ class Developer implements \JsonSerializable
             return false;
         }
 
-        if ($this->cover !== null && $otherDeveloper->cover !== null) {
-            if ($this->cover->getOriginalSizeUrl() !== $otherDeveloper->cover->getOriginalSizeUrl()) {
-                return false;
-            }
-        } elseif ($this->cover !== $otherDeveloper->cover) {
+        if (
+            $this->cover !== null
+            && $otherDeveloper->cover !== null
+            && $this->cover->getOriginalSizeUrl() !== $otherDeveloper->cover->getOriginalSizeUrl()
+        ) {
             return false;
         }
 
-        return true;
+        return $this->cover === $otherDeveloper->cover;
     }
 
     /**

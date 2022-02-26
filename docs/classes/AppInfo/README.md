@@ -22,13 +22,13 @@ final Nelexa\GPlay\Model\AppInfo extends Nelexa\GPlay\Model\App implements JsonS
     public getScore ( void ) : float
     public getPriceText ( void ) : string | null
     public isFree ( void ) : bool
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
     public getDescription ( void ) : string
     public isAutoTranslatedDescription ( void ) : bool
     public getTranslatedFromLocale ( void ) : string | null
     public getCover ( void ) : Nelexa\GPlay\Model\GoogleImage | null
     public getScreenshots ( void ) : Nelexa\GPlay\Model\GoogleImage[]
-    public getCategory ( void ) : Nelexa\GPlay\Model\Category
+    public getCategory ( void ) : Nelexa\GPlay\Model\Category | null
     public getCategoryFamily ( void ) : Nelexa\GPlay\Model\Category | null
     public getVideo ( void ) : Nelexa\GPlay\Model\Video | null
     public getRecentChanges ( void ) : string | null
@@ -127,150 +127,142 @@ class Nelexa\GPlay\Model\AppInfo {
     -getEmail(): ?string: "mama_info02@ofcr.co.jp"
     -getAddress(): ?string: "神奈川県横浜市青葉区青葉台２－１６－１０　第2鈴木ビル３F"
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw"
   }
-  -getScore(): float: 4.3630123
-  -getPriceText(): ?string: null
-  -isFree(): bool: true
-  -jsonSerialize(): mixed: …
+  -getScore(): float: 4.090022
+  -getPriceText(): ?string: ""
+  -isFree(): bool: false
+  -jsonSerialize(): array: …
   -getDescription(): string: """
-    Make scrumptious food and serve it!\n
-    \n
     Chop, bake, stew...\n
     Cook tasty meals with easy touch controls!\n
     Try out this unique cooking game.\n
-    The yummy food y…
+    The yummy food you'll create will definitely make you…
     """
   -isAutoTranslatedDescription(): bool: false
   -getTranslatedFromLocale(): ?string: null
   -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/gZToThOqs6KXpZToJp4pXnvwjJaPHinm9kP5FnThULrMe9ujyfhkKqq1nLka88YjWeOo"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/gZToThOqs6KXpZToJp4pXnvwjJaPHinm9kP5FnThULrMe9ujyfhkKqq1nLka88YjWeOo=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/gZToThOqs6KXpZToJp4pXnvwjJaPHinm9kP5FnThULrMe9ujyfhkKqq1nLka88YjWeOo"
   }
-  -getScreenshots(): array:24 [
+  -getScreenshots(): array: array:24 [
     0 => class Nelexa\GPlay\Model\GoogleImage {
-      -getUrl(): string: "https://lh3.googleusercontent.com/a1lIZGG93kyqjyK5Cy6UvDXpY1wH-Cj8S4f60hagzrjdt90XmhkWWdupVkhEzHHcPiQ"
-      -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a1lIZGG93kyqjyK5Cy6UvDXpY1wH-Cj8S4f60hagzrjdt90XmhkWWdupVkhEzHHcPiQ=s0"
+      -__toString(): string: "https://play-lh.googleusercontent.com/WRRPEfsMwic3iEOEIHeJ52mUom3eCAIgnayNzm4acd42cAVF9hnsbK0dernFGK_SeGY"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/WRRPEfsMwic3iEOEIHeJ52mUom3eCAIgnayNzm4acd42cAVF9hnsbK0dernFGK_SeGY"
+      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/WRRPEfsMwic3iEOEIHeJ52mUom3eCAIgnayNzm4acd42cAVF9hnsbK0dernFGK_SeGY=s0"
       -getBinaryImageContent(): string: …
-      -__toString(): string: "https://lh3.googleusercontent.com/a1lIZGG93kyqjyK5Cy6UvDXpY1wH-Cj8S4f60hagzrjdt90XmhkWWdupVkhEzHHcPiQ"
     }
     1 => class Nelexa\GPlay\Model\GoogleImage {
-      -getUrl(): string: "https://lh3.googleusercontent.com/bXZn07ZqP8SWBcLpf2Ic3p-VDLRZuMpxjUJwfOzv2pm-MUlxELv8u6Vo1L_vHoE9Wz3U"
-      -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/bXZn07ZqP8SWBcLpf2Ic3p-VDLRZuMpxjUJwfOzv2pm-MUlxELv8u6Vo1L_vHoE9Wz3U=s0"
+      -__toString(): string: "https://play-lh.googleusercontent.com/EjgHrAVu2vxG7b_9ykewmf_LFGxdtBenG_ky8b0tERuhxvsLVuVkztXLeFDnp5Xe1g"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/EjgHrAVu2vxG7b_9ykewmf_LFGxdtBenG_ky8b0tERuhxvsLVuVkztXLeFDnp5Xe1g"
+      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/EjgHrAVu2vxG7b_9ykewmf_LFGxdtBenG_ky8b0tERuhxvsLVuVkztXLeFDnp5Xe1g=s0"
       -getBinaryImageContent(): string: …
-      -__toString(): string: "https://lh3.googleusercontent.com/bXZn07ZqP8SWBcLpf2Ic3p-VDLRZuMpxjUJwfOzv2pm-MUlxELv8u6Vo1L_vHoE9Wz3U"
     }
     …
   ]
-  -getCategory(): Nelexa\GPlay\Model\Category: {
+  -getCategory(): ?Nelexa\GPlay\Model\Category: {
     -getId(): string: "GAME_EDUCATIONAL"
     -getName(): string: "Educational"
     -isGamesCategory(): bool: true
     -isFamilyCategory(): bool: false
     -isApplicationCategory(): bool: false
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
-  -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: {
-    -getId(): string: "FAMILY_PRETEND"
-    -getName(): string: "Pretend Play"
-    -isGamesCategory(): bool: false
-    -isFamilyCategory(): bool: true
-    -isApplicationCategory(): bool: false
-    -asArray(): array: …
-    -jsonSerialize(): mixed: …
-  }
+  -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
   -getVideo(): ?Nelexa\GPlay\Model\Video: {
-    -getImageUrl(): string: "https://i.ytimg.com/vi/CIyPDJYtVhw/hqdefault.jpg"
+    -getImageUrl(): string: "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw"
     -getVideoUrl(): string: "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
     -getYoutubeId(): ?string: "CIyPDJYtVhw"
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -getRecentChanges(): ?string: """
-    New! World Dishes 5!\n
-    Round 5: Middle Eastern Dishes! Dine on global cuisines!\n
+    version 1.80.0\n
+    Limited time recipe this time!\n
+    Beefsteak\n
+    Play limited until the next update!\n
     Fixed certain bugs.\n
     Made balance adjustments.
     """
-  -isEditorsChoice(): bool: true
-  -getInstalls(): int: 52048343
+  -isEditorsChoice(): bool: false
+  -getInstalls(): int: 68611221
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 476544
-    -getFourStars(): int: 69144
-    -getThreeStars(): int: 39314
-    -getTwoStars(): int: 20224
-    -getOneStar(): int: 52653
+    -getFiveStars(): int: 499330
+    -getFourStars(): int: 95118
+    -getThreeStars(): int: 69838
+    -getTwoStars(): int: 41725
+    -getOneStar(): int: 91400
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -getPrice(): float: 0.0
   -getCurrency(): string: "USD"
   -isContainsIAP(): bool: true
   -getOffersIAPCost(): ?string: "$0.99 - $15.99 per item"
   -isContainsAds(): bool: true
-  -getSize(): ?string: "61M"
-  -getAppVersion(): ?string: "1.56.0"
-  -getAndroidVersion(): ?string: "4.1 and up"
-  -getMinAndroidVersion(): ?string: "4.1"
+  -getSize(): ?string: "70M"
+  -getAppVersion(): ?string: "1.80.0"
+  -getAndroidVersion(): ?string: "4.4 and up"
+  -getMinAndroidVersion(): ?string: "4.4"
   -getContentRating(): ?string: "Everyone"
   -getPrivacyPoliceUrl(): ?string: "https://app-ofcr.com/OFFICE_CREATE/Website/APP_CookingMama/en/privacypolicy.html"
   -getReleased(): ?DateTimeInterface: @1431561600 {
     date: 2015-05-14T00:00:00+00:00
   }
-  -getUpdated(): ?DateTimeInterface: @1580446355 {
-    date: 2020-01-31T04:52:35+00:00
+  -getUpdated(): ?DateTimeInterface: @1645689783 {
+    date: 2022-02-24T08:03:03+00:00
   }
-  -getNumberVoters(): int: 657882
-  -getNumberReviews(): int: 244629
-  -getReviews(): array:4 [
+  -getNumberVoters(): int: 797466
+  -getNumberReviews(): int: 14874
+  -getReviews(): array: array:4 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWKglrWxdEHoYJg"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWK…"
-      -getUserName(): string: "Marijana Stojanović"
-      -getText(): string: "I absolutely loved the cooking parts of the game, but it's so saddening that you have to pay for like... 70% for the recipes. So I just played the fre…"
+      -getId(): string: "gp:AOqpTOEdhXvIPIx0YGAB8Ad7CKDbId-FqUhPHkOOjmxu4oY8r-WzHzutMb869I5WuvGwZ1SqU18iB3a0ys-POA"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOEdhXvIPIx0YGAB8Ad7CKDbId-FqUhPHkOOjmxu4oY8r-WzHzutMb869I5WuvGwZ1SqU1…"
+      -getUserName(): string: "Sulien J"
+      -getText(): string: "Disappointed because I can't transfer my data to my new device. I transferred once before, but now the option doesn't even exist in the menu in my gam…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCYtS36wyZc-202TCYoJQDgQxlSTOXBO-b0y6KI=s64"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCYtS36wyZc-202TCYoJQDgQxlSTOXBO-b0y6KI=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14Ghh8FH7kuzBz119Dn4MEEFJgzoV_C0sYl8PMtwoBQ=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14Ghh8FH7kuzBz119Dn4MEEFJgzoV_C0sYl8PMtwoBQ=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14Ghh8FH7kuzBz119Dn4MEEFJgzoV_C0sYl8PMtwoBQ=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCYtS36wyZc-202TCYoJQDgQxlSTOXBO-b0y6KI=s64"
       }
-      -getDate(): ?DateTimeInterface: @1580891781 {
-        date: 2020-02-05T08:36:21+00:00
+      -getDate(): ?DateTimeInterface: @1645676281 {
+        date: 2022-02-24T04:18:01+00:00
       }
-      -getScore(): int: 3
-      -getCountLikes(): int: 65
+      -getScore(): int: 1
+      -getCountLikes(): int: 0
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOG0m_5SlxX20BniMe8ojx7IKMVJkrZoflVFp_YBzgyTqXExqTnZXGf9GWwOyR_RKlsvRtfM9g4aPFETRg"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOG0m_5SlxX20BniMe8ojx7IKMVJkrZoflVFp_YBzgyTqXExqTnZXGf9GWwOyR_RKlsvRt…"
-      -getUserName(): string: "Angela Gallagher"
-      -getText(): string: "Level 10 is where it ends??!! That's it. In each area. Not much fun after that. And it's a shame that only those that have the money to spend in the g…"
+      -getId(): string: "gp:AOqpTOGqP2Ugs7sT10aGT5Mj_Es_zaOyCyxVfdfgBJG3at1LnOehNatcFI1TY_sSO0BwcyPy_Ly1oGoNNWN6Tg"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOGqP2Ugs7sT10aGT5Mj_Es_zaOyCyxVfdfgBJG3at1LnOehNatcFI1TY_sSO0BwcyPy_L…"
+      -getUserName(): string: "Emily Shadoan"
+      -getText(): string: "I've loved cooking mama since I was a kid so I have alot of fun with this. I don't understand why so many people are complaining about the UI being "o…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s64"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFIwFc36-6Q_kN5M_1EfdItD11W7whip2RFgd70A=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFIwFc36-6Q_kN5M_1EfdItD11W7whip2RFgd70A=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFIwFc36-6Q_kN5M_1EfdItD11W7whip2RFgd70A=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s64"
       }
-      -getDate(): ?DateTimeInterface: @1580680688 {
-        date: 2020-02-02T21:58:08+00:00
+      -getDate(): ?DateTimeInterface: @1643617761 {
+        date: 2022-01-31T08:29:21+00:00
       }
-      -getScore(): int: 3
-      -getCountLikes(): int: 36
+      -getScore(): int: 5
+      -getCountLikes(): int: 136
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -302,124 +294,121 @@ Output:
         "email": "mama_info02@ofcr.co.jp",
         "address": "神奈川県横浜市青葉区青葉台２－１６－１０　第2鈴木ビル３F"
     },
-    "icon": "https://lh3.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw",
-    "score": 4.3630123,
-    "priceText": null,
-    "description": "Make scrumptious food and serve it!\n\nChop, bake, stew...\nCook tasty meals with easy touch controls!\nTry out this unique cooking game.\nThe yummy food you'll create will definitely make you hungry!\n\n▼Let's Cook! \nCook food by playing fun mini games. More than 30 kinds of recipes are waiting for you. Do your best, Special Chef!\n\n▼Happy Village! \nServe your cooking to everyone at your restaurant. Create a big and wonderful restaurant that's all your own.\nHarvest lots of things by going Fishing, growing plants in the Fields, and raising animals in your Ranch.\nGather up lots to exchange for Happy Foods!\n\n▼Game Plaza!\nPlay non-cooking games like \"Help out,\" \"Play Shopkeeper,\" and \"Exercise your brain.\" More than 30 kinds of mini games are waiting for you. Aim to get high scores!\n\n▼Challenge Ranking!\nCompete in weekly events for the best scores! Join the global rankings!\n\n▼Other Ways to Have Fun\n-Decorate the kitchen with various items.\n-Make surprise dishes by combining 2 recipes.\n-Watch realistic cooking videos for supported recipes.\n-Watch an animated video of Mama's fun daily life.\n\n[Game Features]\nWith its intuitive controls, both children and adults can enjoy the game. Also, even if you make mistakes there are no game overs, so everyone can complete dishes. Furthermore, children who play may develop an interest in cooking.\n\n[Recommended Setup]\nAndroid OS 4.1 or later.\n**Game may not be playable on certain devices even if the above conditions are met.\n\n**By downloading this game, you are accepting its User Agreement.\nhttp://www.ofcr.co.jp/APP_CookingMama/en/privacypolicy.html\n\n[Supported Languages]\nEnglish,French,German,Italian,Spanish,Dutch,Russian,Portuguese,Polish,Czech,Turkish,Japanese,Korean,Simplified Chinese,Traditional Chinese,Indonesian,Filipino,Malay,Thai,Vietnamese,Hindi,Spanish-mexico,Portugues brasileiro,Arabic,Persian,Swedish,Norwegian,Danish,Finnish",
+    "icon": "https://play-lh.googleusercontent.com/51LDykvVt4B1EOfov5NmwGlHLbJ7kMd56kT7hcJb_-fUmgolJi8yJ4_mpaV8cijxSYw",
+    "score": 4.090022,
+    "priceText": "",
+    "description": "Chop, bake, stew...\nCook tasty meals with easy touch controls!\nTry out this unique cooking game.\nThe yummy food you'll create will definitely make you hungry!\n\n▼Let's Cook! \nCook food by playing fun mini games. More than 30 kinds of recipes are waiting for you. Do your best, Special Chef!\n\n▼Happy Village! \nServe your cooking to everyone at your restaurant. Create a big and wonderful restaurant that's all your own.\nHarvest lots of things by going Fishing, growing plants in the Fields, and raising animals in your Ranch.\nGather up lots to exchange for Happy Foods!\n\n▼Game Plaza!\nPlay non-cooking games like \"Help out,\" \"Play Shopkeeper,\" and \"Exercise your brain.\" More than 30 kinds of mini games are waiting for you. Aim to get high scores!\n\n▼Challenge Ranking!\nCompete in weekly events for the best scores! Join the global rankings!\n\n▼Other Ways to Have Fun\n-Decorate the kitchen with various items.\n-Make surprise dishes by combining 2 recipes.\n-Watch realistic cooking videos for supported recipes.\n-Watch an animated video of Mama's fun daily life.\n\n[Game Features]\nWith its intuitive controls, both children and adults can enjoy the game. Also, even if you make mistakes there are no game overs, so everyone can complete dishes. Furthermore, children who play may develop an interest in cooking.\n\n[Recommended Setup]\nAndroid OS 4.1 or later.\n**Game may not be playable on certain devices even if the above conditions are met.\n\n**By downloading this game, you are accepting its User Agreement.\nhttp://www.ofcr.co.jp/APP_CookingMama/en/privacypolicy.html\n\n[Supported Languages]\nEnglish,French,German,Italian,Spanish,Dutch,Russian,Portuguese,Polish,Czech,Turkish,Japanese,Korean,Simplified Chinese,Traditional Chinese,Indonesian,Filipino,Malay,Thai,Vietnamese,Hindi,Spanish-mexico,Portugues brasileiro,Arabic,Persian,Swedish,Norwegian,Danish,Finnish",
     "translatedFromLocale": null,
-    "cover": "https://lh3.googleusercontent.com/gZToThOqs6KXpZToJp4pXnvwjJaPHinm9kP5FnThULrMe9ujyfhkKqq1nLka88YjWeOo",
+    "cover": "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw",
     "screenshots": [
-        "https://lh3.googleusercontent.com/a1lIZGG93kyqjyK5Cy6UvDXpY1wH-Cj8S4f60hagzrjdt90XmhkWWdupVkhEzHHcPiQ",
-        "https://lh3.googleusercontent.com/bXZn07ZqP8SWBcLpf2Ic3p-VDLRZuMpxjUJwfOzv2pm-MUlxELv8u6Vo1L_vHoE9Wz3U",
-        "https://lh3.googleusercontent.com/Yd3wWMiCV65aHYpcM4sV3730AygLSSK7wWaqhv3LNQPK_VeXmfSU3rL8QAus4aLMJA",
-        "https://lh3.googleusercontent.com/QbwbEnXNhjk6RJw2jJr3xZKtdsZuJqjm1B-ICvMrzBW5HtEZpkZzZB0KMOT-7tAAoWU",
-        "https://lh3.googleusercontent.com/lqmtZqtlXcModVqN_SYNpA70UAmZGFJ-aIOY2bQ8wdNvwF-hOYyKuUzFT8c6l5ymBjQ",
-        "https://lh3.googleusercontent.com/QEizHh4yeFEpjgPy_9aAWe5GQkWT6zYIT6ZJpBJVDNwJJYsU8qVcl00obatWQCC5GA",
-        "https://lh3.googleusercontent.com/Jg60GYSVJkt32PsiJkcs-JfL2iENCNa_dixVcdUZnu-kpnPLozPPIQW5-BcuAbudmYix",
-        "https://lh3.googleusercontent.com/t9E9fjtpfPBKalDEeL-cE79AZ2iV2JpGrbPOXExlHEBmr4Ot_Y47tnw1REnsxf_W2ENE",
-        "https://lh3.googleusercontent.com/z-Dvp4Fd5kYhBp3-FM01asMyV1v7SVxwnRe-eEkNcptcWoMQOplgIhocy1ObiEzySH8",
-        "https://lh3.googleusercontent.com/5ngMd1MPFuUZf_FDKKiwKpixYv5MK5mTHGIshO1StYs2DWRL2YYkxku4aGv2e0NQal4",
-        "https://lh3.googleusercontent.com/C_NeVkHgzEtosm8TBJU2xh3EmLWlAOekyxSzGiAGc9pEfe9GFjjEmMjY2h2318HrLw",
-        "https://lh3.googleusercontent.com/-EVwxCrZ_rcPBU2HVL62qFxlNPsrnYwXYGCEa5jHQpAOPabaH42KVRz9tz2id_CrF4s",
-        "https://lh3.googleusercontent.com/Liv-WQ0YRe7e03i7BxOCamwnBe5H8b4kqlmECV8B0tOQJUd7nqo-OMNM66lpf6IR0rBP",
-        "https://lh3.googleusercontent.com/HpFlMncOpozMsYzIqFlLoUixvi6Cj1Qcqidj1BTIx7y98fkOT-gjr3a15BfuFgTbyWs",
-        "https://lh3.googleusercontent.com/NIjUBoz6PfztMUKcaTe1UBXXS-bqod6YOJLJmEwobxah_wIyViUkCgxCHPvCfF8HrEo",
-        "https://lh3.googleusercontent.com/tysrudUXDRUzelYzKjDJBafxg_MHJIQm1XnjoZgdJARl0DUDmep8t8IBeJ-S__rT6n4",
-        "https://lh3.googleusercontent.com/jy20Hv87ggGCyh1qs-sKEwsPkEyE8iSfT5XMQ49OTnQbkNQgq7qy9cKNMNOUeJ_Rpqo",
-        "https://lh3.googleusercontent.com/hr8MZS9g4BVXvL55PGb7LjfwK8VfpfyXLjBzWUozYzveehpdmI9zSTE2EOFq8RVuLug",
-        "https://lh3.googleusercontent.com/XSmEfnQWURFNMKRnXAHRGPTaMsU9Z9GsTYkBwN72lb_0wRMKkzVran4lG-s5GjTMjQ",
-        "https://lh3.googleusercontent.com/P4hIEuITU_fhg4zNCNbRB6MNAJq2hDh9N0NNKJihnNc8vV8aeT9YJDljt-bb6TZ1R449",
-        "https://lh3.googleusercontent.com/pEfyuafiUVYakYg-1t_dSpDpzwbOvuEYq82N_TdsUALhkJft1aLgWgGS7V1RkdMBdw",
-        "https://lh3.googleusercontent.com/xXpPSu5qfyJ7ctVAZQMkZKcAIxMjN2DT8aAdduKoDOCCfXLHdQFQRwi3ZyEZbeBIBipv",
-        "https://lh3.googleusercontent.com/3C6F0DpG_JN0YzDCNgYmxHwnlMS2Qk4aarLXZr5YqBoE4gSx0J9wqksYX9pnM9bYufQ",
-        "https://lh3.googleusercontent.com/dcqYnOpTRcxeaebkaz0zOABAk_SstQI3K_5BnGAtR21m2iD8zAel9xyqmI4UxE5N1HM"
+        "https://play-lh.googleusercontent.com/WRRPEfsMwic3iEOEIHeJ52mUom3eCAIgnayNzm4acd42cAVF9hnsbK0dernFGK_SeGY",
+        "https://play-lh.googleusercontent.com/EjgHrAVu2vxG7b_9ykewmf_LFGxdtBenG_ky8b0tERuhxvsLVuVkztXLeFDnp5Xe1g",
+        "https://play-lh.googleusercontent.com/Gp0DkHJEuZAvn6uSXjhE_NKu3dC8WPnfGpfFpTjH5rWS3_nn58JslId9BoHo8Orm_wI",
+        "https://play-lh.googleusercontent.com/Vw2pAqDWyEFeQ648vR4APt5Ygvn5HdsFyl_Z_w-nekk9GsA34Bkbp7CaoC7kptYnjVCS",
+        "https://play-lh.googleusercontent.com/uOijsKQ1zNtx3_YZJTLqOAhK6_4ES-n35pDiO1Z05kO0LnM73i5cFyl-mFxPIQATGw",
+        "https://play-lh.googleusercontent.com/zkElUKyxm2fhMyI0Kny2q32RCt43bEda8O2ahMBBB1Yhj42ZyzZXRkzUDvY4VojvSw",
+        "https://play-lh.googleusercontent.com/8j-_ZjkCCkAMCpqEfB_dt2LquTEVbf5KfCmGP5R4HWqEl9kB9XnA7AqSLGOPsSQ4z6o",
+        "https://play-lh.googleusercontent.com/t9E9fjtpfPBKalDEeL-cE79AZ2iV2JpGrbPOXExlHEBmr4Ot_Y47tnw1REnsxf_W2ENE",
+        "https://play-lh.googleusercontent.com/ozvcysWTH7Tt1Mx-obR6PR5_p_yVWonKjXU6NO8tOeB-FiVbsdeY6rgLkZbD9kRac4I",
+        "https://play-lh.googleusercontent.com/lplFiGt1WRP5Kj4JNP6yekHsNXFjRlt23hUtsrkBnPXL4mxJcFZDPY5Uu56wWHFMBQ4C",
+        "https://play-lh.googleusercontent.com/e7_ja-1N5Umut3VRUY2Yt8GFVBUdkF3YdMoCRFDxfWG62-0Wgoso5EL7frWpR3KUUQ",
+        "https://play-lh.googleusercontent.com/0AVEI0-wUbbN6tvi47hB-xmh7bjYdDgaAtJp-yPM9UdRdVrfjS0FBdl3T5LQZg-x6A",
+        "https://play-lh.googleusercontent.com/gKI-a09gF6AtN-rFrJn50BQfFyOTXZfiUuUbKTN-WAlxivyq9hsVnsF5387cv7JQRkRG",
+        "https://play-lh.googleusercontent.com/33WPfxcJw1ic-L4S3PmOlBZzZPisdUq44wWibj5Ksty9Uux-Ic6_J8bq6tv5ZE1Xl6V5",
+        "https://play-lh.googleusercontent.com/338W0Rgr16KwBomyzTvDZWiVJT62JdxbX4mA5oNRgOpKqYOcz1l4akODkWvvGvocy74",
+        "https://play-lh.googleusercontent.com/dcqYnOpTRcxeaebkaz0zOABAk_SstQI3K_5BnGAtR21m2iD8zAel9xyqmI4UxE5N1HM",
+        "https://play-lh.googleusercontent.com/r4PrG8JjvcIH5GQlNUbLyRKsP1gnFAhmRE_mu921sfvkk8TUC5r2abFdXDhl5yMAZXk",
+        "https://play-lh.googleusercontent.com/8EBDo1vgT0sPjHyJd0kxTZKLtjOJvCJuJOIo3IYDxHQKBzcKd9SupP6bw7N1i905JhM",
+        "https://play-lh.googleusercontent.com/bx0RR3UrWMK90k1XPg5KXeLeWr4gV0tY43wgopHvkm-t5iEiL4F8-yXLPCHkIyPjeQ",
+        "https://play-lh.googleusercontent.com/QBDJ2zXX1cszR6XKXIYIQlXzFFQmR2ZdcYUhzA4vMiYMhMix7CtOaEpMMuOVpj2mT1A",
+        "https://play-lh.googleusercontent.com/SCS7nIUYJ_LUs0ASmJQ4-Otmdws099aft-V6H_zIuk4CneTMhisoWE_Ng3hKmdVQ",
+        "https://play-lh.googleusercontent.com/6oIRWXB42Q3kAuQfAiAw1Xe04PzE4DP4szFdmhbyVO-mXq2MwMNoESHZScZLD_74Bw",
+        "https://play-lh.googleusercontent.com/EeZAEqZYmgYl1UnuXNWisNEUEnLX-t632PQDXe0VNoxNqKVH9TnFVbt24RPOwLg2lEQ",
+        "https://play-lh.googleusercontent.com/tysrudUXDRUzelYzKjDJBafxg_MHJIQm1XnjoZgdJARl0DUDmep8t8IBeJ-S__rT6n4"
     ],
     "category": {
         "id": "GAME_EDUCATIONAL",
         "name": "Educational"
     },
-    "categoryFamily": {
-        "id": "FAMILY_PRETEND",
-        "name": "Pretend Play"
-    },
+    "categoryFamily": null,
     "video": {
-        "thumbUrl": "https://i.ytimg.com/vi/CIyPDJYtVhw/hqdefault.jpg",
+        "thumbUrl": "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw",
         "videoUrl": "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
     },
     "privacyPoliceUrl": "https://app-ofcr.com/OFFICE_CREATE/Website/APP_CookingMama/en/privacypolicy.html",
-    "recentChange": "New! World Dishes 5!\nRound 5: Middle Eastern Dishes! Dine on global cuisines!\nFixed certain bugs.\nMade balance adjustments.",
-    "editorsChoice": true,
-    "installs": 52048343,
-    "numberVoters": 657882,
+    "recentChange": "version 1.80.0\nLimited time recipe this time!\nBeefsteak\nPlay limited until the next update!\nFixed certain bugs.\nMade balance adjustments.",
+    "editorsChoice": false,
+    "installs": 68611221,
+    "numberVoters": 797466,
     "histogramRating": {
-        "five": 476544,
-        "four": 476544,
-        "three": 39314,
-        "two": 20224,
-        "one": 52653
+        "five": 499330,
+        "four": 499330,
+        "three": 69838,
+        "two": 41725,
+        "one": 91400
     },
     "price": 0,
     "currency": "USD",
     "offersIAP": true,
     "offersIAPCost": "$0.99 - $15.99 per item",
     "containsAds": true,
-    "size": "61M",
-    "appVersion": "1.56.0",
-    "androidVersion": "4.1 and up",
-    "minAndroidVersion": "4.1",
+    "size": "70M",
+    "appVersion": "1.80.0",
+    "androidVersion": "4.4 and up",
+    "minAndroidVersion": "4.4",
     "contentRating": "Everyone",
     "released": "2015-05-14T00:00:00+00:00",
     "releasedTimestamp": 1431561600,
-    "updated": "2020-01-31T04:52:35+00:00",
-    "updatedTimestamp": 1580446355,
-    "numberReviews": 244629,
+    "updated": "2022-02-24T08:03:03+00:00",
+    "updatedTimestamp": 1645689783,
+    "numberReviews": 14874,
     "reviews": [
         {
-            "id": "gp:AOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWKglrWxdEHoYJg",
-            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOElHBcZOZrzHV4DOlW32kIBBZ0PQtHkAXY9Vaw0QYtOHKl8tz2NouvBucCqk7jcGN1GWKglrWxdEHoYJg",
-            "userName": "Marijana Stojanović",
-            "text": "I absolutely loved the cooking parts of the game, but it's so saddening that you have to pay for like... 70% for the recipes. So I just played the free ones. Everything else is just too busy, like they tried to cram every free to play mobile game in it to keep you busy. All I wanted was to cook some cute meals, but instead had to see pop up after pop up forcing me to watch ads or pay. And the music is SO ANNOYINGLY REPETITIVE. I'll have to get a DS to play the real game, it seems.",
-            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mCYtS36wyZc-202TCYoJQDgQxlSTOXBO-b0y6KI=s64",
-            "date": "2020-02-05T08:36:21+00:00",
-            "timestamp": 1580891781,
-            "score": 3,
-            "countLikes": 65,
+            "id": "gp:AOqpTOEdhXvIPIx0YGAB8Ad7CKDbId-FqUhPHkOOjmxu4oY8r-WzHzutMb869I5WuvGwZ1SqU18iB3a0ys-POA",
+            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOEdhXvIPIx0YGAB8Ad7CKDbId-FqUhPHkOOjmxu4oY8r-WzHzutMb869I5WuvGwZ1SqU18iB3a0ys-POA",
+            "userName": "Sulien J",
+            "text": "Disappointed because I can't transfer my data to my new device. I transferred once before, but now the option doesn't even exist in the menu in my game on my old device. I purchased all the expansions, and everything is gone on the new phone. I'm not about to repurchase everything. Guess I'm leaving this game behind.",
+            "avatar": "https://play-lh.googleusercontent.com/a-/AOh14Ghh8FH7kuzBz119Dn4MEEFJgzoV_C0sYl8PMtwoBQ=s64",
+            "date": "2022-02-24T04:18:01+00:00",
+            "timestamp": 1645676281,
+            "score": 1,
+            "countLikes": 0,
             "reply": null
         },
         {
-            "id": "gp:AOqpTOG0m_5SlxX20BniMe8ojx7IKMVJkrZoflVFp_YBzgyTqXExqTnZXGf9GWwOyR_RKlsvRtfM9g4aPFETRg",
-            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOG0m_5SlxX20BniMe8ojx7IKMVJkrZoflVFp_YBzgyTqXExqTnZXGf9GWwOyR_RKlsvRtfM9g4aPFETRg",
-            "userName": "Angela Gallagher",
-            "text": "Level 10 is where it ends??!! That's it. In each area. Not much fun after that. And it's a shame that only those that have the money to spend in the game gets to enjoy the locked recipes. Not cool. Of All those ad pop ups CONSTANTLY the mods COULD give a recipe for clicking on them to watch. Instead of just happy foods. Can earn those in the other areas. And what's the point of all those happy foods earned when you only get to make 5 mini cooking recipes per day with them.",
-            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mCPHJ-ScDUX-RHHhVYFePJf1BMWlE_QGax_LRnp=s64",
-            "date": "2020-02-02T21:58:08+00:00",
-            "timestamp": 1580680688,
-            "score": 3,
-            "countLikes": 36,
+            "id": "gp:AOqpTOGqP2Ugs7sT10aGT5Mj_Es_zaOyCyxVfdfgBJG3at1LnOehNatcFI1TY_sSO0BwcyPy_Ly1oGoNNWN6Tg",
+            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOGqP2Ugs7sT10aGT5Mj_Es_zaOyCyxVfdfgBJG3at1LnOehNatcFI1TY_sSO0BwcyPy_Ly1oGoNNWN6Tg",
+            "userName": "Emily Shadoan",
+            "text": "I've loved cooking mama since I was a kid so I have alot of fun with this. I don't understand why so many people are complaining about the UI being \"overwhelming\". It's NOTHING compared to a gacha-style game, trust me. The UI is extremely simple to me. Love it❤",
+            "avatar": "https://play-lh.googleusercontent.com/a-/AOh14GhFIwFc36-6Q_kN5M_1EfdItD11W7whip2RFgd70A=s64",
+            "date": "2022-01-31T08:29:21+00:00",
+            "timestamp": 1643617761,
+            "score": 5,
+            "countLikes": 136,
             "reply": null
         },
         {
-            "id": "gp:AOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg",
-            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOHKOKTbqKdMRi01uw5GfJdXDU7aC0rzv3vc-BlkT4cYFjy4AzvSMg1N6_Sf6XzkRyJVq8vJz9Y7UygVpg",
-            "userName": "Samantha",
-            "text": "I loved the DS series as a kid and was excited when I saw this. While it did bring back old memories and the recipes I could unlock were fun, most are locked behind a pay wall. They're also much simpler and don't take very long to do, so not really worth the prices they're asking for. The interface is also extremely busy and it constantly feels like I'm on one of those scam websites with all these popups. You're better off playing the original games.",
-            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mDpplpluhiYsZu0DoM_3kG9LHCol2UEkz5GIZcUrw=s64",
-            "date": "2020-02-07T04:56:29+00:00",
-            "timestamp": 1581051389,
-            "score": 3,
-            "countLikes": 37,
+            "id": "gp:AOqpTOHAAXG8BXRy7lxPy-39IZvy_NhBx4R5XHEUPWrfDeuYn9-8PZbX-P_Nh9yy4MntQZdeJhY-hr7f3kUflw",
+            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOHAAXG8BXRy7lxPy-39IZvy_NhBx4R5XHEUPWrfDeuYn9-8PZbX-P_Nh9yy4MntQZdeJhY-hr7f3kUflw",
+            "userName": "anec nhoj",
+            "text": "Really fun but I see what people mean about being overwhelmed. UI is constantly pointing, flashing, moving, popping up, etc. Also still has the same problems as original cooking mama games on other platforms - frustrating mechanics, for example, though they are more manageable mobile. But it does improve upon them, and even adds awesome new features to try out. Great fun!",
+            "avatar": "https://play-lh.googleusercontent.com/a/AATXAJw1JMVmUbhz1otZesYQBzQ8d3UAcoigWO7ifkgJ=s64",
+            "date": "2022-01-09T23:31:08+00:00",
+            "timestamp": 1641771068,
+            "score": 4,
+            "countLikes": 134,
             "reply": null
         },
         {
-            "id": "gp:AOqpTOEzneZAaLNXDOVffe-i0fOQNJ7jR_84vi0GUctpTEtaJce7wrpr4wGEYd3LJzg2EfJgcXm0IEglpPCFRg",
-            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOEzneZAaLNXDOVffe-i0fOQNJ7jR_84vi0GUctpTEtaJce7wrpr4wGEYd3LJzg2EfJgcXm0IEglpPCFRg",
-            "userName": "Mahdi Reza",
-            "text": "It's great! Although I would live to change cooking mama to cooking papa. I would also like more cartoon sound effects like bongs, slide whistles and stuff for atmosphere. He should have a basic dad fleece jacket in all colors as part of his outfit line!",
-            "avatar": "https://lh3.googleusercontent.com/a-/AAuE7mARwrEe_qvBdEBx3rJO5h9qjDUKnbL4KZx048xIyA=s64",
-            "date": "2020-02-13T03:16:29+00:00",
-            "timestamp": 1581563789,
-            "score": 3,
-            "countLikes": 5,
+            "id": "gp:AOqpTOGVg7-p1RXH8WmcZ_HJKpia-_UV2vPK97VTVKseohtuoqCkJpSlytsd6DS6h1j0fI85vltuUoMTBYJSCQ",
+            "url": "https://play.google.com/store/apps/details?id=jp.co.ofcr.cm00&reviewId=gp%3AAOqpTOGVg7-p1RXH8WmcZ_HJKpia-_UV2vPK97VTVKseohtuoqCkJpSlytsd6DS6h1j0fI85vltuUoMTBYJSCQ",
+            "userName": "Bryttney Thompson",
+            "text": "Keeps freezing and closing on me while spending the coins I earn and remembering that. Sometimes I can play for hours with no problems. Sometimes it messes up and stays like that for hours.",
+            "avatar": "https://play-lh.googleusercontent.com/a/AATXAJw5YlhlJfx_gwuaUSRgusNBrc1mdhkW36hQPW1s=s64",
+            "date": "2022-02-23T03:36:21+00:00",
+            "timestamp": 1645587381,
+            "score": 1,
+            "countLikes": 0,
             "reply": null
         }
     ]

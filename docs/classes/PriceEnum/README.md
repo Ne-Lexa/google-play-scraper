@@ -37,16 +37,16 @@ Nelexa\GPlay\Enum\PriceEnum extends Nelexa\Enum {
 * [Nelexa\GPlay\Enum\PriceEnum::containsValue](priceenum.containsvalue.md) - Checks if enum contains a passed value.
 * [Nelexa\GPlay\Enum\PriceEnum::fromValue](priceenum.fromvalue.md) - Returns first enum of the specified constant value.
 * [Nelexa\GPlay\Enum\PriceEnum::ordinal](priceenum.ordinal.md) - Returns the ordinal of this enum constant.
-* [Nelexa\GPlay\Enum\PriceEnum::__toString](priceenum.tostring.md) - Returns the value of this enum constant, as contained in the declaration.
+* [Nelexa\GPlay\Enum\PriceEnum::__toString](priceenum.__tostring.md) - Returns the value of this enum constant, as contained in the declaration.
 
 
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\PriceEnum {
-  -name(): string: "ALL"
-  -value(): mixed: 0
-  -ordinal(): int: 0
-  -__toString(): string: "0"
+  -name(): string: "PAID"
+  -value(): mixed: 2
+  -ordinal(): int: 2
+  -__toString(): string: "2"
 }
 ```
 

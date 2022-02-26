@@ -3,11 +3,13 @@
 /** @noinspection SpellCheckingInspection */
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Util;
@@ -6592,7 +6594,7 @@ class LocaleHelper
     {
         $locale = self::getNormalizeLocale($locale);
 
-        return isset(self::DEPEND_ON_DEVICE_MESSAGES[$locale]) &&
-            strcmp(self::DEPEND_ON_DEVICE_MESSAGES[$locale], $message) === 0;
+        return isset(self::DEPEND_ON_DEVICE_MESSAGES[$locale])
+            && strcmp(self::DEPEND_ON_DEVICE_MESSAGES[$locale], $message) === 0;
     }
 }
