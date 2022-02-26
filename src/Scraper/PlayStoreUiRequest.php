@@ -74,7 +74,7 @@ class PlayStoreUiRequest
         ];
         $body = Utils::streamFor(http_build_query($formParams));
 
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 
     /**
@@ -105,7 +105,7 @@ class PlayStoreUiRequest
         ];
         $body = Utils::streamFor(http_build_query($formParams));
 
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 
     /**
@@ -135,7 +135,7 @@ class PlayStoreUiRequest
         ];
         $body = Utils::streamFor(http_build_query($formParams));
 
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 
     /**
@@ -173,7 +173,7 @@ class PlayStoreUiRequest
         ];
         $body = Utils::streamFor(http_build_query($formParams));
 
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 
     /**
@@ -204,6 +204,6 @@ class PlayStoreUiRequest
         ];
         $body = Utils::streamFor(http_build_query($formParams));
 
-        return new Request('POST', $url, $headers, $body, '2.0');
+        return new Request('POST', $url, $headers, $body);
     }
 }

@@ -210,7 +210,7 @@ class GPlayApps
 
         foreach ($appIds as $key => $appId) {
             $fullUrl = Util\Caster::castToAppId($appId, $this->defaultLocale, $this->defaultCountry)->getFullUrl();
-            $psrRequest = new PsrRequest('GET', $fullUrl, [], null, '2.0');
+            $psrRequest = new PsrRequest('GET', $fullUrl);
             $requests[$key] = new Request($psrRequest, [], $infoScraper);
         }
 
@@ -353,7 +353,7 @@ class GPlayApps
     {
         $appId = Util\Caster::castToAppId($appId, $this->defaultLocale, $this->defaultCountry);
         $fullUrl = $appId->getFullUrl();
-        $psrRequest = new PsrRequest('HEAD', $fullUrl, [], null, '2.0');
+        $psrRequest = new PsrRequest('HEAD', $fullUrl);
         $request = new Request($psrRequest, [
             RequestOptions::HTTP_ERRORS => false,
         ], new Scraper\ExistsAppScraper());
@@ -391,7 +391,7 @@ class GPlayApps
         $parseHandler = new Scraper\ExistsAppScraper();
         $requests = array_map(function ($appId) use ($parseHandler) {
             $fullUrl = Util\Caster::castToAppId($appId, $this->defaultLocale, $this->defaultCountry)->getFullUrl();
-            $psrRequest = new PsrRequest('HEAD', $fullUrl, [], null, '2.0');
+            $psrRequest = new PsrRequest('HEAD', $fullUrl);
 
             return new Request($psrRequest, [
                 RequestOptions::HTTP_ERRORS => false,
@@ -491,7 +491,7 @@ class GPlayApps
             $detailUrl = self::GOOGLE_PLAY_APPS_URL . '/details?' . $queryString;
 
             $request = new Request(
-                new PsrRequest('GET', $detailUrl, [], null, '2.0'),
+                new PsrRequest('GET', $detailUrl),
                 [],
                 new Scraper\AppSpecificReviewScraper($appId)
             );
@@ -553,7 +553,7 @@ class GPlayApps
         try {
             return $this->getHttpClient()->request(
                 new Request(
-                    new PsrRequest('GET', $url, [], null, '2.0'),
+                    new PsrRequest('GET', $url),
                     [],
                     new Scraper\CategoriesScraper()
                 )
@@ -592,7 +592,7 @@ class GPlayApps
         foreach ($locales as $locale) {
             $requestUrl = $url . '?' . http_build_query([self::REQ_PARAM_LOCALE => $locale]);
             $requests[$locale] = new Request(
-                new PsrRequest('GET', $requestUrl, [], null, '2.0'),
+                new PsrRequest('GET', $requestUrl),
                 [],
                 $parseHandler
             );
@@ -657,7 +657,7 @@ class GPlayApps
         try {
             return $this->getHttpClient()->request(
                 new Request(
-                    new PsrRequest('GET', $url, [], null, '2.0'),
+                    new PsrRequest('GET', $url),
                     [],
                     new Scraper\DeveloperInfoScraper()
                 )
@@ -716,7 +716,7 @@ class GPlayApps
                 ]
             );
             $requests[$locale] = new Request(
-                new PsrRequest('GET', $requestUrl, [], null, '2.0'),
+                new PsrRequest('GET', $requestUrl),
                 [],
                 $parseHandler
             );
@@ -761,7 +761,7 @@ class GPlayApps
                  */
                 $developerUrl = $this->getHttpClient()->request(
                     new Request(
-                        new PsrRequest('GET', $developerUrl, [], null, '2.0'),
+                        new PsrRequest('GET', $developerUrl),
                         [],
                         new Scraper\FindDevAppsUrlScraper()
                     )
@@ -812,7 +812,7 @@ class GPlayApps
         try {
             [$apps, $token] = $this->getHttpClient()->request(
                 new Request(
-                    new PsrRequest('GET', $clusterPageUrl, [], null, '2.0'),
+                    new PsrRequest('GET', $clusterPageUrl),
                     [],
                     new Scraper\ClusterAppsScraper()
                 )
@@ -906,7 +906,7 @@ class GPlayApps
             /** @var string|null $similarAppsUrl */
             $similarAppsUrl = $this->getHttpClient()->request(
                 new Request(
-                    new PsrRequest('GET', $appId->getFullUrl(), [], null, '2.0'),
+                    new PsrRequest('GET', $appId->getFullUrl()),
                     [],
                     new Scraper\FindSimilarAppsUrlScraper($appId)
                 )
@@ -956,7 +956,7 @@ class GPlayApps
 
         ['results' => $results, 'token' => $token] = $this->getHttpClient()->request(
             new Request(
-                new PsrRequest('GET', $url, [], null, '2.0'),
+                new PsrRequest('GET', $url),
                 [],
                 new Scraper\ClusterPagesFromListAppsScraper()
             )
