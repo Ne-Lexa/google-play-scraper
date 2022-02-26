@@ -19,7 +19,7 @@ Returns the category id 'Family Brain Games'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "FAMILY_BRAINGAMES"
   -value(): mixed: "FAMILY_BRAINGAMES"
-  -ordinal(): int: 53
+  -ordinal(): int: 54
   -__toString(): string: "FAMILY_BRAINGAMES"
 }
 ```

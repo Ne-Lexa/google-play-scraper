@@ -2,10 +2,12 @@
 
 PHP library to scrape application data from the Google Play store.
 
-[![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg?style=popout&color=aa007f)](https://packagist.org/packages/nelexa/google-play-scraper) ![PHP from Packagist](https://img.shields.io/packagist/php-v/nelexa/google-play-scraper.svg?style=popout&color=d500a0) 
-[![Build Status](https://secure.travis-ci.org/Ne-Lexa/google-play-scraper.png)](http://travis-ci.org/Ne-Lexa/google-play-scraper) [![Code Coverage](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master)
+[![Packagist Version](https://img.shields.io/packagist/v/nelexa/google-play-scraper.svg?style=popout&color=aa007f)](https://packagist.org/packages/nelexa/google-play-scraper) ![PHP from Packagist](https://img.shields.io/packagist/php-v/nelexa/google-play-scraper.svg?style=popout&color=d500a0) ![License](https://img.shields.io/packagist/l/nelexa/google-play-scraper.svg?style=popout&color=ff00bf)
+[![Build Status](https://github.com/Ne-Lexa/google-play-scraper/workflows/build/badge.svg)](https://github.com/Ne-Lexa/google-play-scraper/actions) [![Build Status](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Ne-Lexa/google-play-scraper/?branch=master)
 
 ## Installation
+Add `nelexa/google-play-scraper` as a require dependency in your composer.json file:
+
 ```shell
 composer require nelexa/google-play-scraper
 ```
@@ -34,7 +36,7 @@ $gplay
 ```
 
 #### Caching
-Since each library method performs one or more HTTP-requests to the Google Play server, it is sometimes useful to cache the results so as not to request the same data twice. 
+Since each library method performs one or more HTTP-requests to the Google Play server, it is sometimes useful to cache the results so as not to request the same data twice.
 
 Use the [PSR-16 Simple Cache](https://packagist.org/providers/psr/simple-cache-implementation) compatible cache provider.
 
@@ -54,7 +56,7 @@ $gplay->setCacheTtl(\DateInterval::createFromDateString('1 hour'));
 ```
 
 #### Limit of parallel HTTP requests
-The library allows you to set a limit on the number of parallel HTTP requests to the Google Play server. 
+The library allows you to set a limit on the number of parallel HTTP requests to the Google Play server.
 
 The default is 4.
 ```php
@@ -84,7 +86,9 @@ $gplay->setProxy('https://89.238.XXX.164:3128');
 * [GPlayApps::getDeveloperInfo](#gplayappsgetdeveloperinfo-docs): Returns information about the developer: name, icon, cover, description and website address.
 * [GPlayApps::getDeveloperInfoForLocales](#gplayappsgetdeveloperinfoforlocales-docs): Returns information about the developer for the specified locales.
 * [GPlayApps::getDeveloperApps](#gplayappsgetdeveloperapps-docs): Returns an array of applications from the Google Play store by developer id.
+* [GPlayApps::getClusterApps](#gplayappsgetclusterapps-docs): Returns an iterator of applications from the Google Play store for the specified cluster page.
 * [GPlayApps::getSimilarApps](#gplayappsgetsimilarapps-docs): Returns an array of similar applications with basic information about them in the Google Play store.
+* [GPlayApps::getClusterPages](#gplayappsgetclusterpages-docs): Returns an iterator of cluster pages.
 * [GPlayApps::getSearchSuggestions](#gplayappsgetsearchsuggestions-docs): Returns the Google Play search suggests.
 * [GPlayApps::search](#gplayappssearch-docs): Returns a list of applications from the Google Play store for a search query.
 * [GPlayApps::getListApps](#gplayappsgetlistapps-docs): Returns an array of applications from the Google Play store for the specified category.
@@ -124,14 +128,14 @@ class Nelexa\GPlay\Model\AppInfo {
   -getName(): string: "Minecraft"
   -getSummary(): ?string: "Minecraft – це гра, у якій ви розставляєте блоки та шукаєте пригоди."
   -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-    -getId(): string: "Mojang"
-    -getUrl(): string: "https://play.google.com/store/apps/developer?id=Mojang"
+    -getId(): string: "4772240228547998649"
+    -getUrl(): string: "https://play.google.com/store/apps/dev?id=4772240228547998649"
     -getName(): string: "Mojang"
     -getDescription(): ?string: null
     -getWebsite(): ?string: "http://help.mojang.com"
     -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
     -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-    -getEmail(): ?string: "android-help@mojang.com"
+    -getEmail(): ?string: "help@minecraft.net"
     -getAddress(): ?string: """
       Mojang\n
       Maria Skolgata 83\n
@@ -140,135 +144,135 @@ class Nelexa\GPlay\Model\AppInfo {
       Sweden
       """
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
   }
-  -getScore(): float: 4.4607687
-  -getPriceText(): ?string: "123,50 грн."
+  -getScore(): float: 4.5226836
+  -getPriceText(): ?string: "209,99 грн"
   -isFree(): bool: false
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
   -getDescription(): string: """
     Досліджуйте безкінечні світи та будуйте що завгодно: від простих хижок до розкішних замків. Грайте у творчому режимі з необмеженими ресурсами або вибе…
     """
   -isAutoTranslatedDescription(): bool: false
   -getTranslatedFromLocale(): ?string: null
   -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
   }
-  -getScreenshots(): array:8 [
+  -getScreenshots(): array: array:12 [
     0 => class Nelexa\GPlay\Model\GoogleImage {
-      -getUrl(): string: "https://lh3.googleusercontent.com/Gfor63rEjzuN5gLTd4CjFV5O9T9YF5IVrRrmimqJm2Tct0GSnagoFOHPFpE3Ter7JA"
-      -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Gfor63rEjzuN5gLTd4CjFV5O9T9YF5IVrRrmimqJm2Tct0GSnagoFOHPFpE3Ter7JA=s0"
+      -__toString(): string: "https://play-lh.googleusercontent.com/2Qhsn-Uo3HjXKa5tJErKbSuoiHKO5M2gpD1dANPcHfLHFaEDUIOZpd5M0v_ois_c_n8"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/2Qhsn-Uo3HjXKa5tJErKbSuoiHKO5M2gpD1dANPcHfLHFaEDUIOZpd5M0v_ois_c_n8"
+      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/2Qhsn-Uo3HjXKa5tJErKbSuoiHKO5M2gpD1dANPcHfLHFaEDUIOZpd5M0v_ois_c_n8=s0"
       -getBinaryImageContent(): string: …
-      -__toString(): string: "https://lh3.googleusercontent.com/Gfor63rEjzuN5gLTd4CjFV5O9T9YF5IVrRrmimqJm2Tct0GSnagoFOHPFpE3Ter7JA"
     }
     1 => class Nelexa\GPlay\Model\GoogleImage {
-      -getUrl(): string: "https://lh3.googleusercontent.com/Qre0-8iRhd7iu2AV4GqofQFU1QiKCvET752u32VjZHmMvlo_8W5JX07qAKavcpmis7Zk"
-      -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Qre0-8iRhd7iu2AV4GqofQFU1QiKCvET752u32VjZHmMvlo_8W5JX07qAKavcpmis7Zk=s0"
+      -__toString(): string: "https://play-lh.googleusercontent.com/8ZAmvKPwrGfx-4eTBuU_h4-XlxLOcJM6zjMscVJUHHP8mb1ENo9sOMh9Ul4nTdGuW7M"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/8ZAmvKPwrGfx-4eTBuU_h4-XlxLOcJM6zjMscVJUHHP8mb1ENo9sOMh9Ul4nTdGuW7M"
+      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/8ZAmvKPwrGfx-4eTBuU_h4-XlxLOcJM6zjMscVJUHHP8mb1ENo9sOMh9Ul4nTdGuW7M=s0"
       -getBinaryImageContent(): string: …
-      -__toString(): string: "https://lh3.googleusercontent.com/Qre0-8iRhd7iu2AV4GqofQFU1QiKCvET752u32VjZHmMvlo_8W5JX07qAKavcpmis7Zk"
     }
     …
   ]
-  -getCategory(): Nelexa\GPlay\Model\Category: {
+  -getCategory(): ?Nelexa\GPlay\Model\Category: {
     -getId(): string: "GAME_ARCADE"
     -getName(): string: "Аркади"
     -isGamesCategory(): bool: true
     -isFamilyCategory(): bool: false
     -isApplicationCategory(): bool: false
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
   -getVideo(): ?Nelexa\GPlay\Model\Video: {
-    -getImageUrl(): string: "https://i.ytimg.com/vi/5nWMr2njHiA/hqdefault.jpg"
-    -getVideoUrl(): string: "https://www.youtube.com/embed/5nWMr2njHiA?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-    -getYoutubeId(): ?string: "5nWMr2njHiA"
+    -getImageUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
+    -getVideoUrl(): string: "https://www.youtube.com/embed/KhPxEWUgZlg?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
+    -getYoutubeId(): ?string: "KhPxEWUgZlg"
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -getRecentChanges(): ?string: """
-    Що нового в 1.14.30:\n
+    Що нового в 1.18.12:\n
     Різні виправлення помилок
     """
-  -isEditorsChoice(): bool: true
-  -getInstalls(): int: 27372757
+  -isEditorsChoice(): bool: false
+  -getInstalls(): int: 40328325
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 2414726
-    -getFourStars(): int: 246520
-    -getThreeStars(): int: 118458
-    -getTwoStars(): int: 65428
-    -getOneStar(): int: 246899
+    -getFiveStars(): int: 3584145
+    -getFourStars(): int: 368668
+    -getThreeStars(): int: 150635
+    -getTwoStars(): int: 76037
+    -getOneStar(): int: 311351
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
-  -getPrice(): float: 123.5
+  -getPrice(): float: 209.99
   -getCurrency(): string: "UAH"
   -isContainsIAP(): bool: true
-  -getOffersIAPCost(): ?string: "9,36 грн. – 1 349,99 грн. за продукт"
+  -getOffersIAPCost(): ?string: "9,36 грн – 1 349,99 грн за продукт"
   -isContainsAds(): bool: false
   -getSize(): ?string: null
-  -getAppVersion(): ?string: "1.14.30.2"
-  -getAndroidVersion(): ?string: "4.2 і новіших версій"
-  -getMinAndroidVersion(): ?string: "4.2"
+  -getAppVersion(): ?string: "1.18.12.01"
+  -getAndroidVersion(): ?string: "5.0 і новіших версій"
+  -getMinAndroidVersion(): ?string: "5.0"
   -getContentRating(): ?string: "Від 7 років"
   -getPrivacyPoliceUrl(): ?string: "https://privacy.microsoft.com/en-us/privacystatement"
   -getReleased(): ?DateTimeInterface: @1313366400 {
     date: 2011-08-15T00:00:00+00:00
   }
-  -getUpdated(): ?DateTimeInterface: @1581031098 {
-    date: 2020-02-06T23:18:18+00:00
+  -getUpdated(): ?DateTimeInterface: @1644890219 {
+    date: 2022-02-15T01:56:59+00:00
   }
-  -getNumberVoters(): int: 3092034
-  -getNumberReviews(): int: 1599715
-  -getReviews(): array:4 [
+  -getNumberVoters(): int: 4490983
+  -getNumberReviews(): int: 14756
+  -getReviews(): array: array:4 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOEk-B-eP-WonMwF1mJJ5ki7W8GFSWJ764ctKyedW8kgZod2Th98ipVnpUGm7Bgew1mJ8rH-3ncav6WVcxE"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOEk-B-eP-WonMwF1mJJ5ki7W8GFSWJ764ctKyedW8kgZod2Th98ipVnpUGm7Bg…"
-      -getUserName(): string: "IllyaBoy"
-      -getText(): string: "Дуже класно! Але я хочу вам допомогти з обновленням. Добавити мавп, акул, ще щоб жителі розмовляли. Також різні вулики з бджолами! Дякую що прочитали."
+      -getId(): string: "gp:AOqpTOG7XMyhwj7VRT8zAQ8VnIp31NeTn2taFtOKz9ExUR3tiMAIL7AFG3TtCoewoqsuliAQFHk7ei9uMTYEKhU"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOG7XMyhwj7VRT8zAQ8VnIp31NeTn2taFtOKz9ExUR3tiMAIL7AFG3TtCoewoqs…"
+      -getUserName(): string: "Kira Naumets"
+      -getText(): string: "Гра просто супер!!!! Я давно її хотіла, але коли я заходжу в майнкрафт то спочатку мій скін стіва або алекса а потім все нормально."
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mBivXPbfbLUOmfqIBwXodG2aMfqfdhNhoQVro2_mQ=s64"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mBivXPbfbLUOmfqIBwXodG2aMfqfdhNhoQVro2_mQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgNPA60Ok4r6qGM7B5GshrnzC5TL7y5CL0npenLHQ=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgNPA60Ok4r6qGM7B5GshrnzC5TL7y5CL0npenLHQ=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgNPA60Ok4r6qGM7B5GshrnzC5TL7y5CL0npenLHQ=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mBivXPbfbLUOmfqIBwXodG2aMfqfdhNhoQVro2_mQ=s64"
       }
-      -getDate(): ?DateTimeInterface: @1568365109 {
-        date: 2019-09-13T08:58:29+00:00
+      -getDate(): ?DateTimeInterface: @1645125219 {
+        date: 2022-02-17T19:13:39+00:00
       }
       -getScore(): int: 5
-      -getCountLikes(): int: 10084
+      -getCountLikes(): int: 828
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOHFoqm_MOzJ5wqmPTpcIR_5A7-EYFOXSOaL70oN32z6HhNDpMHIUrqA4nG_p3QhA0tfb6DSW67Mjdd4Qqs"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOHFoqm_MOzJ5wqmPTpcIR_5A7-EYFOXSOaL70oN32z6HhNDpMHIUrqA4nG_p3Q…"
-      -getUserName(): string: "Вова Сапсан"
-      -getText(): string: "Я купив Minecraft с початку була версія 1.14.1 а потім стала версія 1.12.1 іяк це зрозуміти? ПОВЕРНІТЬ ГРОШІ! ЧЕКАЮ 29 ВЕРЕСНЯ О 12:00 2019 РОКУ"
+      -getId(): string: "gp:AOqpTOHR-f11MFPOqd3fc9MH61C2ReUdFUtOoUkGknKBZOPSP-9WuK5fuWvZ5Fk0HG1Fwx0CFk54SXYU6rU5YMo"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOHR-f11MFPOqd3fc9MH61C2ReUdFUtOoUkGknKBZOPSP-9WuK5fuWvZ5Fk0HG1…"
+      -getUserName(): string: "Артем Шестак"
+      -getText(): string: "Гра дуже крута мені нравится що можна грати на серверах гра дуже крута а якщо зайти на ноутбук то вобще отвал божки мені нравится що якщо приручити во…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-EBQ9JSu3bPI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcgqq6wcx3NjHMQXsn2pL7yE1PVCA/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-EBQ9JSu3bPI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcgqq6wcx3NjHMQXsn2pL7yE1PVCA/s0/"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiFmDR_D3agcilAMWtUTkoRblEKM9OrJ65_p8I7=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiFmDR_D3agcilAMWtUTkoRblEKM9OrJ65_p8I7=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiFmDR_D3agcilAMWtUTkoRblEKM9OrJ65_p8I7=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-EBQ9JSu3bPI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcgqq6wcx3NjHMQXsn2pL7yE1PVCA/s64/"
       }
-      -getDate(): ?DateTimeInterface: @1569700945 {
-        date: 2019-09-28T20:02:25+00:00
+      -getDate(): ?DateTimeInterface: @1645336398 {
+        date: 2022-02-20T05:53:18+00:00
       }
-      -getScore(): int: 1
-      -getCountLikes(): int: 4316
+      -getScore(): int: 5
+      -getCountLikes(): int: 0
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -286,12 +290,10 @@ Returns the full detail of multiple applications.
 ```php
 $gplay->setConcurrency(10);
 
-$apps = $gplay->getAppsInfo(
-    [
-        'chrome' => 'com.android.chrome',
-        'minecraft' => new \Nelexa\GPlay\Model\AppId('com.mojang.minecraftpe', 'pt_BR', 'br'),
-    ]
-);
+$apps = $gplay->getAppsInfo([
+    'chrome' => 'com.android.chrome',
+    'minecraft' => new \Nelexa\GPlay\Model\AppId('com.mojang.minecraftpe', 'pt_BR', 'br'),
+]);
 ```
 <details>
   <summary>Results</summary>
@@ -317,70 +319,66 @@ array:2 [
         -getEmail(): ?string: "apps-help@google.com"
         -getAddress(): ?string: "1600 Amphitheatre Parkway, Mountain View 94043"
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
       }
-      -getScore(): float: 4.371647
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 4.126106
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: """
         Google Chrome is a fast, easy to use, and secure web browser. Designed for Android, Chrome brings you personalized news articles, quick links to your …
         """
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
       }
-      -getScreenshots(): array:18 [
+      -getScreenshots(): array: array:18 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/MDUDkVeS3rAZ-CeNSAlMM94iQAxCJbthTNK7675leCrIQ3cZ5uVAxrXRRsqanJUHog"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/MDUDkVeS3rAZ-CeNSAlMM94iQAxCJbthTNK7675leCrIQ3cZ5uVAxrXRRsqanJUHog=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/MDUDkVeS3rAZ-CeNSAlMM94iQAxCJbthTNK7675leCrIQ3cZ5uVAxrXRRsqanJUHog"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "COMMUNICATION"
         -getName(): string: "Communication"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: """
-        Thanks for choosing Chrome! This release contains the following features, as well as stability and performance improvements: \n
-        \n
-        • Quieter notifications…
-        """
+      -getRecentChanges(): ?string: "Thanks for choosing Chrome! This release includes stability and performance improvements."
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 6109119447
+      -getInstalls(): int: 10546228660
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 13653105
-        -getFourStars(): int: 2319179
-        -getThreeStars(): int: 1115216
-        -getTwoStars(): int: 545239
-        -getOneStar(): int: 1451591
+        -getFiveStars(): int: 23719921
+        -getFourStars(): int: 4688358
+        -getThreeStars(): int: 2543567
+        -getTwoStars(): int: 1510499
+        -getOneStar(): int: 4498126
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
@@ -396,51 +394,51 @@ array:2 [
       -getReleased(): ?DateTimeInterface: @1328572800 {
         date: 2012-02-07T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581622298 {
-        date: 2020-02-13T19:31:38+00:00
+      -getUpdated(): ?DateTimeInterface: @1645554664 {
+        date: 2022-02-22T18:31:04+00:00
       }
-      -getNumberVoters(): int: 19084332
-      -getNumberReviews(): int: 5581111
-      -getReviews(): array:4 [
+      -getNumberVoters(): int: 36960498
+      -getNumberReviews(): int: 864115
+      -getReviews(): array: array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZAUppOOGWOIwdUCDs"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZ…"
-          -getUserName(): string: "Stephen"
-          -getText(): string: "I thought it was just me (or my device - Samsung S10 tablet), but I see that many users are having crash problems with Chrome. I tried all of the fixe…"
+          -getId(): string: "gp:AOqpTOGe8ai7cP4FaVAaYPRtiIcSPworf6t7APGHIWI2sdHbjJ0fHJAI0bjnoYPMr_27AQy3rKUvr5Xxj3NmgIk"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGe8ai7cP4FaVAaYPRtiIcSPworf6t7APGHIWI2sdHbjJ0fHJAI0bjnoYPMr_27AQy…"
+          -getUserName(): string: "Two Fisted Betty"
+          -getText(): string: "Have been a VERY long time user and absolutely love Google and everything it has to offer. It's had it's glitches but all software has it's issues fro…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581778840 {
-            date: 2020-02-15T15:00:40+00:00
+          -getDate(): ?DateTimeInterface: @1645673394 {
+            date: 2022-02-24T03:29:54+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 260
+          -getScore(): int: 4
+          -getCountLikes(): int: 0
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkqoOZRUoC6qm4OXv7g"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkq…"
-          -getUserName(): string: "Janae Ask"
-          -getText(): string: "I've been a diehard chrome fan for years but I noticed today that my app updated and my home page button disappeared. I'm super annoyed and honestly I…"
+          -getId(): string: "gp:AOqpTOGIgO0_ejFawLmyIyJt9YFuaauwHIsRq-bCyEEo7E41GTOqXM9STPrGmBjB_9O0ZuJgdGRhoG205Y_Dw-s"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGIgO0_ejFawLmyIyJt9YFuaauwHIsRq-bCyEEo7E41GTOqXM9STPrGmBjB_9O0ZuJ…"
+          -getUserName(): string: "Renae"
+          -getText(): string: "I typically have no issues with the app, but this update seems to have broken it (though it was fine at first). For a few days now whenever I try to u…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581740061 {
-            date: 2020-02-15T04:14:21+00:00
+          -getDate(): ?DateTimeInterface: @1644211105 {
+            date: 2022-02-07T05:18:25+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 24
+          -getCountLikes(): int: 1655
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         …
       ]
@@ -455,14 +453,14 @@ array:2 [
       -getName(): string: "Minecraft"
       -getSummary(): ?string: "Minecraft é um jogo sobre blocos e aventuras!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Mojang"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Mojang"
+        -getId(): string: "4772240228547998649"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4772240228547998649"
         -getName(): string: "Mojang"
         -getDescription(): ?string: null
         -getWebsite(): ?string: "http://help.mojang.com"
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
         -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: "android-help@mojang.com"
+        -getEmail(): ?string: "help@minecraft.net"
         -getAddress(): ?string: """
           Mojang\n
           Maria Skolgata 83\n
@@ -471,135 +469,135 @@ array:2 [
           Sweden
           """
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
       }
-      -getScore(): float: 4.4607687
-      -getPriceText(): ?string: "R$ 19,99"
+      -getScore(): float: 4.5828166
+      -getPriceText(): ?string: "R$ 37,99"
       -isFree(): bool: false
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
       -getDescription(): string: """
         Explore mundos infinitos e construa desde simples casas a grandiosos castelos. Jogue no modo criativo com recursos ilimitados ou minere fundo no mundo…
         """
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
       }
-      -getScreenshots(): array:8 [
+      -getScreenshots(): array: array:12 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/FCSsEdBLAlFANDRAj8N7Azn_zffiK2Qf6FtlTLXRrfTRT7_Zzz4Ys2239WRXm78ZNQ"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/FCSsEdBLAlFANDRAj8N7Azn_zffiK2Qf6FtlTLXRrfTRT7_Zzz4Ys2239WRXm78ZNQ=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/FCSsEdBLAlFANDRAj8N7Azn_zffiK2Qf6FtlTLXRrfTRT7_Zzz4Ys2239WRXm78ZNQ"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/FLM1WbKTa8zW98zrGUQp0ZHWDGLbZRLjIpsqXrd9oFFTIFFPZOlIYbGtH0C305xxXcc"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/FLM1WbKTa8zW98zrGUQp0ZHWDGLbZRLjIpsqXrd9oFFTIFFPZOlIYbGtH0C305xxXcc=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/FLM1WbKTa8zW98zrGUQp0ZHWDGLbZRLjIpsqXrd9oFFTIFFPZOlIYbGtH0C305xxXcc"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "GAME_ARCADE"
         -getName(): string: "Arcade"
         -isGamesCategory(): bool: true
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: false
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: {
-        -getImageUrl(): string: "https://i.ytimg.com/vi/5nWMr2njHiA/hqdefault.jpg"
-        -getVideoUrl(): string: "https://www.youtube.com/embed/5nWMr2njHiA?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-        -getYoutubeId(): ?string: "5nWMr2njHiA"
+        -getImageUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
+        -getVideoUrl(): string: "https://www.youtube.com/embed/6Aaw7LzNQ88?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
+        -getYoutubeId(): ?string: "6Aaw7LzNQ88"
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getRecentChanges(): ?string: """
-        Novidades na versão 1.14.30:\n
+        Novidades na versão 1.18.12:\n
         Correção de diversos erros
         """
       -isEditorsChoice(): bool: true
-      -getInstalls(): int: 27372757
+      -getInstalls(): int: 40328325
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 2414732
-        -getFourStars(): int: 246521
-        -getThreeStars(): int: 118459
-        -getTwoStars(): int: 65428
-        -getOneStar(): int: 246900
+        -getFiveStars(): int: 3696870
+        -getFourStars(): int: 312998
+        -getThreeStars(): int: 142202
+        -getTwoStars(): int: 79491
+        -getOneStar(): int: 259418
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      -getPrice(): float: 19.99
+      -getPrice(): float: 37.99
       -getCurrency(): string: "BRL"
       -isContainsIAP(): bool: true
       -getOffersIAPCost(): ?string: "R$ 1,33 – R$ 179,99 por item"
       -isContainsAds(): bool: false
       -getSize(): ?string: null
-      -getAppVersion(): ?string: "1.14.30.2"
-      -getAndroidVersion(): ?string: "4.2 ou superior"
-      -getMinAndroidVersion(): ?string: "4.2"
+      -getAppVersion(): ?string: "1.18.12.01"
+      -getAndroidVersion(): ?string: "5.0 ou superior"
+      -getMinAndroidVersion(): ?string: "5.0"
       -getContentRating(): ?string: "Classificação Livre"
       -getPrivacyPoliceUrl(): ?string: "https://privacy.microsoft.com/en-us/privacystatement"
       -getReleased(): ?DateTimeInterface: @1313366400 {
         date: 2011-08-15T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581031098 {
-        date: 2020-02-06T23:18:18+00:00
+      -getUpdated(): ?DateTimeInterface: @1644890219 {
+        date: 2022-02-15T01:56:59+00:00
       }
-      -getNumberVoters(): int: 3092042
-      -getNumberReviews(): int: 1599717
-      -getReviews(): array:4 [
+      -getNumberVoters(): int: 4490990
+      -getNumberReviews(): int: 269309
+      -getReviews(): array: array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOF9xom9V10RMHeOT7ZOg-0lZggY1fvhp7rXdiCJROaDn93a3sH1Uo6ECUCH907-Z0Sy81qsEF8wrxGrA-s"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOF9xom9V10RMHeOT7ZOg-0lZggY1fvhp7rXdiCJROaDn93a3sH1Uo6ECUCH907…"
-          -getUserName(): string: "Um usuário do Google"
-          -getText(): string: "Toda vez que eu abro o jogo após a nova atualização o jogo não abre, apenas da tela preta, e fecha, dei uma olhada em outras resenhas e vi outras pess…"
+          -getId(): string: "gp:AOqpTOFKhld3M6sJbWYOeQP_nhptO-nRWsDd5w0iB71Nk3j9bqKthoKytIojqnZz2VZIiApD4NE2o_jTCSfwXQg"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOFKhld3M6sJbWYOeQP_nhptO-nRWsDd5w0iB71Nk3j9bqKthoKytIojqnZz2VZ…"
+          -getUserName(): string: "Renald Lopes"
+          -getText(): string: "Desenvolvedores incompetentes, conseguiram acabar com o jogo nessa atualização. Não renderiza, itens não dropam, mobs invisíveis, jogador não leva dan…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgcBwx1jdNjdC_cEXDJUFIKxV0skPiSzC3rmB8C=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgcBwx1jdNjdC_cEXDJUFIKxV0skPiSzC3rmB8C=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgcBwx1jdNjdC_cEXDJUFIKxV0skPiSzC3rmB8C=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s64"
           }
-          -getDate(): ?DateTimeInterface: @1580406646 {
-            date: 2020-01-30T17:50:46+00:00
+          -getDate(): ?DateTimeInterface: @1645796796 {
+            date: 2022-02-25T13:46:36+00:00
           }
-          -getScore(): int: 4
-          -getCountLikes(): int: 1000
+          -getScore(): int: 1
+          -getCountLikes(): int: 0
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOE9rwGIAQ6BEXIsbLzZEWSiEuWog_l5UnOFfDAvzsv2drkIGtMuZvGhjgqOABrBtRtGXHzr0Jq5_k2GI1s"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOE9rwGIAQ6BEXIsbLzZEWSiEuWog_l5UnOFfDAvzsv2drkIGtMuZvGhjgqOABr…"
-          -getUserName(): string: "Iralo `"
-          -getText(): string: "O jogo é excelente, super criativo e divertido. Não consigo entrar em um dos servidores ( Mineville City ) desde que comprei o jogo. Tudo o que aconte…"
+          -getId(): string: "gp:AOqpTOGXWLBwfd5PTa_Tnp59qHst2-sOsTd2KaZGz-2AVfIaDeYJ0UT10DsD79wMM36U7qj8nMJ2yvMj7fHjhK0"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOGXWLBwfd5PTa_Tnp59qHst2-sOsTd2KaZGz-2AVfIaDeYJ0UT10DsD79wMM36…"
+          -getUserName(): string: "Maria Eduarda"
+          -getText(): string: "Não tenho oque falar desse jogo,gráficos excelentes, não trava quase nunca! Esse app apesar do preço, vale muito a pena, comprei ele e não me arrepend…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mApSsq3soGQoKLTguLGtUT6Ts1m4Bt1LgDK_YDMvg=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mApSsq3soGQoKLTguLGtUT6Ts1m4Bt1LgDK_YDMvg=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjKPq_b1nks0ltQrgqHBuu5yssEYH3gbcWTrgccHQ=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjKPq_b1nks0ltQrgqHBuu5yssEYH3gbcWTrgccHQ=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjKPq_b1nks0ltQrgqHBuu5yssEYH3gbcWTrgccHQ=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mApSsq3soGQoKLTguLGtUT6Ts1m4Bt1LgDK_YDMvg=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581090202 {
-            date: 2020-02-07T15:43:22+00:00
+          -getDate(): ?DateTimeInterface: @1645526625 {
+            date: 2022-02-22T10:43:45+00:00
           }
-          -getScore(): int: 4
-          -getCountLikes(): int: 440
+          -getScore(): int: 5
+          -getCountLikes(): int: 0
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         …
       ]
@@ -648,70 +646,66 @@ array:5 [
         -getEmail(): ?string: "apps-help@google.com"
         -getAddress(): ?string: "1600 Amphitheatre Parkway, Mountain View 94043"
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
       }
-      -getScore(): float: 4.371647
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 4.126106
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: """
         Google Chrome is a fast, easy to use, and secure web browser. Designed for Android, Chrome brings you personalized news articles, quick links to your …
         """
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
       }
-      -getScreenshots(): array:18 [
+      -getScreenshots(): array: array:18 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/MDUDkVeS3rAZ-CeNSAlMM94iQAxCJbthTNK7675leCrIQ3cZ5uVAxrXRRsqanJUHog"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/MDUDkVeS3rAZ-CeNSAlMM94iQAxCJbthTNK7675leCrIQ3cZ5uVAxrXRRsqanJUHog=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/MDUDkVeS3rAZ-CeNSAlMM94iQAxCJbthTNK7675leCrIQ3cZ5uVAxrXRRsqanJUHog"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "COMMUNICATION"
         -getName(): string: "Communication"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: """
-        Thanks for choosing Chrome! This release contains the following features, as well as stability and performance improvements: \n
-        \n
-        • Quieter notifications…
-        """
+      -getRecentChanges(): ?string: "Thanks for choosing Chrome! This release includes stability and performance improvements."
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 6109119447
+      -getInstalls(): int: 10546228660
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 13653105
-        -getFourStars(): int: 2319179
-        -getThreeStars(): int: 1115216
-        -getTwoStars(): int: 545239
-        -getOneStar(): int: 1451591
+        -getFiveStars(): int: 23719921
+        -getFourStars(): int: 4688358
+        -getThreeStars(): int: 2543567
+        -getTwoStars(): int: 1510499
+        -getOneStar(): int: 4498126
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
@@ -727,51 +721,51 @@ array:5 [
       -getReleased(): ?DateTimeInterface: @1328572800 {
         date: 2012-02-07T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581622298 {
-        date: 2020-02-13T19:31:38+00:00
+      -getUpdated(): ?DateTimeInterface: @1645554664 {
+        date: 2022-02-22T18:31:04+00:00
       }
-      -getNumberVoters(): int: 19084332
-      -getNumberReviews(): int: 5581111
-      -getReviews(): array:4 [
+      -getNumberVoters(): int: 36960498
+      -getNumberReviews(): int: 864115
+      -getReviews(): array: array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZAUppOOGWOIwdUCDs"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOH7DSH2OtYI4XCeZEW_qyYJZdFxrXyE-m3mIW0PxSnL_RwuM0xWp_5PJjCJK-4a2cZ…"
-          -getUserName(): string: "Stephen"
-          -getText(): string: "I thought it was just me (or my device - Samsung S10 tablet), but I see that many users are having crash problems with Chrome. I tried all of the fixe…"
+          -getId(): string: "gp:AOqpTOGe8ai7cP4FaVAaYPRtiIcSPworf6t7APGHIWI2sdHbjJ0fHJAI0bjnoYPMr_27AQy3rKUvr5Xxj3NmgIk"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGe8ai7cP4FaVAaYPRtiIcSPworf6t7APGHIWI2sdHbjJ0fHJAI0bjnoYPMr_27AQy…"
+          -getUserName(): string: "Two Fisted Betty"
+          -getText(): string: "Have been a VERY long time user and absolutely love Google and everything it has to offer. It's had it's glitches but all software has it's issues fro…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mAA8Z3E9Dydz7VARV9gbzkRw6SIxFfwT97_QRLg=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581778840 {
-            date: 2020-02-15T15:00:40+00:00
+          -getDate(): ?DateTimeInterface: @1645673394 {
+            date: 2022-02-24T03:29:54+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 260
+          -getScore(): int: 4
+          -getCountLikes(): int: 0
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkqoOZRUoC6qm4OXv7g"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHJIhcmfbAZksVWe5j-AnsnH7Dy3A6ghft6M9Hh_ojJtgMvqpx5hSH5F9Wkg_88bkq…"
-          -getUserName(): string: "Janae Ask"
-          -getText(): string: "I've been a diehard chrome fan for years but I noticed today that my app updated and my home page button disappeared. I'm super annoyed and honestly I…"
+          -getId(): string: "gp:AOqpTOGIgO0_ejFawLmyIyJt9YFuaauwHIsRq-bCyEEo7E41GTOqXM9STPrGmBjB_9O0ZuJgdGRhoG205Y_Dw-s"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGIgO0_ejFawLmyIyJt9YFuaauwHIsRq-bCyEEo7E41GTOqXM9STPrGmBjB_9O0ZuJ…"
+          -getUserName(): string: "Renae"
+          -getText(): string: "I typically have no issues with the app, but this update seems to have broken it (though it was fine at first). For a few days now whenever I try to u…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/a-/AAuE7mCTnjMGOtddUmBD8ley9nDfJxi_hPPlQFYFNimY=s64"
           }
-          -getDate(): ?DateTimeInterface: @1581740061 {
-            date: 2020-02-15T04:14:21+00:00
+          -getDate(): ?DateTimeInterface: @1644211105 {
+            date: 2022-02-07T05:18:25+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 24
+          -getCountLikes(): int: 1655
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         …
       ]
@@ -796,66 +790,66 @@ array:5 [
         -getEmail(): ?string: "apps-help@google.com"
         -getAddress(): ?string: "1600 Amphitheatre Parkway, Mountain View 94043"
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
       }
-      -getScore(): float: 4.371647
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 4.126106
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: """
         Google Chrome est un navigateur Web rapide, simple d'utilisation et sécurisé. Conçu pour Android, Chrome vous permet de consulter une sélection person…
         """
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/rcUvNWE0WrExleYaz3l2XS_8tMOJLtdNTzHz9AXLJDPrkUZqQcY-cMxSSRUOWJteNq4"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/rcUvNWE0WrExleYaz3l2XS_8tMOJLtdNTzHz9AXLJDPrkUZqQcY-cMxSSRUOWJteNq4=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/rcUvNWE0WrExleYaz3l2XS_8tMOJLtdNTzHz9AXLJDPrkUZqQcY-cMxSSRUOWJteNq4"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/rcUvNWE0WrExleYaz3l2XS_8tMOJLtdNTzHz9AXLJDPrkUZqQcY-cMxSSRUOWJteNq4"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/rcUvNWE0WrExleYaz3l2XS_8tMOJLtdNTzHz9AXLJDPrkUZqQcY-cMxSSRUOWJteNq4=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/rcUvNWE0WrExleYaz3l2XS_8tMOJLtdNTzHz9AXLJDPrkUZqQcY-cMxSSRUOWJteNq4"
       }
-      -getScreenshots(): array:18 [
+      -getScreenshots(): array: array:18 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/BkLzaEgIaYIViqMAMnZnWrl9RcZouqH8mHstYVARFP3MYNZB6VeZJGJf3S7Xe_VUuyzt"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/BkLzaEgIaYIViqMAMnZnWrl9RcZouqH8mHstYVARFP3MYNZB6VeZJGJf3S7Xe_VUuyzt=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/BkLzaEgIaYIViqMAMnZnWrl9RcZouqH8mHstYVARFP3MYNZB6VeZJGJf3S7Xe_VUuyzt"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/BkLzaEgIaYIViqMAMnZnWrl9RcZouqH8mHstYVARFP3MYNZB6VeZJGJf3S7Xe_VUuyzt"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/BkLzaEgIaYIViqMAMnZnWrl9RcZouqH8mHstYVARFP3MYNZB6VeZJGJf3S7Xe_VUuyzt=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/BkLzaEgIaYIViqMAMnZnWrl9RcZouqH8mHstYVARFP3MYNZB6VeZJGJf3S7Xe_VUuyzt"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/rJcp_1FVBvblJjs6SpAsLglKV9EH_sn2Oa47CC1vfw1fwXwVQh12N4tqQsYMJiAzUUc"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/rJcp_1FVBvblJjs6SpAsLglKV9EH_sn2Oa47CC1vfw1fwXwVQh12N4tqQsYMJiAzUUc=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/tY1kWcWsc5FU3AJJ5ZzQSfsIqw9IGqejF5j75rh4wA9G0KtcEa_0ffZStfWtF_Zoi1U"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/tY1kWcWsc5FU3AJJ5ZzQSfsIqw9IGqejF5j75rh4wA9G0KtcEa_0ffZStfWtF_Zoi1U"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/tY1kWcWsc5FU3AJJ5ZzQSfsIqw9IGqejF5j75rh4wA9G0KtcEa_0ffZStfWtF_Zoi1U=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/rJcp_1FVBvblJjs6SpAsLglKV9EH_sn2Oa47CC1vfw1fwXwVQh12N4tqQsYMJiAzUUc"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "COMMUNICATION"
         -getName(): string: "Communication"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
       -getRecentChanges(): ?string: "Merci d'avoir choisi Chrome ! Cette version inclut des améliorations de la stabilité et des performances."
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 6109119447
+      -getInstalls(): int: 10546228660
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 13653227
-        -getFourStars(): int: 2319199
-        -getThreeStars(): int: 1115226
-        -getTwoStars(): int: 545244
-        -getOneStar(): int: 1451604
+        -getFiveStars(): int: 23719921
+        -getFourStars(): int: 4688358
+        -getThreeStars(): int: 2543567
+        -getTwoStars(): int: 1510499
+        -getOneStar(): int: 4498126
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
@@ -871,51 +865,58 @@ array:5 [
       -getReleased(): ?DateTimeInterface: @1328572800 {
         date: 2012-02-07T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581622298 {
-        date: 2020-02-13T19:31:38+00:00
+      -getUpdated(): ?DateTimeInterface: @1645554664 {
+        date: 2022-02-22T18:31:04+00:00
       }
-      -getNumberVoters(): int: 19084503
-      -getNumberReviews(): int: 5581172
-      -getReviews(): array:4 [
+      -getNumberVoters(): int: 36960498
+      -getNumberReviews(): int: 864115
+      -getReviews(): array: array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOHhVlm5JUKBgyuPv-Scje53SialWEXc2UMB9_fmrVbRLP1H9i9TYRR9uZSqIBk_XNKYalsOh78ISfMtlTo"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHhVlm5JUKBgyuPv-Scje53SialWEXc2UMB9_fmrVbRLP1H9i9TYRR9uZSqIBk_XNK…"
-          -getUserName(): string: "Dm Go"
-          -getText(): string: "Très bien jusqu'à la dernière mise à jour, le changement des onglets est devenu BEAUCOUP moins pratique qu'avant, où l'on pouvait facilement se repére…"
+          -getId(): string: "gp:AOqpTOF8R72xCrYXTAeso0BgPKXKbou5TR63V5pivkPPZc58NgQK74nIP9jFLw4Tih7ByxkPdwUSlUh45_UQxcU"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOF8R72xCrYXTAeso0BgPKXKbou5TR63V5pivkPPZc58NgQK74nIP9jFLw4Tih7Byxk…"
+          -getUserName(): string: "Atmosphere"
+          -getText(): string: "Impossible de télécharger la mise à jour . Cependant Chrome a été toujours été mon navigateur privilégié, j'apprécie beaucoup sa rapidité."
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/-yWvPQ0z6fjc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd3CK1CsmcQirNT0a5YpECXWUQoUg/s64/"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-yWvPQ0z6fjc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd3CK1CsmcQirNT0a5YpECXWUQoUg/s0/"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhVcyqo6-rX6DRa529Ke5PcSPd7ZW2YxJDFmMYGQQ=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhVcyqo6-rX6DRa529Ke5PcSPd7ZW2YxJDFmMYGQQ=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhVcyqo6-rX6DRa529Ke5PcSPd7ZW2YxJDFmMYGQQ=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/-yWvPQ0z6fjc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rd3CK1CsmcQirNT0a5YpECXWUQoUg/s64/"
           }
-          -getDate(): ?DateTimeInterface: @1581813065 {
-            date: 2020-02-16T00:31:05+00:00
+          -getDate(): ?DateTimeInterface: @1644365527 {
+            date: 2022-02-09T00:12:07+00:00
           }
           -getScore(): int: 3
-          -getCountLikes(): int: 10
-          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getCountLikes(): int: 0
+          -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
+            -getDate(): DateTimeInterface: @1644398667 {
+              date: 2022-02-09T09:24:27+00:00
+            }
+            -getText(): string: "Bonjour et merci de nous avoir contactés ! Nous sommes au courant des soucis concernant la mise à jour de l'application. Nous avons partagé plus d'inf…"
+            -asArray(): array: …
+            -jsonSerialize(): array: …
+          }
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOHqBCktJMi0UcJ3WV-txYU6EOJO5clMdr06hBUP7QgGHQjqBVNl83xNAd82uLEo3JYc28drRhCExmN0i3I"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHqBCktJMi0UcJ3WV-txYU6EOJO5clMdr06hBUP7QgGHQjqBVNl83xNAd82uLEo3JY…"
-          -getUserName(): string: "Dimitri Czech"
-          -getText(): string: "Pleins de détails avec cette mise à jour ne sont plus là et ce sont les détails qui font la différence parfois. Ne plus pouvoir zapper les infos sur l…"
+          -getId(): string: "gp:AOqpTOHzEutq7lmiHmWZ5uu8iRoBTRmLmwPtP5dQlvR1myIuUHObWGgKsjbsACBz1Abu_sqJ4RGNwAFWBh4vovc"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOHzEutq7lmiHmWZ5uu8iRoBTRmLmwPtP5dQlvR1myIuUHObWGgKsjbsACBz1Abu_sq…"
+          -getUserName(): string: "Said said"
+          -getText(): string: "Pour une meilleure navigation je vous conseille firefox largement le meilleur navigateur sur Android en plus il supporte les modules complémentaires c…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/-lKPxhT_CIfw/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rc4XRvV2xeLFwFTrivo4jpsKPBurw/s64/"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-lKPxhT_CIfw/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rc4XRvV2xeLFwFTrivo4jpsKPBurw/s0/"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgpjKVUrdtrAvjpqlQfEyMZLI7P3DDkI_ekIYPHMg=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgpjKVUrdtrAvjpqlQfEyMZLI7P3DDkI_ekIYPHMg=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgpjKVUrdtrAvjpqlQfEyMZLI7P3DDkI_ekIYPHMg=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/-lKPxhT_CIfw/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rc4XRvV2xeLFwFTrivo4jpsKPBurw/s64/"
           }
-          -getDate(): ?DateTimeInterface: @1581444709 {
-            date: 2020-02-11T18:11:49+00:00
+          -getDate(): ?DateTimeInterface: @1639445855 {
+            date: 2021-12-14T01:37:35+00:00
           }
-          -getScore(): int: 2
-          -getCountLikes(): int: 75
+          -getScore(): int: 1
+          -getCountLikes(): int: 62
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         …
       ]
@@ -965,72 +966,75 @@ array:3 [
         -getEmail(): ?string: "info@nederland.fm"
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
       }
-      -getScore(): float: 3.851852
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 3.9333334
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: "Online, live, gratis en eenvoudig luisteren naar de beste radio stations van Nederland !"
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
       }
-      -getScreenshots(): array:6 [
+      -getScreenshots(): array: array:9 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "MUSIC_AND_AUDIO"
         -getName(): string: "Muziek en audio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: "Problemen opgelost"
+      -getRecentChanges(): ?string: """
+        - Geschikt voor Android Auto\n
+        - Problemen opgelost
+        """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 596014
+      -getInstalls(): int: 728301
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 1281
-        -getFourStars(): int: 191
-        -getThreeStars(): int: 151
-        -getTwoStars(): int: 211
-        -getOneStar(): int: 343
+        -getFiveStars(): int: 649
+        -getFourStars(): int: 1137
+        -getThreeStars(): int: 487
+        -getTwoStars(): int: 162
+        -getOneStar(): int: 0
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: true
-      -getSize(): ?string: "5,1M"
-      -getAppVersion(): ?string: "4.0"
+      -getSize(): ?string: "6,5M"
+      -getAppVersion(): ?string: "7.0"
       -getAndroidVersion(): ?string: "4.1 en hoger"
       -getMinAndroidVersion(): ?string: "4.1"
       -getContentRating(): ?string: "Iedereen"
@@ -1038,51 +1042,51 @@ array:3 [
       -getReleased(): ?DateTimeInterface: @1502236800 {
         date: 2017-08-09T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581600058 {
-        date: 2020-02-13T13:20:58+00:00
+      -getUpdated(): ?DateTimeInterface: @1625992062 {
+        date: 2021-07-11T08:27:42+00:00
       }
-      -getNumberVoters(): int: 2180
-      -getNumberReviews(): int: 558
-      -getReviews(): array:4 [
+      -getNumberVoters(): int: 2437
+      -getNumberReviews(): int: 0
+      -getReviews(): array: array:4 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOFi7Kk_jVOllPRPnIosMlgQKqGd2uLTWb5TldsE4KjAOpnLMlxGW6eLrjT8wOQ8ziGNCTukqmr8vMBBFg"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOFi7Kk_jVOllPRPnIosMlgQKqGd2uLTWb5TldsE4KjAOpnLMlxGW6eLrjT8wOQ8ziGN…"
-          -getUserName(): string: "Bas Peters"
-          -getText(): string: "Het was altijd een hele goede app maar sinds kort krijg ik midden in een liedje gewoon reclame en dat slaat echt nergens op. Ben best bereid om wat te…"
+          -getId(): string: "gp:AOqpTOF4FLkx0AUXd_kG6F2iYnIP1ixCa17iis6SO2octmf0WbdLHP3B80m4tc7tGUjuj7259RbuAsKDYlvK_g"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOF4FLkx0AUXd_kG6F2iYnIP1ixCa17iis6SO2octmf0WbdLHP3B80m4tc7tGUjuj725…"
+          -getUserName(): string: "Max Rex"
+          -getText(): string: "Fantastic app pity you cannot move it to sd card.but its worth 5,better than ever was well done even better app now great work thank you."
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/-KRpT8HPwTCg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdzAg8vO7wkLfrQYznvZJ1pjfoyrQ/s64/"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-KRpT8HPwTCg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdzAg8vO7wkLfrQYznvZJ1pjfoyrQ/s0/"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/-KRpT8HPwTCg/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rdzAg8vO7wkLfrQYznvZJ1pjfoyrQ/s64/"
           }
-          -getDate(): ?DateTimeInterface: @1543226196 {
-            date: 2018-11-26T09:56:36+00:00
+          -getDate(): ?DateTimeInterface: @1636736376 {
+            date: 2021-11-12T16:59:36+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 15
+          -getScore(): int: 5
+          -getCountLikes(): int: 6
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOE8md2QM60-iEAviKEt73gXeN3Al1w8GiYUF6CLNWBVjZPRM98Aq3NYhqBwtkY8w3u1Zp3hrPOSgRgjfw"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOE8md2QM60-iEAviKEt73gXeN3Al1w8GiYUF6CLNWBVjZPRM98Aq3NYhqBwtkY8w3u1…"
-          -getUserName(): string: "Verg"
-          -getText(): string: "Even verbinding kwijt? RECLAME. Even op pauze? RECLAME. Radio luisteren in de trein? RECLAME RECLAME RECLAME RECLAME. Ik verbaas me dat jullie blijkba…"
+          -getId(): string: "gp:AOqpTOEBa_5koHnvNNFEmKIoGpW3uWp2Ouu6-47HHADnYzIrKX_VUHd8uEshJKwx3kNwtQQzHlbyzv-o93cbEQ"
+          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOEBa_5koHnvNNFEmKIoGpW3uWp2Ouu6-47HHADnYzIrKX_VUHd8uEshJKwx3kNwtQQz…"
+          -getUserName(): string: "Fred Zeeuw"
+          -getText(): string: "Bij direct via telefoon luisteren gaat het prima. Als je radio gaat casten dan valt na 30 seconden het geluid weg. En niet alleen bij mij maar ook via…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -getUrl(): string: "https://lh3.googleusercontent.com/-4Nyg4U_H_7s/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reMSyniGDA-kcSKIj85b7jCgAcAZA/s64/"
-            -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-4Nyg4U_H_7s/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reMSyniGDA-kcSKIj85b7jCgAcAZA/s0/"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s0"
             -getBinaryImageContent(): string: …
-            -__toString(): string: "https://lh3.googleusercontent.com/-4Nyg4U_H_7s/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3reMSyniGDA-kcSKIj85b7jCgAcAZA/s64/"
           }
-          -getDate(): ?DateTimeInterface: @1545823880 {
-            date: 2018-12-26T11:31:20+00:00
+          -getDate(): ?DateTimeInterface: @1635352879 {
+            date: 2021-10-27T16:41:19+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 57
+          -getCountLikes(): int: 9
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
           -asArray(): array: …
-          -jsonSerialize(): mixed: …
+          -jsonSerialize(): array: …
         }
         …
       ]
@@ -1107,72 +1111,75 @@ array:3 [
         -getEmail(): ?string: "info@nederland.fm"
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/zePx7LWaRzRtSyDJ7vunUvUDkzkqOnabsxrmRd7BJ4DLhdp9e1oWA59Gvm9QzEusJD8"
       }
-      -getScore(): float: 3.851852
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -jsonSerialize(): mixed: …
+      -getScore(): float: 3.9333334
+      -getPriceText(): ?string: ""
+      -isFree(): bool: false
+      -jsonSerialize(): array: …
       -getDescription(): string: "Առցանց, ապրում, ազատ եւ հեշտ է լսել լավագույն ռադիոկայանների Նիդեռլանդներում."
       -isAutoTranslatedDescription(): bool: false
       -getTranslatedFromLocale(): ?string: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
       }
-      -getScreenshots(): array:6 [
+      -getScreenshots(): array: array:9 [
         0 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/ks7h5PE1lxcXBIGpJzgblSaLLk2SIyF8pCJm1AYUnYAvLO7hPoEFb_QkaI8bwSQIyTE=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/Zi1xCmzzlWcmZcRSHdRecGsDPPVOppevflPnPR_mQpCJjrPcdyOHSPYyGePABXtk87o"
         }
         1 => class Nelexa\GPlay\Model\GoogleImage {
-          -getUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
-          -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV=s0"
+          -__toString(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/NmGpurUQJC_DoX_3d6mvIgwUkWBBR5neJf3COGo1abdyJa5HFKA5IqtmB9mBAYhOUW0=s0"
           -getBinaryImageContent(): string: …
-          -__toString(): string: "https://lh3.googleusercontent.com/ajwHxM1Be7NpyJJG-1xmH3cqL4n6Uhf08w9WQvCsOk-5D95p46jyuNPK3YNRnRruFGMV"
         }
         …
       ]
-      -getCategory(): Nelexa\GPlay\Model\Category: {
+      -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "MUSIC_AND_AUDIO"
         -getName(): string: "Երաժշտություն և աուդիո"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
-      -getRecentChanges(): ?string: "Problemen opgelost"
+      -getRecentChanges(): ?string: """
+        - Geschikt voor Android Auto\n
+        - Problemen opgelost
+        """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 596014
+      -getInstalls(): int: 728301
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 1281
-        -getFourStars(): int: 191
-        -getThreeStars(): int: 151
-        -getTwoStars(): int: 211
-        -getOneStar(): int: 343
+        -getFiveStars(): int: 649
+        -getFourStars(): int: 1137
+        -getThreeStars(): int: 487
+        -getTwoStars(): int: 162
+        -getOneStar(): int: 0
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getPrice(): float: 0.0
       -getCurrency(): string: "USD"
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: true
-      -getSize(): ?string: "5.1M"
-      -getAppVersion(): ?string: "4.0"
+      -getSize(): ?string: "6,5M"
+      -getAppVersion(): ?string: "7.0"
       -getAndroidVersion(): ?string: "4.1 և ավելի բարձր"
       -getMinAndroidVersion(): ?string: "4.1"
       -getContentRating(): ?string: "Բոլորի համար"
@@ -1180,12 +1187,12 @@ array:3 [
       -getReleased(): ?DateTimeInterface: @1502236800 {
         date: 2017-08-09T00:00:00+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1581600058 {
-        date: 2020-02-13T13:20:58+00:00
+      -getUpdated(): ?DateTimeInterface: @1625992062 {
+        date: 2021-07-11T08:27:42+00:00
       }
-      -getNumberVoters(): int: 2180
-      -getNumberReviews(): int: 558
-      -getReviews(): array:0 []
+      -getNumberVoters(): int: 2437
+      -getNumberReviews(): int: 0
+      -getReviews(): array: array:0 []
       -asArray(): array: …
     }
     …
@@ -1241,16 +1248,14 @@ Checks if the specified applications exist in the Google Play store.
 ```php
 $gplay->setConcurrency(8);
 
-$exists = $gplay->existsApps(
-    [
-        'maps' => 'com.google.android.apps.maps',
-        'docs' => new \Nelexa\GPlay\Model\AppId('com.google.android.apps.docs'),
-        /* 0 => */ 'com.google.android.apps.googleassistant',
-        /* 1 => */ 'com.google.android.keep',
-        'invalid' => 'com.android.test',
-        'com.google.android.apps.authenticator2' => 'com.google.android.apps.authenticator2',
-    ]
-);
+$exists = $gplay->existsApps([
+    'maps' => 'com.google.android.apps.maps',
+    'docs' => new \Nelexa\GPlay\Model\AppId('com.google.android.apps.docs'),
+    /* 0 => */ 'com.google.android.apps.googleassistant',
+    /* 1 => */ 'com.google.android.keep',
+    'invalid' => 'com.android.test',
+    'com.google.android.apps.authenticator2' => 'com.google.android.apps.authenticator2',
+]);
 ```
 <details>
   <summary>Results</summary>
@@ -1291,58 +1296,58 @@ $reviews = $gplay->getReviews(
 ```php
 array:1000 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOGMp3ybCbJiOqLVaUuFuC9OJnYcVQ17YcqBw1o78rC3Rc7eD0WGwuqgqrHDbTtO6J2hgzcWR7FtK97oyzw"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGMp3ybCbJiOqLVaUuFuC9OJnYcVQ17YcqBw1o78rC3Rc7eD0WGwuqgqrHDbTtO6J2hgz…"
-      -getUserName(): string: "Ury Kamensky"
-      -getText(): string: "Добавьте возможность закрывать (или уберите насовсем, но на это особо не надеюсь) иконку/кнопку/ссылку с предложением заказать такси, она ОЧЕНЬ РАЗДРА…"
+      -getId(): string: "gp:AOqpTOGobbFWlkxiu3je21EbN0izjZYCj888IJdkBfysY5aNS-hIsIsFVc_6yDusSX6MHpWUQsNT-MdlqPgMKG8"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGobbFWlkxiu3je21EbN0izjZYCj888IJdkBfysY5aNS-hIsIsFVc_6yDusSX6MHpWUQs…"
+      -getUserName(): string: "Татьяна Борисова"
+      -getText(): string: "Удобное приложение. Всё варианты пересадок и время в пути показывает, временные закрытия станций - тоже. Это про Московское метро. Но схемы есть и дру…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s0/"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJz1CMv1CYyC64JggEWAkCwXOZBlgU4DakbQKRLo=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJz1CMv1CYyC64JggEWAkCwXOZBlgU4DakbQKRLo=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJz1CMv1CYyC64JggEWAkCwXOZBlgU4DakbQKRLo=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-LI9m4wX6nxk/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3repzhI13u0GMMXfvbTHqnLtnerPYg/s64/"
       }
-      -getDate(): ?DateTimeInterface: @1581494510 {
-        date: 2020-02-12T08:01:50+00:00
+      -getDate(): ?DateTimeInterface: @1645609417 {
+        date: 2022-02-23T09:43:37+00:00
       }
-      -getScore(): int: 2
-      -getCountLikes(): int: 12
-      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-        -getDate(): DateTimeInterface: @1581510687 {
-          date: 2020-02-12T12:31:27+00:00
-        }
-        -getText(): string: "Спасибо за отзыв и замечание к отображению этой кнопки, мы обязательно рассмотрим его подробнее!"
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOGXiWwiyPHHUCXsx5JPJtDtKIa7CCXTUK8xhAJ9eyNv_jkm4coeSOqKHn3Eu5s52AMTOvPLPL0RbAJV25Y"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGXiWwiyPHHUCXsx5JPJtDtKIa7CCXTUK8xhAJ9eyNv_jkm4coeSOqKHn3Eu5s52AMTOv…"
-      -getUserName(): string: "Рии Эн"
-      -getText(): string: "Диаметры то появляются, то исчезают. Время отличается от рассчитанного на сайте. Предлагает ехать через закрытую каховскую ветку. Единственное, что ра…"
-      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-Zos3KoSJTjU/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfZKhn84y4kq0BVajR1VBK8JSNuFQ/s64/"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-Zos3KoSJTjU/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfZKhn84y4kq0BVajR1VBK8JSNuFQ/s0/"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-Zos3KoSJTjU/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfZKhn84y4kq0BVajR1VBK8JSNuFQ/s64/"
-      }
-      -getDate(): ?DateTimeInterface: @1581341597 {
-        date: 2020-02-10T13:33:17+00:00
-      }
-      -getScore(): int: 3
+      -getScore(): int: 5
       -getCountLikes(): int: 0
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-        -getDate(): DateTimeInterface: @1581359256 {
-          date: 2020-02-10T18:27:36+00:00
+        -getDate(): DateTimeInterface: @1645612425 {
+          date: 2022-02-23T10:33:45+00:00
         }
-        -getText(): string: "Пожалуйста, напишите нам на app-metro@support.yandex.ru или через меню «Настройки» — «Обратная связь», покажите на скриншотах ситуации, которые вызыва…"
+        -getText(): string: "Татьяна, спасибо, что пользуетесь сервисами Яндекса! Мы очень ценим ваше доверие и рады, что приложение оказалось полезным для вас."
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
+    }
+    1 => class Nelexa\GPlay\Model\Review {
+      -getId(): string: "gp:AOqpTOGYqhgzbm47kLyxoHYlFHzF2v4k94k7i0ySzz43DWTQPIr5pLXrNBA5UL78PD0sk2stVg71MWKay-Jmpl8"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.metro&reviewId=gp%3AAOqpTOGYqhgzbm47kLyxoHYlFHzF2v4k94k7i0ySzz43DWTQPIr5pLXrNBA5UL78PD0sk2stVg…"
+      -getUserName(): string: "Анна Батлер"
+      -getText(): string: "Очень удобное приложение , показывает в какой вагон удобнее сесть для перехода на другую ветку, сколько времени займет переход , в том числе и наземны…"
+      -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJySgKDLGlL5yp4zPkFC6CnajA2YXlXxsQNig7jh=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJySgKDLGlL5yp4zPkFC6CnajA2YXlXxsQNig7jh=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJySgKDLGlL5yp4zPkFC6CnajA2YXlXxsQNig7jh=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getDate(): ?DateTimeInterface: @1645708636 {
+        date: 2022-02-24T13:17:16+00:00
+      }
+      -getScore(): int: 5
+      -getCountLikes(): int: 0
+      -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
+        -getDate(): DateTimeInterface: @1645740299 {
+          date: 2022-02-24T22:04:59+00:00
+        }
+        -getText(): string: "Анна, спасибо вам за оценку! Мы рады, что вам нравится наше приложение :)"
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -asArray(): array: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -1376,16 +1381,16 @@ class Nelexa\GPlay\Model\Review {
   -getUserName(): string: "rih"
   -getText(): string: "images are not saved on gallery even though it is in automatic download mode. fix this problem fast."
   -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/-7fis3zoKasI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcxiuziW9IC_qbC3i_TPbxOkpmx5A/s64/"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-7fis3zoKasI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcxiuziW9IC_qbC3i_TPbxOkpmx5A/s0/"
+    -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJziqSeotXUfYPXZWqlg_qfxBBER-0bPb4Tt-in8=s64"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJziqSeotXUfYPXZWqlg_qfxBBER-0bPb4Tt-in8=s64"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJziqSeotXUfYPXZWqlg_qfxBBER-0bPb4Tt-in8=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/-7fis3zoKasI/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rcxiuziW9IC_qbC3i_TPbxOkpmx5A/s64/"
   }
   -getDate(): ?DateTimeInterface: @1581236842 {
     date: 2020-02-09T08:27:22+00:00
   }
   -getScore(): int: 1
-  -getCountLikes(): int: 2
+  -getCountLikes(): int: 8
   -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
     -getDate(): DateTimeInterface: @1581348449 {
       date: 2020-02-10T15:27:29+00:00
@@ -1395,10 +1400,10 @@ class Nelexa\GPlay\Model\Review {
       Thank you for letting us know, please also provide our support team this information allowing us to investigate it and assist you as soon as p…
       """
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 
@@ -1426,17 +1431,17 @@ array:1 [
     "Other" => class Nelexa\GPlay\Model\Permission {
       -getLabel(): string: "Other"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
       }
-      -getPermissions(): array:2 [
+      -getPermissions(): array: array:2 [
         0 => "view network connections"
         1 => "full network access"
       ]
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
   ]
 ```
@@ -1458,7 +1463,7 @@ $categories = $gplay
   <summary>Results</summary>
 
 ```php
-array:58 [
+array:53 [
     0 => class Nelexa\GPlay\Model\Category {
       -getId(): string: "ART_AND_DESIGN"
       -getName(): string: "Art & Design"
@@ -1466,7 +1471,7 @@ array:58 [
       -isFamilyCategory(): bool: false
       -isApplicationCategory(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Category {
       -getId(): string: "AUTO_AND_VEHICLES"
@@ -1475,7 +1480,7 @@ array:58 [
       -isFamilyCategory(): bool: false
       -isApplicationCategory(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -1497,7 +1502,7 @@ $categories = $gplay->getCategoriesForLocales(['en', 'pt_PT', 'pt_BR', 'fr']);
 
 ```php
 array:4 [
-    "en_US" => array:58 [
+    "en_US" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1505,7 +1510,7 @@ array:4 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1514,11 +1519,11 @@ array:4 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "pt_PT" => array:58 [
+    "pt_PT" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FOOD_AND_DRINK"
         -getName(): string: "Alimentação e bebida"
@@ -1526,41 +1531,41 @@ array:4 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte e design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de relógio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "pt_BR" => array:58 [
+    "pt_BR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps para smartwatch"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Arte e design"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BEAUTY"
-        -getName(): string: "Beleza"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fr_FR" => array:58 [
+    "fr_FR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
         -getName(): string: "Actualités et magazines"
@@ -1568,16 +1573,16 @@ array:4 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Art et design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Applications montre"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
@@ -1600,7 +1605,7 @@ $categories = $gplay->getCategoriesForAvailableLocales();
 
 ```php
 array:78 [
-    "af" => array:58 [
+    "af" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BUSINESS"
         -getName(): string: "Besigheid"
@@ -1608,7 +1613,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -1617,53 +1622,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "am" => array:58 [
+    "am" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MEDICAL"
         -getName(): string: "ሕክምና"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ar" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "TOOLS"
+        -getName(): string: "መሣሪያዎች"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "ar" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "VIDEO_PLAYERS"
         -getName(): string: "أدوات الفيديو"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "BUSINESS"
+        -getName(): string: "أعمال"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "az_AZ" => array:58 [
+    "az_AZ" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Alətlər"
@@ -1671,7 +1676,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1680,116 +1685,116 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "be" => array:58 [
+    "be" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Інструменты"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "bg" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EDUCATION"
+        -getName(): string: "Адукацыя"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "bg" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
         -getName(): string: "Библиотеки и демонстрации"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      …
-    ]
-    "bn_BD" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "WEATHER"
-        -getName(): string: "আবহাওয়া"
+        -getId(): string: "BUSINESS"
+        -getName(): string: "Бизнес"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ca" => array:58 [
+    "bn_BD" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "SHOPPING"
+        -getName(): string: "Shopping"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "ca" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicacions de rellotge"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art i disseny"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automoció"
+      …
+    ]
+    "cs_CZ" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikace pro hodinky"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "cs_CZ" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Auta a doprava"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BUSINESS"
-        -getName(): string: "Byznys"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "da_DK" => array:58 [
+    "da_DK" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EVENTS"
         -getName(): string: "Begivenheder"
@@ -1797,7 +1802,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -1806,11 +1811,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "de_DE" => array:58 [
+    "de_DE" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autos & Fahrzeuge"
@@ -1818,7 +1823,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BEAUTY"
@@ -1827,32 +1832,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "el_GR" => array:58 [
+    "el_GR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
         -getName(): string: "Αγορές"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "SPORTS"
+        -getName(): string: "Αθλήματα"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_AU" => array:58 [
+    "en_AU" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1860,7 +1865,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1869,11 +1874,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_CA" => array:58 [
+    "en_CA" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1881,7 +1886,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1890,11 +1895,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_GB" => array:58 [
+    "en_GB" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1902,7 +1907,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1911,11 +1916,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_IN" => array:58 [
+    "en_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1923,7 +1928,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1932,11 +1937,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_SG" => array:58 [
+    "en_SG" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1944,7 +1949,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1953,11 +1958,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_US" => array:58 [
+    "en_US" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1965,7 +1970,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1974,11 +1979,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_ZA" => array:58 [
+    "en_ZA" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -1986,7 +1991,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1995,74 +2000,74 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "es_419" => array:58 [
+    "es_419" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte y diseño"
+        -getId(): string: "VIDEO_PLAYERS"
+        -getName(): string: "Aplicaciones de video"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Autos y vehículos"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de reloj"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "es_ES" => array:58 [
+    "es_ES" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte y diseño"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicaciones de reloj"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automoción"
+        -getId(): string: "VIDEO_PLAYERS"
+        -getName(): string: "Aplicaciones de vídeo"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "es_US" => array:58 [
+    "es_US" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte y diseño"
+        -getId(): string: "VIDEO_PLAYERS"
+        -getName(): string: "Aplicaciones de video"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Autos y vehículos"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de reloj"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "et" => array:58 [
+    "et" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autod ja sõidukid"
@@ -2070,7 +2075,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIFESTYLE"
@@ -2079,11 +2084,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "eu_ES" => array:58 [
+    "eu_ES" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ENTERTAINMENT"
         -getName(): string: "Aisia"
@@ -2091,7 +2096,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
@@ -2100,32 +2105,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fa" => array:58 [
+    "fa" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "WEATHER"
         -getName(): string: "آب و هوا"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EDUCATION"
+        -getName(): string: "آموزش"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fi_FI" => array:58 [
+    "fi_FI" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autot ja ajoneuvot"
@@ -2133,7 +2138,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -2142,11 +2147,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fil" => array:58 [
+    "fil" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ENTERTAINMENT"
         -getName(): string: "Aliwan"
@@ -2154,7 +2159,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HOUSE_AND_HOME"
@@ -2163,11 +2168,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fr_CA" => array:58 [
+    "fr_CA" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
         -getName(): string: "Actualités et magazines"
@@ -2175,20 +2180,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "FOOD_AND_DRINK"
-        -getName(): string: "Alimentation et boissons"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Applications pour montre intelligente"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fr_FR" => array:58 [
+    "fr_FR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
         -getName(): string: "Actualités et magazines"
@@ -2196,62 +2201,62 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Art et design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Applications montre"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "gl_ES" => array:58 [
+    "gl_ES" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicacións de reloxo"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Arte e deseño"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automóbiles e vehículos"
+      …
+    ]
+    "hi_IN" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "hi_IN" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MAPS_AND_NAVIGATION"
         -getName(): string: "Maps और नेविगेशन ऐप्स"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "hr" => array:58 [
+    "hr" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Alati"
@@ -2259,20 +2264,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automobili i prijevoz"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikacija za sat"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "hu_HU" => array:58 [
+    "hu_HU" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autók és járművek"
@@ -2280,7 +2285,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HEALTH_AND_FITNESS"
@@ -2289,32 +2294,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "hy_AM" => array:58 [
+    "hy_AM" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HOUSE_AND_HOME"
         -getName(): string: "Ամեն ինչ տան համար"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "PERSONALIZATION"
+        -getName(): string: "Անհատականացում"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "id" => array:58 [
+    "id" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Alat "
@@ -2322,20 +2327,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "SHOPPING"
-        -getName(): string: "Belanja"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikasi smartwatch"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "is_IS" => array:58 [
+    "is_IS" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ENTERTAINMENT"
         -getName(): string: "Afþreying"
@@ -2343,7 +2348,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PRODUCTIVITY"
@@ -2352,11 +2357,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "it_IT" => array:58 [
+    "it_IT" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BUSINESS"
         -getName(): string: "Affari"
@@ -2364,70 +2369,70 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte e design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "App dell'orologio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "iw_IL" => array:58 [
+    "iw_IL" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FOOD_AND_DRINK"
         -getName(): string: "אוכל ומשקאות"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ja_JP" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EVENTS"
+        -getName(): string: "אירועים"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "ja_JP" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "アート＆デザイン"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ka_GE" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EVENTS"
+        -getName(): string: "イベント"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "ka_GE" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Watch აპები"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -2436,124 +2441,124 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "kk" => array:58 [
+    "kk" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Авто және көліктер"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "km_KH" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "WEATHER"
+        -getName(): string: "Ауа райы"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "km_KH" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "VIDEO_PLAYERS"
         -getName(): string: "កម្មវិធីចាក់ និងកែវីដេអូ"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "កម្មវិធីនាឡិកា"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "kn_IN" => array:58 [
+    "kn_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MAPS_AND_NAVIGATION"
         -getName(): string: "Maps ಮತ್ತು ನ್ಯಾವಿಗೇಶನ್"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ko_KR" => array:58 [
+    "ko_KR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HEALTH_AND_FITNESS"
         -getName(): string: "건강/운동"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ky_KG" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EDUCATION"
+        -getName(): string: "교육"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "ky_KG" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "WEATHER"
         -getName(): string: "Аба ырайы"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "lo_LA" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "Авто жана унаалар"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "lo_LA" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "COMICS"
+        -getName(): string: "ກາຕູນ"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
@@ -2562,11 +2567,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "lt" => array:58 [
+    "lt" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
         -getName(): string: "Apsipirkimas"
@@ -2574,7 +2579,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -2583,11 +2588,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "lv" => array:58 [
+    "lv" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Auto"
@@ -2595,7 +2600,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -2604,74 +2609,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "mk_MK" => array:58 [
+    "mk_MK" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Автомобили и возила"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      …
-    ]
-    "ml_IN" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "HEALTH_AND_FITNESS"
-        -getName(): string: "ആരോഗ്യവും ശാരീരികക്ഷമതയും"
+        -getId(): string: "TOOLS"
+        -getName(): string: "Алатки"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "mn_MN" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Авто, тээврийн хэрэгсэл"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      …
-    ]
-    "mr_IN" => array:58 [
+    "ml_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FINANCE"
         -getName(): string: "Finance"
@@ -2679,20 +2642,62 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "SHOPPING"
+        -getName(): string: "Shopping"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ms" => array:58 [
+    "mn_MN" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "Авто, тээврийн хэрэгсэл"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "LIFESTYLE"
+        -getName(): string: "Амьдралын хэв маяг"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "mr_IN" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "आरोग्य व स्वास्थ्य"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "ms" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EVENTS"
         -getName(): string: "Acara"
@@ -2700,7 +2705,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
@@ -2709,53 +2714,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "my_MM" => array:58 [
+    "my_MM" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "ကားနှင့်ယာဉ်များ"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "COMICS"
-        -getName(): string: "ကာတွန်း"
+        -getId(): string: "TOOLS"
+        -getName(): string: "ကိရိယာများ"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ne_NP" => array:58 [
+    "ne_NP" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "अटो र सवारीसाधनहरू"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "PRODUCTIVITY"
+        -getName(): string: "उत्पादकत्व"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "nl_NL" => array:58 [
+    "nl_NL" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Auto's en voertuigen"
@@ -2763,7 +2768,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BEAUTY"
@@ -2772,11 +2777,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "no_NO" => array:58 [
+    "no_NO" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EVENTS"
         -getName(): string: "Arrangementer"
@@ -2784,7 +2789,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PARENTING"
@@ -2793,53 +2798,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "pl_PL" => array:58 [
+    "pl_PL" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikacje na zegarki"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
         -getName(): string: "Biblioteki i wersje demo"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BUSINESS"
-        -getName(): string: "Dla firm"
+      …
+    ]
+    "pt_BR" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps para smartwatch"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "pt_BR" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Arte e design"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BEAUTY"
-        -getName(): string: "Beleza"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "pt_PT" => array:58 [
+    "pt_PT" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FOOD_AND_DRINK"
         -getName(): string: "Alimentação e bebida"
@@ -2847,20 +2852,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte e design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de relógio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ro" => array:58 [
+    "ro" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BUSINESS"
         -getName(): string: "Afacere"
@@ -2868,49 +2873,49 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Artă și design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicații pentru ceas"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ru_RU" => array:58 [
+    "ru_RU" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Автомобили и транспорт"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "si_LK" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "BUSINESS"
+        -getName(): string: "Бизнес"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "si_LK" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "watch යෙදුම"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EDUCATION"
@@ -2919,74 +2924,74 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sk" => array:58 [
+    "sk" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikácie pre hodinky"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autá a doprava"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BUSINESS"
-        -getName(): string: "Biznis"
+      …
+    ]
+    "sl" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikacije za uro"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "sl" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Avtomobili in vozila"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "EVENTS"
-        -getName(): string: "Dogodki"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sr" => array:58 [
+    "sr" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Алатке"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Апликације за сат"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sv_SE" => array:58 [
+    "sv_SE" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "Anpassning"
@@ -2994,20 +2999,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "LIBRARIES_AND_DEMO"
-        -getName(): string: "Bibliotek och demo"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Appar för smartklockor"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sw" => array:58 [
+    "sw" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HEALTH_AND_FITNESS"
         -getName(): string: "Afya na Siha"
@@ -3015,7 +3020,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
@@ -3024,19 +3029,19 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ta_IN" => array:58 [
+    "ta_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BEAUTY"
@@ -3045,53 +3050,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "te_IN" => array:58 [
+    "te_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "MAPS_AND_NAVIGATION"
-        -getName(): string: "Maps & నావిగేషన్"
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "ఆటో & వాహనాలు"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "ఆరోగ్యం & దృఢత్వం"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "th" => array:58 [
+    "th" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "การกำหนดค่าส่วนบุคคล"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "PHOTOGRAPHY"
+        -getName(): string: "การถ่ายภาพ"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "tr_TR" => array:58 [
+    "tr_TR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
         -getName(): string: "Alışveriş"
@@ -3099,7 +3104,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
@@ -3108,32 +3113,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "uk" => array:58 [
+    "uk" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Інструменти"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FOOD_AND_DRINK"
+        -getName(): string: "Їжа та напої"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "vi" => array:58 [
+    "vi" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MAPS_AND_NAVIGATION"
         -getName(): string: "Bản đồ và dẫn đường"
@@ -3141,7 +3146,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
@@ -3150,74 +3155,74 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "zh_CN" => array:58 [
+    "zh_CN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
-        -getName(): string: "个性化"
+        -getName(): string: "个性定制"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "SPORTS"
+        -getName(): string: "体育"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "zh_HK" => array:58 [
+    "zh_HK" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "個人化"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "zh_TW" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "健康與健身"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "zh_TW" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "個人化"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "健康塑身"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "zu" => array:58 [
+    "zu" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BOOKS_AND_REFERENCE"
         -getName(): string: "Amabhuku & Amaphatho"
@@ -3225,7 +3230,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "COMICS"
@@ -3234,7 +3239,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
@@ -3268,21 +3273,21 @@ class Nelexa\GPlay\Model\Developer {
   -getDescription(): ?string: "Apps from Google to help you get the most out of your day, across all your devices."
   -getWebsite(): ?string: null
   -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
   }
   -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
-    -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
   }
   -getEmail(): ?string: null
   -getAddress(): ?string: null
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 
@@ -3316,21 +3321,21 @@ array:4 [
       -getDescription(): ?string: "Apps from Google to help you get the most out of your day, across all your devices."
       -getWebsite(): ?string: null
       -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
       }
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
       }
       -getEmail(): ?string: null
       -getAddress(): ?string: null
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     "es_ES" => class Nelexa\GPlay\Model\Developer {
       -getId(): string: "5700313618786177705"
@@ -3339,21 +3344,21 @@ array:4 [
       -getDescription(): ?string: "Apps from Google to help you get the most out of your day, across all your devices."
       -getWebsite(): ?string: null
       -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"
       }
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/1-hPxafOxdYpYZEOKzNIkSP43HXCNftVJVttoo4ucl7rsMASXW3Xr6GlXURCubE1tA"
       }
       -getEmail(): ?string: null
       -getAddress(): ?string: null
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -3381,15 +3386,15 @@ $apps = $gplay->getDeveloperApps($devId);
   <summary>Results</summary>
 
 ```php
-array:129 [
+array:143 [
     0 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.google.android.play.games"
+      -getId(): string: "com.google.android.apps.nbu.paisa.user"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.play.games"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.play.games&hl=en_US&gl=us"
-      -getName(): string: "Google Play Games"
-      -getSummary(): ?string: "Play games instantly, save progress, and earn achievements."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user&hl=en_US&gl=us"
+      -getName(): string: "Google Pay: Save, Pay, Manage"
+      -getSummary(): ?string: "Send money, shop, pay bills & earn rewards — plus a secure mobile wallet"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
         -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
@@ -3401,28 +3406,28 @@ array:129 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/HArtbyi53u0jnqhnnxkQnMx9dHOERNcprZyKnInd2nrfM7Wd9ivMNTiz7IJP6-mSpwk"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/HArtbyi53u0jnqhnnxkQnMx9dHOERNcprZyKnInd2nrfM7Wd9ivMNTiz7IJP6-mSpwk"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/HArtbyi53u0jnqhnnxkQnMx9dHOERNcprZyKnInd2nrfM7Wd9ivMNTiz7IJP6-mSpwk=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA"
       }
-      -getScore(): float: 4.354707
+      -getScore(): float: 4.088699
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.google.android.apps.youtube.music"
+      -getId(): string: "com.google.android.apps.authenticator2"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music&hl=en_US&gl=us"
-      -getName(): string: "YouTube Music - Stream Songs & Music Videos"
-      -getSummary(): ?string: "The official YouTube app built just for music."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US&gl=us"
+      -getName(): string: "Google Authenticator"
+      -getSummary(): ?string: "Enable 2-step verification to protect your account from hijacking."
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
         -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
@@ -3434,19 +3439,197 @@ array:129 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/HPc5gptPzRw3wFhJE1ZCnTqlvEvuVFBAsV9etfouOhdRbkp-zNtYTzKUmUVPERSZ_lAL"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/HPc5gptPzRw3wFhJE1ZCnTqlvEvuVFBAsV9etfouOhdRbkp-zNtYTzKUmUVPERSZ_lAL"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/HPc5gptPzRw3wFhJE1ZCnTqlvEvuVFBAsV9etfouOhdRbkp-zNtYTzKUmUVPERSZ_lAL=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg"
       }
-      -getScore(): float: 4.123365
+      -getScore(): float: 3.8315983
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
+    }
+    …
+  ]
+```
+
+</details>
+
+
+
+### GPlayApps::getClusterApps [[docs]](classes/GPlayApps/gplayapps.getclusterapps.md)
+Returns an iterator of applications from the Google Play store for the specified cluster page.
+
+**Example 1. Fetch all apps by cluster page**
+```php
+$clusterPage = 'https://play.google.com/store/apps/collection/cluster?clp=ogooCAEaHAoWcmVjc190b3BpY19vbDFxdl9tODloVRA7GAMqAggBUgIIAg%3D%3D:S:ANO1ljLnmTE&gsr=CiuiCigIARocChZyZWNzX3RvcGljX29sMXF2X204OWhVEDsYAyoCCAFSAggC:S:ANO1ljJBunU';
+
+$apps = iterator_to_array($gplay->getClusterApps($clusterPage));
+```
+<details>
+  <summary>Results</summary>
+
+```php
+array:170 [
+    0 => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.netflix.mediaclient"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient&hl=en_US&gl=us"
+      -getName(): string: "Netflix"
+      -getSummary(): ?string: "Netflix is the leading subscription service for watching TV episodes and movies."
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Netflix, Inc."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Netflix,+Inc."
+        -getName(): string: "Netflix, Inc."
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.4724298
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    1 => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.t11.skyviewfree"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.t11.skyviewfree"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.t11.skyviewfree&hl=en_US&gl=us"
+      -getName(): string: "SkyView® Lite"
+      -getSummary(): ?string: "SkyView®, an augmented reality space app, brings stargazing to everyone!"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Terminal Eleven"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Terminal+Eleven"
+        -getName(): string: "Terminal Eleven"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/PpPV2Ug-Cr05xLKQdZJoA9quSanR3Y6L1TtL80ppJgIpRkIU6v_H0UJoDR4VCE4m38RQ"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/PpPV2Ug-Cr05xLKQdZJoA9quSanR3Y6L1TtL80ppJgIpRkIU6v_H0UJoDR4VCE4m38RQ"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/PpPV2Ug-Cr05xLKQdZJoA9quSanR3Y6L1TtL80ppJgIpRkIU6v_H0UJoDR4VCE4m38RQ=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.388937
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    …
+  ]
+```
+
+</details>
+
+**Example 2. Fetch first 10 apps from cluster page url.**
+```php
+$clusterPage = 'https://play.google.com/store/apps/collection/cluster?clp=ogooCAEaHAoWcmVjc190b3BpY19pREdaa09EdG1UMBA7GAMqAggBUgIIAg%3D%3D:S:ANO1ljKeniA&gsr=CiuiCigIARocChZyZWNzX3RvcGljX2lER1prT0R0bVQwEDsYAyoCCAFSAggC:S:ANO1ljKPzfI&hl=ru';
+
+$limit = 10;
+$apps = [];
+foreach ($gplay->getClusterApps($clusterPage) as $i => $app) {
+    $apps[] = $app;
+    if ($i > $limit) {
+        break;
+    }
+}
+```
+<details>
+  <summary>Results</summary>
+
+```php
+array:12 [
+    0 => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.chickfila.cfaflagship"
+      -getLocale(): string: "ru_RU"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.chickfila.cfaflagship"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.chickfila.cfaflagship&hl=ru_RU&gl=us"
+      -getName(): string: "Chick-fil-A®"
+      -getSummary(): ?string: "Заказывайте заранее, получайте баллы за соответствующую покупку и используйте доступные награды."
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Chick-fil-A, Inc."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Chick-fil-A,+Inc."
+        -getName(): string: "Chick-fil-A, Inc."
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/yF2S41QGnGWs7JCD-t6L6AJ4KIm2ybwM0lirAiHQZR2ZKjbvYAgQ4e0MFVXYVLQWWA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/yF2S41QGnGWs7JCD-t6L6AJ4KIm2ybwM0lirAiHQZR2ZKjbvYAgQ4e0MFVXYVLQWWA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yF2S41QGnGWs7JCD-t6L6AJ4KIm2ybwM0lirAiHQZR2ZKjbvYAgQ4e0MFVXYVLQWWA=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.693777
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    1 => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.chuckecheese.app"
+      -getLocale(): string: "ru_RU"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.chuckecheese.app"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.chuckecheese.app&hl=ru_RU&gl=us"
+      -getName(): string: "Chuck E. Cheese"
+      -getSummary(): ?string: "Зарабатывайте бонусные баллы за каждое посещение и открывайте эксклюзивные предложения!"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "8581794605065481540"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8581794605065481540"
+        -getName(): string: "Chuck E. Cheese"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/xCVK5YbFjD8obUoUuje3ZK-lhFG8XWWpZJKN1B8DUOPS8chirXl6KbP6pMNbjMcDOw"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/xCVK5YbFjD8obUoUuje3ZK-lhFG8XWWpZJKN1B8DUOPS8chirXl6KbP6pMNbjMcDOw"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/xCVK5YbFjD8obUoUuje3ZK-lhFG8XWWpZJKN1B8DUOPS8chirXl6KbP6pMNbjMcDOw=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.6525
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -3472,14 +3655,47 @@ $similarApps = $gplay->getSimilarApps($app, $limit = \Nelexa\GPlay\GPlayApps::UN
   <summary>Results</summary>
 
 ```php
-array:161 [
+array:163 [
     0 => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.getmimo"
+      -getLocale(): string: "ru_RU"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.getmimo"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.getmimo&hl=ru_RU&gl=us"
+      -getName(): string: "Mimo: программирование на HTML, JavaScript, Python"
+      -getSummary(): ?string: "Информатика, обучение программированию на Python, JavaScript, HTML, SQL"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "5836148544871025856"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5836148544871025856"
+        -getName(): string: "Mimohello GmbH"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.7183843
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    1 => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.freeit.java"
       -getLocale(): string: "ru_RU"
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.freeit.java"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.freeit.java&hl=ru_RU&gl=us"
-      -getName(): string: "Центр программирования: научиться кодировать"
+      -getName(): string: "Центр программирования: код"
       -getSummary(): ?string: "Изучайте HTML,Python,Javascript,C,C ++,C #, Java и другие языки программирования"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "8802462833480602617"
@@ -3492,52 +3708,80 @@ array:161 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/fy2SPeYLij4AC8WFaGSq0uxol14F22F3BGUU_Dq-UY9WjUiDc6Tz2FDCuxsgyQ4HPQ"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/fy2SPeYLij4AC8WFaGSq0uxol14F22F3BGUU_Dq-UY9WjUiDc6Tz2FDCuxsgyQ4HPQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/PGoBnnmiiwDrkGf-i1YfUd7x8pE6GdGeS6NgzUZXOoXMws31QjyVBLNVhYeAkRO2kJE"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/PGoBnnmiiwDrkGf-i1YfUd7x8pE6GdGeS6NgzUZXOoXMws31QjyVBLNVhYeAkRO2kJE"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/PGoBnnmiiwDrkGf-i1YfUd7x8pE6GdGeS6NgzUZXOoXMws31QjyVBLNVhYeAkRO2kJE=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/fy2SPeYLij4AC8WFaGSq0uxol14F22F3BGUU_Dq-UY9WjUiDc6Tz2FDCuxsgyQ4HPQ"
       }
-      -getScore(): float: 4.5951314
+      -getScore(): float: 4.707401
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    1 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.getmimo"
-      -getLocale(): string: "ru_RU"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.getmimo"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.getmimo&hl=ru_RU&gl=us"
-      -getName(): string: "Мимо: Научитесь программировать"
-      -getSummary(): ?string: "Освой Python, JavaScript, Java, HTML, CSS, Swift, Kotlin, C++, SQL, PHP и C#!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "5836148544871025856"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5836148544871025856"
-        -getName(): string: "Mimohello GmbH"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/4EbbMw6TnleJPtv4rc2C-8NVle1c9xxRkGfPLBzdqosNT61Fk7ag-TYXcVadm8V8uA4"
-      }
-      -getScore(): float: 4.6699705
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
+    …
+  ]
+```
+
+</details>
+
+
+
+### GPlayApps::getClusterPages [[docs]](classes/GPlayApps/gplayapps.getclusterpages.md)
+Returns an iterator of cluster pages.
+
+**Example 1. Fetch all cluster pages**
+```php
+$clusterPage = 'https://play.google.com/store/apps/collection/cluster?clp=ogooCAEaHAoWcmVjc190b3BpY19vbDFxdl9tODloVRA7GAMqAggBUgIIAg%3D%3D:S:ANO1ljLnmTE&gsr=CiuiCigIARocChZyZWNzX3RvcGljX29sMXF2X204OWhVEDsYAyoCCAFSAggC:S:ANO1ljJBunU';
+
+$clusterPages = iterator_to_array($gplay->getClusterPages());
+```
+<details>
+  <summary>Results</summary>
+
+```php
+array:23 [
+    0 => class Nelexa\GPlay\Model\ClusterPage {
+      -getTitle(): string: "Recommended for you"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogoKCAEqAggBUgIIAQ%3D%3D:S:ANO1ljJG6Aw&gsr=Cg2iCgoIASoCCAFSAggB:S:ANO1ljLKNqE"
+    }
+    1 => class Nelexa\GPlay\Model\ClusterPage {
+      -getTitle(): string: "Entertainment"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogooCAEaHAoWcmVjc190b3BpY19tRWdfUlNWMHY2QRA7GAMqAggBUgIIAg%3D%3D:S:ANO1ljKiaBY&gsr=CiuiCigIA…"
+    }
+    …
+  ]
+```
+
+</details>
+
+**Example 1. Fetch all top cluster pages by category "Game Puzzle" for ages up to 5.**
+```php
+$clusterPage = 'https://play.google.com/store/apps/collection/cluster?clp=ogooCAEaHAoWcmVjc190b3BpY19vbDFxdl9tODloVRA7GAMqAggBUgIIAg%3D%3D:S:ANO1ljLnmTE&gsr=CiuiCigIARocChZyZWNzX3RvcGljX29sMXF2X204OWhVEDsYAyoCCAFSAggC:S:ANO1ljJBunU';
+
+$clusterPages = iterator_to_array(
+    $gplay->getClusterPages(
+        \Nelexa\GPlay\Enum\CategoryEnum::GAME_PUZZLE(),
+        \Nelexa\GPlay\Enum\AgeEnum::FIVE_UNDER(),
+        'top'
+    )
+);
+```
+<details>
+  <summary>Results</summary>
+
+```php
+array:3 [
+    0 => class Nelexa\GPlay\Model\ClusterPage {
+      -getTitle(): string: "Top free"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=0g4jCiEKG3RvcHNlbGxpbmdfZnJlZV9HQU1FX1BVWlpMRRAHGAM%3D:S:ANO1ljLYuNA&gsr=CibSDiMKIQobdG9wc2V…"
+    }
+    1 => class Nelexa\GPlay\Model\ClusterPage {
+      -getTitle(): string: "Top paid"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=0g4jCiEKG3RvcHNlbGxpbmdfcGFpZF9HQU1FX1BVWlpMRRAHGAM%3D:S:ANO1ljIFZPM&gsr=CibSDiMKIQobdG9wc2V…"
     }
     …
   ]
@@ -3563,7 +3807,7 @@ $suggestions = $gplay
 ```php
 array:5 [
     0 => "maps"
-    1 => "maps for minecraft"
+    1 => "maps for minecraft pe"
     …
   ]
 ```
@@ -3593,7 +3837,7 @@ array:150 [
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps&hl=en_US&gl=us"
-      -getName(): string: "Maps - Navigate & Explore"
+      -getName(): string: "Google Maps"
       -getSummary(): ?string: "Real-time GPS navigation & local suggestions for food, events, & activities"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
@@ -3606,19 +3850,19 @@ array:150 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/Kf8WTct65hFJxBUDm5E-EpYsiDoLQiGGbnuyP6HBNax43YShXti9THPon1YKB6zPYpA"
       }
-      -getScore(): float: 4.3254695
+      -getScore(): float: 3.8799007
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.google.android.apps.mapslite"
@@ -3626,7 +3870,7 @@ array:150 [
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.mapslite"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.mapslite&hl=en_US&gl=us"
-      -getName(): string: "Google Maps Go - Directions, Traffic & Transit"
+      -getName(): string: "Google Maps Go"
       -getSummary(): ?string: "Get real-time traffic, directions, search and find places"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
@@ -3639,19 +3883,19 @@ array:150 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/0uRNRSe4iS6nhvfbBcoScHcBTx1PMmxkCx8rrEsI2UQcQeZ5ByKz8fkhwRqR3vttOg"
       }
-      -getScore(): float: 4.3090644
+      -getScore(): float: 4.3178163
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -3672,19 +3916,19 @@ $apps = $gplay->getListApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:169 [
-    "com.combineinc.streetracing.driftthreeD" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.combineinc.streetracing.driftthreeD"
+array:905 [
+    "com.fingersoft.hillclimb" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.fingersoft.hillclimb"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.combineinc.streetracing.driftthreeD"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.combineinc.streetracing.driftthreeD&hl=en_US&gl=us"
-      -getName(): string: "Street Racing 3D"
-      -getSummary(): ?string: "Street car racing has started, experience the drving skills!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb&hl=en_US&gl=us"
+      -getName(): string: "Hill Climb Racing"
+      -getSummary(): ?string: "Race uphill to win in this offline physics based driving game!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "6936794375735348055"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6936794375735348055"
-        -getName(): string: "Ivy"
+        -getId(): string: "7064049075652771302"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7064049075652771302"
+        -getName(): string: "Fingersoft"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3692,32 +3936,32 @@ array:169 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/xzMuAO5HWhJgEQlZd9qn_A1LK21FXOED2HVVqEh9uce-e9G8unFR5Vb8Xaq4nZuw06A"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/xzMuAO5HWhJgEQlZd9qn_A1LK21FXOED2HVVqEh9uce-e9G8unFR5Vb8Xaq4nZuw06A=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/xzMuAO5HWhJgEQlZd9qn_A1LK21FXOED2HVVqEh9uce-e9G8unFR5Vb8Xaq4nZuw06A"
       }
-      -getScore(): float: 4.363952
+      -getScore(): float: 4.585985
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.gameloft.android.ANMP.GloftA9HM" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.gameloft.android.ANMP.GloftA9HM"
+    "com.ea.game.nfs14_row" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.ea.game.nfs14_row"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.android.ANMP.GloftA9HM"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.android.ANMP.GloftA9HM&hl=en_US&gl=us"
-      -getName(): string: "Asphalt 9: Legends - Epic Car Action Racing Game"
-      -getSummary(): ?string: "Tear up the Asphalt & become the next Legend in the ultimate arcade racing game."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.ea.game.nfs14_row"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.ea.game.nfs14_row&hl=en_US&gl=us"
+      -getName(): string: "Need for Speed™ No Limits"
+      -getSummary(): ?string: "Dominate the competition and rule the streets. Download to race now!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "4826827787946964969"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4826827787946964969"
-        -getName(): string: "Gameloft SE"
+        -getId(): string: "6605125519975771237"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6605125519975771237"
+        -getName(): string: "ELECTRONIC ARTS"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3725,19 +3969,19 @@ array:169 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/cQBJ7Jwvz0jex8sL7LjgLId-wOdmMajSZbpC-bzHDhS5uK9Zms0fFsXEVNGvlIUk_g"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/cQBJ7Jwvz0jex8sL7LjgLId-wOdmMajSZbpC-bzHDhS5uK9Zms0fFsXEVNGvlIUk_g=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/3D39RIkfs0amH9MhhWRLHRILBQUmq1BlIqYMyNSJKb7HyqU6NhQR-toUMmSnPAi60t0"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/3D39RIkfs0amH9MhhWRLHRILBQUmq1BlIqYMyNSJKb7HyqU6NhQR-toUMmSnPAi60t0"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/3D39RIkfs0amH9MhhWRLHRILBQUmq1BlIqYMyNSJKb7HyqU6NhQR-toUMmSnPAi60t0=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/cQBJ7Jwvz0jex8sL7LjgLId-wOdmMajSZbpC-bzHDhS5uK9Zms0fFsXEVNGvlIUk_g"
       }
-      -getScore(): float: 4.5014334
+      -getScore(): float: 4.3452697
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -3758,18 +4002,18 @@ $apps = $gplay->getListApps(
 
 ```php
 array:100 [
-    "com.gameloft.car.tycoon.game" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.gameloft.car.tycoon.game"
+    "com.blizzard.diablo.immortal" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.blizzard.diablo.immortal"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.car.tycoon.game"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gameloft.car.tycoon.game&hl=en_US&gl=us"
-      -getName(): string: "Overdrive City – Car Tycoon Game"
-      -getSummary(): ?string: "Build your car city and race! (Install requires 2.5 GB of disk space.)"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.blizzard.diablo.immortal"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.blizzard.diablo.immortal&hl=en_US&gl=us"
+      -getName(): string: "Diablo Immortal"
+      -getSummary(): ?string: "A brand new, visceral Diablo action RPG experience at your fingertips"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "4826827787946964969"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4826827787946964969"
-        -getName(): string: "Gameloft SE"
+        -getId(): string: "8636572569301896616"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8636572569301896616"
+        -getName(): string: "Blizzard Entertainment, Inc."
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3777,32 +4021,32 @@ array:100 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/PctrUsXkExv1coL2YyoaQSPmYGzuqhBROWpDOCxEhA0a9jeEzl0kD580jlZCeV9CoGg"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/PctrUsXkExv1coL2YyoaQSPmYGzuqhBROWpDOCxEhA0a9jeEzl0kD580jlZCeV9CoGg=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/PctrUsXkExv1coL2YyoaQSPmYGzuqhBROWpDOCxEhA0a9jeEzl0kD580jlZCeV9CoGg"
       }
-      -getScore(): float: 4.3102565
+      -getScore(): float: 0.0
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.igg.android.mobileroyale" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.igg.android.mobileroyale"
+    "com.empire.warriors2.premium.epic.tower.td.defender.rush" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.empire.warriors2.premium.epic.tower.td.defender.rush"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.igg.android.mobileroyale"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.igg.android.mobileroyale&hl=en_US&gl=us"
-      -getName(): string: "Mobile Royale MMORPG - Build a Strategy for Battle"
-      -getSummary(): ?string: "Enjoy this 3D fantasy world! Fight in a RTS multiplayer battle, build your city!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.empire.warriors2.premium.epic.tower.td.defender.rush"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.empire.warriors2.premium.epic.tower.td.defender.rush&hl=en_US&gl=us"
+      -getName(): string: "Empire Defender TD: Premium"
+      -getSummary(): ?string: "Strategy Offline TD Game! Become An Epic Defender! Premium Version"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "8895734616362643252"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8895734616362643252"
-        -getName(): string: "IGG.COM"
+        -getId(): string: "7674514660084826148"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7674514660084826148"
+        -getName(): string: "ZITGA"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3810,19 +4054,19 @@ array:100 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/iBHuomMtanzz3EIEARbv-x-_FmKBqCg-m7iYj2daqYYrYBOSJ6isDeiDixHl4i4J1fM"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/iBHuomMtanzz3EIEARbv-x-_FmKBqCg-m7iYj2daqYYrYBOSJ6isDeiDixHl4i4J1fM=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/mBk-tv2a4eqmsA9uPT_nsmL89CzNeKXk_vgb8__xxKNyC9Unb6dH2awR10NyL20hD_0"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/mBk-tv2a4eqmsA9uPT_nsmL89CzNeKXk_vgb8__xxKNyC9Unb6dH2awR10NyL20hD_0"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/mBk-tv2a4eqmsA9uPT_nsmL89CzNeKXk_vgb8__xxKNyC9Unb6dH2awR10NyL20hD_0=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/iBHuomMtanzz3EIEARbv-x-_FmKBqCg-m7iYj2daqYYrYBOSJ6isDeiDixHl4i4J1fM"
       }
-      -getScore(): float: 4.0906167
+      -getScore(): float: 0.0
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -3838,19 +4082,19 @@ $apps = $gplay->getListApps();
   <summary>Results</summary>
 
 ```php
-array:600 [
-    "com.water.balls" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.water.balls"
+array:1277 [
+    "com.zhiliaoapp.musically" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.zhiliaoapp.musically"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.water.balls"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.water.balls&hl=en_US&gl=us"
-      -getName(): string: "Sand Balls"
-      -getSummary(): ?string: "Collect all balls!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically&hl=en_US&gl=us"
+      -getName(): string: "TikTok"
+      -getSummary(): ?string: "Join your friends and discover videos you love, only on TikTok"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "SayGames"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=SayGames"
-        -getName(): string: "SayGames"
+        -getId(): string: "TikTok Pte. Ltd."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=TikTok+Pte.+Ltd."
+        -getName(): string: "TikTok Pte. Ltd."
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3858,32 +4102,32 @@ array:600 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/U0hk5TisL-gYTm2anJElHtaNrJ52NdJnEjPjyygRnAXERW_tv2yo-wAVUM3sVIguf4CC"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/U0hk5TisL-gYTm2anJElHtaNrJ52NdJnEjPjyygRnAXERW_tv2yo-wAVUM3sVIguf4CC=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/U0hk5TisL-gYTm2anJElHtaNrJ52NdJnEjPjyygRnAXERW_tv2yo-wAVUM3sVIguf4CC"
       }
-      -getScore(): float: 4.186313
+      -getScore(): float: 4.53436
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.fingersoft.hillclimb" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.fingersoft.hillclimb"
+    "com.google.android.apps.youtube.kids" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.google.android.apps.youtube.kids"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb&hl=en_US&gl=us"
-      -getName(): string: "Hill Climb Racing"
-      -getSummary(): ?string: "Play the best physics based driving game ever made! For Free! 🚥🏎️🚗🏁🏆"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.kids"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.kids&hl=en_US&gl=us"
+      -getName(): string: "YouTube Kids"
+      -getSummary(): ?string: "Encourage kids to discover the world with a suite of parental controls"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "7064049075652771302"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7064049075652771302"
-        -getName(): string: "Fingersoft"
+        -getId(): string: "5700313618786177705"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
+        -getName(): string: "Google LLC"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3891,19 +4135,19 @@ array:600 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/S4wylkvt2jz16hnG9IG0pAZosbB82nWWy8P-rQkb54uH-SCVd5L2j7z7x1Vz5pZvIRc"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/S4wylkvt2jz16hnG9IG0pAZosbB82nWWy8P-rQkb54uH-SCVd5L2j7z7x1Vz5pZvIRc"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/S4wylkvt2jz16hnG9IG0pAZosbB82nWWy8P-rQkb54uH-SCVd5L2j7z7x1Vz5pZvIRc=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
       }
-      -getScore(): float: 4.427317
+      -getScore(): float: 4.3300085
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -3924,19 +4168,19 @@ $apps = $gplay->getTopApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:280 [
-    "com.gym.racegame" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.gym.racegame"
+array:314 [
+    "com.easygames.race" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.easygames.race"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame&hl=en_US&gl=us"
-      -getName(): string: "Epic Race 3D"
-      -getSummary(): ?string: "50% Luck, 70% Skill, 30% Will"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.easygames.race"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.easygames.race&hl=en_US&gl=us"
+      -getName(): string: "Race Master 3D - Car Racing"
+      -getSummary(): ?string: "Become a track master in the wackiest, wildest, winningest racing game!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Good Job Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Good+Job+Games"
-        -getName(): string: "Good Job Games"
+        -getId(): string: "6392896734092635573"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6392896734092635573"
+        -getName(): string: "SayGames Ltd"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3944,32 +4188,32 @@ array:280 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/qW1SrW0Gyr3JRMNrTqMjFwcvZVjLP6-Wp2tDY8Z9UWzf2_XteCit8n9CNEGpnHOEFS8"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/qW1SrW0Gyr3JRMNrTqMjFwcvZVjLP6-Wp2tDY8Z9UWzf2_XteCit8n9CNEGpnHOEFS8"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/qW1SrW0Gyr3JRMNrTqMjFwcvZVjLP6-Wp2tDY8Z9UWzf2_XteCit8n9CNEGpnHOEFS8=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
       }
-      -getScore(): float: 3.8746777
+      -getScore(): float: 4.3804564
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.slippy.linerusher" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.slippy.linerusher"
+    "com.luna.theyarecoming" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.luna.theyarecoming"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.slippy.linerusher"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.slippy.linerusher&hl=en_US&gl=us"
-      -getName(): string: "Fun Race 3D"
-      -getSummary(): ?string: "Once You Start, You Can’t Stop"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.luna.theyarecoming"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.luna.theyarecoming&hl=en_US&gl=us"
+      -getName(): string: "They Are Coming"
+      -getSummary(): ?string: "Defeat all enemies and win!"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Good Job Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Good+Job+Games"
-        -getName(): string: "Good Job Games"
+        -getId(): string: "6018074114375198913"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6018074114375198913"
+        -getName(): string: "Rollic Games"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -3977,19 +4221,19 @@ array:280 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/3YCNUp1tvYhjT5lBRdmUYRVp1GISq-g_8Uk8tdm4wLtRmZPnJljVa7OBnS8PPYdabx4"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/3YCNUp1tvYhjT5lBRdmUYRVp1GISq-g_8Uk8tdm4wLtRmZPnJljVa7OBnS8PPYdabx4"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/3YCNUp1tvYhjT5lBRdmUYRVp1GISq-g_8Uk8tdm4wLtRmZPnJljVa7OBnS8PPYdabx4=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/9OjEvPQm7nJ83ZXqMsPV2UZCRzVw4_un-aAGdbqkwV-Wk3oT9iqFshmeiLTHvbMPkgk"
       }
-      -getScore(): float: 4.1582165
+      -getScore(): float: 1.583815
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4009,15 +4253,48 @@ $apps = $gplay->getTopApps(
   <summary>Results</summary>
 
 ```php
-array:530 [
-    "com.BallGames.Woodturning" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.BallGames.Woodturning"
+array:572 [
+    "com.fusee.MergeMaster" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.fusee.MergeMaster"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.BallGames.Woodturning"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.BallGames.Woodturning&hl=en_US&gl=us"
-      -getName(): string: "Woodturning"
-      -getSummary(): ?string: "One lathe to rule them all"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fusee.MergeMaster"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fusee.MergeMaster&hl=en_US&gl=us"
+      -getName(): string: "Merge Master - Dinosaur Fusion"
+      -getSummary(): ?string: "Are you ready to fight and become a merge master?"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "4656343638685426415"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=4656343638685426415"
+        -getName(): string: "HOMA GAMES"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/LUxutPFfkpuhZlK9mlBxlZI2J1ECDW-SPfNWnGtgENhasceP8r1vYNkwWf3-yHoZNII"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/LUxutPFfkpuhZlK9mlBxlZI2J1ECDW-SPfNWnGtgENhasceP8r1vYNkwWf3-yHoZNII"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/LUxutPFfkpuhZlK9mlBxlZI2J1ECDW-SPfNWnGtgENhasceP8r1vYNkwWf3-yHoZNII=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 4.043062
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    "com.arkhe.batteryrun" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.arkhe.batteryrun"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.arkhe.batteryrun"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.arkhe.batteryrun&hl=en_US&gl=us"
+      -getName(): string: "Battery Run"
+      -getSummary(): ?string: "Collect Batteries"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "VOODOO"
         -getUrl(): string: "https://play.google.com/store/apps/developer?id=VOODOO"
@@ -4029,52 +4306,19 @@ array:530 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/D8hlXQPeRnqMlTxd3kkvaVtEuGoPIVtrJjsDDfkXlKc-81CTyLCcD8BJO_yJr8xNbA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/D8hlXQPeRnqMlTxd3kkvaVtEuGoPIVtrJjsDDfkXlKc-81CTyLCcD8BJO_yJr8xNbA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/D8hlXQPeRnqMlTxd3kkvaVtEuGoPIVtrJjsDDfkXlKc-81CTyLCcD8BJO_yJr8xNbA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/p_TPhF6yEel0S1DklaU9vRg4jHnLQx212O0J9WQfvqo_EpaMuW3lTBEngJEx2yj31AQ"
       }
-      -getScore(): float: 3.7703204
+      -getScore(): float: 4.0819674
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
-    "com.trianglegames.squarebird" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.trianglegames.squarebird"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.trianglegames.squarebird"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.trianglegames.squarebird&hl=en_US&gl=us"
-      -getName(): string: "Square Bird"
-      -getSummary(): ?string: "Build the perfect egg tower!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "MOONEE PUBLISHING LTD"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=MOONEE+PUBLISHING+LTD"
-        -getName(): string: "MOONEE PUBLISHING LTD"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/-tinv3wt-7QR6cNYu3fLw5ySktJ0Mb5iydk5QIAPphFkvBuE-xwFuxsy57IGY5lVSQM"
-      }
-      -getScore(): float: 4.1803513
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4090,52 +4334,19 @@ $apps = $gplay->getTopApps();
   <summary>Results</summary>
 
 ```php
-array:1074 [
-    "com.whatsapp" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.whatsapp"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.whatsapp"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.whatsapp&hl=en_US&gl=us"
-      -getName(): string: "WhatsApp Messenger"
-      -getSummary(): ?string: "Simple. Personal. Secure."
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "WhatsApp Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=WhatsApp+Inc."
-        -getName(): string: "WhatsApp Inc."
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN=s0"
-        -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"
-      }
-      -getScore(): float: 4.28501
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): mixed: …
-    }
+array:1141 [
     "com.zhiliaoapp.musically" => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.zhiliaoapp.musically"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically&hl=en_US&gl=us"
-      -getName(): string: "TikTok - Make Your Day"
-      -getSummary(): ?string: "Real People. Real Videos."
+      -getName(): string: "TikTok"
+      -getSummary(): ?string: "Join your friends and discover videos you love, only on TikTok"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "TikTok Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=TikTok+Inc."
-        -getName(): string: "TikTok Inc."
+        -getId(): string: "TikTok Pte. Ltd."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=TikTok+Pte.+Ltd."
+        -getName(): string: "TikTok Pte. Ltd."
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4143,19 +4354,52 @@ array:1074 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/iBYjvYuNq8BB7EEEHktPG1fpX9NiY7Jcyg1iRtQxO442r9CZ8H-X9cLkTjpbORwWDG9d"
       }
-      -getScore(): float: 4.581792
+      -getScore(): float: 4.53434
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
+    }
+    "com.picture.magic.imager" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.picture.magic.imager"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.picture.magic.imager"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.picture.magic.imager&hl=en_US&gl=us"
+      -getName(): string: "Magic Photo Editor:Foto Repair"
+      -getSummary(): ?string: "Handy photo editor : photo repair & coloring"
+      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Zachary Holt"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Zachary+Holt"
+        -getName(): string: "Zachary Holt"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: null
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: null
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/eZHrfJNrI0_dfxVvk8Ng_qGPqLj9TVRTQpsozVN_RbLFymXirvboqTeP2rKUNi5gpg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/eZHrfJNrI0_dfxVvk8Ng_qGPqLj9TVRTQpsozVN_RbLFymXirvboqTeP2rKUNi5gpg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/eZHrfJNrI0_dfxVvk8Ng_qGPqLj9TVRTQpsozVN_RbLFymXirvboqTeP2rKUNi5gpg=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScore(): float: 3.7973423
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -asArray(): array: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4176,19 +4420,19 @@ $apps = $gplay->getNewApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:47 [
-    "com.gym.racegame" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.gym.racegame"
+array:108 [
+    "com.zerosum.coupleshuffle" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.zerosum.coupleshuffle"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame&hl=en_US&gl=us"
-      -getName(): string: "Epic Race 3D"
-      -getSummary(): ?string: "50% Luck, 70% Skill, 30% Will"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.zerosum.coupleshuffle"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.zerosum.coupleshuffle&hl=en_US&gl=us"
+      -getName(): string: "Couple Shuffle"
+      -getSummary(): ?string: "Couple's Money Adventure"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Good Job Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Good+Job+Games"
-        -getName(): string: "Good Job Games"
+        -getId(): string: "5006687761269120821"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5006687761269120821"
+        -getName(): string: "Zerosum"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4196,32 +4440,32 @@ array:47 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/pJkzrkGuRs4wfW8En1adLZgYXD8fk5bR5Jq7vE_6S_tjKRDzll3_RAM35f80qQBy"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/pJkzrkGuRs4wfW8En1adLZgYXD8fk5bR5Jq7vE_6S_tjKRDzll3_RAM35f80qQBy"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pJkzrkGuRs4wfW8En1adLZgYXD8fk5bR5Jq7vE_6S_tjKRDzll3_RAM35f80qQBy=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
       }
-      -getScore(): float: 3.8746777
+      -getScore(): float: 1.5
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.fancyforce.happywheels" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.fancyforce.happywheels"
+    "com.DogukanKurekci.ShootNDoor" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.DogukanKurekci.ShootNDoor"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fancyforce.happywheels"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fancyforce.happywheels&hl=en_US&gl=us"
-      -getName(): string: "Happy Wheels"
-      -getSummary(): ?string: "Happy Wheels is an intense, side-scrolling, physics-based, obstacle course game."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.DogukanKurekci.ShootNDoor"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.DogukanKurekci.ShootNDoor&hl=en_US&gl=us"
+      -getName(): string: "Shoot N Door"
+      -getSummary(): ?string: "The most creative and fun way to shoot. You can do anything by shooting."
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "James Bonacci"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=James+Bonacci"
-        -getName(): string: "James Bonacci"
+        -getId(): string: "F13 Entertainment"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=F13+Entertainment"
+        -getName(): string: "F13 Entertainment"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4229,19 +4473,19 @@ array:47 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/SV8RsV5udSeeONjatT5SwleP6lzV6PjtNPs2VvyohJXWSG9fFLNOfslDEHbpDN337wQ"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/SV8RsV5udSeeONjatT5SwleP6lzV6PjtNPs2VvyohJXWSG9fFLNOfslDEHbpDN337wQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/6zNZbPZLnbQ4hyiVf4Sb5WGQA-ROQQb_qfGEcVzwOoUjJePHDp1uNoKO3yt6ReG1fbA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/6zNZbPZLnbQ4hyiVf4Sb5WGQA-ROQQb_qfGEcVzwOoUjJePHDp1uNoKO3yt6ReG1fbA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/6zNZbPZLnbQ4hyiVf4Sb5WGQA-ROQQb_qfGEcVzwOoUjJePHDp1uNoKO3yt6ReG1fbA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/SV8RsV5udSeeONjatT5SwleP6lzV6PjtNPs2VvyohJXWSG9fFLNOfslDEHbpDN337wQ"
       }
-      -getScore(): float: 4.3360324
+      -getScore(): float: 1.8666667
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4261,19 +4505,19 @@ $apps = $gplay->getNewApps(
   <summary>Results</summary>
 
 ```php
-array:188 [
-    "com.appadvisory.drawclimber" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.appadvisory.drawclimber"
+array:202 [
+    "com.jura.freddy.rope.five.night" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.jura.freddy.rope.five.night"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.appadvisory.drawclimber"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.appadvisory.drawclimber&hl=en_US&gl=us"
-      -getName(): string: "Draw Climber"
-      -getSummary(): ?string: "Draw your legs to win the race!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.jura.freddy.rope.five.night"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.jura.freddy.rope.five.night&hl=en_US&gl=us"
+      -getName(): string: "Bear Rope Hero, Security City"
+      -getSummary(): ?string: "Find gangster snipers at the building's and kill them"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "VOODOO"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=VOODOO"
-        -getName(): string: "VOODOO"
+        -getId(): string: "5891027934210113676"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5891027934210113676"
+        -getName(): string: "Zego Global Publishing"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4281,32 +4525,32 @@ array:188 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/0tq7Z4-FvJd9rpPPIztraZcxoRsfX_U_6sH7Z5x_EdW3O-XyPUjXBkOLQprHgj0NJzQx"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/0tq7Z4-FvJd9rpPPIztraZcxoRsfX_U_6sH7Z5x_EdW3O-XyPUjXBkOLQprHgj0NJzQx=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/9lIZMexQDGYxh82g176ql3r054cGFcXHNB6qVxtTcb_XMPbqwFLcEivK6vkx-DT-nw"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/9lIZMexQDGYxh82g176ql3r054cGFcXHNB6qVxtTcb_XMPbqwFLcEivK6vkx-DT-nw"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/9lIZMexQDGYxh82g176ql3r054cGFcXHNB6qVxtTcb_XMPbqwFLcEivK6vkx-DT-nw=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/0tq7Z4-FvJd9rpPPIztraZcxoRsfX_U_6sH7Z5x_EdW3O-XyPUjXBkOLQprHgj0NJzQx"
       }
-      -getScore(): float: 3.24
+      -getScore(): float: 4.390244
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.HeroGames.WoodShop" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.HeroGames.WoodShop"
+    "com.brain.snake.thief.troll" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.brain.snake.thief.troll"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.HeroGames.WoodShop"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.HeroGames.WoodShop&hl=en_US&gl=us"
-      -getName(): string: "Wood Shop"
-      -getSummary(): ?string: "Satisfying Wood Carving Art"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.brain.snake.thief.troll"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.brain.snake.thief.troll&hl=en_US&gl=us"
+      -getName(): string: "Snake Troll : Thief master"
+      -getSummary(): ?string: "Use your brain to steal them all"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Rollic Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Rollic+Games"
-        -getName(): string: "Rollic Games"
+        -getId(): string: "ABI Global Publishing"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=ABI+Global+Publishing"
+        -getName(): string: "ABI Global Publishing"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4314,19 +4558,19 @@ array:188 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/C3ztBVoJujqMojs59g4RLQHHpJD2K5wNikV9RBNAFtDd54_3fp_-jRUXC9h1SzXLRj4F"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/C3ztBVoJujqMojs59g4RLQHHpJD2K5wNikV9RBNAFtDd54_3fp_-jRUXC9h1SzXLRj4F=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/jVHQZOe6aEpYsjObeByIWJcOLJMt9_VGmSSBxLgAPgs2JakXt6vW6lJybpKi9J-kAn8"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/jVHQZOe6aEpYsjObeByIWJcOLJMt9_VGmSSBxLgAPgs2JakXt6vW6lJybpKi9J-kAn8"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/jVHQZOe6aEpYsjObeByIWJcOLJMt9_VGmSSBxLgAPgs2JakXt6vW6lJybpKi9J-kAn8=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/C3ztBVoJujqMojs59g4RLQHHpJD2K5wNikV9RBNAFtDd54_3fp_-jRUXC9h1SzXLRj4F"
       }
-      -getScore(): float: 2.148289
+      -getScore(): float: 3.5714285
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4342,19 +4586,19 @@ $apps = $gplay->getNewApps();
   <summary>Results</summary>
 
 ```php
-array:399 [
-    "com.fnaps.mod.addon" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.fnaps.mod.addon"
+array:411 [
+    "com.speedfiymax.app" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.speedfiymax.app"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fnaps.mod.addon"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fnaps.mod.addon&hl=en_US&gl=us"
-      -getName(): string: "Mod Freddy for MCPE"
-      -getSummary(): ?string: "Download and install fnap mod for MCPE."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.speedfiymax.app"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.speedfiymax.app&hl=en_US&gl=us"
+      -getName(): string: "MaxSpeedfiy-Unlimited&Easy"
+      -getSummary(): ?string: "Simple, fast and easy-to-use high-speed proxy"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Seepaul"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Seepaul"
-        -getName(): string: "Seepaul"
+        -getId(): string: "PRIME DIGITAL PTE. LTD."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=PRIME+DIGITAL+PTE.+LTD."
+        -getName(): string: "PRIME DIGITAL PTE. LTD."
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4362,32 +4606,32 @@ array:399 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/Rk0zW4o7HzcmU0skttNNSYcv-EIqsmPwVsNZp4lu2CUZEoMdlCctvXm2U_qtSlZT9BU"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Rk0zW4o7HzcmU0skttNNSYcv-EIqsmPwVsNZp4lu2CUZEoMdlCctvXm2U_qtSlZT9BU=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/um1SUFZ4MvJ6heUV-h6Ygt23X1gQhw9b5Gk38enw387Ke4xXGh2ixgFt8Y-Q1tXOTAg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/um1SUFZ4MvJ6heUV-h6Ygt23X1gQhw9b5Gk38enw387Ke4xXGh2ixgFt8Y-Q1tXOTAg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/um1SUFZ4MvJ6heUV-h6Ygt23X1gQhw9b5Gk38enw387Ke4xXGh2ixgFt8Y-Q1tXOTAg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/Rk0zW4o7HzcmU0skttNNSYcv-EIqsmPwVsNZp4lu2CUZEoMdlCctvXm2U_qtSlZT9BU"
       }
-      -getScore(): float: 4.27
+      -getScore(): float: 4.5064936
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.video.magician" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.video.magician"
+    "com.Blingwallpaper.hd" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.Blingwallpaper.hd"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.video.magician"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.video.magician&hl=en_US&gl=us"
-      -getName(): string: "Video Magician"
-      -getSummary(): ?string: "Video Magician"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.Blingwallpaper.hd"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.Blingwallpaper.hd&hl=en_US&gl=us"
+      -getName(): string: "Bling Wallpeper-live,4K,HD"
+      -getSummary(): ?string: "Easy，4K,HD，Livewallpaper"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "More Money more"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=More+Money+more"
-        -getName(): string: "More Money more"
+        -getId(): string: "swmail9@gmail.com"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=swmail9@gmail.com"
+        -getName(): string: "swmail9@gmail.com"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -4395,19 +4639,19 @@ array:399 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/2OhNoYN55Op82vBizSjzRpAbH9w28YtDnZroZZCIU_eCFNfyPxgygKonWxc4V-wr178a"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/2OhNoYN55Op82vBizSjzRpAbH9w28YtDnZroZZCIU_eCFNfyPxgygKonWxc4V-wr178a=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/-NL_6qpT4ETIEg5k5z2Sq3x-8LLfabt-GleIkTvfjyv2UitZ0hsRoRAXjVCqLyiOdg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/-NL_6qpT4ETIEg5k5z2Sq3x-8LLfabt-GleIkTvfjyv2UitZ0hsRoRAXjVCqLyiOdg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/-NL_6qpT4ETIEg5k5z2Sq3x-8LLfabt-GleIkTvfjyv2UitZ0hsRoRAXjVCqLyiOdg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/2OhNoYN55Op82vBizSjzRpAbH9w28YtDnZroZZCIU_eCFNfyPxgygKonWxc4V-wr178a"
       }
-      -getScore(): float: 2.1
+      -getScore(): float: 3.0
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4428,16 +4672,13 @@ $screenshots = $app->getScreenshots();
 // download and save images
 $imageInfos = $gplay
     ->setConcurrency(10)
-    ->saveGoogleImages(
-        $screenshots,
-        static function (Nelexa\GPlay\Model\GoogleImage $image) {
-            // set width or height 700px
-            $image->setSize(700);
-            $hash = $image->getHashUrl($hashAlgo = 'md5', $parts = 2, $partLength = 2);
+    ->saveGoogleImages($screenshots, static function (Nelexa\GPlay\Model\GoogleImage $image) {
+        // set width or height 700px
+        $image->setSize(700);
+        $hash = $image->getHashUrl($hashAlgo = 'md5', $parts = 2, $partLength = 2);
 
-            return 'screenshots/' . $hash . '.{ext}';
-        }
-    )
+        return 'screenshots/' . $hash . '.{ext}';
+    })
 ;
 ```
 <details>
@@ -4446,26 +4687,26 @@ $imageInfos = $gplay
 ```php
 array:15 [
     0 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/Qty-abgT_-kvC_uU-cDgY9YyGqVbjMxoHjHKF5fBCEuBLv64Xn88RXY5hhcom92q3pE=s700"
-      -getFilename(): string: "screenshots/6b/bb/6bbb94f8b009399ed1bc51d82dc9abc1.png"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/n7uqiWBp3ej01JpnR3ShqB6jfn_FIEjnDn0vM0b535O9DHk5wdtWGE3g1V9mpw4rG24=s700"
+      -getFilename(): string: "screenshots/ec/45/ec45b381683d65cd43f269a03a7bc518.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 394
       -getHeight(): int: 700
-      -getFilesize(): int: 266242
+      -getFilesize(): int: 261138
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://lh3.googleusercontent.com/APOh41DcYeFCRukZMmrvpmdKXurhhPhHKm8Pv-iezGxAWCiHPMEBwYZrgPItsy9ZpfQ=s700"
-      -getFilename(): string: "screenshots/d7/49/d749ba30b0c9214b77eb4103b20082f9.png"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/NDrRfjlbFwrrGQAOkW5WoemB8QrBS6lp8c1C3gmXJXIITHBDS5LBnk5ypXySwudJiFQ=s700"
+      -getFilename(): string: "screenshots/a8/89/a889866f987dd36b8f013e8750b7fab3.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 394
       -getHeight(): int: 700
-      -getFilesize(): int: 328205
+      -getFilesize(): int: 342036
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -4487,7 +4728,7 @@ $imageInfo = $app->getIcon()
 
 ```php
 class Nelexa\GPlay\Model\ImageInfo {
-  -getUrl(): string: "https://lh3.googleusercontent.com/iOi6YJxQwMenT5UQWGPWTrFMQFm68IC4uKlFtARveZzVD5lTZ7fC47_rnnF7Tk48DpY=w300"
+  -getUrl(): string: "https://play-lh.googleusercontent.com/iOi6YJxQwMenT5UQWGPWTrFMQFm68IC4uKlFtARveZzVD5lTZ7fC47_rnnF7Tk48DpY=w300"
   -getFilename(): string: "icons/com.rovio.angrybirds.png"
   -getMimeType(): string: "image/png"
   -getExtension(): string: "png"
@@ -4495,12 +4736,8 @@ class Nelexa\GPlay\Model\ImageInfo {
   -getHeight(): int: 300
   -getFilesize(): int: 59706
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 
 </details>
-
-
-
-

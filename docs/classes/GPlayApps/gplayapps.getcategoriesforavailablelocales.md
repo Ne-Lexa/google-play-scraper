@@ -27,7 +27,7 @@ $categories = $gplay->getCategoriesForAvailableLocales();
 
 ```php
 array:78 [
-    "af" => array:58 [
+    "af" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BUSINESS"
         -getName(): string: "Besigheid"
@@ -35,7 +35,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -44,53 +44,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "am" => array:58 [
+    "am" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MEDICAL"
         -getName(): string: "ሕክምና"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ar" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "TOOLS"
+        -getName(): string: "መሣሪያዎች"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "ar" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "VIDEO_PLAYERS"
         -getName(): string: "أدوات الفيديو"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "BUSINESS"
+        -getName(): string: "أعمال"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "az_AZ" => array:58 [
+    "az_AZ" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Alətlər"
@@ -98,7 +98,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -107,116 +107,116 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "be" => array:58 [
+    "be" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Інструменты"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "bg" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EDUCATION"
+        -getName(): string: "Адукацыя"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "bg" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
         -getName(): string: "Библиотеки и демонстрации"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      …
-    ]
-    "bn_BD" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "WEATHER"
-        -getName(): string: "আবহাওয়া"
+        -getId(): string: "BUSINESS"
+        -getName(): string: "Бизнес"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ca" => array:58 [
+    "bn_BD" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "SHOPPING"
+        -getName(): string: "Shopping"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "ca" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicacions de rellotge"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art i disseny"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automoció"
+      …
+    ]
+    "cs_CZ" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikace pro hodinky"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "cs_CZ" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Auta a doprava"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BUSINESS"
-        -getName(): string: "Byznys"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "da_DK" => array:58 [
+    "da_DK" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EVENTS"
         -getName(): string: "Begivenheder"
@@ -224,7 +224,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -233,11 +233,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "de_DE" => array:58 [
+    "de_DE" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autos & Fahrzeuge"
@@ -245,7 +245,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BEAUTY"
@@ -254,32 +254,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "el_GR" => array:58 [
+    "el_GR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
         -getName(): string: "Αγορές"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "SPORTS"
+        -getName(): string: "Αθλήματα"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_AU" => array:58 [
+    "en_AU" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -287,7 +287,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -296,11 +296,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_CA" => array:58 [
+    "en_CA" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -308,7 +308,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -317,11 +317,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_GB" => array:58 [
+    "en_GB" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -329,7 +329,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -338,11 +338,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_IN" => array:58 [
+    "en_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -350,7 +350,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -359,11 +359,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_SG" => array:58 [
+    "en_SG" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -371,7 +371,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -380,11 +380,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_US" => array:58 [
+    "en_US" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -392,7 +392,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -401,11 +401,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "en_ZA" => array:58 [
+    "en_ZA" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Art & Design"
@@ -413,7 +413,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -422,74 +422,74 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "es_419" => array:58 [
+    "es_419" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte y diseño"
+        -getId(): string: "VIDEO_PLAYERS"
+        -getName(): string: "Aplicaciones de video"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Autos y vehículos"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de reloj"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "es_ES" => array:58 [
+    "es_ES" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte y diseño"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicaciones de reloj"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automoción"
+        -getId(): string: "VIDEO_PLAYERS"
+        -getName(): string: "Aplicaciones de vídeo"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "es_US" => array:58 [
+    "es_US" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte y diseño"
+        -getId(): string: "VIDEO_PLAYERS"
+        -getName(): string: "Aplicaciones de video"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Autos y vehículos"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de reloj"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "et" => array:58 [
+    "et" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autod ja sõidukid"
@@ -497,7 +497,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIFESTYLE"
@@ -506,11 +506,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "eu_ES" => array:58 [
+    "eu_ES" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ENTERTAINMENT"
         -getName(): string: "Aisia"
@@ -518,7 +518,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
@@ -527,32 +527,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fa" => array:58 [
+    "fa" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "WEATHER"
         -getName(): string: "آب و هوا"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EDUCATION"
+        -getName(): string: "آموزش"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fi_FI" => array:58 [
+    "fi_FI" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autot ja ajoneuvot"
@@ -560,7 +560,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -569,11 +569,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fil" => array:58 [
+    "fil" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ENTERTAINMENT"
         -getName(): string: "Aliwan"
@@ -581,7 +581,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HOUSE_AND_HOME"
@@ -590,11 +590,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fr_CA" => array:58 [
+    "fr_CA" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
         -getName(): string: "Actualités et magazines"
@@ -602,20 +602,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "FOOD_AND_DRINK"
-        -getName(): string: "Alimentation et boissons"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Applications pour montre intelligente"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "fr_FR" => array:58 [
+    "fr_FR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "NEWS_AND_MAGAZINES"
         -getName(): string: "Actualités et magazines"
@@ -623,62 +623,62 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Art et design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Applications montre"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "gl_ES" => array:58 [
+    "gl_ES" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicacións de reloxo"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Arte e deseño"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automóbiles e vehículos"
+      …
+    ]
+    "hi_IN" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "hi_IN" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MAPS_AND_NAVIGATION"
         -getName(): string: "Maps और नेविगेशन ऐप्स"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "hr" => array:58 [
+    "hr" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Alati"
@@ -686,20 +686,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Automobili i prijevoz"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikacija za sat"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "hu_HU" => array:58 [
+    "hu_HU" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autók és járművek"
@@ -707,7 +707,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HEALTH_AND_FITNESS"
@@ -716,32 +716,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "hy_AM" => array:58 [
+    "hy_AM" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HOUSE_AND_HOME"
         -getName(): string: "Ամեն ինչ տան համար"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "PERSONALIZATION"
+        -getName(): string: "Անհատականացում"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "id" => array:58 [
+    "id" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Alat "
@@ -749,20 +749,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "SHOPPING"
-        -getName(): string: "Belanja"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikasi smartwatch"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "is_IS" => array:58 [
+    "is_IS" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ENTERTAINMENT"
         -getName(): string: "Afþreying"
@@ -770,7 +770,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PRODUCTIVITY"
@@ -779,11 +779,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "it_IT" => array:58 [
+    "it_IT" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BUSINESS"
         -getName(): string: "Affari"
@@ -791,70 +791,70 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte e design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "App dell'orologio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "iw_IL" => array:58 [
+    "iw_IL" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FOOD_AND_DRINK"
         -getName(): string: "אוכל ומשקאות"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ja_JP" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EVENTS"
+        -getName(): string: "אירועים"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "ja_JP" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "アート＆デザイン"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ka_GE" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EVENTS"
+        -getName(): string: "イベント"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "ka_GE" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Watch აპები"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -863,124 +863,124 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "kk" => array:58 [
+    "kk" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Авто және көліктер"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "km_KH" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "WEATHER"
+        -getName(): string: "Ауа райы"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "km_KH" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "VIDEO_PLAYERS"
         -getName(): string: "កម្មវិធីចាក់ និងកែវីដេអូ"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "កម្មវិធីនាឡិកា"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "kn_IN" => array:58 [
+    "kn_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MAPS_AND_NAVIGATION"
         -getName(): string: "Maps ಮತ್ತು ನ್ಯಾವಿಗೇಶನ್"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ko_KR" => array:58 [
+    "ko_KR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HEALTH_AND_FITNESS"
         -getName(): string: "건강/운동"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "ky_KG" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "EDUCATION"
+        -getName(): string: "교육"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "ky_KG" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "WEATHER"
         -getName(): string: "Аба ырайы"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "lo_LA" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "Авто жана унаалар"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "lo_LA" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "COMICS"
+        -getName(): string: "ກາຕູນ"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
@@ -989,11 +989,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "lt" => array:58 [
+    "lt" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
         -getName(): string: "Apsipirkimas"
@@ -1001,7 +1001,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
@@ -1010,11 +1010,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "lv" => array:58 [
+    "lv" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Auto"
@@ -1022,7 +1022,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
@@ -1031,74 +1031,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "mk_MK" => array:58 [
+    "mk_MK" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Автомобили и возила"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      …
-    ]
-    "ml_IN" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "HEALTH_AND_FITNESS"
-        -getName(): string: "ആരോഗ്യവും ശാരീരികക്ഷമതയും"
+        -getId(): string: "TOOLS"
+        -getName(): string: "Алатки"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "mn_MN" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "AUTO_AND_VEHICLES"
-        -getName(): string: "Авто, тээврийн хэрэгсэл"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      …
-    ]
-    "mr_IN" => array:58 [
+    "ml_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FINANCE"
         -getName(): string: "Finance"
@@ -1106,20 +1064,62 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "SHOPPING"
+        -getName(): string: "Shopping"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ms" => array:58 [
+    "mn_MN" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "Авто, тээврийн хэрэгсэл"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "LIFESTYLE"
+        -getName(): string: "Амьдралын хэв маяг"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "mr_IN" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "आरोग्य व स्वास्थ्य"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "ms" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EVENTS"
         -getName(): string: "Acara"
@@ -1127,7 +1127,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
@@ -1136,53 +1136,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "my_MM" => array:58 [
+    "my_MM" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "ကားနှင့်ယာဉ်များ"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "COMICS"
-        -getName(): string: "ကာတွန်း"
+        -getId(): string: "TOOLS"
+        -getName(): string: "ကိရိယာများ"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ne_NP" => array:58 [
+    "ne_NP" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "अटो र सवारीसाधनहरू"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "PRODUCTIVITY"
+        -getName(): string: "उत्पादकत्व"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "nl_NL" => array:58 [
+    "nl_NL" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Auto's en voertuigen"
@@ -1190,7 +1190,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BEAUTY"
@@ -1199,11 +1199,11 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "no_NO" => array:58 [
+    "no_NO" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EVENTS"
         -getName(): string: "Arrangementer"
@@ -1211,7 +1211,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PARENTING"
@@ -1220,53 +1220,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "pl_PL" => array:58 [
+    "pl_PL" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikacje na zegarki"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "LIBRARIES_AND_DEMO"
         -getName(): string: "Biblioteki i wersje demo"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BUSINESS"
-        -getName(): string: "Dla firm"
+      …
+    ]
+    "pt_BR" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps para smartwatch"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "pt_BR" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "ART_AND_DESIGN"
         -getName(): string: "Arte e design"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BEAUTY"
-        -getName(): string: "Beleza"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "pt_PT" => array:58 [
+    "pt_PT" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "FOOD_AND_DRINK"
         -getName(): string: "Alimentação e bebida"
@@ -1274,20 +1274,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Arte e design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Apps de relógio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ro" => array:58 [
+    "ro" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BUSINESS"
         -getName(): string: "Afacere"
@@ -1295,49 +1295,49 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ART_AND_DESIGN"
-        -getName(): string: "Artă și design"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplicații pentru ceas"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ru_RU" => array:58 [
+    "ru_RU" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Автомобили и транспорт"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "si_LK" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "BUSINESS"
+        -getName(): string: "Бизнес"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      …
+    ]
+    "si_LK" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "watch යෙදුම"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "EDUCATION"
@@ -1346,74 +1346,74 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sk" => array:58 [
+    "sk" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikácie pre hodinky"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Autá a doprava"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "BUSINESS"
-        -getName(): string: "Biznis"
+      …
+    ]
+    "sl" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Aplikacije za uro"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "sl" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
+      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "AUTO_AND_VEHICLES"
         -getName(): string: "Avtomobili in vozila"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "EVENTS"
-        -getName(): string: "Dogodki"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sr" => array:58 [
+    "sr" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Алатке"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Апликације за сат"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sv_SE" => array:58 [
+    "sv_SE" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "Anpassning"
@@ -1421,20 +1421,20 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "LIBRARIES_AND_DEMO"
-        -getName(): string: "Bibliotek och demo"
+        -getId(): string: "ANDROID_WEAR"
+        -getName(): string: "Appar för smartklockor"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "sw" => array:58 [
+    "sw" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "HEALTH_AND_FITNESS"
         -getName(): string: "Afya na Siha"
@@ -1442,7 +1442,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
@@ -1451,19 +1451,19 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "ta_IN" => array:58 [
+    "ta_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "FINANCE"
+        -getName(): string: "Finance"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BEAUTY"
@@ -1472,53 +1472,53 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "te_IN" => array:58 [
+    "te_IN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "MAPS_AND_NAVIGATION"
-        -getName(): string: "Maps & నావిగేషన్"
+        -getId(): string: "AUTO_AND_VEHICLES"
+        -getName(): string: "ఆటో & వాహనాలు"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "ఆరోగ్యం & దృఢత్వం"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "th" => array:58 [
+    "th" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "การกำหนดค่าส่วนบุคคล"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "PHOTOGRAPHY"
+        -getName(): string: "การถ่ายภาพ"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "tr_TR" => array:58 [
+    "tr_TR" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "SHOPPING"
         -getName(): string: "Alışveriş"
@@ -1526,7 +1526,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
@@ -1535,32 +1535,32 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "uk" => array:58 [
+    "uk" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "TOOLS"
         -getName(): string: "Інструменти"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "FOOD_AND_DRINK"
+        -getName(): string: "Їжа та напої"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "vi" => array:58 [
+    "vi" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "MAPS_AND_NAVIGATION"
         -getName(): string: "Bản đồ và dẫn đường"
@@ -1568,7 +1568,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
@@ -1577,74 +1577,74 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "zh_CN" => array:58 [
+    "zh_CN" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
-        -getName(): string: "个性化"
+        -getName(): string: "个性定制"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "SPORTS"
+        -getName(): string: "体育"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "zh_HK" => array:58 [
+    "zh_HK" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
-        -isGamesCategory(): bool: false
-        -isFamilyCategory(): bool: false
-        -isApplicationCategory(): bool: true
-        -asArray(): array: …
-        -jsonSerialize(): mixed: …
-      }
-      1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "個人化"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      …
-    ]
-    "zh_TW" => array:58 [
-      0 => class Nelexa\GPlay\Model\Category {
-        -getId(): string: "ANDROID_WEAR"
-        -getName(): string: "Wear OS by Google"
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "健康與健身"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
-      1 => class Nelexa\GPlay\Model\Category {
+      …
+    ]
+    "zh_TW" => array:53 [
+      0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "PERSONALIZATION"
         -getName(): string: "個人化"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
+      }
+      1 => class Nelexa\GPlay\Model\Category {
+        -getId(): string: "HEALTH_AND_FITNESS"
+        -getName(): string: "健康塑身"
+        -isGamesCategory(): bool: false
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: true
+        -asArray(): array: …
+        -jsonSerialize(): array: …
       }
       …
     ]
-    "zu" => array:58 [
+    "zu" => array:53 [
       0 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "BOOKS_AND_REFERENCE"
         -getName(): string: "Amabhuku & Amaphatho"
@@ -1652,7 +1652,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       1 => class Nelexa\GPlay\Model\Category {
         -getId(): string: "COMICS"
@@ -1661,7 +1661,7 @@ array:78 [
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       …
     ]

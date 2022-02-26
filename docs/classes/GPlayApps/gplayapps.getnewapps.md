@@ -12,15 +12,21 @@ Nelexa\GPlay\GPlayApps::getNewApps ( [ string | Nelexa\GPlay\Model\Category | Ne
 
 ## Parameters
 * **$category** (string | [Nelexa\GPlay\Model\Category](../Category/README.md) | [Nelexa\GPlay\Enum\CategoryEnum](../CategoryEnum/README.md) | null)  
-application category as string, [Nelexa\GPlay\Model\Category](../Category/README.md),
+application category as
+string, [Nelexa\GPlay\Model\Category](../Category/README.md),
 * **$age** ([Nelexa\GPlay\Enum\AgeEnum](../AgeEnum/README.md) | null)  
 age limit or null for no limit
 * **$limit** (int)  
-limit on the number of results or [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants) for no limit
+limit on the number of results
+or [Nelexa\GPlay\GPlayApps::UNLIMIT](README.md#predefined-constants)
+for no limit
 
 ## Return Values
 an array of applications with basic information
 
+
+## Errors/Exceptions
+* Throws [Nelexa\GPlay\Exception\GooglePlayException](../GooglePlayException/README.md)
 ## Examples
 **Example 1. Gets new apps by category.**
 ```php
@@ -30,19 +36,19 @@ $apps = $gplay->getNewApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:47 [
-    "com.gym.racegame" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.gym.racegame"
+array:108 [
+    "com.zerosum.coupleshuffle" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.zerosum.coupleshuffle"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.gym.racegame&hl=en_US&gl=us"
-      -getName(): string: "Epic Race 3D"
-      -getSummary(): ?string: "50% Luck, 70% Skill, 30% Will"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.zerosum.coupleshuffle"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.zerosum.coupleshuffle&hl=en_US&gl=us"
+      -getName(): string: "Couple Shuffle"
+      -getSummary(): ?string: "Couple's Money Adventure"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Good Job Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Good+Job+Games"
-        -getName(): string: "Good Job Games"
+        -getId(): string: "5006687761269120821"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5006687761269120821"
+        -getName(): string: "Zerosum"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -50,32 +56,32 @@ array:47 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/pJkzrkGuRs4wfW8En1adLZgYXD8fk5bR5Jq7vE_6S_tjKRDzll3_RAM35f80qQBy"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/pJkzrkGuRs4wfW8En1adLZgYXD8fk5bR5Jq7vE_6S_tjKRDzll3_RAM35f80qQBy"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pJkzrkGuRs4wfW8En1adLZgYXD8fk5bR5Jq7vE_6S_tjKRDzll3_RAM35f80qQBy=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/u8Qv75lvrmBbv0kyDHnjX5Xi1g8SIUN5wOfKJXi3wVukaINv2lFuvr0MUl5FJelbKg2b"
       }
-      -getScore(): float: 3.8746777
+      -getScore(): float: 1.5
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.fancyforce.happywheels" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.fancyforce.happywheels"
+    "com.DogukanKurekci.ShootNDoor" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.DogukanKurekci.ShootNDoor"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fancyforce.happywheels"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fancyforce.happywheels&hl=en_US&gl=us"
-      -getName(): string: "Happy Wheels"
-      -getSummary(): ?string: "Happy Wheels is an intense, side-scrolling, physics-based, obstacle course game."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.DogukanKurekci.ShootNDoor"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.DogukanKurekci.ShootNDoor&hl=en_US&gl=us"
+      -getName(): string: "Shoot N Door"
+      -getSummary(): ?string: "The most creative and fun way to shoot. You can do anything by shooting."
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "James Bonacci"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=James+Bonacci"
-        -getName(): string: "James Bonacci"
+        -getId(): string: "F13 Entertainment"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=F13+Entertainment"
+        -getName(): string: "F13 Entertainment"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -83,19 +89,19 @@ array:47 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/SV8RsV5udSeeONjatT5SwleP6lzV6PjtNPs2VvyohJXWSG9fFLNOfslDEHbpDN337wQ"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/SV8RsV5udSeeONjatT5SwleP6lzV6PjtNPs2VvyohJXWSG9fFLNOfslDEHbpDN337wQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/6zNZbPZLnbQ4hyiVf4Sb5WGQA-ROQQb_qfGEcVzwOoUjJePHDp1uNoKO3yt6ReG1fbA"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/6zNZbPZLnbQ4hyiVf4Sb5WGQA-ROQQb_qfGEcVzwOoUjJePHDp1uNoKO3yt6ReG1fbA"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/6zNZbPZLnbQ4hyiVf4Sb5WGQA-ROQQb_qfGEcVzwOoUjJePHDp1uNoKO3yt6ReG1fbA=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/SV8RsV5udSeeONjatT5SwleP6lzV6PjtNPs2VvyohJXWSG9fFLNOfslDEHbpDN337wQ"
       }
-      -getScore(): float: 4.3360324
+      -getScore(): float: 1.8666667
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -115,19 +121,19 @@ $apps = $gplay->getNewApps(
   <summary>Results</summary>
 
 ```php
-array:188 [
-    "com.appadvisory.drawclimber" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.appadvisory.drawclimber"
+array:202 [
+    "com.jura.freddy.rope.five.night" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.jura.freddy.rope.five.night"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.appadvisory.drawclimber"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.appadvisory.drawclimber&hl=en_US&gl=us"
-      -getName(): string: "Draw Climber"
-      -getSummary(): ?string: "Draw your legs to win the race!"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.jura.freddy.rope.five.night"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.jura.freddy.rope.five.night&hl=en_US&gl=us"
+      -getName(): string: "Bear Rope Hero, Security City"
+      -getSummary(): ?string: "Find gangster snipers at the building's and kill them"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "VOODOO"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=VOODOO"
-        -getName(): string: "VOODOO"
+        -getId(): string: "5891027934210113676"
+        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5891027934210113676"
+        -getName(): string: "Zego Global Publishing"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -135,32 +141,32 @@ array:188 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/0tq7Z4-FvJd9rpPPIztraZcxoRsfX_U_6sH7Z5x_EdW3O-XyPUjXBkOLQprHgj0NJzQx"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/0tq7Z4-FvJd9rpPPIztraZcxoRsfX_U_6sH7Z5x_EdW3O-XyPUjXBkOLQprHgj0NJzQx=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/9lIZMexQDGYxh82g176ql3r054cGFcXHNB6qVxtTcb_XMPbqwFLcEivK6vkx-DT-nw"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/9lIZMexQDGYxh82g176ql3r054cGFcXHNB6qVxtTcb_XMPbqwFLcEivK6vkx-DT-nw"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/9lIZMexQDGYxh82g176ql3r054cGFcXHNB6qVxtTcb_XMPbqwFLcEivK6vkx-DT-nw=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/0tq7Z4-FvJd9rpPPIztraZcxoRsfX_U_6sH7Z5x_EdW3O-XyPUjXBkOLQprHgj0NJzQx"
       }
-      -getScore(): float: 3.24
+      -getScore(): float: 4.390244
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.HeroGames.WoodShop" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.HeroGames.WoodShop"
+    "com.brain.snake.thief.troll" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.brain.snake.thief.troll"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.HeroGames.WoodShop"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.HeroGames.WoodShop&hl=en_US&gl=us"
-      -getName(): string: "Wood Shop"
-      -getSummary(): ?string: "Satisfying Wood Carving Art"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.brain.snake.thief.troll"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.brain.snake.thief.troll&hl=en_US&gl=us"
+      -getName(): string: "Snake Troll : Thief master"
+      -getSummary(): ?string: "Use your brain to steal them all"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Rollic Games"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Rollic+Games"
-        -getName(): string: "Rollic Games"
+        -getId(): string: "ABI Global Publishing"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=ABI+Global+Publishing"
+        -getName(): string: "ABI Global Publishing"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -168,19 +174,19 @@ array:188 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/C3ztBVoJujqMojs59g4RLQHHpJD2K5wNikV9RBNAFtDd54_3fp_-jRUXC9h1SzXLRj4F"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/C3ztBVoJujqMojs59g4RLQHHpJD2K5wNikV9RBNAFtDd54_3fp_-jRUXC9h1SzXLRj4F=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/jVHQZOe6aEpYsjObeByIWJcOLJMt9_VGmSSBxLgAPgs2JakXt6vW6lJybpKi9J-kAn8"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/jVHQZOe6aEpYsjObeByIWJcOLJMt9_VGmSSBxLgAPgs2JakXt6vW6lJybpKi9J-kAn8"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/jVHQZOe6aEpYsjObeByIWJcOLJMt9_VGmSSBxLgAPgs2JakXt6vW6lJybpKi9J-kAn8=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/C3ztBVoJujqMojs59g4RLQHHpJD2K5wNikV9RBNAFtDd54_3fp_-jRUXC9h1SzXLRj4F"
       }
-      -getScore(): float: 2.148289
+      -getScore(): float: 3.5714285
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]
@@ -196,19 +202,19 @@ $apps = $gplay->getNewApps();
   <summary>Results</summary>
 
 ```php
-array:399 [
-    "com.fnaps.mod.addon" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.fnaps.mod.addon"
+array:411 [
+    "com.speedfiymax.app" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.speedfiymax.app"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fnaps.mod.addon"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fnaps.mod.addon&hl=en_US&gl=us"
-      -getName(): string: "Mod Freddy for MCPE"
-      -getSummary(): ?string: "Download and install fnap mod for MCPE."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.speedfiymax.app"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.speedfiymax.app&hl=en_US&gl=us"
+      -getName(): string: "MaxSpeedfiy-Unlimited&Easy"
+      -getSummary(): ?string: "Simple, fast and easy-to-use high-speed proxy"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Seepaul"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Seepaul"
-        -getName(): string: "Seepaul"
+        -getId(): string: "PRIME DIGITAL PTE. LTD."
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=PRIME+DIGITAL+PTE.+LTD."
+        -getName(): string: "PRIME DIGITAL PTE. LTD."
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -216,32 +222,32 @@ array:399 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/Rk0zW4o7HzcmU0skttNNSYcv-EIqsmPwVsNZp4lu2CUZEoMdlCctvXm2U_qtSlZT9BU"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/Rk0zW4o7HzcmU0skttNNSYcv-EIqsmPwVsNZp4lu2CUZEoMdlCctvXm2U_qtSlZT9BU=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/um1SUFZ4MvJ6heUV-h6Ygt23X1gQhw9b5Gk38enw387Ke4xXGh2ixgFt8Y-Q1tXOTAg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/um1SUFZ4MvJ6heUV-h6Ygt23X1gQhw9b5Gk38enw387Ke4xXGh2ixgFt8Y-Q1tXOTAg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/um1SUFZ4MvJ6heUV-h6Ygt23X1gQhw9b5Gk38enw387Ke4xXGh2ixgFt8Y-Q1tXOTAg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/Rk0zW4o7HzcmU0skttNNSYcv-EIqsmPwVsNZp4lu2CUZEoMdlCctvXm2U_qtSlZT9BU"
       }
-      -getScore(): float: 4.27
+      -getScore(): float: 4.5064936
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
-    "com.video.magician" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.video.magician"
+    "com.Blingwallpaper.hd" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.Blingwallpaper.hd"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.video.magician"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.video.magician&hl=en_US&gl=us"
-      -getName(): string: "Video Magician"
-      -getSummary(): ?string: "Video Magician"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.Blingwallpaper.hd"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.Blingwallpaper.hd&hl=en_US&gl=us"
+      -getName(): string: "Bling Wallpeper-live,4K,HD"
+      -getSummary(): ?string: "Easy，4K,HD，Livewallpaper"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "More Money more"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=More+Money+more"
-        -getName(): string: "More Money more"
+        -getId(): string: "swmail9@gmail.com"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=swmail9@gmail.com"
+        -getName(): string: "swmail9@gmail.com"
         -getDescription(): ?string: null
         -getWebsite(): ?string: null
         -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
@@ -249,19 +255,19 @@ array:399 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/2OhNoYN55Op82vBizSjzRpAbH9w28YtDnZroZZCIU_eCFNfyPxgygKonWxc4V-wr178a"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/2OhNoYN55Op82vBizSjzRpAbH9w28YtDnZroZZCIU_eCFNfyPxgygKonWxc4V-wr178a=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/-NL_6qpT4ETIEg5k5z2Sq3x-8LLfabt-GleIkTvfjyv2UitZ0hsRoRAXjVCqLyiOdg"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/-NL_6qpT4ETIEg5k5z2Sq3x-8LLfabt-GleIkTvfjyv2UitZ0hsRoRAXjVCqLyiOdg"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/-NL_6qpT4ETIEg5k5z2Sq3x-8LLfabt-GleIkTvfjyv2UitZ0hsRoRAXjVCqLyiOdg=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/2OhNoYN55Op82vBizSjzRpAbH9w28YtDnZroZZCIU_eCFNfyPxgygKonWxc4V-wr178a"
       }
-      -getScore(): float: 2.1
+      -getScore(): float: 3.0
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]

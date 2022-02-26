@@ -139,6 +139,7 @@ namespace PHPSTORM_META {
         \Nelexa\GPlay\Enum\CategoryEnum::TRAVEL_AND_LOCAL(),
         \Nelexa\GPlay\Enum\CategoryEnum::VIDEO_PLAYERS(),
         \Nelexa\GPlay\Enum\CategoryEnum::ANDROID_WEAR(),
+        \Nelexa\GPlay\Enum\CategoryEnum::WATCH_FACE(),
         \Nelexa\GPlay\Enum\CategoryEnum::WEATHER(),
         \Nelexa\GPlay\Enum\CategoryEnum::GAME_ACTION(),
         \Nelexa\GPlay\Enum\CategoryEnum::GAME_ADVENTURE(),
@@ -157,12 +158,6 @@ namespace PHPSTORM_META {
         \Nelexa\GPlay\Enum\CategoryEnum::GAME_STRATEGY(),
         \Nelexa\GPlay\Enum\CategoryEnum::GAME_TRIVIA(),
         \Nelexa\GPlay\Enum\CategoryEnum::GAME_WORD(),
-        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_ACTION(),
-        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_BRAINGAMES(),
-        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_CREATE(),
-        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_EDUCATION(),
-        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_MUSICVIDEO(),
-        \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_PRETEND(),
     );
 
     registerArgumentsSet(

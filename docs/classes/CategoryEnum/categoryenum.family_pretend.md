@@ -19,7 +19,7 @@ Returns the category id 'Pretend play'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "FAMILY_PRETEND"
   -value(): mixed: "FAMILY_PRETEND"
-  -ordinal(): int: 57
+  -ordinal(): int: 58
   -__toString(): string: "FAMILY_PRETEND"
 }
 ```

@@ -19,7 +19,7 @@ Returns the category id 'Card'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_CARD"
   -value(): mixed: "GAME_CARD"
-  -ordinal(): int: 39
+  -ordinal(): int: 40
   -__toString(): string: "GAME_CARD"
 }
 ```

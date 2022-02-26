@@ -19,7 +19,7 @@ Returns the category id 'Educational'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_EDUCATIONAL"
   -value(): mixed: "GAME_EDUCATIONAL"
-  -ordinal(): int: 42
+  -ordinal(): int: 43
   -__toString(): string: "GAME_EDUCATIONAL"
 }
 ```

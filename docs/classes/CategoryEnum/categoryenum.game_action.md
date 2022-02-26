@@ -19,7 +19,7 @@ Returns the category id 'Action'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_ACTION"
   -value(): mixed: "GAME_ACTION"
-  -ordinal(): int: 35
+  -ordinal(): int: 36
   -__toString(): string: "GAME_ACTION"
 }
 ```

@@ -15,12 +15,12 @@ Nelexa\GPlay\Model\Video implements JsonSerializable {
     public getVideoUrl ( void ) : string
     public getYoutubeId ( void ) : string | null
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\Video::__construct](video.construct.md) - Creates an object with information about the promo video for Android application.
+* [Nelexa\GPlay\Model\Video::__construct](video.__construct.md) - Creates an object with information about the promo video for Android application.
 * [Nelexa\GPlay\Model\Video::getImageUrl](video.getimageurl.md) - Returns the video thumbnail url.
 * [Nelexa\GPlay\Model\Video::getVideoUrl](video.getvideourl.md) - Returns the video url.
 * [Nelexa\GPlay\Model\Video::getYoutubeId](video.getyoutubeid.md) - Returns a YouTube id.
@@ -35,11 +35,11 @@ Nelexa\GPlay\Model\Video implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Video {
-  -getImageUrl(): string: "https://i.ytimg.com/vi/CIyPDJYtVhw/hqdefault.jpg"
+  -getImageUrl(): string: "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw"
   -getVideoUrl(): string: "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
   -getYoutubeId(): ?string: "CIyPDJYtVhw"
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -50,7 +50,7 @@ echo json_encode($video, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_UNES
 Output:
 ```json
 {
-    "thumbUrl": "https://i.ytimg.com/vi/CIyPDJYtVhw/hqdefault.jpg",
+    "thumbUrl": "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw",
     "videoUrl": "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
 }
 ```

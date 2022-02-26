@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Model;
@@ -76,7 +78,7 @@ final class AppInfo extends App
     /** @var float Price of the application in the Google Play store. */
     private $price;
 
-    /** @var string $currency Currency price of the application. */
+    /** @var string Currency price of the application. */
     private $currency;
 
     /** @var string|null In-App Purchase price. */
@@ -152,8 +154,8 @@ final class AppInfo extends App
         $this->recentChanges = $builder->getRecentChanges();
         $this->editorsChoice = $builder->isEditorsChoice();
         $this->installs = $builder->getInstalls();
-        $this->histogramRating = $builder->getHistogramRating() ??
-            new HistogramRating(0, 0, 0, 0, 0);
+        $this->histogramRating = $builder->getHistogramRating()
+            ?? new HistogramRating(0, 0, 0, 0, 0);
         $this->price = $builder->getPrice();
         $this->currency = $builder->getCurrency() ?? self::DEFAULT_CURRENCY;
         $this->offersIAPCost = $builder->getOffersIAPCost();

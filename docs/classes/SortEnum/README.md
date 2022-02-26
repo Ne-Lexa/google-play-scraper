@@ -37,7 +37,7 @@ Nelexa\GPlay\Enum\SortEnum extends Nelexa\Enum {
 * [Nelexa\GPlay\Enum\SortEnum::containsValue](sortenum.containsvalue.md) - Checks if enum contains a passed value.
 * [Nelexa\GPlay\Enum\SortEnum::fromValue](sortenum.fromvalue.md) - Returns first enum of the specified constant value.
 * [Nelexa\GPlay\Enum\SortEnum::ordinal](sortenum.ordinal.md) - Returns the ordinal of this enum constant.
-* [Nelexa\GPlay\Enum\SortEnum::__toString](sortenum.tostring.md) - Returns the value of this enum constant, as contained in the declaration.
+* [Nelexa\GPlay\Enum\SortEnum::__toString](sortenum.__tostring.md) - Returns the value of this enum constant, as contained in the declaration.
 
 
 ## Sample object content

@@ -19,7 +19,7 @@ Returns the category id 'Role Playing'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_ROLE_PLAYING"
   -value(): mixed: "GAME_ROLE_PLAYING"
-  -ordinal(): int: 46
+  -ordinal(): int: 47
   -__toString(): string: "GAME_ROLE_PLAYING"
 }
 ```

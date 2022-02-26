@@ -19,7 +19,7 @@ Returns the category id 'Racing'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_RACING"
   -value(): mixed: "GAME_RACING"
-  -ordinal(): int: 45
+  -ordinal(): int: 46
   -__toString(): string: "GAME_RACING"
 }
 ```

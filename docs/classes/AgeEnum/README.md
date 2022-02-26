@@ -37,7 +37,7 @@ Nelexa\GPlay\Enum\AgeEnum extends Nelexa\Enum {
 * [Nelexa\GPlay\Enum\AgeEnum::containsValue](ageenum.containsvalue.md) - Checks if enum contains a passed value.
 * [Nelexa\GPlay\Enum\AgeEnum::fromValue](ageenum.fromvalue.md) - Returns first enum of the specified constant value.
 * [Nelexa\GPlay\Enum\AgeEnum::ordinal](ageenum.ordinal.md) - Returns the ordinal of this enum constant.
-* [Nelexa\GPlay\Enum\AgeEnum::__toString](ageenum.tostring.md) - Returns the value of this enum constant, as contained in the declaration.
+* [Nelexa\GPlay\Enum\AgeEnum::__toString](ageenum.__tostring.md) - Returns the value of this enum constant, as contained in the declaration.
 
 
 ## Sample object content

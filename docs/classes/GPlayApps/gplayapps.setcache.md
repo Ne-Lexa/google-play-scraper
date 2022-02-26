@@ -5,13 +5,13 @@
 
 ## Description
 ```php
-Nelexa\GPlay\GPlayApps::setCache ( cacheInterface | null $cache [, DateInterval | int | null $cacheTtl = null ] ) : Nelexa\GPlay\GPlayApps
+Nelexa\GPlay\GPlayApps::setCache ( Psr\SimpleCache\CacheInterface | null $cache [, DateInterval | int | null $cacheTtl = null ] ) : Nelexa\GPlay\GPlayApps
 ```
 
 ## Parameters
-* **$cache** (cacheInterface | null)  
+* **$cache** (Psr\SimpleCache\CacheInterface | null)  
 PSR-16 Simple Cache instance
-* **$cacheTtl** ([DateInterval](https://www.php.net/manual/class.dateinterval.php) | int | null)  
+* **$cacheTtl** ([DateInterval](../../https:/www.php.net/manual/class.dateinterval.php) | int | null)  
 TTL cached data
 
 ## Return Values

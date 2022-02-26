@@ -2,36 +2,39 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\GPlayApps;
+use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Util\ScraperUtil;
-use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * @internal
  */
-class FindDevAppsUrlScraper implements ResponseHandlerInterface
+class FindDevAppsUrlScraper implements ParseHandlerInterface
 {
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
+     * @param array             $options
      *
-     * @throws GooglePlayException
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
      * @return string|null
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response): ?string
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): ?string
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 

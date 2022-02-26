@@ -2,44 +2,47 @@
 
 declare(strict_types=1);
 
-/**
- * @author   Ne-Lexa
- * @license  MIT
+/*
+ * Copyright (c) Ne-Lexa
  *
- * @see      https://github.com/Ne-Lexa/google-play-scraper
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/Ne-Lexa/google-play-scraper
  */
 
 namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\Exception\GooglePlayException;
+use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
 use Nelexa\GPlay\Model\Category;
 use Nelexa\GPlay\Util\ScraperUtil;
-use Nelexa\HttpClient\ResponseHandlerInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * @internal
  */
-class CategoriesScraper implements ResponseHandlerInterface
+class CategoriesScraper implements ParseHandlerInterface
 {
     private const CATEGORY_URL_PREFIX = '/store/apps/category/';
 
     /**
      * @param RequestInterface  $request
      * @param ResponseInterface $response
+     * @param array             $options
      *
-     * @throws GooglePlayException
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
-     * @return mixed
+     * @return array
      */
-    public function __invoke(RequestInterface $request, ResponseInterface $response)
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): array
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
         $dataCategories = null;
 
-        foreach ($scriptData as $key => $data) {
+        foreach ($scriptData as $data) {
             if (isset($data[0][1][0][3][0]) && \is_array($data[0][1][0][3][0])) {
                 $dataCategories = $data;
                 break;
@@ -58,9 +61,9 @@ class CategoriesScraper implements ResponseHandlerInterface
                 static function ($results, $item) use (&$parseCategories) {
                     if (\is_array($item)) {
                         if (
-                            \count($item) === 6 &&
-                            strpos($item[0], self::CATEGORY_URL_PREFIX) === 0 &&
-                            strpos($item[0], '?age=') === false
+                            \count($item) === 6
+                            && strpos($item[0], self::CATEGORY_URL_PREFIX) === 0
+                            && strpos($item[0], '?age=') === false
                         ) {
                             $id = basename($item[0]);
                             $categoryName = $item[1];

@@ -19,7 +19,7 @@ Returns the category id 'Word'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_WORD"
   -value(): mixed: "GAME_WORD"
-  -ordinal(): int: 51
+  -ordinal(): int: 52
   -__toString(): string: "GAME_WORD"
 }
 ```

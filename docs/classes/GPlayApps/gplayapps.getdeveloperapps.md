@@ -10,7 +10,9 @@ Nelexa\GPlay\GPlayApps::getDeveloperApps ( string | Nelexa\GPlay\Model\Developer
 
 ## Parameters
 * **$developerId** (string | [Nelexa\GPlay\Model\Developer](../Developer/README.md) | [Nelexa\GPlay\Model\App](../App/README.md))  
-developer id as string, [Nelexa\GPlay\Model\Developer](../Developer/README.md) or [Nelexa\GPlay\Model\App](../App/README.md) object
+developer id as
+string, [Nelexa\GPlay\Model\Developer](../Developer/README.md)
+or [Nelexa\GPlay\Model\App](../App/README.md) object
 
 ## Return Values
 an array of applications with basic information
@@ -34,15 +36,15 @@ $apps = $gplay->getDeveloperApps($devId);
   <summary>Results</summary>
 
 ```php
-array:129 [
+array:143 [
     0 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.google.android.play.games"
+      -getId(): string: "com.google.android.apps.nbu.paisa.user"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.play.games"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.play.games&hl=en_US&gl=us"
-      -getName(): string: "Google Play Games"
-      -getSummary(): ?string: "Play games instantly, save progress, and earn achievements."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.nbu.paisa.user&hl=en_US&gl=us"
+      -getName(): string: "Google Pay: Save, Pay, Manage"
+      -getSummary(): ?string: "Send money, shop, pay bills & earn rewards — plus a secure mobile wallet"
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
         -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
@@ -54,28 +56,28 @@ array:129 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/HArtbyi53u0jnqhnnxkQnMx9dHOERNcprZyKnInd2nrfM7Wd9ivMNTiz7IJP6-mSpwk"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/HArtbyi53u0jnqhnnxkQnMx9dHOERNcprZyKnInd2nrfM7Wd9ivMNTiz7IJP6-mSpwk"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/HArtbyi53u0jnqhnnxkQnMx9dHOERNcprZyKnInd2nrfM7Wd9ivMNTiz7IJP6-mSpwk=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/szHQCpMAb0MikYIhvNG1MlruXFUggd6DJHXkMPG1H4lJPB7Lee_BkODfwxpQazxfO9mA"
       }
-      -getScore(): float: 4.354707
+      -getScore(): float: 4.088699
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.google.android.apps.youtube.music"
+      -getId(): string: "com.google.android.apps.authenticator2"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.music&hl=en_US&gl=us"
-      -getName(): string: "YouTube Music - Stream Songs & Music Videos"
-      -getSummary(): ?string: "The official YouTube app built just for music."
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US&gl=us"
+      -getName(): string: "Google Authenticator"
+      -getSummary(): ?string: "Enable 2-step verification to protect your account from hijacking."
       -getDeveloper(): Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
         -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
@@ -87,19 +89,19 @@ array:129 [
         -getEmail(): ?string: null
         -getAddress(): ?string: null
         -asArray(): array: …
-        -jsonSerialize(): mixed: …
+        -jsonSerialize(): array: …
       }
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg"
-        -getOriginalSizeUrl(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/HPc5gptPzRw3wFhJE1ZCnTqlvEvuVFBAsV9etfouOhdRbkp-zNtYTzKUmUVPERSZ_lAL"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/HPc5gptPzRw3wFhJE1ZCnTqlvEvuVFBAsV9etfouOhdRbkp-zNtYTzKUmUVPERSZ_lAL"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/HPc5gptPzRw3wFhJE1ZCnTqlvEvuVFBAsV9etfouOhdRbkp-zNtYTzKUmUVPERSZ_lAL=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://lh3.googleusercontent.com/GnYnNfKBr2nysHBYgYRCQtcv_RRNN0Sosn47F5ArKJu89DMR3_jHRAazoIVsPUoaMg"
       }
-      -getScore(): float: 4.123365
+      -getScore(): float: 3.8315983
       -getPriceText(): ?string: null
       -isFree(): bool: true
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]

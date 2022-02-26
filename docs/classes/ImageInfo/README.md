@@ -19,12 +19,12 @@ Nelexa\GPlay\Model\ImageInfo implements JsonSerializable {
     public getHeight ( void ) : int
     public getFilesize ( void ) : int
     public asArray ( void ) : array
-    public jsonSerialize ( void ) : mixed
+    public jsonSerialize ( void ) : array
 }
 ```
 
 ## Table of Contents
-* [Nelexa\GPlay\Model\ImageInfo::__construct](imageinfo.construct.md) - Creates an object with information about the image saved to disk.
+* [Nelexa\GPlay\Model\ImageInfo::__construct](imageinfo.__construct.md) - Creates an object with information about the image saved to disk.
 * [Nelexa\GPlay\Model\ImageInfo::getUrl](imageinfo.geturl.md) - Returns the url of the image.
 * [Nelexa\GPlay\Model\ImageInfo::getFilename](imageinfo.getfilename.md) - Returns the path to save the image file.
 * [Nelexa\GPlay\Model\ImageInfo::getMimeType](imageinfo.getmimetype.md) - Returns the mime type of the image.
@@ -39,15 +39,15 @@ Nelexa\GPlay\Model\ImageInfo implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ImageInfo {
-  -getUrl(): string: "https://lh3.googleusercontent.com/eJRcpLl6mxZpq2VK0MjIwiSSv0fnVjgVtC_p2Z0pzgykn40oMG-RX3J8JdRLYGHHrQ"
+  -getUrl(): string: "https://play-lh.googleusercontent.com/33WPfxcJw1ic-L4S3PmOlBZzZPisdUq44wWibj5Ksty9Uux-Ic6_J8bq6tv5ZE1Xl6V5"
   -getFilename(): string: "/tmp/screenshot.png"
-  -getMimeType(): string: "image/jpeg"
-  -getExtension(): string: "jpg"
-  -getWidth(): int: 288
-  -getHeight(): int: 512
-  -getFilesize(): int: 49287
+  -getMimeType(): string: "image/png"
+  -getExtension(): string: "png"
+  -getWidth(): int: 512
+  -getHeight(): int: 341
+  -getFilesize(): int: 292638
   -asArray(): array: …
-  -jsonSerialize(): mixed: …
+  -jsonSerialize(): array: …
 }
 ```
 **Example result as `json`**
@@ -58,12 +58,12 @@ echo json_encode($imageInfo, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_
 Output:
 ```json
 {
-    "url": "https://lh3.googleusercontent.com/eJRcpLl6mxZpq2VK0MjIwiSSv0fnVjgVtC_p2Z0pzgykn40oMG-RX3J8JdRLYGHHrQ",
+    "url": "https://play-lh.googleusercontent.com/33WPfxcJw1ic-L4S3PmOlBZzZPisdUq44wWibj5Ksty9Uux-Ic6_J8bq6tv5ZE1Xl6V5",
     "path": "/tmp/screenshot.png",
-    "mimeType": "image/jpeg",
-    "extension": "jpg",
-    "width": 288,
-    "height": 512
+    "mimeType": "image/png",
+    "extension": "png",
+    "width": 512,
+    "height": 341
 }
 ```
 

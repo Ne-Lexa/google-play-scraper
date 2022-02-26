@@ -19,7 +19,7 @@ Returns the category id 'Casual'.
 class Nelexa\GPlay\Enum\CategoryEnum {
   -name(): string: "GAME_CASUAL"
   -value(): mixed: "GAME_CASUAL"
-  -ordinal(): int: 41
+  -ordinal(): int: 42
   -__toString(): string: "GAME_CASUAL"
 }
 ```
