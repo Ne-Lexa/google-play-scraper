@@ -7,8 +7,24 @@ on:
         -   cron: '30 6 * * *'
 
 jobs:
+    pre_job:
+        name: Skip Duplicate Actions
+        runs-on: ubuntu-latest
+        outputs:
+            should_skip: ${{ steps.skip_check.outputs.should_skip }}
+        steps:
+            -   id: skip_check
+                uses: fkirc/skip-duplicate-actions@v3
+                with:
+                    concurrent_skipping: 'never'
+                    skip_after_successful_duplicate: 'true'
+                    paths_ignore: '["**/README.md", "**/docs/**"]'
+                    do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
+
     tests:
         name: PHP ${{ matrix.php }} Test on ${{ matrix.os }}
+
+        if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
 
         env:
             extensions: curl, dom, hash, iconv, json, libxml, mbstring, xml, redis
