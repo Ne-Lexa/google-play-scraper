@@ -38,12 +38,14 @@ class ClusterPagesFromClusterResponseScraper implements ParseHandlerInterface
         $json = \GuzzleHttp\json_decode($json[0][2], true);
 
         $results = [];
-        foreach ($json[0][1] as $items) {
-            if (isset($items[0][1], $items[0][3][4][2])) {
-                $results[] = new ClusterPage(
-                    $items[0][1],
-                    GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2]
-                );
+        if (isset($json[0][1]) && \is_array($json[0][1])) {
+            foreach ($json[0][1] as $items) {
+                if (isset($items[0][1], $items[0][3][4][2])) {
+                    $results[] = new ClusterPage(
+                        $items[0][1],
+                        GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2]
+                    );
+                }
             }
         }
         $token = $json[0][3][1] ?? null;
