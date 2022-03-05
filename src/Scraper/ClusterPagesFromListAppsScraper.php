@@ -15,7 +15,6 @@ namespace Nelexa\GPlay\Scraper;
 
 use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\HttpClient\ParseHandlerInterface;
-use Nelexa\GPlay\Model\App;
 use Nelexa\GPlay\Model\ClusterPage;
 use Nelexa\GPlay\Util\ScraperUtil;
 use Psr\Http\Message\RequestInterface;

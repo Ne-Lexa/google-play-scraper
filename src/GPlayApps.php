@@ -794,7 +794,7 @@ class GPlayApps
      *
      * @return \Generator<Model\App> an iterator with basic information about applications
      */
-    public function getClusterApps(string $clusterPageUrl): iterable
+    public function getClusterApps(string $clusterPageUrl): \Generator
     {
         $clusterUri = new Uri($clusterPageUrl);
         $query = Query::parse($clusterUri->getQuery());
@@ -936,9 +936,9 @@ class GPlayApps
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
-     * @return iterable<Model\ClusterPage> an iterator of cluster pages
+     * @return \Generator<Model\ClusterPage> an iterator of cluster pages
      */
-    public function getClusterPages($category = null, ?Enum\AgeEnum $age = null, ?string $path = null): iterable
+    public function getClusterPages($category = null, ?Enum\AgeEnum $age = null, ?string $path = null): \Generator
     {
         $queryParams = [
             self::REQ_PARAM_LOCALE => $this->defaultLocale,
