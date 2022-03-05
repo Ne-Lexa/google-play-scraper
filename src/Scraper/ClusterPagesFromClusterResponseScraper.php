@@ -39,10 +39,12 @@ class ClusterPagesFromClusterResponseScraper implements ParseHandlerInterface
 
         $results = [];
         foreach ($json[0][1] as $items) {
-            $results[] = new ClusterPage(
-                $items[0][1],
-                GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2]
-            );
+            if (isset($items[0][1], $items[0][3][4][2])) {
+                $results[] = new ClusterPage(
+                    $items[0][1],
+                    GPlayApps::GOOGLE_PLAY_URL . $items[0][3][4][2]
+                );
+            }
         }
         $token = $json[0][3][1] ?? null;
 
