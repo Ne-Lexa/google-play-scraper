@@ -18,6 +18,17 @@ use Psr\Log\LogLevel;
 
 class ConsoleLog extends AbstractLogger
 {
+    public function __construct()
+    {
+        if (!\defined('STDOUT')) {
+            \define('STDOUT', fopen('php://stdout', 'wb'));
+        }
+
+        if (!\defined('STDERR')) {
+            \define('STDERR', fopen('php://stderr', 'wb'));
+        }
+    }
+
     public function log($level, $message, array $context = []): void
     {
         $stream = LogLevel::DEBUG === $level || LogLevel::INFO === $level ? \STDOUT : \STDERR;
