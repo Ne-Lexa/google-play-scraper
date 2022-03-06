@@ -58,8 +58,7 @@ class HttpClient
 
             $stack = HandlerStack::create();
             $logTemplate = $config['logTemplate']
-                ?? '🌎 [{ts}] "{method} {url} HTTP/{version}" {code} "{phrase}" - "{req_headers}"'
-                . ' - {res_header_Content-Length}';
+                ?? '🌎 [{ts}] "{method} {url} HTTP/{version}" {code} "{phrase}" - {res_header_Content-Length}';
             $stack->push(Middleware::log(new ConsoleLog(), new MessageFormatter($logTemplate)), 'logger');
             $stack->push(
                 Middleware::retry(
