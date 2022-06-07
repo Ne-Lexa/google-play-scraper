@@ -28,8 +28,8 @@ Nelexa\GPlay\Model\ClusterPage {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ClusterPage {
-  -getTitle(): string: "Recommended for you"
-  -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogoKCAEqAggBUgIIAQ%3D%3D:S:ANO1ljJG6Aw&gsr=Cg2iCgoIASoCCAFSAggB:S:ANO1ljLKNqE"
+  -getTitle(): string: "Popular apps"
+  -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?gsr=ShwSFwoCCAEQBBoLQVBQTElDQVRJT04qAggB-AEA:S:ANO1ljLOWNs"
 }
 ```
 

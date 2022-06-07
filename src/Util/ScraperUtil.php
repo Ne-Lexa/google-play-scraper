@@ -27,7 +27,8 @@ class ScraperUtil
     {
         $scripts = [];
 
-        if (preg_match_all('/>AF_initDataCallback\((.*?)\);<\/script/s', $html, $matches)) {
+        preg_match_all('/>AF_initDataCallback\((.*?)\);<\/script/s', $html, $matches);
+        if ($matches) {
             $scripts = array_reduce(
                 $matches[0],
                 static function ($carry, $item) {
@@ -123,5 +124,31 @@ class ScraperUtil
         }
 
         return $text;
+    }
+
+    /**
+     * @param array        $array
+     * @param array|string $path
+     * @param string       $glue
+     *
+     * @return mixed
+     */
+    public static function getValue(array &$array, $path, string $glue = '.')
+    {
+        if (!\is_array($path)) {
+            $path = explode($glue, (string) $path);
+        }
+
+        $ref = &$array;
+
+        foreach ((array) $path as $parent) {
+            if (\is_array($ref) && \array_key_exists($parent, $ref)) {
+                $ref = &$ref[$parent];
+            } else {
+                return null;
+            }
+        }
+
+        return $ref;
     }
 }

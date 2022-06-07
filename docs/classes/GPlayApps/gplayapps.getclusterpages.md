@@ -5,7 +5,7 @@
 
 ## Description
 ```php
-Nelexa\GPlay\GPlayApps::getClusterPages ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] [, string | null $path = null ] ) : iterable<Nelexa\GPlay\Model\ClusterPage>
+Nelexa\GPlay\GPlayApps::getClusterPages ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] ) : \Generator<Nelexa\GPlay\Model\ClusterPage>
 ```
 [Nelexa\GPlay\Enum\CategoryEnum](../CategoryEnum/README.md) or
 `null` for all categories
@@ -16,8 +16,6 @@ application category as
 string, [Nelexa\GPlay\Model\Category](../Category/README.md),
 * **$age** ([Nelexa\GPlay\Enum\AgeEnum](../AgeEnum/README.md) | null)  
 age limit or `null` for no limit
-* **$path** (string | null)  
-`top`, `new` or `null`
 
 ## Return Values
 an iterator of cluster pages
@@ -36,14 +34,14 @@ $clusterPages = iterator_to_array($gplay->getClusterPages());
   <summary>Results</summary>
 
 ```php
-array:23 [
+array:27 [
     0 => class Nelexa\GPlay\Model\ClusterPage {
-      -getTitle(): string: "Recommended for you"
-      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogoKCAEqAggBUgIIAQ%3D%3D:S:ANO1ljJG6Aw&gsr=Cg2iCgoIASoCCAFSAggB:S:ANO1ljLKNqE"
+      -getTitle(): string: "Popular apps"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?gsr=ShwSFwoCCAEQBBoLQVBQTElDQVRJT04qAggB-AEA:S:ANO1ljLOWNs"
     }
     1 => class Nelexa\GPlay\Model\ClusterPage {
-      -getTitle(): string: "Entertainment"
-      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogooCAEaHAoWcmVjc190b3BpY19tRWdfUlNWMHY2QRA7GAMqAggBUgIIAg%3D%3D:S:ANO1ljKiaBY&gsr=CiuiCigIA…"
+      -getTitle(): string: "Low on space?"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?gsr=SmoKZQodChlwcm9tb3Rpb25fMzAwMTg1OF9sb3dfYXBrEAISPgo6bmV3X2hvbWVfZGV2aWNlX2ZlYXR1cmVkX3JlY3My…"
     }
     …
   ]
@@ -67,14 +65,14 @@ $clusterPages = iterator_to_array(
   <summary>Results</summary>
 
 ```php
-array:3 [
+array:20 [
     0 => class Nelexa\GPlay\Model\ClusterPage {
-      -getTitle(): string: "Top free"
-      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=0g4jCiEKG3RvcHNlbGxpbmdfZnJlZV9HQU1FX1BVWlpMRRAHGAM%3D:S:ANO1ljLYuNA&gsr=CibSDiMKIQobdG9wc2V…"
+      -getTitle(): string: "Top-rated games"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogoXCAkSC0dBTUVfUFVaWkxFKgIIB1ICCAE%3D:S:ANO1ljIIXE4&gsr=ChqiChcICRILR0FNRV9QVVpaTEUqAggHUgI…"
     }
     1 => class Nelexa\GPlay\Model\ClusterPage {
-      -getTitle(): string: "Top paid"
-      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=0g4jCiEKG3RvcHNlbGxpbmdfcGFpZF9HQU1FX1BVWlpMRRAHGAM%3D:S:ANO1ljIFZPM&gsr=CibSDiMKIQobdG9wc2V…"
+      -getTitle(): string: "Recommended for you"
+      -getUrl(): string: "https://play.google.com/store/apps/collection/cluster?clp=ogoXCAESC0dBTUVfUFVaWkxFKgIIB1ICCAE%3D:S:ANO1ljKwRMs&gsr=ChqiChcIARILR0FNRV9QVVpaTEUqAggHUgI…"
     }
     …
   ]

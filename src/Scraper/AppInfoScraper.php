@@ -1,6 +1,5 @@
 <?php
 
-/** @noinspection MultiAssignmentUsageInspection */
 declare(strict_types=1);
 
 /*
@@ -28,7 +27,6 @@ use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Model\Video;
 use Nelexa\GPlay\Scraper\Extractor\ReviewsExtractor;
 use Nelexa\GPlay\Util\DateStringFormatter;
-use Nelexa\GPlay\Util\LocaleHelper;
 use Nelexa\GPlay\Util\ScraperUtil;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -49,76 +47,64 @@ class AppInfoScraper implements ParseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): AppInfo
     {
-        $query = Query::parse($request->getUri()->getQuery());
+        $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
+        $appInfo = ScraperUtil::getValue($scriptData, 'ds:4.1.2');
+        if (!\is_array($appInfo)) {
+            throw (new GooglePlayException('Unable to get data for this application.'))->setUrl(
+                $request->getUri()->__toString()
+            );
+        }
+
+        $query = Query::parse($request->getUri()->getQuery());
         $id = $query[GPlayApps::REQ_PARAM_ID];
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
         $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
-        /** @var array|null $scriptDataRating */
-        [
-            $scriptDataInfo,
-            $scriptDataRating,
-            $scriptDataPrice,
-            $scriptDataVersion,
-            $scriptDataReviews,
-        ] = $this->getScriptData($request, $response);
+        $name = $appInfo[0][0];
+        $description = ScraperUtil::html2text($appInfo[72][0][1]);
+        $developer = $this->extractDeveloper($appInfo);
 
-        $name = $scriptDataInfo[0][0][0];
-        $description = $this->extractDescription($scriptDataInfo);
-        $translatedFromLocale = $this->extractTranslatedFromLocale($scriptDataInfo, $locale);
-        $developer = $this->extractDeveloper($scriptDataInfo);
+        $category = $this->extractCategory($appInfo[79][0][0] ?? []);
+        $summary = $this->extractSummary($appInfo);
+        $installsText = $appInfo[13][0] ?? null;
+        $installs = $appInfo[13][2] ?? 0;
+        $score = (float) ($appInfo[51][0][1] ?? 0);
+        $numberVoters = (int) ($appInfo[51][2][1] ?? 0);
+        $numberReviews = (int) ($appInfo[51][3][1] ?? 0);
+        $histogramRating = $this->extractHistogramRating($appInfo[51][1]);
 
-        if (isset($scriptDataInfo[0][12][13][0][0])) {
-            $category = $this->extractCategory($scriptDataInfo[0][12][13][0]);
-        } elseif (!empty($data[0][12][13][25])) {
-            $genreId = (string) $data[0][12][13][25];
-            $genreName = ucwords(strtolower(str_replace(['_', 'AND'], [' ', '&'], $genreId)));
-            $category = new Category($genreId, $genreName);
-        } else {
-            $category = null;
-        }
-        $summary = $this->extractSummary($scriptDataInfo);
-        $installs = $scriptDataInfo[0][12][9][2] ?? 0;
-        $score = (float) ($scriptDataRating[0][6][0][1] ?? 0);
-        $numberVoters = (int) ($scriptDataRating[0][6][2][1] ?? 0);
-        $numberReviews = (int) ($scriptDataRating[0][6][3][1] ?? 0);
-        $histogramRating = $this->extractHistogramRating($scriptDataRating);
+        $scriptDataPrice = $appInfo[57][0][0][0][0][1] ?? null;
         $price = $scriptDataPrice !== null ? $this->extractPrice($scriptDataPrice) : 0.0;
-        $currency = $scriptDataPrice[0][2][0][0][0][1][0][1] ?? 'USD';
-        $priceText = $scriptDataPrice[0][2][0][0][0][1][0][2] ?? null;
-        $offersIAPCost = $scriptDataInfo[0][12][12][0] ?? null;
-        $containsAds = (bool) ($scriptDataInfo[0][12][14][0] ?? false);
+        $currency = $scriptDataPrice[0][1] ?? 'USD';
+        $priceText = $scriptDataPrice[0][2] ?? null;
 
-        [$size, $appVersion, $androidVersion] = $scriptDataVersion;
+        $offersIAPCost = $appInfo[19][0] ?? null;
+        $containsAds = (bool) ($appInfo[48][0] ?? false);
 
-        if (LocaleHelper::isDependOnDevice($locale, $size)) {
-            $size = null;
-        }
+        $androidVersion = $appInfo[140][1][1][0][0][1] ?? null;
+        $appVersion = $appInfo[140][0][0][0] ?? null;
 
-        if (LocaleHelper::isDependOnDevice($locale, $appVersion)) {
-            $appVersion = null;
-        }
-
-        if (LocaleHelper::isDependOnDevice($locale, $androidVersion)) {
-            $androidVersion = null;
-            $minAndroidVersion = null;
-        } else {
+        if ($androidVersion !== null) {
             $minAndroidVersion = preg_replace('~.*?(\d+(\.\d+)*).*~', '$1', $androidVersion);
+        } else {
+            $minAndroidVersion = null;
         }
 
-        $editorsChoice = !empty($scriptDataInfo[0][12][15][1][1]);
-        $privacyPoliceUrl = $scriptDataInfo[0][12][7][2] ?? '';
-        $categoryFamily = $this->extractCategory($scriptDataInfo[0][12][13][1] ?? []);
-        $icon = $this->extractIcon($scriptDataInfo);
-        $cover = $this->extractCover($scriptDataInfo);
-        $screenshots = $this->extractScreenshots($scriptDataInfo);
-        $video = $this->extractVideo($scriptDataInfo);
-        $contentRating = $scriptDataInfo[0][12][4][0] ?? '';
-        $released = $this->extractReleaseDate($scriptDataInfo, $locale);
-        $updated = $this->extractUpdatedDate($scriptDataInfo);
-        $recentChanges = $this->extractRecentChanges($scriptDataInfo);
-        $reviews = $this->extractReviews(new AppId($id, $locale, $country), $scriptDataReviews);
+        $editorsChoice = (bool) ScraperUtil::getValue($appInfo, 'ds:5.1.2.136.0.1.0');
+        $privacyPoliceUrl = $appInfo[99][0][5][2] ?? '';
+        $categoryFamily = $this->extractCategory($appInfo[118][0][0][0] ?? []);
+        $icon = $this->extractIcon($appInfo);
+        $cover = $this->extractCover($appInfo);
+        $screenshots = $this->extractScreenshots($appInfo);
+        $video = $this->extractVideo($appInfo);
+        $contentRating = $appInfo[111][1] ?? '';
+        $released = $this->convertDate($appInfo[10][1][0] ?? null);
+        $updated = $this->convertDate($appInfo[145][0][1][0] ?? null);
+        $recentChanges = $this->extractRecentChanges($appInfo);
+
+        $reviewsInfo = ScraperUtil::getValue($scriptData, 'ds:8.0');
+        $reviews = $this->extractReviews(new AppId($id, $locale, $country), $reviewsInfo);
 
         return AppInfo::newBuilder()
             ->setId($id)
@@ -126,7 +112,6 @@ class AppInfoScraper implements ParseHandlerInterface
             ->setCountry($country)
             ->setName($name)
             ->setDescription($description)
-            ->setTranslatedFromLocale($translatedFromLocale)
             ->setSummary($summary)
             ->setIcon($icon)
             ->setCover($cover)
@@ -139,6 +124,7 @@ class AppInfoScraper implements ParseHandlerInterface
             ->setEditorsChoice($editorsChoice)
             ->setPrivacyPoliceUrl($privacyPoliceUrl)
             ->setInstalls($installs)
+            ->setInstallsText($installsText)
             ->setScore($score)
             ->setRecentChanges($recentChanges)
             ->setEditorsChoice($editorsChoice)
@@ -152,7 +138,6 @@ class AppInfoScraper implements ParseHandlerInterface
             ->setPriceText($priceText)
             ->setOffersIAPCost($offersIAPCost)
             ->setContainsAds($containsAds)
-            ->setSize($size)
             ->setAppVersion($appVersion)
             ->setAndroidVersion($androidVersion)
             ->setMinAndroidVersion($minAndroidVersion)
@@ -166,109 +151,30 @@ class AppInfoScraper implements ParseHandlerInterface
     }
 
     /**
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     *
-     * @throws GooglePlayException
-     *
-     * @return array
-     */
-    private function getScriptData(RequestInterface $request, ResponseInterface $response): array
-    {
-        $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
-
-        $scriptDataInfo = null;
-        $scriptDataRating = null;
-        $scriptDataPrice = null;
-        $scriptDataVersion = null;
-        $scriptDataReviews = [];
-
-        foreach ($scriptData as $key => $scriptValue) {
-            if (isset($scriptValue[0][12][5][5][4][2])) { // ds:5
-                $scriptDataInfo = $scriptValue;
-            } elseif (isset($scriptValue[0][2][0][0][0][1][0][0])) { // ds:3
-                $scriptDataPrice = $scriptValue;
-            } elseif (isset($scriptValue[0][0][0])
-                && \is_string($scriptValue[0][0][0])
-                && strpos($scriptValue[0][0][0], 'gp:') === 0) { // ds:15
-                $scriptDataReviews = $scriptValue;
-            } elseif (isset($scriptValue[0][6][3][1])) { // ds:7
-                $scriptDataRating = $scriptValue;
-            } elseif (isset($scriptValue[0])
-                && \is_string($scriptValue[0])
-                && \count($scriptValue) === 3) { // ds:8
-                $scriptDataVersion = $scriptValue;
-            }
-        }
-
-        if (
-            $scriptDataInfo === null
-            || $scriptDataVersion === null
-        ) {
-            throw (new GooglePlayException('Unable to get data for this application.'))->setUrl(
-                $request->getUri()->__toString()
-            );
-        }
-
-        return [$scriptDataInfo, $scriptDataRating, $scriptDataPrice, $scriptDataVersion, $scriptDataReviews];
-    }
-
-    /**
-     * @param        $scriptDataInfo
-     * @param string $locale
+     * @param array $appInfo
      *
      * @return string|null
      */
-    private function extractTranslatedFromLocale(array $scriptDataInfo, string $locale): ?string
+    private function extractSummary(array $appInfo): ?string
     {
-        return isset($scriptDataInfo[0][19][1])
-            ? LocaleHelper::findPreferredLanguage(
-                $locale,
-                $scriptDataInfo[0][19][1]
-            )
-            : null;
-    }
-
-    /**
-     * @param array $scriptDataInfo
-     *
-     * @return string
-     */
-    private function extractDescription(array $scriptDataInfo): string
-    {
-        if (isset($scriptDataInfo[0][19][0][0][1])) {
-            return ScraperUtil::html2text($scriptDataInfo[0][19][0][0][1]);
-        }
-
-        return ScraperUtil::html2text($scriptDataInfo[0][10][0][1]);
-    }
-
-    /**
-     * @param $scriptDataInfo
-     *
-     * @return string|null
-     */
-    private function extractSummary(array $scriptDataInfo): ?string
-    {
-        return empty($scriptDataInfo[0][10][1][1])
+        return empty($appInfo[73][0][1])
             ? null
-            : ScraperUtil::html2text($scriptDataInfo[0][10][1][1]);
+            : ScraperUtil::html2text(str_replace("\n", ' ', $appInfo[73][0][1]));
     }
 
     /**
-     * @param array $scriptDataInfo
+     * @param array $appInfo
      *
      * @return Developer
      */
-    private function extractDeveloper(array $scriptDataInfo): Developer
+    private function extractDeveloper(array $appInfo): Developer
     {
-        $developerPage = GPlayApps::GOOGLE_PLAY_URL . $scriptDataInfo[0][12][5][5][4][2];
+        $developerPage = GPlayApps::GOOGLE_PLAY_URL . $appInfo[68][1][4][2];
         $developerId = Query::parse(parse_url($developerPage, \PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
-        $developerName = $scriptDataInfo[0][12][5][1];
-        $developerEmail = $scriptDataInfo[0][12][5][2][0] ?? null;
-        $developerWebsite = $scriptDataInfo[0][12][5][3][5][2] ?? null;
-        $developerAddress = $scriptDataInfo[0][12][5][4][0] ?? null;
-//        $developerInternalID = (int)$scriptDataInfo[0][12][5][0][0];
+        $developerName = $appInfo[68][0];
+        $developerEmail = $appInfo[69][1][0] ?? null;
+        $developerWebsite = $appInfo[69][0][5][2] ?? null;
+        $developerAddress = $appInfo[69][2][0] ?? null;
 
         return new Developer(
             Developer::newBuilder()
@@ -284,33 +190,33 @@ class AppInfoScraper implements ParseHandlerInterface
     /**
      * @param array $data
      *
-     * @return Category
+     * @return Category|null
      */
     private function extractCategory(array $data): ?Category
     {
-        if (isset($data[0], $data[2])) {
-            $genreId = (string) $data[2];
-            $genreName = (string) $data[0];
+        if (isset($data[1][4][2], $data[0], $data[2])) {
+            $categorySlug = (string) $data[2];
+            $categoryName = (string) $data[0];
 
-            return new Category($genreId, $genreName);
+            return new Category($categorySlug, $categoryName);
         }
 
         return null;
     }
 
     /**
-     * @param array|null $scriptDataRating
+     * @param array|null $data
      *
      * @return HistogramRating
      */
-    private function extractHistogramRating(?array $scriptDataRating): HistogramRating
+    private function extractHistogramRating(array $data): HistogramRating
     {
         return new HistogramRating(
-            $scriptDataRating[0][6][1][5][1] ?? 0,
-            $scriptDataRating[0][6][1][4][1] ?? 0,
-            $scriptDataRating[0][6][1][3][1] ?? 0,
-            $scriptDataRating[0][6][1][2][1] ?? 0,
-            $scriptDataRating[0][6][1][1][1] ?? 0
+            $data[1][1] ?? 0,
+            $data[2][1] ?? 0,
+            $data[3][1] ?? 0,
+            $data[4][1] ?? 0,
+            $data[5][1] ?? 0
         );
     }
 
@@ -321,64 +227,62 @@ class AppInfoScraper implements ParseHandlerInterface
      */
     protected function extractPrice(array $scriptDataPrice): ?float
     {
-        return isset($scriptDataPrice[0][2][0][0][0][1][0][0])
-            ? (float) ($scriptDataPrice[0][2][0][0][0][1][0][0] / 1000000)
+        return isset($scriptDataPrice[0][0])
+            ? (float) ($scriptDataPrice[0][0] / 1000000)
             : 0.0;
     }
 
     /**
-     * @param array $scriptDataInfo
+     * @param array $data
      *
      * @return GoogleImage|null
      */
-    protected function extractIcon(array $scriptDataInfo): ?GoogleImage
+    protected function extractIcon(array $data): ?GoogleImage
     {
-        return empty($scriptDataInfo[0][12][1][3][2])
+        return empty($data[95][0][3][2])
             ? null
-            : new GoogleImage($scriptDataInfo[0][12][1][3][2]);
+            : new GoogleImage($data[95][0][3][2]);
     }
 
     /**
-     * @param array $scriptDataInfo
+     * @param array $data
      *
      * @return GoogleImage|null
      */
-    protected function extractCover(array $scriptDataInfo): ?GoogleImage
+    protected function extractCover(array $data): ?GoogleImage
     {
-        return empty($scriptDataInfo[0][12][2][3][2])
+        return empty($data[96][0][3][2])
             ? null
-            : new GoogleImage($scriptDataInfo[0][12][2][3][2]);
+            : new GoogleImage($data[96][0][3][2]);
     }
 
     /**
-     * @param array $scriptDataInfo
+     * @param array $data
      *
      * @return GoogleImage[]
      */
-    private function extractScreenshots(array $scriptDataInfo): array
+    private function extractScreenshots(array $data): array
     {
-        return !empty($scriptDataInfo[0][12][0]) ? array_map(
+        return !empty($data[78][0][0][3][2]) ? array_map(
             static function (array $v) {
                 return new GoogleImage($v[3][2]);
             },
-            $scriptDataInfo[0][12][0]
+            $data[78][0]
         ) : [];
     }
 
     /**
-     * @param array $scriptDataInfo
+     * @param array $data
      *
      * @return Video|null
      */
-    private function extractVideo(array $scriptDataInfo): ?Video
+    private function extractVideo(array $data): ?Video
     {
-        if (
-            isset($scriptDataInfo[0][12][3][0][3][2])
-            && $scriptDataInfo[0][12][3][0][3][2] !== null
-            && $scriptDataInfo[0][12][3][1][3][2] !== null
-        ) {
-            $videoThumb = (string) $scriptDataInfo[0][12][3][1][3][2];
-            $videoUrl = (string) $scriptDataInfo[0][12][3][0][3][2];
+        if (isset($data[100][0][0][4], $data[100][0][1][3][3])) {
+            $videoThumb = (string) $data[100][0][1][3][2];
+            $youtubeId = (string) $data[100][0][4];
+            $youtubeId = str_replace('yt:', '', strtok($youtubeId, '?'));
+            $videoUrl = 'https://www.youtube.com/embed/' . $youtubeId . '?ps=play&vq=large&rel=0&autohide=1&showinfo=0';
 
             return new Video($videoThumb, $videoUrl);
         }
@@ -387,62 +291,43 @@ class AppInfoScraper implements ParseHandlerInterface
     }
 
     /**
-     * @param array  $scriptDataInfo
-     * @param string $locale
+     * @param ?int $timestamp
      *
      * @return \DateTimeInterface|null
      */
-    private function extractReleaseDate(array $scriptDataInfo, string $locale): ?\DateTimeInterface
+    private function convertDate(?int $timestamp): ?\DateTimeInterface
     {
-        if (isset($scriptDataInfo[0][12][36])) {
-            return DateStringFormatter::formatted($locale, $scriptDataInfo[0][12][36]);
+        if ($timestamp !== null) {
+            return DateStringFormatter::unixTimeToDateTime($timestamp);
         }
 
         return null;
     }
 
     /**
-     * @param array $scriptDataInfo
-     *
-     * @return \DateTimeInterface|null
-     */
-    private function extractUpdatedDate(array $scriptDataInfo): ?\DateTimeInterface
-    {
-        if (isset($scriptDataInfo[0][12][8][0])) {
-            return DateStringFormatter::unixTimeToDateTime($scriptDataInfo[0][12][8][0]);
-        }
-
-        return null;
-    }
-
-    /**
-     * @param $scriptDataInfo
+     * @param array $data
      *
      * @return string|null
      */
-    protected function extractRecentChanges($scriptDataInfo): ?string
+    protected function extractRecentChanges(array $data): ?string
     {
-        return empty($scriptDataInfo[0][12][6][1])
+        return empty($data[144][1][1])
             ? null
-            : ScraperUtil::html2text($scriptDataInfo[0][12][6][1]);
+            : ScraperUtil::html2text($data[144][1][1]);
     }
 
     /**
      * @param AppId $appId
-     * @param array $scriptDataReviews
-     * @param int   $limit
+     * @param array $data
      *
      * @return Review[]
      */
-    private function extractReviews(AppId $appId, array $scriptDataReviews, int $limit = 4): array
+    private function extractReviews(AppId $appId, array $data): array
     {
-        if (empty($scriptDataReviews[0])) {
+        if (empty($data[0])) {
             return [];
         }
 
-        return ReviewsExtractor::extractReviews(
-            $appId,
-            \array_slice($scriptDataReviews[0], 0, $limit)
-        );
+        return ReviewsExtractor::extractReviews($appId, $data);
     }
 }

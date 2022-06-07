@@ -7,7 +7,7 @@ Contains all valid values for the "sort" parameter.
 
 ## Class synopsis
 ```php
-Nelexa\GPlay\Enum\SortEnum extends Nelexa\Enum {
+Nelexa\GPlay\Enum\SortEnum extends Nelexa\Enum implements Stringable {
 
     /* Methods */
     public static HELPFULNESS ( void ) : Nelexa\GPlay\Enum\SortEnum

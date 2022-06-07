@@ -182,7 +182,6 @@ namespace PHPSTORM_META {
     expectedArguments(\Nelexa\GPlay\GPlayApps::setCacheTtl(), 0, argumentsSet('cache_ttl_sec'));
     expectedArguments(\Nelexa\GPlay\GPlayApps::getAppInfoForLocales(), 1, argumentsSet('locales_array'));
     expectedArguments(\Nelexa\GPlay\GPlayApps::getReviews(), 2, argumentsSet('sort'));
-    expectedArguments(\Nelexa\GPlay\GPlayApps::getReviewById(), 1, 'gp:');
     expectedArguments(\Nelexa\GPlay\GPlayApps::getCategoriesForLocales(), 0, argumentsSet('locales_array'));
     expectedArguments(\Nelexa\GPlay\GPlayApps::getDeveloperInfoForLocales(), 1, argumentsSet('locales_array'));
     expectedArguments(\Nelexa\GPlay\GPlayApps::getSimilarApps(), 1, argumentsSet('limit'));

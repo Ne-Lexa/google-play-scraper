@@ -32,7 +32,7 @@ $suggestions = $gplay
 ```php
 array:5 [
     0 => "maps"
-    1 => "maps for minecraft pe"
+    1 => "maps go"
     …
   ]
 ```

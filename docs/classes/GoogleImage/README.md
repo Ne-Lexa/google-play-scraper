@@ -69,7 +69,7 @@ This means that the width or height will not exceed 512px.
 
 ## Class synopsis
 ```php
-Nelexa\GPlay\Model\GoogleImage {
+Nelexa\GPlay\Model\GoogleImage implements Stringable {
 
     /* Methods */
     public __construct ( string $url [, bool $keepParams = true ] ) 

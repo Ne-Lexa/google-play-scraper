@@ -39,13 +39,13 @@ Nelexa\GPlay\Model\ImageInfo implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ImageInfo {
-  -getUrl(): string: "https://play-lh.googleusercontent.com/33WPfxcJw1ic-L4S3PmOlBZzZPisdUq44wWibj5Ksty9Uux-Ic6_J8bq6tv5ZE1Xl6V5"
+  -getUrl(): string: "https://play-lh.googleusercontent.com/lplFiGt1WRP5Kj4JNP6yekHsNXFjRlt23hUtsrkBnPXL4mxJcFZDPY5Uu56wWHFMBQ4C"
   -getFilename(): string: "/tmp/screenshot.png"
   -getMimeType(): string: "image/png"
   -getExtension(): string: "png"
   -getWidth(): int: 512
   -getHeight(): int: 341
-  -getFilesize(): int: 292638
+  -getFilesize(): int: 311963
   -asArray(): array: …
   -jsonSerialize(): array: …
 }
@@ -58,7 +58,7 @@ echo json_encode($imageInfo, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_
 Output:
 ```json
 {
-    "url": "https://play-lh.googleusercontent.com/33WPfxcJw1ic-L4S3PmOlBZzZPisdUq44wWibj5Ksty9Uux-Ic6_J8bq6tv5ZE1Xl6V5",
+    "url": "https://play-lh.googleusercontent.com/lplFiGt1WRP5Kj4JNP6yekHsNXFjRlt23hUtsrkBnPXL4mxJcFZDPY5Uu56wWHFMBQ4C",
     "path": "/tmp/screenshot.png",
     "mimeType": "image/png",
     "extension": "png",

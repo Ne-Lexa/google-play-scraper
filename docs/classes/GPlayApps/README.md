@@ -29,21 +29,22 @@ Nelexa\GPlay\GPlayApps {
     public existsApp ( string | Nelexa\GPlay\Model\AppId $appId ) : bool
     public existsApps ( string[] | Nelexa\GPlay\Model\AppId[] $appIds ) : bool[]
     public getReviews ( string | Nelexa\GPlay\Model\AppId $appId [, int $limit = 100 ] [, Nelexa\GPlay\Enum\SortEnum | null $sort = null ] ) : Nelexa\GPlay\Model\Review[]
-    public getReviewById ( string | Nelexa\GPlay\Model\AppId $appId , string $reviewId ) : Nelexa\GPlay\Model\Review
+    public getReviewById ( mixed $appId , string $reviewId ) 
     public getPermissions ( string | Nelexa\GPlay\Model\AppId $appId ) : Nelexa\GPlay\Model\Permission[]
     public getCategories ( void ) : Nelexa\GPlay\Model\Category[]
-    public getCategoriesForLocales ( string[] $locales ) : Nelexa\GPlay\Model\Category[][]
-    public getCategoriesForAvailableLocales ( void ) : Nelexa\GPlay\Model\Category[][]
     public getDeveloperInfo ( string | Nelexa\GPlay\Model\Developer | Nelexa\GPlay\Model\App $developerId ) : Nelexa\GPlay\Model\Developer
     public getDeveloperInfoForLocales ( string | Nelexa\GPlay\Model\Developer | Nelexa\GPlay\Model\App $developerId [, string[] $locales = array() ] ) : Nelexa\GPlay\Model\Developer[]
     public getDeveloperApps ( string | Nelexa\GPlay\Model\Developer | Nelexa\GPlay\Model\App $developerId ) : Nelexa\GPlay\Model\App[]
     public getClusterApps ( string $clusterPageUrl ) : \Generator<Nelexa\GPlay\Model\App>
     public getSimilarApps ( string | Nelexa\GPlay\Model\AppId $appId [, int $limit = 50 ] ) : Nelexa\GPlay\Model\App[]
-    public getClusterPages ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] [, string | null $path = null ] ) : iterable<Nelexa\GPlay\Model\ClusterPage>
+    public getClusterPages ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] ) : \Generator<Nelexa\GPlay\Model\ClusterPage>
     public getSearchSuggestions ( string $query ) : string[]
     public search ( string $query [, int $limit = 50 ] [, Nelexa\GPlay\Enum\PriceEnum | null $price = null ] ) : Nelexa\GPlay\Model\App[]
     public getListApps ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] [, int $limit = -1 ] ) : Nelexa\GPlay\Model\App[]
     public getTopApps ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] [, int $limit = -1 ] ) : Nelexa\GPlay\Model\App[]
+    public getTopSellingFreeApps ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum $category = "APPLICATION" ] [, int $limit = 500 ] ) : Nelexa\GPlay\Model\App[]
+    public getTopSellingPaidApps ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum $category = "APPLICATION" ] [, int $limit = 500 ] ) : Nelexa\GPlay\Model\App[]
+    public getTopGrossingApps ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum $category = "APPLICATION" ] [, int $limit = 500 ] ) : Nelexa\GPlay\Model\App[]
     public getNewApps ( [ string | Nelexa\GPlay\Model\Category | Nelexa\GPlay\Enum\CategoryEnum | null $category = null ] [, Nelexa\GPlay\Enum\AgeEnum | null $age = null ] [, int $limit = -1 ] ) : Nelexa\GPlay\Model\App[]
     public saveGoogleImages ( Nelexa\GPlay\Model\GoogleImage[] $images , callable $destPathCallback [, bool $overwrite = false ] ) : Nelexa\GPlay\Model\ImageInfo[]
     public getDefaultLocale ( void ) : string
@@ -108,39 +109,13 @@ class Nelexa\GPlay\Model\AppInfo {
   -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube"
   -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&hl=fr_CA&gl=ca"
   -getName(): string: "YouTube"
-  -getSummary(): ?string: "Regardez vos vidéos, chaînes et playlists préférées où que vous soyez."
-  -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-    -getId(): string: "5700313618786177705"
-    -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
-    -getName(): string: "Google LLC"
-    -getDescription(): ?string: null
-    -getWebsite(): ?string: "https://support.google.com/youtube/topic/2422554?rd=1"
-    -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-    -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-    -getEmail(): ?string: "ytandroid-support@google.com"
-    -getAddress(): ?string: "1600 Amphitheatre Parkway, Mountain View 94043"
-    -asArray(): array: …
-    -jsonSerialize(): array: …
-  }
+  -getDescription(): string: """
+    Téléchargez l'application YouTube officielle sur votre téléphone ou tablette Android. Découvrez les contenus regardés partout dans le monde : des clip…
+    """
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
     -__toString(): string: "https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc"
     -getUrl(): string: "https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc"
     -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc=s0"
-    -getBinaryImageContent(): string: …
-  }
-  -getScore(): float: 3.9086208
-  -getPriceText(): ?string: ""
-  -isFree(): bool: false
-  -jsonSerialize(): array: …
-  -getDescription(): string: """
-    Téléchargez l'application YouTube officielle sur votre téléphone ou tablette Android. Découvrez les contenus regardés partout dans le monde : des clip…
-    """
-  -isAutoTranslatedDescription(): bool: false
-  -getTranslatedFromLocale(): ?string: null
-  -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -__toString(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
-    -getUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
-    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk=s0"
     -getBinaryImageContent(): string: …
   }
   -getScreenshots(): array: array:5 [
@@ -158,6 +133,33 @@ class Nelexa\GPlay\Model\AppInfo {
     }
     …
   ]
+  -getScore(): float: 3.8564255
+  -getPriceText(): ?string: null
+  -isFree(): bool: true
+  -getInstallsText(): string: "10 000 000 000+"
+  -jsonSerialize(): array: …
+  -getDeveloper(): ?Nelexa\GPlay\Model\Developer: {
+    -getId(): string: "5700313618786177705"
+    -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
+    -getName(): string: "Google LLC"
+    -getDescription(): ?string: null
+    -getWebsite(): ?string: "https://support.google.com/youtube/topic/2422554?rd=1"
+    -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+    -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+    -getEmail(): ?string: "ytandroid-support@google.com"
+    -getAddress(): ?string: "1600 Amphitheatre Parkway, Mountain View 94043"
+    -asArray(): array: …
+    -jsonSerialize(): array: …
+  }
+  -getDeveloperName(): mixed: "Google LLC"
+  -getSummary(): string: "Regardez vos vidéos, chaînes et playlists préférées où que vous soyez."
+  -getTranslatedFromLocale(): mixed: null
+  -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
+    -__toString(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk=s0"
+    -getBinaryImageContent(): string: …
+  }
   -getCategory(): ?Nelexa\GPlay\Model\Category: {
     -getId(): string: "VIDEO_PLAYERS"
     -getName(): string: "Lecteurs vidéo et éditeurs"
@@ -168,22 +170,16 @@ class Nelexa\GPlay\Model\AppInfo {
     -jsonSerialize(): array: …
   }
   -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
-  -getVideo(): ?Nelexa\GPlay\Model\Video: {
-    -getImageUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
-    -getVideoUrl(): string: "https://www.youtube.com/embed/__NeP0RqACU?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-    -getYoutubeId(): ?string: "__NeP0RqACU"
-    -asArray(): array: …
-    -jsonSerialize(): array: …
-  }
+  -getVideo(): ?Nelexa\GPlay\Model\Video: null
   -getRecentChanges(): ?string: "Pour plus d'informations sur les nouvelles fonctionnalités et leur utilisation, consultez la documentation et les notifications intégrées au produit."
   -isEditorsChoice(): bool: false
-  -getInstalls(): int: 11342812160
+  -getInstalls(): int: 11923110578
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 82191171
-    -getFourStars(): int: 14302068
-    -getThreeStars(): int: 7306990
-    -getTwoStars(): int: 4271998
-    -getOneStar(): int: 26202945
+    -getFiveStars(): int: 28666549
+    -getFourStars(): int: 4783408
+    -getThreeStars(): int: 7638282
+    -getTwoStars(): int: 14217650
+    -getOneStar(): int: 83304870
     -asArray(): array: …
     -jsonSerialize(): array: …
   }
@@ -192,58 +188,60 @@ class Nelexa\GPlay\Model\AppInfo {
   -isContainsIAP(): bool: false
   -getOffersIAPCost(): ?string: null
   -isContainsAds(): bool: true
-  -getSize(): ?string: null
+  -getSize(): mixed: null
   -getAppVersion(): ?string: null
   -getAndroidVersion(): ?string: null
   -getMinAndroidVersion(): ?string: null
-  -getContentRating(): ?string: "Adolescents"
+  -getContentRating(): ?string: ""
   -getPrivacyPoliceUrl(): ?string: "http://www.google.com/policies/privacy"
-  -getReleased(): ?DateTimeInterface: @1287532800 {
-    date: 2010-10-20T00:00:00+00:00
+  -getReleased(): ?DateTimeInterface: @1287601948 {
+    date: 2010-10-20T19:12:28+00:00
   }
-  -getUpdated(): ?DateTimeInterface: @1645840956 {
-    date: 2022-02-26T02:02:36+00:00
+  -getUpdated(): ?DateTimeInterface: @1654299141 {
+    date: 2022-06-03T23:32:21+00:00
   }
-  -getNumberVoters(): int: 134275841
-  -getNumberReviews(): int: 139268
-  -getReviews(): array: array:4 [
+  -getNumberVoters(): int: 138611767
+  -getNumberReviews(): int: 142747
+  -getReviews(): array: array:40 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOFdKqR8ANorPO_vWBkluer0yPjFqF7slkwm6uiIMdESo1UEevh5IF42Aleo_Fek2WQQpdDy-1Q_znfqGA"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&reviewId=gp%3AAOqpTOFdKqR8ANorPO_vWBkluer0yPjFqF7slkwm6uiIMdESo1UEevh5IF42Ale…"
-      -getUserName(): string: "LEGO ET PLUS"
-      -getText(): string: "À part pour les gros bug visuels lors de la lecture de certaines vidéos, l'application en soit est très bien et facile à prendre en main."
+      -getId(): string: "gp:AOqpTOEMQEAUOLXyd5CBETDY47q0t0LfiCNl0igi4p9DscGE10LQedLKFr6WPPvGFbQ4rTqKu_vR9bf1k2Dl6g"
+      -getUrl(): mixed: ""
+      -getUserName(): string: "Boromir et Tilou"
+      -getText(): string: "Cette application est excellente, cependant il y a quelque problématique niveau pub! Par exemple : il arrive des fois que je regarde une vidéo qui dur…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhTfOMuu9v4iPeHYCQrmu04rvrc45boKxW0Hw6W6A=s64"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhTfOMuu9v4iPeHYCQrmu04rvrc45boKxW0Hw6W6A=s64"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhTfOMuu9v4iPeHYCQrmu04rvrc45boKxW0Hw6W6A=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiEuZYl4opeaRXLTVlEPX09UT7O1pu28Xibw2YO=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiEuZYl4opeaRXLTVlEPX09UT7O1pu28Xibw2YO=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiEuZYl4opeaRXLTVlEPX09UT7O1pu28Xibw2YO=s0"
         -getBinaryImageContent(): string: …
       }
-      -getDate(): ?DateTimeInterface: @1645756765 {
-        date: 2022-02-25T02:39:25+00:00
+      -getDate(): ?DateTimeInterface: @1652904683 {
+        date: 2022-05-18T20:11:23+00:00
       }
       -getScore(): int: 4
-      -getCountLikes(): int: 0
+      -getCountLikes(): int: 1929
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+      -getAppVersion(): ?string: "17.19.34"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOH1HvcMcXhhaI7Rt1esrlC9R5pa_F_WToao57a0YyssebHG8ExrSclu2tRNU3ZdwLgqSZM94s4awoAoVg"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&reviewId=gp%3AAOqpTOH1HvcMcXhhaI7Rt1esrlC9R5pa_F_WToao57a0YyssebHG8ExrSclu2tR…"
-      -getUserName(): string: "Legends Never Die"
-      -getText(): string: "Je suis prix dans algorithme de youtube sans jamais pouvoirs voir de nouveau créateurs ou de trouvée des choses recommandé en ma langue maternelle. On…"
+      -getId(): string: "gp:AOqpTOEMsRD995sFxjIRu23yRV7za1PH0O2IKHmydCwK9CyQuf4IhL6WNyMsS7ZoEFcdTSI6-akTQAoHGQmzXQ"
+      -getUrl(): mixed: ""
+      -getUserName(): string: "Mathias Blouin"
+      -getText(): string: "Beaucoup trop de publicités, sous-titres qui se mettent tout seul, la résolution n'est JAMAIS sur la plus haute et c'est assez long à changer, des foi…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFkfkULXKwqDI8keygmLyt6eoF7eHf0yltPXNO=s64"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFkfkULXKwqDI8keygmLyt6eoF7eHf0yltPXNO=s64"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFkfkULXKwqDI8keygmLyt6eoF7eHf0yltPXNO=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiIFpEtppYtvFbeki1HKoLOHfLOuDfPFOtuvoBFew=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiIFpEtppYtvFbeki1HKoLOHfLOuDfPFOtuvoBFew=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiIFpEtppYtvFbeki1HKoLOHfLOuDfPFOtuvoBFew=s0"
         -getBinaryImageContent(): string: …
       }
-      -getDate(): ?DateTimeInterface: @1644190606 {
-        date: 2022-02-06T23:36:46+00:00
+      -getDate(): ?DateTimeInterface: @1652148284 {
+        date: 2022-05-10T02:04:44+00:00
       }
-      -getScore(): int: 1
-      -getCountLikes(): int: 58
+      -getScore(): int: 3
+      -getCountLikes(): int: 2569
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+      -getAppVersion(): ?string: "17.17.34"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
@@ -268,11 +266,9 @@ class Nelexa\GPlay\Model\AppInfo {
 * [Nelexa\GPlay\GPlayApps::existsApp](gplayapps.existsapp.md) - Checks if the specified application exists in the Google Play store.
 * [Nelexa\GPlay\GPlayApps::existsApps](gplayapps.existsapps.md) - Checks if the specified applications exist in the Google Play store.
 * [Nelexa\GPlay\GPlayApps::getReviews](gplayapps.getreviews.md) - Returns reviews of the Android app in the Google Play store.
-* [Nelexa\GPlay\GPlayApps::getReviewById](gplayapps.getreviewbyid.md) - Returns review of the Android app in the Google Play store by review id.
+* [Nelexa\GPlay\GPlayApps::getReviewById](gplayapps.getreviewbyid.md)
 * [Nelexa\GPlay\GPlayApps::getPermissions](gplayapps.getpermissions.md) - Returns a list of permissions for the application.
 * [Nelexa\GPlay\GPlayApps::getCategories](gplayapps.getcategories.md) - Returns an array of application categories from the Google Play store.
-* [Nelexa\GPlay\GPlayApps::getCategoriesForLocales](gplayapps.getcategoriesforlocales.md) - Returns an array of application categories from the Google Play store for the specified locales.
-* [Nelexa\GPlay\GPlayApps::getCategoriesForAvailableLocales](gplayapps.getcategoriesforavailablelocales.md) - Returns an array of categories from the Google Play store for all available locales.
 * [Nelexa\GPlay\GPlayApps::getDeveloperInfo](gplayapps.getdeveloperinfo.md) - Returns information about the developer: name, icon, cover, description and website address.
 * [Nelexa\GPlay\GPlayApps::getDeveloperInfoForLocales](gplayapps.getdeveloperinfoforlocales.md) - Returns information about the developer for the specified locales.
 * [Nelexa\GPlay\GPlayApps::getDeveloperApps](gplayapps.getdeveloperapps.md) - Returns an array of applications from the Google Play store by developer id.
@@ -283,6 +279,9 @@ class Nelexa\GPlay\Model\AppInfo {
 * [Nelexa\GPlay\GPlayApps::search](gplayapps.search.md) - Returns a list of applications from the Google Play store for a search query.
 * [Nelexa\GPlay\GPlayApps::getListApps](gplayapps.getlistapps.md) - Returns an array of applications from the Google Play store for the specified category.
 * [Nelexa\GPlay\GPlayApps::getTopApps](gplayapps.gettopapps.md) - Returns an array of **top apps** from the Google Play store for the specified category.
+* [Nelexa\GPlay\GPlayApps::getTopSellingFreeApps](gplayapps.gettopsellingfreeapps.md) - Returns an array of **top selling free apps** from the Google Play store for the specified category.
+* [Nelexa\GPlay\GPlayApps::getTopSellingPaidApps](gplayapps.gettopsellingpaidapps.md) - Returns an array of **top selling paid apps** from the Google Play store for the specified category.
+* [Nelexa\GPlay\GPlayApps::getTopGrossingApps](gplayapps.gettopgrossingapps.md) - Returns an array of **top grossing apps** from the Google Play store for the specified category.
 * [Nelexa\GPlay\GPlayApps::getNewApps](gplayapps.getnewapps.md) - Returns an array of **new apps** from the Google Play store for the specified category.
 * [Nelexa\GPlay\GPlayApps::saveGoogleImages](gplayapps.savegoogleimages.md) - Asynchronously saves images from googleusercontent.com and similar URLs to disk.
 * [Nelexa\GPlay\GPlayApps::getDefaultLocale](gplayapps.getdefaultlocale.md) - Returns the locale (language) of the requests.

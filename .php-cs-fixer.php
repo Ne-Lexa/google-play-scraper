@@ -1444,7 +1444,7 @@ $rules = [
      * A return statement wishing to return `void` should not return
      * `null`.
      */
-    'simplified_null_return' => true,
+    'simplified_null_return' => false,
 
     /*
      * A PHP file without end tag must always end with a single empty
@@ -1721,19 +1721,6 @@ return (new \PhpCsFixer\Config())
             ->exclude('tools')
             ->exclude('docs')
             ->exclude('github')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
-            ->name('/\\.php$/')
             ->notName('.phpstorm.meta.php')
             ->in(__DIR__)
     )

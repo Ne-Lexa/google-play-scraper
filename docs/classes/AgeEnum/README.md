@@ -7,7 +7,7 @@ Contains all valid values for the age parameter.
 
 ## Class synopsis
 ```php
-Nelexa\GPlay\Enum\AgeEnum extends Nelexa\Enum {
+Nelexa\GPlay\Enum\AgeEnum extends Nelexa\Enum implements Stringable {
 
     /* Methods */
     public static FIVE_UNDER ( void ) : Nelexa\GPlay\Enum\AgeEnum
@@ -43,10 +43,10 @@ Nelexa\GPlay\Enum\AgeEnum extends Nelexa\Enum {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\AgeEnum {
-  -name(): string: "FIVE_UNDER"
-  -value(): mixed: "AGE_RANGE1"
-  -ordinal(): int: 0
-  -__toString(): string: "AGE_RANGE1"
+  -name(): string: "NINE_UP"
+  -value(): mixed: "AGE_RANGE3"
+  -ordinal(): int: 2
+  -__toString(): string: "AGE_RANGE3"
 }
 ```
 

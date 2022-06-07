@@ -84,8 +84,8 @@ final class GPlayAppsTest extends TestCase
         string $actualCountry
     ): void {
         $gplay = new GPlayApps($defaultLocale, $defaultCountry);
-        self::assertSame($gplay->getDefaultLocale(), $actualLocale);
-        self::assertSame($gplay->getDefaultCountry(), $actualCountry);
+        self::assertSame($actualLocale, $gplay->getDefaultLocale());
+        self::assertSame($actualCountry, $gplay->getDefaultCountry());
     }
 
     /**
@@ -103,8 +103,8 @@ final class GPlayAppsTest extends TestCase
     public function testDefaultConstruct(): void
     {
         $gplay = new GPlayApps();
-        self::assertSame($gplay->getDefaultLocale(), GPlayApps::DEFAULT_LOCALE);
-        self::assertSame($gplay->getDefaultCountry(), GPlayApps::DEFAULT_COUNTRY);
+        self::assertSame(GPlayApps::DEFAULT_LOCALE, $gplay->getDefaultLocale());
+        self::assertSame(GPlayApps::DEFAULT_COUNTRY, $gplay->getDefaultCountry());
     }
 
     /**
@@ -112,8 +112,6 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetAppInfo(): void
     {
-        $this->gplay->setCache($this->getCacheInterface());
-
         $appId = 'com.google.android.googlequicksearchbox';
         $locale = 'es';
         $country = 'ca';
@@ -128,20 +126,6 @@ final class GPlayAppsTest extends TestCase
 
         self::assertEquals($app->getId(), $appId);
         self::assertEquals($app->getLocale(), LocaleHelper::getNormalizeLocale($locale));
-
-        $app2 = $this->gplay->getAppInfo($appId);
-        self::assertEquals($app2->getId(), $appId);
-        self::assertEquals(GPlayApps::DEFAULT_LOCALE, $app2->getLocale());
-        self::assertNotEquals($app2, $app);
-
-        $this->gplay
-            ->setDefaultLocale($locale)
-            ->setDefaultCountry($country)
-        ;
-        $app3 = $this->gplay->getAppInfo($appId);
-        self::assertEquals($app3->getId(), $appId);
-        self::assertEquals($app3->getLocale(), LocaleHelper::getNormalizeLocale($locale));
-        self::assertEquals($app3, $app);
     }
 
     /**
@@ -298,16 +282,10 @@ final class GPlayAppsTest extends TestCase
         $apps = $this->gplay->getAppInfoForAvailableLocales($id);
         self::assertContainsOnlyInstancesOf(AppInfo::class, $apps);
 
-        self::assertTrue(\count(LocaleHelper::SUPPORTED_LOCALES) > \count($apps));
-
         self::assertArrayHasKey('ru_RU', $apps);
         self::assertArrayHasKey('uk', $apps);
         self::assertArrayHasKey('tr_TR', $apps);
         self::assertArrayHasKey('en_US', $apps);
-
-        self::assertArrayNotHasKey('th', $apps);
-        self::assertArrayNotHasKey('fr_FR', $apps);
-        self::assertArrayNotHasKey('fil', $apps);
     }
 
     /**
@@ -388,8 +366,8 @@ final class GPlayAppsTest extends TestCase
     {
         $appId = new AppId(
             'com.google.android.webview',
-            $locale = 'zh_TW',
-            $country = 'cn'
+            'zh_TW',
+            'cn'
         );
         $reviews = $this->gplay->getReviews(
             $appId,
@@ -398,15 +376,8 @@ final class GPlayAppsTest extends TestCase
         );
         self::assertCount($limit, $reviews);
         self::assertContainsOnlyInstancesOf(Review::class, $reviews);
-
-        $firstActualReview = $reviews[0];
-        $expectedReview = $this->gplay->getReviewById($appId, $firstActualReview->getId());
-        self::assertEquals($expectedReview, $firstActualReview);
     }
 
-    /**
-     * @throws GooglePlayException
-     */
     public function testGetCategories(): void
     {
         $this->gplay->setDefaultLocale('ru');
@@ -414,36 +385,6 @@ final class GPlayAppsTest extends TestCase
 
         self::assertNotEmpty($categories);
         self::assertContainsOnlyInstancesOf(Category::class, $categories);
-    }
-
-    /**
-     * @throws GooglePlayException
-     */
-    public function testGetCategoriesForLocales(): void
-    {
-        $categoriesForLocales = $this->gplay->getCategoriesForLocales(['ru', 'en', 'es', 'be', 'fil', 'zh-TW']);
-
-        self::assertNotEmpty($categoriesForLocales);
-
-        foreach ($categoriesForLocales as $categories) {
-            self::assertContainsOnlyInstancesOf(Category::class, $categories);
-        }
-    }
-
-    /**
-     * @throws GooglePlayException
-     */
-    public function testGetCategoriesForAvailableLocales(): void
-    {
-        $this->gplay->setConcurrency(10);
-
-        $categoriesForAvailableLocales = $this->gplay->getCategoriesForAvailableLocales();
-
-        self::assertNotEmpty($categoriesForAvailableLocales);
-
-        foreach ($categoriesForAvailableLocales as $categories) {
-            self::assertContainsOnlyInstancesOf(Category::class, $categories);
-        }
     }
 
     /**
@@ -547,11 +488,16 @@ final class GPlayAppsTest extends TestCase
     }
 
     /**
-     * @throws GooglePlayException
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      */
     public function testSearch(): void
     {
-        $results = $this->gplay->search('News', GPlayApps::UNLIMIT, PriceEnum::ALL());
+        $this->gplay->setCache(null);
+        $results = $this->gplay
+            ->setDefaultCountry('us')
+            ->search('gta', GPlayApps::UNLIMIT, PriceEnum::PAID())
+        ;
+        self::assertGreaterThan(51, $results);
         self::assertNotEmpty($results);
         self::assertContainsOnlyInstancesOf(App::class, $results);
     }
@@ -584,6 +530,14 @@ final class GPlayAppsTest extends TestCase
     }
 
     /**
+     * @return \Generator|null
+     */
+    public function provideNullCategory(): ?\Generator
+    {
+        yield 'No category' => [null];
+    }
+
+    /**
      * @return \Generator
      */
     public function provideCategoryApps(): ?\Generator
@@ -601,57 +555,50 @@ final class GPlayAppsTest extends TestCase
     }
 
     /**
-     * @dataProvider provideNullCategory
-     * @dataProvider provideCategoryApps
-     *
-     * @param CategoryEnum|null $category
-     */
-    public function testGetNewApps(?CategoryEnum $category): void
-    {
-        $this->gplay->setCache($this->getCacheInterface());
-        $apps = $this->gplay->getNewApps($category);
-
-        self::assertContainsOnlyInstancesOf(App::class, $apps);
-    }
-
-    /**
-     * @return \Generator|null
-     */
-    public function provideNullCategory(): ?\Generator
-    {
-        yield 'No category' => [null];
-    }
-
-    /**
-     * @dataProvider provideNullCategory
      * @dataProvider provideCategoryApps
      *
      * @param CategoryEnum|null $category
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      */
-    public function testGetTopApps(?CategoryEnum $category): void
+    public function testGetSellingFreeApps(?CategoryEnum $category): void
     {
         $this->gplay->setCache($this->getCacheInterface());
-        $apps = $this->gplay->getTopApps($category);
+        $apps = $this->gplay->getTopSellingFreeApps($category);
 
         self::assertNotEmpty($apps);
         self::assertContainsOnlyInstancesOf(App::class, $apps);
     }
 
     /**
+     * @dataProvider provideCategoryApps
+     *
+     * @param CategoryEnum|null $category
+     *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      */
-    public function testGetListAppLimit(): void
+    public function testGetSellingPaidApps(?CategoryEnum $category): void
     {
-        $limit = 100;
-
         $this->gplay->setCache($this->getCacheInterface());
-        $apps = $this->gplay->getTopApps(null, AgeEnum::FIVE_UNDER(), $limit);
+        $apps = $this->gplay->getTopSellingPaidApps($category);
 
         self::assertNotEmpty($apps);
         self::assertContainsOnlyInstancesOf(App::class, $apps);
-        self::assertLessThanOrEqual($limit, \count($apps));
+    }
+
+    /**
+     * @dataProvider provideCategoryApps
+     *
+     * @param CategoryEnum|null $category
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     */
+    public function testGetSellingGrossingApps(?CategoryEnum $category): void
+    {
+        $this->gplay->setCache($this->getCacheInterface());
+        $apps = $this->gplay->getTopGrossingApps($category);
+        self::assertNotEmpty($apps);
+        self::assertContainsOnlyInstancesOf(App::class, $apps);
     }
 
     /**
@@ -707,53 +654,6 @@ final class GPlayAppsTest extends TestCase
     }
 
     /**
-     * @dataProvider provideReleaseApps
-     *
-     * @param string $actualReleaseDate
-     * @param string $packageName
-     *
-     * @throws GooglePlayException
-     *
-     * @medium
-     */
-    public function testReleaseDateForAllLocales(string $actualReleaseDate, string $packageName): void
-    {
-        $appInfos = $this->gplay->getAppInfoForAvailableLocales($packageName);
-
-        foreach ($appInfos as $appInfo) {
-            $released = $appInfo->getReleased();
-            self::assertNotNull(
-                $released,
-                'Null released date in ' . $appInfo->getLocale() . ' locale (' . $appInfo->getFullUrl() . ')'
-            );
-            self::assertSame(
-                $released->format('Y.m.d'),
-                $actualReleaseDate,
-                'Error equals released date in ' . $appInfo->getLocale() . ' locale (' . $appInfo->getFullUrl() . ')'
-            );
-        }
-    }
-
-    /**
-     * @return \Generator|null
-     */
-    public function provideReleaseApps(): ?\Generator
-    {
-        yield 'jan' => ['2016.01.11', 'com.skgames.trafficrider'];
-        yield 'feb' => ['2019.02.28', 'com.budgestudios.googleplay.MyLittlePonyPocketPonies'];
-        yield 'mar' => ['2011.03.06', 'sp.app.bubblePop'];
-        yield 'apr' => ['2014.04.30', 'com.google.android.apps.docs.editors.docs'];
-        yield 'may' => ['2010.05.24', 'com.adobe.reader'];
-        yield 'jun' => ['2015.06.17', 'com.disney.thoughtbubbles_goo'];
-        yield 'jul' => ['2011.07.19', 'com.viber.voip'];
-        yield 'aug' => ['2010.08.12', 'com.google.android.googlequicksearchbox'];
-        yield 'sep' => ['2012.09.26', 'com.rovio.BadPiggiesHD'];
-        yield 'oct' => ['2014.10.22', 'com.gamehouse.slingo'];
-        yield 'nov' => ['2010.11.01', 'com.maxmpz.audioplayer'];
-        yield 'dec' => ['2014.12.22', 'ru.cian.main'];
-    }
-
-    /**
      * @dataProvider provideGetClusterApps
      *
      * @param string $clusterPage
@@ -779,18 +679,17 @@ final class GPlayAppsTest extends TestCase
     /**
      * @param string|Category|CategoryEnum|null $category
      * @param AgeEnum|null                      $age
-     * @param string|null                       $path
-     *
-     * @dataProvider provideGetClusterPages
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     *
+     * @dataProvider provideGetClusterPages
      */
-    public function testGetClusterPages($category, ?AgeEnum $age, ?string $path): void
+    public function testGetClusterPages($category, ?AgeEnum $age): void
     {
         $clusterPagesGenerator = $this->gplay
             ->setDefaultLocale('en_US')
             ->setDefaultCountry('us')
-            ->getClusterPages($category, $age, $path)
+            ->getClusterPages($category, $age)
         ;
 
         foreach ($clusterPagesGenerator as $clusterPage) {
@@ -806,27 +705,6 @@ final class GPlayAppsTest extends TestCase
 
         yield 'Top Game Card' => ['GAME_CARD', null, 'top'];
 
-        yield 'Games category' => ['GAME', null, null];
-    }
-
-    /**
-     * @throws \Nelexa\GPlay\Exception\GooglePlayException
-     */
-    public function testEnumCategories(): void
-    {
-        $enumCategories = array_map(
-            static function (CategoryEnum $enum): string {
-                return $enum->value();
-            },
-            CategoryEnum::values()
-        );
-        sort($enumCategories);
-
-        $categories = array_map(static function (Category $category) {
-            return $category->getId();
-        }, $this->gplay->getCategories());
-        sort($categories);
-
-        self::assertEmpty(array_diff($categories, $enumCategories));
+        yield 'Art & Design category' => [CategoryEnum::ART_AND_DESIGN(), null, null];
     }
 }

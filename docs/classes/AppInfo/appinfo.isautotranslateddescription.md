@@ -1,18 +1,22 @@
 [Documentation](../../README.md) > [AppInfo](README.md) > **isAutoTranslatedDescription**
 
 # Nelexa\GPlay\Model\AppInfo::isAutoTranslatedDescription
-`Nelexa\GPlay\Model\AppInfo::isAutoTranslatedDescription` — Checks if the class description is automatically translated via Google Translate.
+`Nelexa\GPlay\Model\AppInfo::isAutoTranslatedDescription`
 
 ## Description
 ```php
-Nelexa\GPlay\Model\AppInfo::isAutoTranslatedDescription ( void ) : bool
+Nelexa\GPlay\Model\AppInfo::isAutoTranslatedDescription ( void )
 ```
-`false` if the developer added a description for the locale in the Google Play Console
+
+> :heavy_exclamation_mark: **Warning**
+>
+> This function is currently not documented; only its argument list is available. 
+
 
 ## Parameters
 This function has no parameters.
 
 ## Return Values
-`true` if the description was automatically translated using Google Translate and
+No value is returned.
 
 [Documentation](../../README.md) > [AppInfo](README.md) > **isAutoTranslatedDescription**

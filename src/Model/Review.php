@@ -30,9 +30,6 @@ class Review implements \JsonSerializable
     /** @var string review id */
     private $id;
 
-    /** @var string review url */
-    private $url;
-
     /** @var string review author */
     private $userName;
 
@@ -54,32 +51,35 @@ class Review implements \JsonSerializable
     /** @var ReplyReview|null reply review */
     private $reply;
 
+    /** @var string|null */
+    private $appVersion;
+
     /**
      * Creates an Android app review object in the Google Play store.
      *
-     * @param string                  $id        review id
-     * @param string                  $url       review url
-     * @param string                  $userName  review author
-     * @param string                  $text      review text
-     * @param GoogleImage             $avatar    author's avatar
-     * @param \DateTimeInterface|null $date      review date
-     * @param int                     $score     review score
-     * @param int                     $likeCount the number of likes reviews
-     * @param ReplyReview|null        $reply     reply review
+     * @param string                  $id         review id
+     * @param string                  $userName   review author
+     * @param string                  $text       review text
+     * @param GoogleImage             $avatar     author's avatar
+     * @param \DateTimeInterface|null $date       review date
+     * @param int                     $score      review score
+     * @param int                     $likeCount  the number of likes reviews
+     * @param ReplyReview|null        $reply      reply review
+     * @param string|null             $appVersion application version
      */
     public function __construct(
         string $id,
-        string $url,
+//        string $url,
         string $userName,
         string $text,
         GoogleImage $avatar,
         ?\DateTimeInterface $date,
         int $score,
         int $likeCount = 0,
-        ?ReplyReview $reply = null
+        ?ReplyReview $reply = null,
+        ?string $appVersion = null
     ) {
         $this->id = $id;
-        $this->url = $url;
         $this->userName = $userName;
         $this->text = $text;
         $this->avatar = $avatar;
@@ -87,6 +87,7 @@ class Review implements \JsonSerializable
         $this->score = $score;
         $this->countLikes = $likeCount;
         $this->reply = $reply;
+        $this->appVersion = $appVersion;
     }
 
     /**
@@ -100,13 +101,11 @@ class Review implements \JsonSerializable
     }
 
     /**
-     * Returns a review url.
-     *
-     * @return string review url
+     * @deprecated URL no longer available
      */
     public function getUrl(): string
     {
-        return $this->url;
+        return '';
     }
 
     /**
@@ -180,6 +179,16 @@ class Review implements \JsonSerializable
     }
 
     /**
+     * Returns the version of the application for which the comment was made.
+     *
+     * @return string|null application version
+     */
+    public function getAppVersion(): ?string
+    {
+        return $this->appVersion;
+    }
+
+    /**
      * Returns class properties as an array.
      *
      * @return array class properties as an array
@@ -188,10 +197,10 @@ class Review implements \JsonSerializable
     {
         return [
             'id' => $this->id,
-            'url' => $this->url,
             'userName' => $this->userName,
             'text' => $this->text,
             'avatar' => $this->avatar->getUrl(),
+            'appVersion' => $this->appVersion,
             'date' => $this->date->format(\DateTime::RFC3339),
             'timestamp' => $this->date->getTimestamp(),
             'score' => $this->score,

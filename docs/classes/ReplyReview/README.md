@@ -32,10 +32,10 @@ Nelexa\GPlay\Model\ReplyReview implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\ReplyReview {
-  -getDate(): DateTimeInterface: @1563092813 {
-    date: 2019-07-14T08:26:53+00:00
+  -getDate(): DateTimeInterface: @1616237045 {
+    date: 2021-03-20T10:44:05+00:00
   }
-  -getText(): string: "Please contact our support team and tell us more about that type of situation: app-maps@support.yandex.ru"
+  -getText(): string: "Please write to us through the "Feedback" menu of the Navigator or app-navigator@support.yandex.ru. Specify what route and between what points you tri…"
   -asArray(): array: …
   -jsonSerialize(): array: …
 }
@@ -48,9 +48,9 @@ echo json_encode($replyReview, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSO
 Output:
 ```json
 {
-    "date": "2019-07-14T08:26:53+00:00",
-    "timestamp": 1563092813,
-    "text": "Please contact our support team and tell us more about that type of situation: app-maps@support.yandex.ru"
+    "date": "2021-03-20T10:44:05+00:00",
+    "timestamp": 1616237045,
+    "text": "Please write to us through the \"Feedback\" menu of the Navigator or app-navigator@support.yandex.ru. Specify what route and between what points you tried to build and show it in the screenshot. This will help us understand the current situation."
 }
 ```
 

@@ -14,9 +14,6 @@ This function has no parameters.
 ## Return Values
 array of application categories
 
-
-## Errors/Exceptions
-* Throws [Nelexa\GPlay\Exception\GooglePlayException](../GooglePlayException/README.md) if HTTP error is received
 ## Examples
 ```php
 $categories = $gplay
@@ -28,22 +25,22 @@ $categories = $gplay
   <summary>Results</summary>
 
 ```php
-array:53 [
+array:59 [
     0 => class Nelexa\GPlay\Model\Category {
-      -getId(): string: "ART_AND_DESIGN"
-      -getName(): string: "Art & Design"
-      -isGamesCategory(): bool: false
+      -getId(): string: "GAME"
+      -getName(): string: "Game"
+      -isGamesCategory(): bool: true
       -isFamilyCategory(): bool: false
-      -isApplicationCategory(): bool: true
+      -isApplicationCategory(): bool: false
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Category {
-      -getId(): string: "AUTO_AND_VEHICLES"
-      -getName(): string: "Auto & Vehicles"
+      -getId(): string: "FAMILY"
+      -getName(): string: "Family"
       -isGamesCategory(): bool: false
-      -isFamilyCategory(): bool: false
-      -isApplicationCategory(): bool: true
+      -isFamilyCategory(): bool: true
+      -isApplicationCategory(): bool: false
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
