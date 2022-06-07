@@ -193,3 +193,6 @@ Changes are documented in the [releases page](https://github.com/Ne-Lexa/google-
 # License
 
 The library is open-sourced software licensed under the [MIT License](https://github.com/Ne-Lexa/google-play-scraper/blob/master/LICENSE).
+
+# Donation
+USDT TRC-20 - TAR6uqMAMCpTUemy9RP26zrTpJM1rtECxE
