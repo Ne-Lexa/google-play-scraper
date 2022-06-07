@@ -5,7 +5,7 @@
 
 ## Description
 ```php
-Nelexa\GPlay\Model\App::getDeveloper ( void ) : Nelexa\GPlay\Model\Developer
+Nelexa\GPlay\Model\App::getDeveloper ( void ) : Nelexa\GPlay\Model\Developer | null
 ```
 
 ## Parameters

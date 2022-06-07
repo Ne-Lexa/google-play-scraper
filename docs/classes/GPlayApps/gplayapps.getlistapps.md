@@ -36,40 +36,7 @@ $apps = $gplay->getListApps(\Nelexa\GPlay\Enum\CategoryEnum::GAME_RACING());
   <summary>Results</summary>
 
 ```php
-array:905 [
-    "com.fingersoft.hillclimb" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.fingersoft.hillclimb"
-      -getLocale(): string: "en_US"
-      -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.fingersoft.hillclimb&hl=en_US&gl=us"
-      -getName(): string: "Hill Climb Racing"
-      -getSummary(): ?string: "Race uphill to win in this offline physics based driving game!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "7064049075652771302"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7064049075652771302"
-        -getName(): string: "Fingersoft"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/N0UxhBVUmx8s7y3F7Kqre2AcpXyPDKAp8nHjiPPoOONc_sfugHCYMjBpbUKCMlK_XUs=s0"
-        -getBinaryImageContent(): string: …
-      }
-      -getScore(): float: 4.585985
-      -getPriceText(): ?string: null
-      -isFree(): bool: true
-      -asArray(): array: …
-      -jsonSerialize(): array: …
-    }
+array:1286 [
     "com.ea.game.nfs14_row" => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.ea.game.nfs14_row"
       -getLocale(): string: "en_US"
@@ -77,29 +44,78 @@ array:905 [
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.ea.game.nfs14_row"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.ea.game.nfs14_row&hl=en_US&gl=us"
       -getName(): string: "Need for Speed™ No Limits"
-      -getSummary(): ?string: "Dominate the competition and rule the streets. Download to race now!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "6605125519975771237"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=6605125519975771237"
-        -getName(): string: "ELECTRONIC ARTS"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getDescription(): string: """
+        Claim the crown and rule the underground as you race for dominance in the first white-knuckle edition of Need for Speed made just for mobile – from th…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "ELECTRONIC ARTS"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/3D39RIkfs0amH9MhhWRLHRILBQUmq1BlIqYMyNSJKb7HyqU6NhQR-toUMmSnPAi60t0"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/3D39RIkfs0amH9MhhWRLHRILBQUmq1BlIqYMyNSJKb7HyqU6NhQR-toUMmSnPAi60t0"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/3D39RIkfs0amH9MhhWRLHRILBQUmq1BlIqYMyNSJKb7HyqU6NhQR-toUMmSnPAi60t0=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/jR32DXa15ObFAKr1KTL46qY8DZA5UUWK-qz_Ji4pu_Z-Ue-uQOunCY6GW9VRoVvgYQ"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/jR32DXa15ObFAKr1KTL46qY8DZA5UUWK-qz_Ji4pu_Z-Ue-uQOunCY6GW9VRoVvgYQ"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/jR32DXa15ObFAKr1KTL46qY8DZA5UUWK-qz_Ji4pu_Z-Ue-uQOunCY6GW9VRoVvgYQ=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.3452697
+      -getScreenshots(): array: array:12 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/YIPVKEX-vldJN9ZAyFTaT05Qf53tq90MBZLfrQqaE_C6MZ7kzlloS01EBMkhWixcUvk"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/YIPVKEX-vldJN9ZAyFTaT05Qf53tq90MBZLfrQqaE_C6MZ7kzlloS01EBMkhWixcUvk"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/YIPVKEX-vldJN9ZAyFTaT05Qf53tq90MBZLfrQqaE_C6MZ7kzlloS01EBMkhWixcUvk=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/aKXKOVc6-ejZoXMcraRjPBxkreHKI_f95Y6j-JARGhj-j2qs6ma6l_g2WWKjsrCQDmc"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/aKXKOVc6-ejZoXMcraRjPBxkreHKI_f95Y6j-JARGhj-j2qs6ma6l_g2WWKjsrCQDmc"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/aKXKOVc6-ejZoXMcraRjPBxkreHKI_f95Y6j-JARGhj-j2qs6ma6l_g2WWKjsrCQDmc=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.3578167
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "100,000,000+"
+      -asArray(): array: …
+      -jsonSerialize(): array: …
+    }
+    "com.skgames.trafficrider" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.skgames.trafficrider"
+      -getLocale(): string: "en_US"
+      -getCountry(): string: "us"
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.skgames.trafficrider"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.skgames.trafficrider&hl=en_US&gl=us"
+      -getName(): string: "Traffic Rider"
+      -getDescription(): string: """
+        Another masterpiece from the creators of Traffic Racer. This time, you are behind the wheels of a motorbike in a much more detailed gaming experience,…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Soner Kara"
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/590AflDt-hW2t85Cit_ODJPJdRiMMRn2cSF0vYNfsBpjm895x1zDy0npbD7IlDCvmNvI"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/590AflDt-hW2t85Cit_ODJPJdRiMMRn2cSF0vYNfsBpjm895x1zDy0npbD7IlDCvmNvI"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/590AflDt-hW2t85Cit_ODJPJdRiMMRn2cSF0vYNfsBpjm895x1zDy0npbD7IlDCvmNvI=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScreenshots(): array: array:18 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/9r6683uXT-9FUsHDxEewq7rjWGJM4si0wVHUPWV3qk334V50PscxGXhCJ3P8BTAWObk"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/9r6683uXT-9FUsHDxEewq7rjWGJM4si0wVHUPWV3qk334V50PscxGXhCJ3P8BTAWObk"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/9r6683uXT-9FUsHDxEewq7rjWGJM4si0wVHUPWV3qk334V50PscxGXhCJ3P8BTAWObk=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/IQB8k1MwuRpuo3Ns9k77nXxOasPhSmHMCVhL7zEfL0iWBbzS5fQ4Byx8bwJsQM0aDfYC"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/IQB8k1MwuRpuo3Ns9k77nXxOasPhSmHMCVhL7zEfL0iWBbzS5fQ4Byx8bwJsQM0aDfYC"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/IQB8k1MwuRpuo3Ns9k77nXxOasPhSmHMCVhL7zEfL0iWBbzS5fQ4Byx8bwJsQM0aDfYC=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.2793527
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -getInstallsText(): string: "100,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
@@ -109,10 +125,10 @@ array:905 [
 
 </details>
 
-**Example 1. Gets applications from the GAMES category with an age limit of 6-8 years.**
+**Example 1. Gets applications from the FAMILY_ACTION category with an age limit of 6-8 years.**
 ```php
 $apps = $gplay->getListApps(
-    $category = \Nelexa\GPlay\Enum\CategoryEnum::GAME(),
+    $category = \Nelexa\GPlay\Enum\CategoryEnum::FAMILY_ACTION(),
     $ageLimit = \Nelexa\GPlay\Enum\AgeEnum::SIX_EIGHT(),
     $limit = 100
 );
@@ -122,69 +138,87 @@ $apps = $gplay->getListApps(
 
 ```php
 array:100 [
-    "com.blizzard.diablo.immortal" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.blizzard.diablo.immortal"
+    "com.imayi.trainbuilderfree" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.imayi.trainbuilderfree"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.blizzard.diablo.immortal"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.blizzard.diablo.immortal&hl=en_US&gl=us"
-      -getName(): string: "Diablo Immortal"
-      -getSummary(): ?string: "A brand new, visceral Diablo action RPG experience at your fingertips"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "8636572569301896616"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8636572569301896616"
-        -getName(): string: "Blizzard Entertainment, Inc."
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.imayi.trainbuilderfree"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.imayi.trainbuilderfree&hl=en_US&gl=us"
+      -getName(): string: "Train Builder - Games for kids"
+      -getDescription(): string: """
+        Assemble your own unique train! Experience the fun of driving! Pick up fruits from the farm, get your favorite animals from the zoo, and don’t forget …
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Yateland - Learning Games For Kids"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/8DtlOHx-zIncYJE-kwHnOTBXycjAzwufkuk0uad7_MzWP17auA24THldTwhEru-b-7I=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/HHmaZwsT0_KhM1NZguKUJaBWQ6ycEaMF_UIi3omN2LhKxLB9EUlyOPlKg6XiHa6zmQ"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/HHmaZwsT0_KhM1NZguKUJaBWQ6ycEaMF_UIi3omN2LhKxLB9EUlyOPlKg6XiHa6zmQ"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/HHmaZwsT0_KhM1NZguKUJaBWQ6ycEaMF_UIi3omN2LhKxLB9EUlyOPlKg6XiHa6zmQ=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 0.0
+      -getScreenshots(): array: array:18 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/pXWq7snZUlu0_NUY6IxmWANpkSX_7wVs43iM_XP0m0auX3GqqjF-vvph5QjqkjME_vYc"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/pXWq7snZUlu0_NUY6IxmWANpkSX_7wVs43iM_XP0m0auX3GqqjF-vvph5QjqkjME_vYc"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pXWq7snZUlu0_NUY6IxmWANpkSX_7wVs43iM_XP0m0auX3GqqjF-vvph5QjqkjME_vYc=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/3Cx1GAaFpVxww1qTyGz7nYnqEmrkcAcBbLKNSRzkSa0zOEgCpSLEDsxHLL_d6MLF3m0i"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/3Cx1GAaFpVxww1qTyGz7nYnqEmrkcAcBbLKNSRzkSa0zOEgCpSLEDsxHLL_d6MLF3m0i"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/3Cx1GAaFpVxww1qTyGz7nYnqEmrkcAcBbLKNSRzkSa0zOEgCpSLEDsxHLL_d6MLF3m0i=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.18
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "1,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
-    "com.empire.warriors2.premium.epic.tower.td.defender.rush" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.empire.warriors2.premium.epic.tower.td.defender.rush"
+    "com.imayi.monstertruckgofree" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.imayi.monstertruckgofree"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.empire.warriors2.premium.epic.tower.td.defender.rush"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.empire.warriors2.premium.epic.tower.td.defender.rush&hl=en_US&gl=us"
-      -getName(): string: "Empire Defender TD: Premium"
-      -getSummary(): ?string: "Strategy Offline TD Game! Become An Epic Defender! Premium Version"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "7674514660084826148"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=7674514660084826148"
-        -getName(): string: "ZITGA"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.imayi.monstertruckgofree"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.imayi.monstertruckgofree&hl=en_US&gl=us"
+      -getName(): string: "Monster Truck Games for kids"
+      -getDescription(): string: """
+        VVRROOOM! Time to race in the big monster truck rally! \n
+        \n
+        Race over obstacles and across beautiful landscapes on your way to the finish line. Choose fr…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Yateland - Learning Games For Kids"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/mBk-tv2a4eqmsA9uPT_nsmL89CzNeKXk_vgb8__xxKNyC9Unb6dH2awR10NyL20hD_0"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/mBk-tv2a4eqmsA9uPT_nsmL89CzNeKXk_vgb8__xxKNyC9Unb6dH2awR10NyL20hD_0"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/mBk-tv2a4eqmsA9uPT_nsmL89CzNeKXk_vgb8__xxKNyC9Unb6dH2awR10NyL20hD_0=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/xT5t0ExiuD0Hu_3Q7KmGrQvnvNGofqzx_eXThtN2lw3BDw-m8u1dKR_Ix_vs_4DtxcM"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/xT5t0ExiuD0Hu_3Q7KmGrQvnvNGofqzx_eXThtN2lw3BDw-m8u1dKR_Ix_vs_4DtxcM"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/xT5t0ExiuD0Hu_3Q7KmGrQvnvNGofqzx_eXThtN2lw3BDw-m8u1dKR_Ix_vs_4DtxcM=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 0.0
+      -getScreenshots(): array: array:23 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/w7ZEGbDZ5xhDzS7YUCXKVGJ6nFiNTKBVd611ggv_W2pjbkpeXBP-WiZet7zKh1EORQ"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/w7ZEGbDZ5xhDzS7YUCXKVGJ6nFiNTKBVd611ggv_W2pjbkpeXBP-WiZet7zKh1EORQ"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/w7ZEGbDZ5xhDzS7YUCXKVGJ6nFiNTKBVd611ggv_W2pjbkpeXBP-WiZet7zKh1EORQ=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/_KjZA3k2ENftAXItu84QnvxNCwv_8juVUHJdQPpJu8s45dN_ulSHArtU38-y-_dtiEE"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/_KjZA3k2ENftAXItu84QnvxNCwv_8juVUHJdQPpJu8s45dN_ulSHArtU38-y-_dtiEE"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/_KjZA3k2ENftAXItu84QnvxNCwv_8juVUHJdQPpJu8s45dN_ulSHArtU38-y-_dtiEE=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.254464
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "1,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
@@ -202,70 +236,91 @@ $apps = $gplay->getListApps();
   <summary>Results</summary>
 
 ```php
-array:1277 [
-    "com.zhiliaoapp.musically" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.zhiliaoapp.musically"
+array:1435 [
+    "com.snapchat.android" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.snapchat.android"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically&hl=en_US&gl=us"
-      -getName(): string: "TikTok"
-      -getSummary(): ?string: "Join your friends and discover videos you love, only on TikTok"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "TikTok Pte. Ltd."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=TikTok+Pte.+Ltd."
-        -getName(): string: "TikTok Pte. Ltd."
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.snapchat.android"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.snapchat.android&hl=en_US&gl=us"
+      -getName(): string: "Snapchat"
+      -getDescription(): string: """
+        Snapchat is a fast and fun way to share the moment with your friends and family 👻\n
+        \n
+        SNAP \n
+        • Snapchat opens right to the Camera — just tap to take a pho…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Snap Inc"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/z5nin1RdQ4UZhv6fa1FNG7VE33imGqPgC4kKZIUjgf_up7E-Pj3AaojlMPwNNXaeGA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/KxeSAjPTKliCErbivNiXrd6cTwfbqUJcbSRPe_IBVK_YmwckfMRS1VIHz-5cgT09yMo"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/KxeSAjPTKliCErbivNiXrd6cTwfbqUJcbSRPe_IBVK_YmwckfMRS1VIHz-5cgT09yMo"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KxeSAjPTKliCErbivNiXrd6cTwfbqUJcbSRPe_IBVK_YmwckfMRS1VIHz-5cgT09yMo=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.53436
+      -getScreenshots(): array: array:8 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/xKCYMMuIshGmxLVckXnGYsdorvBxF0oI58Yt82Vkj_cn3Dby52gdrt4Lmr7BTYiVww"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/xKCYMMuIshGmxLVckXnGYsdorvBxF0oI58Yt82Vkj_cn3Dby52gdrt4Lmr7BTYiVww"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/xKCYMMuIshGmxLVckXnGYsdorvBxF0oI58Yt82Vkj_cn3Dby52gdrt4Lmr7BTYiVww=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/yoN8h1j4M0Axz1UK2-iyPOmlQmIHqZ1tO8p7PjRicfmyPxj3-rztyB3YImG58zeMvOI"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/yoN8h1j4M0Axz1UK2-iyPOmlQmIHqZ1tO8p7PjRicfmyPxj3-rztyB3YImG58zeMvOI"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yoN8h1j4M0Axz1UK2-iyPOmlQmIHqZ1tO8p7PjRicfmyPxj3-rztyB3YImG58zeMvOI=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.211082
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "1,000,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
-    "com.google.android.apps.youtube.kids" => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.google.android.apps.youtube.kids"
+    "com.netflix.mediaclient" => class Nelexa\GPlay\Model\App {
+      -getId(): string: "com.netflix.mediaclient"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.kids"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.apps.youtube.kids&hl=en_US&gl=us"
-      -getName(): string: "YouTube Kids"
-      -getSummary(): ?string: "Encourage kids to discover the world with a suite of parental controls"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "5700313618786177705"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
-        -getName(): string: "Google LLC"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient&hl=en_US&gl=us"
+      -getName(): string: "Netflix"
+      -getDescription(): string: """
+        Looking for the most talked about TV shows and movies from the around the world? They’re all on Netflix.\n
+        \n
+        We’ve got award-winning series, movies, docu…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Netflix, Inc."
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/S4wylkvt2jz16hnG9IG0pAZosbB82nWWy8P-rQkb54uH-SCVd5L2j7z7x1Vz5pZvIRc"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/S4wylkvt2jz16hnG9IG0pAZosbB82nWWy8P-rQkb54uH-SCVd5L2j7z7x1Vz5pZvIRc"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/S4wylkvt2jz16hnG9IG0pAZosbB82nWWy8P-rQkb54uH-SCVd5L2j7z7x1Vz5pZvIRc=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.3300085
+      -getScreenshots(): array: array:24 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/m7mg_DZ1uTb6jfGewOOtZ4ejmDaBYfEWZVfEP0pkSX60OsoG7YDgjuFLPCCc6rBnYJk"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/m7mg_DZ1uTb6jfGewOOtZ4ejmDaBYfEWZVfEP0pkSX60OsoG7YDgjuFLPCCc6rBnYJk"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/m7mg_DZ1uTb6jfGewOOtZ4ejmDaBYfEWZVfEP0pkSX60OsoG7YDgjuFLPCCc6rBnYJk=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/K4-4tkQJD0U0H_FiAn5yHz_-9Y8bP6f1tGCmFtYwBzn-5Gk1AM8Ga4S3c0T6s4ex_HI"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/K4-4tkQJD0U0H_FiAn5yHz_-9Y8bP6f1tGCmFtYwBzn-5Gk1AM8Ga4S3c0T6s4ex_HI"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/K4-4tkQJD0U0H_FiAn5yHz_-9Y8bP6f1tGCmFtYwBzn-5Gk1AM8Ga4S3c0T6s4ex_HI=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.451842
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "1,000,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }

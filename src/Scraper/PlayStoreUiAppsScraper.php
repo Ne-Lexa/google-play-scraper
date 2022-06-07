@@ -42,7 +42,8 @@ class PlayStoreUiAppsScraper implements ParseHandlerInterface
         }
         $json = \GuzzleHttp\json_decode($json[0][2], true);
 
-        if (empty($json[0][0][0])) {
+        $json = $json[0][22] ?? $json[0][21];
+        if (empty($json)) {
             return [[], null];
         }
 
@@ -52,11 +53,11 @@ class PlayStoreUiAppsScraper implements ParseHandlerInterface
 
         $apps = [];
 
-        foreach ($json[0][0][0] as $data) {
-            $apps[] = AppsExtractor::extractApp($data, $locale, $country);
+        foreach ($json[0] as $data) {
+            $apps[] = AppsExtractor::extractApp(isset($data[1]) ? $data : $data[0], $locale, $country);
         }
 
-        $nextToken = $json[0][0][7][1] ?? null;
+        $nextToken = $json[1][3][1] ?? null;
 
         return [$apps, $nextToken];
     }

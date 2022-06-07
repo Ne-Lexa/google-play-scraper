@@ -60,24 +60,24 @@ $imageInfos = $gplay
 ```php
 array:15 [
     0 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://play-lh.googleusercontent.com/0Wp_JWb55MC6uygq04cbRi6sZp1ygf2tASy_NxCiVislgV0aECPtnVjkfJBSX48tOQE=s700"
-      -getFilename(): string: "screenshots/40/56/405626f8d5599bd433a2544b0587cb57.png"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/n7uqiWBp3ej01JpnR3ShqB6jfn_FIEjnDn0vM0b535O9DHk5wdtWGE3g1V9mpw4rG24=s700"
+      -getFilename(): string: "screenshots/ec/45/ec45b381683d65cd43f269a03a7bc518.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 394
       -getHeight(): int: 700
-      -getFilesize(): int: 308317
+      -getFilesize(): int: 261138
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\ImageInfo {
-      -getUrl(): string: "https://play-lh.googleusercontent.com/VcMpf4HOZEGOZl11sHgJ85FTg006NG1lnnjqsUQEYfkJ6eog4wVi8aQktQI9zXnXoA=s700"
-      -getFilename(): string: "screenshots/d9/12/d912cbd91cdb547b33720009ea703a7b.png"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/G1UMB--FegPRDxJfct7cS6-BWeMyh8-on--_aAiE_3ap6NveXAM-uj4ye-HX3HEQrqS3=s700"
+      -getFilename(): string: "screenshots/6b/30/6b3042000b09d83f0cd27fe945914b26.png"
       -getMimeType(): string: "image/png"
       -getExtension(): string: "png"
       -getWidth(): int: 394
       -getHeight(): int: 700
-      -getFilesize(): int: 318706
+      -getFilesize(): int: 312625
       -asArray(): array: …
       -jsonSerialize(): array: …
     }

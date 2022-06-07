@@ -7,7 +7,7 @@ Exception thrown if there is an error accessing the Google Play server.
 
 ## Class synopsis
 ```php
-Nelexa\GPlay\Exception\GooglePlayException extends Exception implements Throwable {
+Nelexa\GPlay\Exception\GooglePlayException extends Exception implements Throwable, Stringable {
 
     /* Methods */
     public __construct ( [ string $message = "" ] [, int $code = 0 ] [, Throwable $previous = null ] ) 
@@ -53,7 +53,7 @@ class Nelexa\GPlay\Exception\GooglePlayException {
     """
   -getCode(): mixed: 1
   -getFile(): mixed: …
-  -getLine(): mixed: 219
+  -getLine(): mixed: 221
   -getTrace(): mixed: …
   -getTraceAsString(): mixed: …
   -getUrl(): ?string: "https://play.google.com/store/apps/details?id=com.invalid.app.test&hl=en_US&gl=us"

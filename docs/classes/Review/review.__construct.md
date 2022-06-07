@@ -5,14 +5,12 @@
 
 ## Description
 ```php
-Nelexa\GPlay\Model\Review::__construct ( string $id , string $url , string $userName , string $text , Nelexa\GPlay\Model\GoogleImage $avatar , DateTimeInterface | null $date , int $score [, int $likeCount = 0 ] [, Nelexa\GPlay\Model\ReplyReview | null $reply = null ] )
+Nelexa\GPlay\Model\Review::__construct ( string $id , string $userName , string $text , Nelexa\GPlay\Model\GoogleImage $avatar , DateTimeInterface | null $date , int $score [, int $likeCount = 0 ] [, Nelexa\GPlay\Model\ReplyReview | null $reply = null ] [, string | null $appVersion = null ] )
 ```
 
 ## Parameters
 * **$id** (string)  
 review id
-* **$url** (string)  
-review url
 * **$userName** (string)  
 review author
 * **$text** (string)  
@@ -27,6 +25,8 @@ review score
 the number of likes reviews
 * **$reply** ([Nelexa\GPlay\Model\ReplyReview](../ReplyReview/README.md) | null)  
 reply review
+* **$appVersion** (string | null)  
+application version
 
 ## Return Values
 No value is returned.

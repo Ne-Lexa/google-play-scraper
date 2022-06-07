@@ -19,8 +19,10 @@ use GuzzleHttp\Psr7\Query;
 use GuzzleHttp\Psr7\Request as PsrRequest;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
+use Nelexa\GPlay\Enum\CategoryEnum;
 use Nelexa\GPlay\HttpClient\HttpClient;
 use Nelexa\GPlay\HttpClient\Request;
+use Nelexa\GPlay\Model\Category;
 use Psr\Http\Message\ResponseInterface;
 use Psr\SimpleCache\CacheInterface;
 
@@ -270,72 +272,7 @@ class GPlayApps
      */
     public function getAppInfoForAvailableLocales($appId): array
     {
-        $list = $this->getAppInfoForLocales($appId, Util\LocaleHelper::SUPPORTED_LOCALES);
-
-        $preferredLocale = self::DEFAULT_LOCALE;
-
-        foreach ($list as $app) {
-            if ($app->isAutoTranslatedDescription()) {
-                $preferredLocale = (string) $app->getTranslatedFromLocale();
-                break;
-            }
-        }
-
-        /**
-         * @var Model\AppInfo[] $list
-         */
-        $list = array_filter(
-            $list,
-            static function (Model\AppInfo $app) {
-                return !$app->isAutoTranslatedDescription();
-            }
-        );
-
-        if (!isset($list[$preferredLocale])) {
-            throw new \RuntimeException('No key ' . $preferredLocale);
-        }
-        $preferredApp = $list[$preferredLocale];
-        $list = array_filter(
-            $list,
-            static function (Model\AppInfo $app, string $locale) use ($preferredApp, $list) {
-                // deletes locales in which there is no translation added, but automatic translation by Google Translate is used.
-                if ($preferredApp->getLocale() === $locale || !$preferredApp->equals($app)) {
-                    if (($pos = strpos($locale, '_')) !== false) {
-                        $rootLang = substr($locale, 0, $pos);
-                        $rootLangLocale = Util\LocaleHelper::getNormalizeLocale($rootLang);
-
-                        if (
-                            $rootLangLocale !== $locale
-                            && isset($list[$rootLangLocale])
-                            && $list[$rootLangLocale]->equals($app)
-                        ) {
-                            // delete duplicate data,
-                            // for example, delete en_CA, en_IN, en_GB, en_ZA, if there is en_US and they are equals.
-                            return false;
-                        }
-                    }
-
-                    return true;
-                }
-
-                return false;
-            },
-            \ARRAY_FILTER_USE_BOTH
-        );
-
-        // sorting array keys; the first key is the preferred locale
-        uksort(
-            $list,
-            static function (
-                /** @noinspection PhpUnusedParameterInspection */
-                string $a,
-                string $b
-            ) use ($preferredLocale) {
-                return $b === $preferredLocale ? 1 : 0;
-            }
-        );
-
-        return $list;
+        return $this->getAppInfoForLocales($appId, Util\LocaleHelper::SUPPORTED_LOCALES);
     }
 
     /**
@@ -465,40 +402,16 @@ class GPlayApps
     }
 
     /**
-     * Returns review of the Android app in the Google Play store by review id.
+     * @deprecated Feature no longer available
      *
-     * @param string|Model\AppId $appId    application ID (Android package name) as
-     *                                     a string or {@see Model\AppId} object
-     * @param string             $reviewId review id
+     * @param mixed  $appId
+     * @param string $reviewId
      *
-     * @throws Exception\GooglePlayException if the application is not exists or other HTTP error
-     *
-     * @return Model\Review app review
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
      */
     public function getReviewById($appId, string $reviewId): Model\Review
     {
-        $appId = Util\Caster::castToAppId($appId, $this->defaultLocale, $this->defaultCountry);
-
-        try {
-            $queryString = Query::build([
-                self::REQ_PARAM_ID => $appId->getId(),
-                self::REQ_PARAM_LOCALE => $appId->getLocale(),
-                self::REQ_PARAM_COUNTRY => $appId->getCountry(),
-                'reviewId' => $reviewId,
-            ]);
-
-            $detailUrl = self::GOOGLE_PLAY_APPS_URL . '/details?' . $queryString;
-
-            $request = new Request(
-                new PsrRequest('GET', $detailUrl),
-                [],
-                new Scraper\AppSpecificReviewScraper($appId)
-            );
-
-            return $this->getHttpClient()->request($request);
-        } catch (\Throwable $e) {
-            throw new Exception\GooglePlayException($e->getMessage(), 1, $e);
-        }
+        throw new Exception\GooglePlayException('Feature no longer available', 0);
     }
 
     /**
@@ -535,89 +448,20 @@ class GPlayApps
     /**
      * Returns an array of application categories from the Google Play store.
      *
-     * @throws Exception\GooglePlayException if HTTP error is received
-     *
      * @return Model\Category[] array of application categories
      *
      * @api
      */
     public function getCategories(): array
     {
-        $url = self::GOOGLE_PLAY_APPS_URL . '?' . http_build_query(
-            [
-                self::REQ_PARAM_LOCALE => $this->defaultLocale,
-            ]
-        );
+        return array_map(static function (CategoryEnum $category) {
+            $categoryName = $category->value();
+            $categoryName = str_replace('_', ' ', $categoryName);
+            $categoryName = ucfirst(strtolower($categoryName));
+            $categoryName = str_replace(' and ', ' & ', $categoryName);
 
-        try {
-            return $this->getHttpClient()->request(
-                new Request(
-                    new PsrRequest('GET', $url),
-                    [],
-                    new Scraper\CategoriesScraper()
-                )
-            );
-        } catch (\Throwable $e) {
-            throw new Exception\GooglePlayException($e->getMessage(), 1, $e);
-        }
-    }
-
-    /**
-     * Returns an array of application categories from the Google Play store for the specified locales.
-     *
-     * HTTP requests are executed in parallel.
-     *
-     * @param string[] $locales array of locales
-     *
-     * @throws Exception\GooglePlayException if HTTP error is received
-     *
-     * @return Model\Category[][] array of application categories by locale
-     *
-     * @see GPlayApps::setConcurrency() Sets the limit of concurrent HTTP requests.
-     *
-     * @api
-     */
-    public function getCategoriesForLocales(array $locales): array
-    {
-        if (empty($locales)) {
-            return [];
-        }
-
-        $url = self::GOOGLE_PLAY_APPS_URL;
-        $locales = Util\LocaleHelper::getNormalizeLocales($locales);
-        $parseHandler = new Scraper\CategoriesScraper();
-        $requests = [];
-
-        foreach ($locales as $locale) {
-            $requestUrl = $url . '?' . http_build_query([self::REQ_PARAM_LOCALE => $locale]);
-            $requests[$locale] = new Request(
-                new PsrRequest('GET', $requestUrl),
-                [],
-                $parseHandler
-            );
-        }
-
-        try {
-            return $this->getHttpClient()->requestPool($requests);
-        } catch (\Throwable $e) {
-            throw new Exception\GooglePlayException($e->getMessage(), 1, $e);
-        }
-    }
-
-    /**
-     * Returns an array of categories from the Google Play store for all available locales.
-     *
-     * @throws Exception\GooglePlayException if HTTP error is received
-     *
-     * @return Model\Category[][] array of application categories by locale
-     *
-     * @see GPlayApps::setConcurrency() Sets the limit of concurrent HTTP requests.
-     *
-     * @api
-     */
-    public function getCategoriesForAvailableLocales(): array
-    {
-        return $this->getCategoriesForLocales(Util\LocaleHelper::SUPPORTED_LOCALES);
+            return new Category($category->name(), $categoryName);
+        }, CategoryEnum::values());
     }
 
     /**
@@ -932,13 +776,12 @@ class GPlayApps
      *                                                               {@see Enum\CategoryEnum} or
      *                                                               `null` for all categories
      * @param Enum\AgeEnum|null                            $age      age limit or `null` for no limit
-     * @param string|null                                  $path     `top`, `new` or `null`
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
      * @return \Generator<Model\ClusterPage> an iterator of cluster pages
      */
-    public function getClusterPages($category = null, ?Enum\AgeEnum $age = null, ?string $path = null): \Generator
+    public function getClusterPages($category = null, ?Enum\AgeEnum $age = null): \Generator
     {
         $queryParams = [
             self::REQ_PARAM_LOCALE => $this->defaultLocale,
@@ -950,10 +793,6 @@ class GPlayApps
         }
 
         $url = self::GOOGLE_PLAY_APPS_URL;
-
-        if ($path !== null) {
-            $url .= '/' . $path;
-        }
 
         if ($category !== null) {
             $url .= '/category/' . Util\Caster::castToCategoryId($category);
@@ -1072,10 +911,18 @@ class GPlayApps
         ];
         $clusterPageUrl = self::GOOGLE_PLAY_URL . '/store/search?' . http_build_query($params);
 
-        return $this->fetchAppsFromClusterPage(
-            $clusterPageUrl,
-            $limit
-        );
+        $apps = [];
+        $count = 0;
+
+        foreach ($this->getClusterApps($clusterPageUrl) as $app) {
+            $apps[] = $app;
+            ++$count;
+            if ($count === $limit) {
+                break;
+            }
+        }
+
+        return $apps;
     }
 
     /**
@@ -1100,7 +947,7 @@ class GPlayApps
      */
     public function getListApps($category = null, ?Enum\AgeEnum $age = null, int $limit = self::UNLIMIT): array
     {
-        return $this->fetchAppsFromClusterPages($category, $age, null, $limit);
+        return $this->fetchAppsFromClusterPages($category, $age, $limit);
     }
 
     /**
@@ -1110,10 +957,10 @@ class GPlayApps
      *                                                               string, {@see Model\Category},
      *                                                               {@see Enum\CategoryEnum} or
      *                                                               `null` for all categories
-     * @param Enum\AgeEnum|null                            $age      age limit or null for no limit
      * @param int                                          $limit    limit on the number of results
      *                                                               or {@see GPlayApps::UNLIMIT}
      *                                                               for no limit
+     * @param Enum\AgeEnum|null                            $age
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
@@ -1122,10 +969,88 @@ class GPlayApps
      * @api
      *
      * @see GPlayApps::UNLIMIT Limit for all available results.
+     * @deprecated Use {@see \Nelexa\GPlay\GPlayApps::getTopSellingFreeApps}, {@see \Nelexa\GPlay\GPlayApps::getTopSellingPaidApps} and {@see \Nelexa\GPlay\GPlayApps::getTopGrossingApps}
      */
     public function getTopApps($category = null, ?Enum\AgeEnum $age = null, int $limit = self::UNLIMIT): array
     {
-        return $this->fetchAppsFromClusterPages($category, $age, 'top', $limit);
+        return $this->getTopSellingFreeApps($category, $limit);
+    }
+
+    /**
+     * Returns an array of **top selling free apps** from the Google Play store for the specified category.
+     *
+     * @param string|Model\Category|Enum\CategoryEnum $category application category as string, {@see Model\Category}, {@see Enum\CategoryEnum}, ex. APPLICATION or GAME
+     * @param int                                     $limit    Limit
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     *
+     * @return Model\App[] App list
+     */
+    public function getTopSellingFreeApps($category = 'APPLICATION', int $limit = 500): array
+    {
+        return $this->fetchTopApps($category ?? 'APPLICATION', 'topselling_free', $limit);
+    }
+
+    /**
+     * Returns an array of **top selling paid apps** from the Google Play store for the specified category.
+     *
+     * @param string|Model\Category|Enum\CategoryEnum $category application category as string, {@see Model\Category}, {@see Enum\CategoryEnum}, ex. APPLICATION or GAME
+     * @param int                                     $limit    Limit
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     *
+     * @return Model\App[] App list
+     */
+    public function getTopSellingPaidApps($category = 'APPLICATION', int $limit = 500): array
+    {
+        return $this->fetchTopApps($category, 'topselling_paid', $limit);
+    }
+
+    /**
+     * Returns an array of **top grossing apps** from the Google Play store for the specified category.
+     *
+     * @param string|Model\Category|Enum\CategoryEnum $category application category as string, {@see Model\Category}, {@see Enum\CategoryEnum}, ex. APPLICATION or GAME
+     * @param int                                     $limit    Limit
+     *
+     * @throws \Nelexa\GPlay\Exception\GooglePlayException
+     *
+     * @return Model\App[] App list
+     */
+    public function getTopGrossingApps($category = 'APPLICATION', int $limit = 500): array
+    {
+        return $this->fetchTopApps($category, 'topgrossing', $limit);
+    }
+
+    /**
+     * @param string|Model\Category|Enum\CategoryEnum $category
+     * @param string                                  $topSlug
+     * @param int                                     $limit
+     *
+     * @throws Exception\GooglePlayException
+     *
+     * @return Model\App[]
+     */
+    protected function fetchTopApps($category, string $topSlug, int $limit = 1000): array
+    {
+        try {
+            $psrRequest = Scraper\PlayStoreUiRequest::getTopCategoryApps(
+                $topSlug,
+                Util\Caster::castToCategoryId($category),
+                $this->defaultLocale,
+                $this->defaultCountry,
+                $limit
+            );
+
+            return $this->getHttpClient()->request(
+                new Request(
+                    $psrRequest,
+                    [],
+                    new Scraper\CategoryTopScraper()
+                )
+            );
+        } catch (\Throwable $e) {
+            throw new Exception\GooglePlayException($e->getMessage(), 1, $e);
+        }
     }
 
     /**
@@ -1147,27 +1072,27 @@ class GPlayApps
      * @api
      *
      * @see GPlayApps::UNLIMIT Limit for all available results.
+     * @deprecated
      */
     public function getNewApps($category = null, ?Enum\AgeEnum $age = null, int $limit = self::UNLIMIT): array
     {
-        return $this->fetchAppsFromClusterPages($category, $age, 'new', $limit);
+        return $this->getListApps($category, $age, $limit);
     }
 
     /**
      * @param string|Model\Category|Enum\CategoryEnum|null $category
      * @param Enum\AgeEnum|null                            $age
-     * @param string|null                                  $path
      * @param int                                          $limit
      *
      * @throws \Nelexa\GPlay\Exception\GooglePlayException
      *
      * @return Model\App[]
      */
-    protected function fetchAppsFromClusterPages($category, ?Enum\AgeEnum $age, ?string $path, int $limit): array
+    protected function fetchAppsFromClusterPages($category, ?Enum\AgeEnum $age, int $limit): array
     {
         $apps = [];
         $count = 0;
-        foreach ($this->getClusterPages($category, $age, $path) as $clusterPage) {
+        foreach ($this->getClusterPages($category, $age) as $clusterPage) {
             foreach ($this->getClusterApps($clusterPage->getUrl()) as $app) {
                 if (!isset($apps[$app->getId()])) {
                     $apps[$app->getId()] = $app;

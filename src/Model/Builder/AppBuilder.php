@@ -47,6 +47,9 @@ class AppBuilder
     /** @var Developer|null */
     private $developer;
 
+    /** @var string|null */
+    private $developerName;
+
     /** @var GoogleImage|null */
     private $icon;
 
@@ -58,9 +61,6 @@ class AppBuilder
 
     /** @var string|null */
     private $description;
-
-    /** @var string|null */
-    private $translatedFromLocale;
 
     /** @var GoogleImage|null */
     private $cover;
@@ -89,6 +89,9 @@ class AppBuilder
     /** @var int */
     private $installs = 0;
 
+    /** @var string|null */
+    private $installsText;
+
     /** @var int */
     private $numberVoters = 0;
 
@@ -106,9 +109,6 @@ class AppBuilder
 
     /** @var bool */
     private $containsAds = false;
-
-    /** @var string|null */
-    private $size;
 
     /** @var string|null */
     private $appVersion;
@@ -255,6 +255,26 @@ class AppBuilder
     }
 
     /**
+     * @return string|null
+     */
+    public function getDeveloperName(): ?string
+    {
+        return $this->developerName;
+    }
+
+    /**
+     * @param string|null $developerName
+     *
+     * @return AppBuilder
+     */
+    public function setDeveloperName(?string $developerName): self
+    {
+        $this->developerName = $developerName;
+
+        return $this;
+    }
+
+    /**
      * @return GoogleImage|null
      */
     public function getIcon(): ?GoogleImage
@@ -309,6 +329,9 @@ class AppBuilder
      */
     public function setPriceText(?string $priceText): self
     {
+        if ($priceText === '') {
+            $priceText = null;
+        }
         $this->priceText = $priceText;
 
         return $this;
@@ -330,26 +353,6 @@ class AppBuilder
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTranslatedFromLocale(): ?string
-    {
-        return $this->translatedFromLocale;
-    }
-
-    /**
-     * @param string|null $translatedFromLocale
-     *
-     * @return AppBuilder
-     */
-    public function setTranslatedFromLocale(?string $translatedFromLocale): self
-    {
-        $this->translatedFromLocale = $translatedFromLocale;
 
         return $this;
     }
@@ -551,6 +554,26 @@ class AppBuilder
     }
 
     /**
+     * @return string|null
+     */
+    public function getInstallsText(): ?string
+    {
+        return $this->installsText;
+    }
+
+    /**
+     * @param string|null $installsText
+     *
+     * @return AppBuilder
+     */
+    public function setInstallsText(?string $installsText): self
+    {
+        $this->installsText = $installsText;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getNumberVoters(): int
@@ -666,26 +689,6 @@ class AppBuilder
     public function setContainsAds(bool $containsAds): self
     {
         $this->containsAds = $containsAds;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getSize(): ?string
-    {
-        return $this->size;
-    }
-
-    /**
-     * @param string|null $size
-     *
-     * @return AppBuilder
-     */
-    public function setSize(?string $size): self
-    {
-        $this->size = $size;
 
         return $this;
     }

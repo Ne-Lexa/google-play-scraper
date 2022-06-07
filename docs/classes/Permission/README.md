@@ -31,17 +31,16 @@ Nelexa\GPlay\Model\Permission implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Permission {
-  -getLabel(): string: "Other"
+  -getLabel(): string: "Photos/Media/Files"
   -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -__toString(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
-    -getUrl(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA"
-    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw=s0"
     -getBinaryImageContent(): string: …
   }
-  -getPermissions(): array: array:7 [
-    0 => "receive data from Internet"
-    1 => "view network connections"
-    …
+  -getPermissions(): array: array:2 [
+    0 => "read the contents of your USB storage"
+    1 => "modify or delete the contents of your USB storage"
   ]
   -asArray(): array: …
   -jsonSerialize(): array: …
@@ -55,16 +54,11 @@ echo json_encode($permission, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON
 Output:
 ```json
 {
-    "label": "Other",
-    "icon": "https://play-lh.googleusercontent.com/pkKXoPl5q7n8T0s7KREtdvUZn1PLRgx-Ox0t4tkO8af4JpgGbyAxLBTsvEKKBCjwBACQsZisSYNmHPGbBA",
+    "label": "Photos/Media/Files",
+    "icon": "https://play-lh.googleusercontent.com/pHtIujPWxciAZcfYSwlrGGq14Z984rKLMgcm9RPATLiOlbrWy-tVlelEWgED7gpktgcD1tZizVeHiO5fkw",
     "permissions": [
-        "receive data from Internet",
-        "view network connections",
-        "full network access",
-        "run at startup",
-        "control vibration",
-        "prevent device from sleeping",
-        "Google Play license check"
+        "read the contents of your USB storage",
+        "modify or delete the contents of your USB storage"
     ]
 }
 ```

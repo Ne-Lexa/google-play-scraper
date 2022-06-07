@@ -7,7 +7,7 @@ Contains all valid application category values.
 
 ## Class synopsis
 ```php
-Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum {
+Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum implements Stringable {
 
     /* Methods */
     public static GAME ( void ) : Nelexa\GPlay\Enum\CategoryEnum
@@ -155,10 +155,10 @@ Nelexa\GPlay\Enum\CategoryEnum extends Nelexa\Enum {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\CategoryEnum {
-  -name(): string: "FAMILY_MUSICVIDEO"
-  -value(): mixed: "FAMILY_MUSICVIDEO"
-  -ordinal(): int: 57
-  -__toString(): string: "FAMILY_MUSICVIDEO"
+  -name(): string: "GAME_BOARD"
+  -value(): mixed: "GAME_BOARD"
+  -ordinal(): int: 39
+  -__toString(): string: "GAME_BOARD"
 }
 ```
 

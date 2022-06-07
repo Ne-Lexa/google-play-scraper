@@ -32,27 +32,5 @@ Nelexa\GPlay\Model\Video implements JsonSerializable {
 * [Nelexa\GPlay\GPlayApps::getAppsInfo()](../GPlayApps/gplayapps.getappsinfo.md) - Returns detailed information about many android packages.
 * [Nelexa\GPlay\GPlayApps::getAppInLocales()](../GPlayApps/gplayapps.getappinlocales.md) - Returns detailed information about an application from the Google Play store for an array of locales.
 * [Nelexa\GPlay\GPlayApps::getAppInfoForAvailableLocales()](../GPlayApps/gplayapps.getappinfoforavailablelocales.md) - Returns detailed information about the application in all available locales.
-## Sample object content
-```php
-class Nelexa\GPlay\Model\Video {
-  -getImageUrl(): string: "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw"
-  -getVideoUrl(): string: "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-  -getYoutubeId(): ?string: "CIyPDJYtVhw"
-  -asArray(): array: …
-  -jsonSerialize(): array: …
-}
-```
-**Example result as `json`**
-```php
-<?php
-echo json_encode($video, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_LINE_TERMINATORS);
-```
-Output:
-```json
-{
-    "thumbUrl": "https://play-lh.googleusercontent.com/2AkEZPx48hOnEJLjtTrmqnPqFOfgeE9COWfqCDRTzXCt0sI9yK9rXhSKs6-Uns9Tcw",
-    "videoUrl": "https://www.youtube.com/embed/CIyPDJYtVhw?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-}
-```
 
 [Documentation](../../README.md) > **Video**

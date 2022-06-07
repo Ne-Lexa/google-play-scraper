@@ -37,45 +37,19 @@ $apps = $gplay->getAppInfoForAvailableLocales($appId);
   <summary>Results</summary>
 
 ```php
-array:3 [
-    "nl_NL" => class Nelexa\GPlay\Model\AppInfo {
+array:78 [
+    "en_US" => class Nelexa\GPlay\Model\AppInfo {
       -getId(): string: "nl.nibbixsoft.app"
-      -getLocale(): string: "nl_NL"
+      -getLocale(): string: "en_US"
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&hl=nl_NL&gl=us"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&hl=en_US&gl=us"
       -getName(): string: "Nederland.FM - Radio"
-      -getSummary(): ?string: "Online Radio"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Nederland.FM BV"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Nederland.FM+BV"
-        -getName(): string: "Nederland.FM BV"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: "http://www.nederland.fm"
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: "info@nederland.fm"
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getDescription(): string: "Online, live, gratis en eenvoudig luisteren naar de beste radio stations van Nederland !"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
         -__toString(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
         -getUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
         -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g=s0"
-        -getBinaryImageContent(): string: …
-      }
-      -getScore(): float: 3.9333334
-      -getPriceText(): ?string: ""
-      -isFree(): bool: false
-      -jsonSerialize(): array: …
-      -getDescription(): string: "Online, live, gratis en eenvoudig luisteren naar de beste radio stations van Nederland !"
-      -isAutoTranslatedDescription(): bool: false
-      -getTranslatedFromLocale(): ?string: null
-      -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
         -getBinaryImageContent(): string: …
       }
       -getScreenshots(): array: array:9 [
@@ -93,9 +67,36 @@ array:3 [
         }
         …
       ]
+      -getScore(): float: 3.9333334
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -getInstallsText(): string: "500,000+"
+      -jsonSerialize(): array: …
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Nederland.FM BV"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Nederland.FM+BV"
+        -getName(): string: "Nederland.FM BV"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: "http://www.nederland.fm"
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: "info@nederland.fm"
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getDeveloperName(): mixed: "Nederland.FM BV"
+      -getSummary(): string: "online Radio"
+      -getTranslatedFromLocale(): mixed: null
+      -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
+        -getBinaryImageContent(): string: …
+      }
       -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "MUSIC_AND_AUDIO"
-        -getName(): string: "Muziek en audio"
+        -getName(): string: "Music & Audio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
@@ -109,13 +110,13 @@ array:3 [
         - Problemen opgelost
         """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 728301
+      -getInstalls(): int: 742748
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 649
-        -getFourStars(): int: 1137
-        -getThreeStars(): int: 487
-        -getTwoStars(): int: 162
-        -getOneStar(): int: 0
+        -getFiveStars(): int: 0
+        -getFourStars(): int: 164
+        -getThreeStars(): int: 492
+        -getTwoStars(): int: 1148
+        -getOneStar(): int: 656
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
@@ -124,58 +125,60 @@ array:3 [
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: true
-      -getSize(): ?string: "6,5M"
+      -getSize(): mixed: null
       -getAppVersion(): ?string: "7.0"
-      -getAndroidVersion(): ?string: "4.1 en hoger"
+      -getAndroidVersion(): ?string: "4.1"
       -getMinAndroidVersion(): ?string: "4.1"
-      -getContentRating(): ?string: "Iedereen"
+      -getContentRating(): ?string: ""
       -getPrivacyPoliceUrl(): ?string: "http://www.nederland.fm/cookies.php"
-      -getReleased(): ?DateTimeInterface: @1502236800 {
-        date: 2017-08-09T00:00:00+00:00
+      -getReleased(): ?DateTimeInterface: @1502282388 {
+        date: 2017-08-09T12:39:48+00:00
       }
       -getUpdated(): ?DateTimeInterface: @1625992062 {
         date: 2021-07-11T08:27:42+00:00
       }
-      -getNumberVoters(): int: 2437
+      -getNumberVoters(): int: 2460
       -getNumberReviews(): int: 0
-      -getReviews(): array: array:4 [
+      -getReviews(): array: array:30 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOF4FLkx0AUXd_kG6F2iYnIP1ixCa17iis6SO2octmf0WbdLHP3B80m4tc7tGUjuj7259RbuAsKDYlvK_g"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOF4FLkx0AUXd_kG6F2iYnIP1ixCa17iis6SO2octmf0WbdLHP3B80m4tc7tGUjuj725…"
-          -getUserName(): string: "Max Rex"
-          -getText(): string: "Fantastic app pity you cannot move it to sd card.but its worth 5,better than ever was well done even better app now great work thank you."
+          -getId(): string: "gp:AOqpTOHY5QUPcWS6yuk7gAICDpv9MD2nkCz4k9wvT5tU37NRgCWeVXisefasOOQ-wjdBVnrnh6OXnMAe9O71nQ"
+          -getUrl(): mixed: ""
+          -getUserName(): string: "Anton van Nieuwenhuyzen"
+          -getText(): string: "Very unsatisfied since the app introduced ads while listening to the radio! Please offer alternatives without ads or payments!"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s64"
-            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s64"
-            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgL7tT8KXwLHBALZzJP-elzvLyVU7-XDF9jgR3eAiQ=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJzq13O--6_y5FKpcvJrEMI5DsIHn_4Kqaqv4cTL=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJzq13O--6_y5FKpcvJrEMI5DsIHn_4Kqaqv4cTL=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJzq13O--6_y5FKpcvJrEMI5DsIHn_4Kqaqv4cTL=s0"
             -getBinaryImageContent(): string: …
           }
-          -getDate(): ?DateTimeInterface: @1636736376 {
-            date: 2021-11-12T16:59:36+00:00
+          -getDate(): ?DateTimeInterface: @1629281437 {
+            date: 2021-08-18T10:10:37+00:00
           }
-          -getScore(): int: 5
-          -getCountLikes(): int: 6
+          -getScore(): int: 1
+          -getCountLikes(): int: 1
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getAppVersion(): ?string: "7.0"
           -asArray(): array: …
           -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOEBa_5koHnvNNFEmKIoGpW3uWp2Ouu6-47HHADnYzIrKX_VUHd8uEshJKwx3kNwtQQzHlbyzv-o93cbEQ"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&reviewId=gp%3AAOqpTOEBa_5koHnvNNFEmKIoGpW3uWp2Ouu6-47HHADnYzIrKX_VUHd8uEshJKwx3kNwtQQz…"
-          -getUserName(): string: "Fred Zeeuw"
-          -getText(): string: "Bij direct via telefoon luisteren gaat het prima. Als je radio gaat casten dan valt na 30 seconden het geluid weg. En niet alleen bij mij maar ook via…"
+          -getId(): string: "gp:AOqpTOG_H2g6DceMPsgNPAk2S_7hamynz_s3Tmxz-y9xuFDvor10h6mJ2zaeHbx5H9sznNchT_WjqCmqj88k4g"
+          -getUrl(): mixed: ""
+          -getUserName(): string: "A Google user"
+          -getText(): string: "Easy to use and reasonable sound quality, stays on in background using other apps or without screen"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s64"
-            -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s64"
-            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJwhXfo7s8dT_15gMWIBdSwam2lgkMKRc8G6u21Q=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/EGemoI2NTXmTsBVtJqk8jxF9rh8ApRWfsIMQSt2uE4OcpQqbFu7f7NbTK05lx80nuSijCz7sc3a277R67g=s0"
             -getBinaryImageContent(): string: …
           }
-          -getDate(): ?DateTimeInterface: @1635352879 {
-            date: 2021-10-27T16:41:19+00:00
+          -getDate(): ?DateTimeInterface: @1557845440 {
+            date: 2019-05-14T14:50:40+00:00
           }
-          -getScore(): int: 1
+          -getScore(): int: 4
           -getCountLikes(): int: 9
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getAppVersion(): ?string: null
           -asArray(): array: …
           -jsonSerialize(): array: …
         }
@@ -183,44 +186,18 @@ array:3 [
       ]
       -asArray(): array: …
     }
-    "hy_AM" => class Nelexa\GPlay\Model\AppInfo {
+    "af" => class Nelexa\GPlay\Model\AppInfo {
       -getId(): string: "nl.nibbixsoft.app"
-      -getLocale(): string: "hy_AM"
+      -getLocale(): string: "af"
       -getCountry(): string: "us"
       -getUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&hl=hy_AM&gl=us"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=nl.nibbixsoft.app&hl=af&gl=us"
       -getName(): string: "Nederland.FM - Radio"
-      -getSummary(): ?string: "օնլայն Ռադիո"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Nederland.FM BV"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Nederland.FM+BV"
-        -getName(): string: "Nederland.FM BV"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: "http://www.nederland.fm"
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: "info@nederland.fm"
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getDescription(): string: "Online, live, gratis en eenvoudig luisteren naar de beste radio stations van Nederland !"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
         -__toString(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
         -getUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g"
         -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/el-J9cb_oujzyYw450iaExvKJ1LkJ8aynobCWcHcqJr2LhiXtsI2jaQn7vP9nJFKd2g=s0"
-        -getBinaryImageContent(): string: …
-      }
-      -getScore(): float: 3.9333334
-      -getPriceText(): ?string: ""
-      -isFree(): bool: false
-      -jsonSerialize(): array: …
-      -getDescription(): string: "Առցանց, ապրում, ազատ եւ հեշտ է լսել լավագույն ռադիոկայանների Նիդեռլանդներում."
-      -isAutoTranslatedDescription(): bool: false
-      -getTranslatedFromLocale(): ?string: null
-      -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
         -getBinaryImageContent(): string: …
       }
       -getScreenshots(): array: array:9 [
@@ -238,9 +215,36 @@ array:3 [
         }
         …
       ]
+      -getScore(): float: 3.9333334
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -getInstallsText(): string: "500 000+"
+      -jsonSerialize(): array: …
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: {
+        -getId(): string: "Nederland.FM BV"
+        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Nederland.FM+BV"
+        -getName(): string: "Nederland.FM BV"
+        -getDescription(): ?string: null
+        -getWebsite(): ?string: "http://www.nederland.fm"
+        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+        -getEmail(): ?string: "info@nederland.fm"
+        -getAddress(): ?string: null
+        -asArray(): array: …
+        -jsonSerialize(): array: …
+      }
+      -getDeveloperName(): mixed: "Nederland.FM BV"
+      -getSummary(): string: "Online Radio"
+      -getTranslatedFromLocale(): mixed: null
+      -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/MF1Jx3AoUYFvl66JZlq9HgmHVAAzliDasGl1VAEAl_ctjTWyHCXpDel6XrElM2C-d24=s0"
+        -getBinaryImageContent(): string: …
+      }
       -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "MUSIC_AND_AUDIO"
-        -getName(): string: "Երաժշտություն և աուդիո"
+        -getName(): string: "Musiek en oudio"
         -isGamesCategory(): bool: false
         -isFamilyCategory(): bool: false
         -isApplicationCategory(): bool: true
@@ -254,13 +258,13 @@ array:3 [
         - Problemen opgelost
         """
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 728301
+      -getInstalls(): int: 742748
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 649
-        -getFourStars(): int: 1137
-        -getThreeStars(): int: 487
-        -getTwoStars(): int: 162
-        -getOneStar(): int: 0
+        -getFiveStars(): int: 0
+        -getFourStars(): int: 164
+        -getThreeStars(): int: 492
+        -getTwoStars(): int: 1148
+        -getOneStar(): int: 656
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
@@ -269,19 +273,19 @@ array:3 [
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: true
-      -getSize(): ?string: "6,5M"
+      -getSize(): mixed: null
       -getAppVersion(): ?string: "7.0"
-      -getAndroidVersion(): ?string: "4.1 և ավելի բարձր"
+      -getAndroidVersion(): ?string: "4.1"
       -getMinAndroidVersion(): ?string: "4.1"
-      -getContentRating(): ?string: "Բոլորի համար"
+      -getContentRating(): ?string: ""
       -getPrivacyPoliceUrl(): ?string: "http://www.nederland.fm/cookies.php"
-      -getReleased(): ?DateTimeInterface: @1502236800 {
-        date: 2017-08-09T00:00:00+00:00
+      -getReleased(): ?DateTimeInterface: @1502282388 {
+        date: 2017-08-09T12:39:48+00:00
       }
       -getUpdated(): ?DateTimeInterface: @1625992062 {
         date: 2021-07-11T08:27:42+00:00
       }
-      -getNumberVoters(): int: 2437
+      -getNumberVoters(): int: 2460
       -getNumberReviews(): int: 0
       -getReviews(): array: array:0 []
       -asArray(): array: …

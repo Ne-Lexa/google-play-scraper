@@ -32,7 +32,7 @@ final class Caster
      */
     public static function castToDeveloperId($developerId): string
     {
-        if ($developerId instanceof App) {
+        if ($developerId instanceof AppInfo) {
             return $developerId->getDeveloper()->getId();
         }
 
@@ -82,10 +82,6 @@ final class Caster
 
         if (\is_string($appId)) {
             return new AppId($appId, $locale, $country);
-        }
-
-        if ($appId instanceof AppId) {
-            return $appId;
         }
 
         return $appId;

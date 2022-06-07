@@ -48,13 +48,11 @@ class FindSimilarAppsUrlScraper implements ParseHandlerInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): ?string
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
-
-        foreach ($scriptData as $scriptValue) {
-            if (isset($scriptValue[1][1][0][0][3][4][2])) {
-                return GPlayApps::GOOGLE_PLAY_URL . $scriptValue[1][1][0][0][3][4][2]
-                    . '&' . GPlayApps::REQ_PARAM_LOCALE . '=' . urlencode($this->appId->getLocale())
-                    . '&' . GPlayApps::REQ_PARAM_COUNTRY . '=' . urlencode($this->appId->getCountry());
-            }
+        $url = ScraperUtil::getValue($scriptData, 'ds:6.1.1.0.21.1.2.4.2');
+        if ($url !== null && strpos($url, 'cluster') !== false) {
+            return GPlayApps::GOOGLE_PLAY_URL . $url
+                . '&' . GPlayApps::REQ_PARAM_LOCALE . '=' . urlencode($this->appId->getLocale())
+                . '&' . GPlayApps::REQ_PARAM_COUNTRY . '=' . urlencode($this->appId->getCountry());
         }
 
         return null;

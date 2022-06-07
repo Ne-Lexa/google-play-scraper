@@ -32,162 +32,153 @@ composer require nelexa/google-play-scraper
 ```php
 // Retrieving full app info
 
-$gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'en_US', $defaultCountry = 'us');
-$appInfo = $gplay->getAppInfo('com.mojang.minecraftpe');
+$gplay = new \Nelexa\GPlay\GPlayApps($defaultLocale = 'fr_CA', $defaultCountry = 'ca');
+$appInfo = $gplay->getAppInfo('com.google.android.youtube');
 ```
 Result:
 ```php
 class Nelexa\GPlay\Model\AppInfo {
-  -getId(): string: "com.mojang.minecraftpe"
-  -getLocale(): string: "en_US"
-  -getCountry(): string: "us"
-  -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe"
-  -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=en_US&gl=us"
-  -getName(): string: "Minecraft"
-  -getSummary(): ?string: "Millions of crafters have smashed billions of blocks! Now you can join the fun!"
-  -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-    -getId(): string: "4772240228547998649"
-    -getUrl(): string: "https://play.google.com/store/apps/dev?id=4772240228547998649"
-    -getName(): string: "Mojang"
-    -getDescription(): ?string: null
-    -getWebsite(): ?string: "http://help.mojang.com"
-    -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-    -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-    -getEmail(): ?string: "help@minecraft.net"
-    -getAddress(): ?string: """
-      Mojang\n
-      Maria Skolgata 83\n
-      118 53\n
-      Stockholm\n
-      Sweden
-      """
-    -asArray(): array: …
-    -jsonSerialize(): mixed: …
-  }
-  -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
-    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
-    -getBinaryImageContent(): string: …
-    -__toString(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
-  }
-  -getScore(): float: 4.526772
-  -getPriceText(): ?string: "$7.49"
-  -isFree(): bool: false
-  -jsonSerialize(): mixed: …
+  -getId(): string: "com.google.android.youtube"
+  -getLocale(): string: "fr_CA"
+  -getCountry(): string: "ca"
+  -getUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube"
+  -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.google.android.youtube&hl=fr_CA&gl=ca"
+  -getName(): string: "YouTube"
   -getDescription(): string: """
-    Explore infinite worlds and build everything from the simplest of homes to the grandest of castles. Play in creative mode with unlimited resources or …
+    Téléchargez l'application YouTube officielle sur votre téléphone ou tablette Android. Découvrez les contenus regardés partout dans le monde : des clip…
     """
-  -isAutoTranslatedDescription(): bool: false
-  -getTranslatedFromLocale(): ?string: null
-  -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
-    -getUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
-    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y=s0"
+  -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+    -__toString(): string: "https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/lMoItBgdPPVDJsNOVtP26EKHePkwBg-PkuY9NOrc-fumRtTFP4XhpUNk_22syN4Datc=s0"
     -getBinaryImageContent(): string: …
-    -__toString(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
   }
-  -getScreenshots(): array: array:8 [
+  -getScreenshots(): array: array:5 [
     0 => class Nelexa\GPlay\Model\GoogleImage {
-      -getUrl(): string: "https://play-lh.googleusercontent.com/0-zBoTxVn5PJQtNNnovURx1JIbIytd7_H8fXbOVNyReZkKdgU30BkBzD-XmdoP6BtS0"
-      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/0-zBoTxVn5PJQtNNnovURx1JIbIytd7_H8fXbOVNyReZkKdgU30BkBzD-XmdoP6BtS0=s0"
+      -__toString(): string: "https://play-lh.googleusercontent.com/ysXRzV6uIprDW4_cTODTc3RICYKV57YAzNv7zHeAYpwJpe2lC6Wdx-GuCoSgzCCDwuc"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/ysXRzV6uIprDW4_cTODTc3RICYKV57YAzNv7zHeAYpwJpe2lC6Wdx-GuCoSgzCCDwuc"
+      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/ysXRzV6uIprDW4_cTODTc3RICYKV57YAzNv7zHeAYpwJpe2lC6Wdx-GuCoSgzCCDwuc=s0"
       -getBinaryImageContent(): string: …
-      -__toString(): string: "https://play-lh.googleusercontent.com/0-zBoTxVn5PJQtNNnovURx1JIbIytd7_H8fXbOVNyReZkKdgU30BkBzD-XmdoP6BtS0"
     }
     1 => class Nelexa\GPlay\Model\GoogleImage {
-      -getUrl(): string: "https://play-lh.googleusercontent.com/Cq6Sju3wrs8IvE7y0w1pGwjO1FNZchjIbXEqpOTtdW5y7s7qkW-aYEPBFILA4RSKuF8"
-      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Cq6Sju3wrs8IvE7y0w1pGwjO1FNZchjIbXEqpOTtdW5y7s7qkW-aYEPBFILA4RSKuF8=s0"
+      -__toString(): string: "https://play-lh.googleusercontent.com/YshbPqiMzsf-UJbTlLhgOXriJw2X_A0HIZ7AX1kfuyk1IkfWjHmTWmYMG0t9pJW3yqU"
+      -getUrl(): string: "https://play-lh.googleusercontent.com/YshbPqiMzsf-UJbTlLhgOXriJw2X_A0HIZ7AX1kfuyk1IkfWjHmTWmYMG0t9pJW3yqU"
+      -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/YshbPqiMzsf-UJbTlLhgOXriJw2X_A0HIZ7AX1kfuyk1IkfWjHmTWmYMG0t9pJW3yqU=s0"
       -getBinaryImageContent(): string: …
-      -__toString(): string: "https://play-lh.googleusercontent.com/Cq6Sju3wrs8IvE7y0w1pGwjO1FNZchjIbXEqpOTtdW5y7s7qkW-aYEPBFILA4RSKuF8"
     }
     …
   ]
-  -getCategory(): ?Nelexa\GPlay\Model\Category: {
-    -getId(): string: "GAME_ARCADE"
-    -getName(): string: "Arcade"
-    -isGamesCategory(): bool: true
-    -isFamilyCategory(): bool: false
-    -isApplicationCategory(): bool: false
+  -getScore(): float: 3.8564255
+  -getPriceText(): ?string: null
+  -isFree(): bool: true
+  -getInstallsText(): string: "10 000 000 000+"
+  -jsonSerialize(): array: …
+  -getDeveloper(): ?Nelexa\GPlay\Model\Developer: {
+    -getId(): string: "5700313618786177705"
+    -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
+    -getName(): string: "Google LLC"
+    -getDescription(): ?string: null
+    -getWebsite(): ?string: "https://support.google.com/youtube/topic/2422554?rd=1"
+    -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
+    -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
+    -getEmail(): ?string: "ytandroid-support@google.com"
+    -getAddress(): ?string: "1600 Amphitheatre Parkway, Mountain View 94043"
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
+  }
+  -getDeveloperName(): string: "Google LLC"
+  -getSummary(): string: "Regardez vos vidéos, chaînes et playlists préférées où que vous soyez."
+  -getTranslatedFromLocale(): mixed: null
+  -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
+    -__toString(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/vA4tG0v4aasE7oIvRIvTkOYTwom07DfqHdUPr6k7jmrDwy_qA_SonqZkw6KX0OXKAdk=s0"
+    -getBinaryImageContent(): string: …
+  }
+  -getCategory(): ?Nelexa\GPlay\Model\Category: {
+    -getId(): string: "VIDEO_PLAYERS"
+    -getName(): string: "Lecteurs vidéo et éditeurs"
+    -isGamesCategory(): bool: false
+    -isFamilyCategory(): bool: false
+    -isApplicationCategory(): bool: true
+    -asArray(): array: …
+    -jsonSerialize(): array: …
   }
   -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
-  -getVideo(): ?Nelexa\GPlay\Model\Video: {
-    -getImageUrl(): string: "https://i.ytimg.com/vi/gcf9FM4TbN4/hqdefault.jpg"
-    -getVideoUrl(): string: "https://www.youtube.com/embed/gcf9FM4TbN4?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-    -getYoutubeId(): ?string: "gcf9FM4TbN4"
-    -asArray(): array: …
-    -jsonSerialize(): mixed: …
-  }
-  -getRecentChanges(): ?string: "What's new in 1.16.201: Various bug fixes!"
-  -isEditorsChoice(): bool: true
-  -getInstalls(): int: 34362566
+  -getVideo(): ?Nelexa\GPlay\Model\Video: null
+  -getRecentChanges(): ?string: "Pour plus d'informations sur les nouvelles fonctionnalités et leur utilisation, consultez la documentation et les notifications intégrées au produit."
+  -isEditorsChoice(): bool: false
+  -getInstalls(): int: 11923110578
   -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-    -getFiveStars(): int: 3145912
-    -getFourStars(): int: 310909
-    -getThreeStars(): int: 140246
-    -getTwoStars(): int: 72652
-    -getOneStar(): int: 262919
+    -getFiveStars(): int: 28666549
+    -getFourStars(): int: 4783408
+    -getThreeStars(): int: 7638282
+    -getTwoStars(): int: 14217650
+    -getOneStar(): int: 83304870
     -asArray(): array: …
-    -jsonSerialize(): mixed: …
+    -jsonSerialize(): array: …
   }
-  -getPrice(): float: 7.49
-  -getCurrency(): string: "USD"
-  -isContainsIAP(): bool: true
-  -getOffersIAPCost(): ?string: "$0.99 - $49.99 per item"
-  -isContainsAds(): bool: false
-  -getSize(): ?string: null
-  -getAppVersion(): ?string: "1.16.201.01"
+  -getPrice(): float: 0.0
+  -getCurrency(): string: "CAD"
+  -isContainsIAP(): bool: false
+  -getOffersIAPCost(): ?string: null
+  -isContainsAds(): bool: true
+  -getSize(): mixed: null
+  -getAppVersion(): ?string: null
   -getAndroidVersion(): ?string: null
   -getMinAndroidVersion(): ?string: null
-  -getContentRating(): ?string: "Everyone 10+"
-  -getPrivacyPoliceUrl(): ?string: "https://privacy.microsoft.com/en-us/privacystatement"
-  -getReleased(): ?DateTimeInterface: @1313366400 {
-    date: 2011-08-15T00:00:00+00:00
+  -getContentRating(): ?string: ""
+  -getPrivacyPoliceUrl(): ?string: "http://www.google.com/policies/privacy"
+  -getReleased(): ?DateTimeInterface: @1287601948 {
+    date: 2010-10-20T19:12:28+00:00
   }
-  -getUpdated(): ?DateTimeInterface: @1607647454 {
-    date: 2020-12-11T00:44:14+00:00
+  -getUpdated(): ?DateTimeInterface: @1654299141 {
+    date: 2022-06-03T23:32:21+00:00
   }
-  -getNumberVoters(): int: 3932639
-  -getNumberReviews(): int: 2016325
-  -getReviews(): array: array:4 [
+  -getNumberVoters(): int: 138611767
+  -getNumberReviews(): int: 142747
+  -getReviews(): array: array:40 [
     0 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOFxF_0wZvXlsd4S2sMo1-2hHZoYRVdbWipCgqXYQ8Z56fmAavjLomiBbK2V0rrzLL--3zzotG8uaZ_epG4"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOFxF_0wZvXlsd4S2sMo1-2hHZoYRVdbWipCgqXYQ8Z56fmAavjLomiBbK2V0rr…"
-      -getUserName(): string: "Flower bee family"
-      -getText(): string: "I love the game, I've been playing for years, but recently theres been a bug that causes animals to disappear, even if they have a name tag, they just…"
+      -getId(): string: "gp:AOqpTOEMQEAUOLXyd5CBETDY47q0t0LfiCNl0igi4p9DscGE10LQedLKFr6WPPvGFbQ4rTqKu_vR9bf1k2Dl6g"
+      -getUrl(): mixed: ""
+      -getUserName(): string: "Boromir et Tilou"
+      -getText(): string: "Cette application est excellente, cependant il y a quelque problématique niveau pub! Par exemple : il arrive des fois que je regarde une vidéo qui dur…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjhZU5WZifxWBYbe2A8jf9vOwPyn5Sx2WovM4ABdXM=s64"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjhZU5WZifxWBYbe2A8jf9vOwPyn5Sx2WovM4ABdXM=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiEuZYl4opeaRXLTVlEPX09UT7O1pu28Xibw2YO=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiEuZYl4opeaRXLTVlEPX09UT7O1pu28Xibw2YO=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiEuZYl4opeaRXLTVlEPX09UT7O1pu28Xibw2YO=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjhZU5WZifxWBYbe2A8jf9vOwPyn5Sx2WovM4ABdXM=s64"
       }
-      -getDate(): ?DateTimeInterface: @1613991788 {
-        date: 2021-02-22T11:03:08+00:00
+      -getDate(): ?DateTimeInterface: @1652904683 {
+        date: 2022-05-18T20:11:23+00:00
       }
       -getScore(): int: 4
-      -getCountLikes(): int: 979
+      -getCountLikes(): int: 1929
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+      -getAppVersion(): ?string: "17.19.34"
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\Review {
-      -getId(): string: "gp:AOqpTOFiVjgQDewv35LSvMEsNX1TODZgKw1ZwDcW-jwXVON6ZmqH3R6s7j7h3Rd6dpN2m8RLrU5Jexcp5CZt-n0"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOFiVjgQDewv35LSvMEsNX1TODZgKw1ZwDcW-jwXVON6ZmqH3R6s7j7h3Rd6dpN…"
-      -getUserName(): string: "Ella Lawrence"
-      -getText(): string: "It's honestly a great game. It needs a few updates and it has a bunch of bigs but it's a lot of fun! My reason for rating 4 stars is because of some o…"
+      -getId(): string: "gp:AOqpTOEMsRD995sFxjIRu23yRV7za1PH0O2IKHmydCwK9CyQuf4IhL6WNyMsS7ZoEFcdTSI6-akTQAoHGQmzXQ"
+      -getUrl(): mixed: ""
+      -getUserName(): string: "Mathias Blouin"
+      -getText(): string: "Beaucoup trop de publicités, sous-titres qui se mettent tout seul, la résolution n'est JAMAIS sur la plus haute et c'est assez long à changer, des foi…"
       -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiDnoYjbEjd1uqr3YG7P_M6Sc6FjLR5HsPl6A-oMB8=s64"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiDnoYjbEjd1uqr3YG7P_M6Sc6FjLR5HsPl6A-oMB8=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiIFpEtppYtvFbeki1HKoLOHfLOuDfPFOtuvoBFew=s64"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiIFpEtppYtvFbeki1HKoLOHfLOuDfPFOtuvoBFew=s64"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiIFpEtppYtvFbeki1HKoLOHfLOuDfPFOtuvoBFew=s0"
         -getBinaryImageContent(): string: …
-        -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GiDnoYjbEjd1uqr3YG7P_M6Sc6FjLR5HsPl6A-oMB8=s64"
       }
-      -getDate(): ?DateTimeInterface: @1613964110 {
-        date: 2021-02-22T03:21:50+00:00
+      -getDate(): ?DateTimeInterface: @1652148284 {
+        date: 2022-05-10T02:04:44+00:00
       }
-      -getScore(): int: 4
-      -getCountLikes(): int: 1692
+      -getScore(): int: 3
+      -getCountLikes(): int: 2569
       -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+      -getAppVersion(): ?string: "17.17.34"
       -asArray(): array: …
-      -jsonSerialize(): mixed: …
+      -jsonSerialize(): array: …
     }
     …
   ]

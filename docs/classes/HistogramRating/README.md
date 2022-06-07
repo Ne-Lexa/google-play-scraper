@@ -39,11 +39,11 @@ Nelexa\GPlay\Model\HistogramRating implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\HistogramRating {
-  -getFiveStars(): int: 499330
-  -getFourStars(): int: 95118
-  -getThreeStars(): int: 69838
-  -getTwoStars(): int: 41725
-  -getOneStar(): int: 91400
+  -getFiveStars(): int: 91850
+  -getFourStars(): int: 42887
+  -getThreeStars(): int: 68083
+  -getTwoStars(): int: 97389
+  -getOneStar(): int: 510377
   -asArray(): array: …
   -jsonSerialize(): array: …
 }
@@ -56,11 +56,11 @@ echo json_encode($histogramRating, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES |
 Output:
 ```json
 {
-    "five": 499330,
-    "four": 499330,
-    "three": 69838,
-    "two": 41725,
-    "one": 91400
+    "five": 91850,
+    "four": 91850,
+    "three": 68083,
+    "two": 97389,
+    "one": 510377
 }
 ```
 

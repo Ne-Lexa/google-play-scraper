@@ -40,7 +40,7 @@ Nelexa\GPlay\Model\Category implements JsonSerializable {
 ```php
 class Nelexa\GPlay\Model\Category {
   -getId(): string: "GAME_CARD"
-  -getName(): string: "Card"
+  -getName(): string: "Game card"
   -isGamesCategory(): bool: true
   -isFamilyCategory(): bool: false
   -isApplicationCategory(): bool: false
@@ -57,7 +57,7 @@ Output:
 ```json
 {
     "id": "GAME_CARD",
-    "name": "Card"
+    "name": "Game card"
 }
 ```
 

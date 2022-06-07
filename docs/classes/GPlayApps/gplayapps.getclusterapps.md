@@ -29,7 +29,7 @@ $apps = iterator_to_array($gplay->getClusterApps($clusterPage));
   <summary>Results</summary>
 
 ```php
-array:170 [
+array:203 [
     0 => class Nelexa\GPlay\Model\App {
       -getId(): string: "com.netflix.mediaclient"
       -getLocale(): string: "en_US"
@@ -37,62 +37,80 @@ array:170 [
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.netflix.mediaclient&hl=en_US&gl=us"
       -getName(): string: "Netflix"
-      -getSummary(): ?string: "Netflix is the leading subscription service for watching TV episodes and movies."
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Netflix, Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Netflix,+Inc."
-        -getName(): string: "Netflix, Inc."
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getDescription(): string: """
+        Looking for the most talked about TV shows and movies from the around the world? They’re all on Netflix.\n
+        \n
+        We’ve got award-winning series, movies, docu…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Netflix, Inc."
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
         -__toString(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI"
         -getUrl(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI"
         -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/TBRwjS_qfJCSj1m7zZB93FnpJM5fSpMA_wUlFDLxWAb45T9RmwBvQd5cWR5viJJOhkI=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.4724298
+      -getScreenshots(): array: array:24 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/m7mg_DZ1uTb6jfGewOOtZ4ejmDaBYfEWZVfEP0pkSX60OsoG7YDgjuFLPCCc6rBnYJk"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/m7mg_DZ1uTb6jfGewOOtZ4ejmDaBYfEWZVfEP0pkSX60OsoG7YDgjuFLPCCc6rBnYJk"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/m7mg_DZ1uTb6jfGewOOtZ4ejmDaBYfEWZVfEP0pkSX60OsoG7YDgjuFLPCCc6rBnYJk=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/K4-4tkQJD0U0H_FiAn5yHz_-9Y8bP6f1tGCmFtYwBzn-5Gk1AM8Ga4S3c0T6s4ex_HI"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/K4-4tkQJD0U0H_FiAn5yHz_-9Y8bP6f1tGCmFtYwBzn-5Gk1AM8Ga4S3c0T6s4ex_HI"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/K4-4tkQJD0U0H_FiAn5yHz_-9Y8bP6f1tGCmFtYwBzn-5Gk1AM8Ga4S3c0T6s4ex_HI=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.4518275
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "1,000,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.t11.skyviewfree"
+      -getId(): string: "com.microsoft.office.officehubrow"
       -getLocale(): string: "en_US"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.t11.skyviewfree"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.t11.skyviewfree&hl=en_US&gl=us"
-      -getName(): string: "SkyView® Lite"
-      -getSummary(): ?string: "SkyView®, an augmented reality space app, brings stargazing to everyone!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Terminal Eleven"
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Terminal+Eleven"
-        -getName(): string: "Terminal Eleven"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.microsoft.office.officehubrow"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.microsoft.office.officehubrow&hl=en_US&gl=us"
+      -getName(): string: "Microsoft Office: Edit & Share"
+      -getDescription(): string: """
+        Microsoft Office brings you Word, Excel, and PowerPoint all in one app. Take advantage of a seamless experience with Microsoft tools on the go with th…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Microsoft Corporation"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/PpPV2Ug-Cr05xLKQdZJoA9quSanR3Y6L1TtL80ppJgIpRkIU6v_H0UJoDR4VCE4m38RQ"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/PpPV2Ug-Cr05xLKQdZJoA9quSanR3Y6L1TtL80ppJgIpRkIU6v_H0UJoDR4VCE4m38RQ"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/PpPV2Ug-Cr05xLKQdZJoA9quSanR3Y6L1TtL80ppJgIpRkIU6v_H0UJoDR4VCE4m38RQ=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/D6XDCje7pB0nNP1sOZkwD-tXkV0_As3ni21us5yZ71_sy0FTWv1s_MQBe1JUnHlgE94"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/D6XDCje7pB0nNP1sOZkwD-tXkV0_As3ni21us5yZ71_sy0FTWv1s_MQBe1JUnHlgE94"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/D6XDCje7pB0nNP1sOZkwD-tXkV0_As3ni21us5yZ71_sy0FTWv1s_MQBe1JUnHlgE94=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.388937
+      -getScreenshots(): array: array:8 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/cDvFQbu-3O3NfyrNSkx9d1Ua25bYS3Ly8fCcPgdMnj5ktHh0uidRp0OiNVIb5OFB5ck"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/cDvFQbu-3O3NfyrNSkx9d1Ua25bYS3Ly8fCcPgdMnj5ktHh0uidRp0OiNVIb5OFB5ck"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/cDvFQbu-3O3NfyrNSkx9d1Ua25bYS3Ly8fCcPgdMnj5ktHh0uidRp0OiNVIb5OFB5ck=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/h054Q_gu6miJlzLA59fyO6sgtSFlEVIa1iSgHeqUXik07F2-ppZNPUK8XjLdnIVI0PA"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/h054Q_gu6miJlzLA59fyO6sgtSFlEVIa1iSgHeqUXik07F2-ppZNPUK8XjLdnIVI0PA"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/h054Q_gu6miJlzLA59fyO6sgtSFlEVIa1iSgHeqUXik07F2-ppZNPUK8XjLdnIVI0PA=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.5317974
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "500,000,000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
@@ -121,68 +139,88 @@ foreach ($gplay->getClusterApps($clusterPage) as $i => $app) {
 ```php
 array:12 [
     0 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.chickfila.cfaflagship"
+      -getId(): string: "com.propel.ebenefits"
       -getLocale(): string: "ru_RU"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.chickfila.cfaflagship"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.chickfila.cfaflagship&hl=ru_RU&gl=us"
-      -getName(): string: "Chick-fil-A®"
-      -getSummary(): ?string: "Заказывайте заранее, получайте баллы за соответствующую покупку и используйте доступные награды."
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "Chick-fil-A, Inc."
-        -getUrl(): string: "https://play.google.com/store/apps/developer?id=Chick-fil-A,+Inc."
-        -getName(): string: "Chick-fil-A, Inc."
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.propel.ebenefits"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.propel.ebenefits&hl=ru_RU&gl=us"
+      -getName(): string: "Providers: EBT, debit, & more"
+      -getDescription(): string: """
+        Providers (formerly Fresh EBT) is the #1 rated EBT app  for checking your food stamp balance. Plus, you can now manage other benefits and income with …
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Propel Inc"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/yF2S41QGnGWs7JCD-t6L6AJ4KIm2ybwM0lirAiHQZR2ZKjbvYAgQ4e0MFVXYVLQWWA"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/yF2S41QGnGWs7JCD-t6L6AJ4KIm2ybwM0lirAiHQZR2ZKjbvYAgQ4e0MFVXYVLQWWA"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yF2S41QGnGWs7JCD-t6L6AJ4KIm2ybwM0lirAiHQZR2ZKjbvYAgQ4e0MFVXYVLQWWA=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/KZZXWqhPRrC90BMBPYDErwovMvxHgmp9Oq3kWOBPgMl0ySoQktr9sQ1ItEKWtGr_VcJE"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/KZZXWqhPRrC90BMBPYDErwovMvxHgmp9Oq3kWOBPgMl0ySoQktr9sQ1ItEKWtGr_VcJE"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KZZXWqhPRrC90BMBPYDErwovMvxHgmp9Oq3kWOBPgMl0ySoQktr9sQ1ItEKWtGr_VcJE=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.693777
+      -getScreenshots(): array: array:8 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/8s0av_Mi4dWXeR1LQaEVk4MtpjDpGqb-uOc7C2IcNqTaQffa_XwYDqsF8zxTDjBi4LOJ"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/8s0av_Mi4dWXeR1LQaEVk4MtpjDpGqb-uOc7C2IcNqTaQffa_XwYDqsF8zxTDjBi4LOJ"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/8s0av_Mi4dWXeR1LQaEVk4MtpjDpGqb-uOc7C2IcNqTaQffa_XwYDqsF8zxTDjBi4LOJ=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/xkw61UodnuL9G6tjyLlLbRUgWWbrDrjBduAV8LmGhImSDnIkMXGGiKZaOPmNVSZI0ds"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/xkw61UodnuL9G6tjyLlLbRUgWWbrDrjBduAV8LmGhImSDnIkMXGGiKZaOPmNVSZI0ds"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/xkw61UodnuL9G6tjyLlLbRUgWWbrDrjBduAV8LmGhImSDnIkMXGGiKZaOPmNVSZI0ds=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.7484856
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "10 000 000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }
     1 => class Nelexa\GPlay\Model\App {
-      -getId(): string: "com.chuckecheese.app"
+      -getId(): string: "com.tacobell.ordering"
       -getLocale(): string: "ru_RU"
       -getCountry(): string: "us"
-      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.chuckecheese.app"
-      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.chuckecheese.app&hl=ru_RU&gl=us"
-      -getName(): string: "Chuck E. Cheese"
-      -getSummary(): ?string: "Зарабатывайте бонусные баллы за каждое посещение и открывайте эксклюзивные предложения!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
-        -getId(): string: "8581794605065481540"
-        -getUrl(): string: "https://play.google.com/store/apps/dev?id=8581794605065481540"
-        -getName(): string: "Chuck E. Cheese"
-        -getDescription(): ?string: null
-        -getWebsite(): ?string: null
-        -getIcon(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getCover(): ?Nelexa\GPlay\Model\GoogleImage: null
-        -getEmail(): ?string: null
-        -getAddress(): ?string: null
-        -asArray(): array: …
-        -jsonSerialize(): array: …
-      }
+      -getUrl(): string: "https://play.google.com/store/apps/details?id=com.tacobell.ordering"
+      -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.tacobell.ordering&hl=ru_RU&gl=us"
+      -getName(): string: "Taco Bell – Order Fast Food"
+      -getDescription(): string: """
+        With the Taco Bell App, you can order and pay ahead, skip our line, get access to new deals and offers, and more.\n
+        \n
+        App Features include:\n
+        \n
+        REDEEM REWAR…
+        """
+      -getSummary(): ?string: null
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: null
+      -getDeveloperName(): ?string: "Taco Bell Mobile"
       -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/xCVK5YbFjD8obUoUuje3ZK-lhFG8XWWpZJKN1B8DUOPS8chirXl6KbP6pMNbjMcDOw"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/xCVK5YbFjD8obUoUuje3ZK-lhFG8XWWpZJKN1B8DUOPS8chirXl6KbP6pMNbjMcDOw"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/xCVK5YbFjD8obUoUuje3ZK-lhFG8XWWpZJKN1B8DUOPS8chirXl6KbP6pMNbjMcDOw=s0"
+        -__toString(): string: "https://play-lh.googleusercontent.com/wWXePJtJwa8slrpch_scAqld5hNDAQKx-KSLDo5uo69yfQv-_k6o5OPPjEQrdRHFHOo"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/wWXePJtJwa8slrpch_scAqld5hNDAQKx-KSLDo5uo69yfQv-_k6o5OPPjEQrdRHFHOo"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/wWXePJtJwa8slrpch_scAqld5hNDAQKx-KSLDo5uo69yfQv-_k6o5OPPjEQrdRHFHOo=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScore(): float: 4.6525
+      -getScreenshots(): array: array:6 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/Jk2tFc36FvYTpisapcpQzMuReYHaxvua5wetPgD6oE4tXgPTQZS-Ii39mcUTW9XbIs6Y"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/Jk2tFc36FvYTpisapcpQzMuReYHaxvua5wetPgD6oE4tXgPTQZS-Ii39mcUTW9XbIs6Y"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Jk2tFc36FvYTpisapcpQzMuReYHaxvua5wetPgD6oE4tXgPTQZS-Ii39mcUTW9XbIs6Y=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/vvh-ryJMzMcFDGDEdfv92jiWjAn-Gw7B5nFLA314RKMG-sp82TQEJEzciOHX_F8zFko"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/vvh-ryJMzMcFDGDEdfv92jiWjAn-Gw7B5nFLA314RKMG-sp82TQEJEzciOHX_F8zFko"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/vvh-ryJMzMcFDGDEdfv92jiWjAn-Gw7B5nFLA314RKMG-sp82TQEJEzciOHX_F8zFko=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.1398363
       -getPriceText(): ?string: null
       -isFree(): bool: true
+      -getInstallsText(): string: "10 000 000+"
       -asArray(): array: …
       -jsonSerialize(): array: …
     }

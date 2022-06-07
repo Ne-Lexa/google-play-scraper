@@ -10,9 +10,9 @@ Contains review of application on Google Play store.
 Nelexa\GPlay\Model\Review implements JsonSerializable {
 
     /* Methods */
-    public __construct ( string $id , string $url , string $userName , string $text , Nelexa\GPlay\Model\GoogleImage $avatar , DateTimeInterface | null $date , int $score [, int $likeCount = 0 ] [, Nelexa\GPlay\Model\ReplyReview | null $reply = null ] ) 
+    public __construct ( string $id , string $userName , string $text , Nelexa\GPlay\Model\GoogleImage $avatar , DateTimeInterface | null $date , int $score [, int $likeCount = 0 ] [, Nelexa\GPlay\Model\ReplyReview | null $reply = null ] [, string | null $appVersion = null ] ) 
     public getId ( void ) : string
-    public getUrl ( void ) : string
+    public getUrl ( void ) 
     public getUserName ( void ) : string
     public getText ( void ) : string
     public getAvatar ( void ) : Nelexa\GPlay\Model\GoogleImage
@@ -20,6 +20,7 @@ Nelexa\GPlay\Model\Review implements JsonSerializable {
     public getScore ( void ) : int
     public getCountLikes ( void ) : int
     public getReply ( void ) : Nelexa\GPlay\Model\ReplyReview | null
+    public getAppVersion ( void ) : string | null
     public asArray ( void ) : array
     public jsonSerialize ( void ) : array
 }
@@ -28,7 +29,7 @@ Nelexa\GPlay\Model\Review implements JsonSerializable {
 ## Table of Contents
 * [Nelexa\GPlay\Model\Review::__construct](review.__construct.md) - Creates an Android app review object in the Google Play store.
 * [Nelexa\GPlay\Model\Review::getId](review.getid.md) - Returns review id.
-* [Nelexa\GPlay\Model\Review::getUrl](review.geturl.md) - Returns a review url.
+* [Nelexa\GPlay\Model\Review::getUrl](review.geturl.md)
 * [Nelexa\GPlay\Model\Review::getUserName](review.getusername.md) - Returns the username of the review author.
 * [Nelexa\GPlay\Model\Review::getText](review.gettext.md) - Returns the text of the review.
 * [Nelexa\GPlay\Model\Review::getAvatar](review.getavatar.md) - Returns the user's avatar.
@@ -36,6 +37,7 @@ Nelexa\GPlay\Model\Review implements JsonSerializable {
 * [Nelexa\GPlay\Model\Review::getScore](review.getscore.md) - Returns a review rating.
 * [Nelexa\GPlay\Model\Review::getCountLikes](review.getcountlikes.md) - Returns the count of likes of the review.
 * [Nelexa\GPlay\Model\Review::getReply](review.getreply.md) - Returns a reply of the review.
+* [Nelexa\GPlay\Model\Review::getAppVersion](review.getappversion.md) - Returns the version of the application for which the comment was made.
 * [Nelexa\GPlay\Model\Review::asArray](review.asarray.md) - Returns class properties as an array.
 * [Nelexa\GPlay\Model\Review::jsonSerialize](review.jsonserialize.md) - Specify data which should be serialized to JSON.
 
@@ -46,29 +48,30 @@ Nelexa\GPlay\Model\Review implements JsonSerializable {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Model\Review {
-  -getId(): string: "gp:AOqpTOE7yudbpITet1zkUkQyYxG8oAIMGX_Wa0bKkTfvBV_jhbFdfoptFVfC25yUINhtMOjttiNWDnW34A-v0Q"
-  -getUrl(): string: "https://play.google.com/store/apps/details?id=ru.yandex.yandexnavi&reviewId=gp%3AAOqpTOE7yudbpITet1zkUkQyYxG8oAIMGX_Wa0bKkTfvBV_jhbFdfoptFVfC25yUINhtM…"
-  -getUserName(): string: "Pete Santini"
-  -getText(): string: "want the longest possible route to get somewhere... yandex is got you covered! don't worry, it was just easier to install and encourage others not to …"
+  -getId(): string: "gp:AOqpTOFvc086CKRg0slbv_yLZ15HDwE7jwBZAmhWwo7EG6RcUaINxiStjK4rgswSckGkQlS6JrJK0BjcPiSIZA"
+  -getUrl(): mixed: ""
+  -getUserName(): string: "Selin B"
+  -getText(): string: "This app -in Turkey- forces you to use the most expensive highway. It used to show 3 shortest routes, sorted by time. Now default route is the most ex…"
   -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-    -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFf8owUEBtgG3OzRaPOoV8aLL5YrVs8bQMXWN3ZVg=s64"
-    -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFf8owUEBtgG3OzRaPOoV8aLL5YrVs8bQMXWN3ZVg=s64"
-    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GhFf8owUEBtgG3OzRaPOoV8aLL5YrVs8bQMXWN3ZVg=s0"
+    -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14Gh5XHzZhoKfopnMpk-LSb-Ik5vQHQ9z7x-RsZQW5Q=s64"
+    -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14Gh5XHzZhoKfopnMpk-LSb-Ik5vQHQ9z7x-RsZQW5Q=s64"
+    -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14Gh5XHzZhoKfopnMpk-LSb-Ik5vQHQ9z7x-RsZQW5Q=s0"
     -getBinaryImageContent(): string: …
   }
-  -getDate(): ?DateTimeInterface: @1562856331 {
-    date: 2019-07-11T14:45:31+00:00
+  -getDate(): ?DateTimeInterface: @1616155943 {
+    date: 2021-03-19T12:12:23+00:00
   }
   -getScore(): int: 1
-  -getCountLikes(): int: 18
+  -getCountLikes(): int: 166
   -getReply(): ?Nelexa\GPlay\Model\ReplyReview: {
-    -getDate(): DateTimeInterface: @1563092813 {
-      date: 2019-07-14T08:26:53+00:00
+    -getDate(): DateTimeInterface: @1616237045 {
+      date: 2021-03-20T10:44:05+00:00
     }
-    -getText(): string: "Please contact our support team and tell us more about that type of situation: app-maps@support.yandex.ru"
+    -getText(): string: "Please write to us through the "Feedback" menu of the Navigator or app-navigator@support.yandex.ru. Specify what route and between what points you tri…"
     -asArray(): array: …
     -jsonSerialize(): array: …
   }
+  -getAppVersion(): ?string: "5.31"
   -asArray(): array: …
   -jsonSerialize(): array: …
 }
@@ -81,19 +84,20 @@ echo json_encode($review, JSON_PRETTY_PRINT |  JSON_UNESCAPED_SLASHES | JSON_UNE
 Output:
 ```json
 {
-    "id": "gp:AOqpTOE7yudbpITet1zkUkQyYxG8oAIMGX_Wa0bKkTfvBV_jhbFdfoptFVfC25yUINhtMOjttiNWDnW34A-v0Q",
-    "url": "https://play.google.com/store/apps/details?id=ru.yandex.yandexnavi&reviewId=gp%3AAOqpTOE7yudbpITet1zkUkQyYxG8oAIMGX_Wa0bKkTfvBV_jhbFdfoptFVfC25yUINhtMOjttiNWDnW34A-v0Q",
-    "userName": "Pete Santini",
-    "text": "want the longest possible route to get somewhere... yandex is got you covered! don't worry, it was just easier to install and encourage others not to bother.",
-    "avatar": "https://play-lh.googleusercontent.com/a-/AOh14GhFf8owUEBtgG3OzRaPOoV8aLL5YrVs8bQMXWN3ZVg=s64",
-    "date": "2019-07-11T14:45:31+00:00",
-    "timestamp": 1562856331,
+    "id": "gp:AOqpTOFvc086CKRg0slbv_yLZ15HDwE7jwBZAmhWwo7EG6RcUaINxiStjK4rgswSckGkQlS6JrJK0BjcPiSIZA",
+    "url": null,
+    "userName": "Selin B",
+    "text": "This app -in Turkey- forces you to use the most expensive highway. It used to show 3 shortest routes, sorted by time. Now default route is the most expensive one where the second best is the most crowded and longest route. The \"reasonable\", relatively cheaper and relatively crowded highway is not even an option, and pass points on that highway can't be added manually. Switched to other nav apps for that reason.",
+    "avatar": "https://play-lh.googleusercontent.com/a-/AOh14Gh5XHzZhoKfopnMpk-LSb-Ik5vQHQ9z7x-RsZQW5Q=s64",
+    "appVersion": "5.31",
+    "date": "2021-03-19T12:12:23+00:00",
+    "timestamp": 1616155943,
     "score": 1,
-    "countLikes": 18,
+    "countLikes": 166,
     "reply": {
-        "date": "2019-07-14T08:26:53+00:00",
-        "timestamp": 1563092813,
-        "text": "Please contact our support team and tell us more about that type of situation: app-maps@support.yandex.ru"
+        "date": "2021-03-20T10:44:05+00:00",
+        "timestamp": 1616237045,
+        "text": "Please write to us through the \"Feedback\" menu of the Navigator or app-navigator@support.yandex.ru. Specify what route and between what points you tried to build and show it in the screenshot. This will help us understand the current situation."
     }
 }
 ```

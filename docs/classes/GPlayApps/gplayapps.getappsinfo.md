@@ -41,8 +41,36 @@ array:2 [
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&hl=en_US&gl=us"
       -getName(): string: "Google Chrome: Fast & Secure"
-      -getSummary(): ?string: "Fast, simple, and secure. Google Chrome browser for Android phones and tablets."
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+      -getDescription(): string: """
+        Google Chrome is a fast, easy to use, and secure web browser. Designed for Android, Chrome brings you personalized news articles, quick links to your …
+        """
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScreenshots(): array: array:14 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/zNteEAWnOwZ9rSewvLziSgcK-jApPMf3SouV8e0aaDpSq71IKa82_PSguI63CWEjV2M"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/zNteEAWnOwZ9rSewvLziSgcK-jApPMf3SouV8e0aaDpSq71IKa82_PSguI63CWEjV2M"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/zNteEAWnOwZ9rSewvLziSgcK-jApPMf3SouV8e0aaDpSq71IKa82_PSguI63CWEjV2M=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/lMbdwtu9mb66J9xRxxYH9vtobiZl_cnGfnHhguDkKb9LxJQUAS_UtaYzI8K0NS5QftE"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/lMbdwtu9mb66J9xRxxYH9vtobiZl_cnGfnHhguDkKb9LxJQUAS_UtaYzI8K0NS5QftE"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/lMbdwtu9mb66J9xRxxYH9vtobiZl_cnGfnHhguDkKb9LxJQUAS_UtaYzI8K0NS5QftE=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.1628103
+      -getPriceText(): ?string: null
+      -isFree(): bool: true
+      -getInstallsText(): string: "10,000,000,000+"
+      -jsonSerialize(): array: …
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: {
         -getId(): string: "5700313618786177705"
         -getUrl(): string: "https://play.google.com/store/apps/dev?id=5700313618786177705"
         -getName(): string: "Google LLC"
@@ -55,42 +83,15 @@ array:2 [
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/KwUBNPbMTk9jDXYS2AeX3illtVRTkrKVh5xR1Mg4WHd0CG2tV4mrh1z3kXi5z_warlk=s0"
-        -getBinaryImageContent(): string: …
-      }
-      -getScore(): float: 4.126106
-      -getPriceText(): ?string: ""
-      -isFree(): bool: false
-      -jsonSerialize(): array: …
-      -getDescription(): string: """
-        Google Chrome is a fast, easy to use, and secure web browser. Designed for Android, Chrome brings you personalized news articles, quick links to your …
-        """
-      -isAutoTranslatedDescription(): bool: false
-      -getTranslatedFromLocale(): ?string: null
+      -getDeveloperName(): mixed: "Google LLC"
+      -getSummary(): string: "Fast, simple, and secure. Google Chrome browser for Android phones and tablets."
+      -getTranslatedFromLocale(): mixed: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
         -__toString(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
         -getUrl(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0"
         -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/WPIJiEaY1kOU3-zogfv11ILu-mCaKhdq7hy2LXZ7JoLFTqGW3ZUXpRCTM7_dvPuBgB0=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScreenshots(): array: array:18 [
-        0 => class Nelexa\GPlay\Model\GoogleImage {
-          -__toString(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
-          -getUrl(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4"
-          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/Usyjx1hHMLBCkpIpr56I74F1wYVncbZFTctqkDDgzfj1ABhCGu0GCg7pHwbyL-xhSV4=s0"
-          -getBinaryImageContent(): string: …
-        }
-        1 => class Nelexa\GPlay\Model\GoogleImage {
-          -__toString(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA"
-          -getUrl(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA"
-          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/hQyOjY123zSEeZkXcyY9QvhBDd6iCkH5vL07gaoHhEKec-_bZyqD8IEbHpCJOQEDbA=s0"
-          -getBinaryImageContent(): string: …
-        }
-        …
-      ]
       -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "COMMUNICATION"
         -getName(): string: "Communication"
@@ -104,13 +105,13 @@ array:2 [
       -getVideo(): ?Nelexa\GPlay\Model\Video: null
       -getRecentChanges(): ?string: "Thanks for choosing Chrome! This release includes stability and performance improvements."
       -isEditorsChoice(): bool: false
-      -getInstalls(): int: 10546228660
+      -getInstalls(): int: 11148872337
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 23719921
-        -getFourStars(): int: 4688358
-        -getThreeStars(): int: 2543567
-        -getTwoStars(): int: 1510499
-        -getOneStar(): int: 4498126
+        -getFiveStars(): int: 4486994
+        -getFourStars(): int: 1503208
+        -getThreeStars(): int: 2579594
+        -getTwoStars(): int: 4886732
+        -getOneStar(): int: 25368105
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
@@ -119,58 +120,60 @@ array:2 [
       -isContainsIAP(): bool: false
       -getOffersIAPCost(): ?string: null
       -isContainsAds(): bool: false
-      -getSize(): ?string: null
+      -getSize(): mixed: null
       -getAppVersion(): ?string: null
       -getAndroidVersion(): ?string: null
       -getMinAndroidVersion(): ?string: null
-      -getContentRating(): ?string: "Everyone"
+      -getContentRating(): ?string: ""
       -getPrivacyPoliceUrl(): ?string: "http://www.google.com/chrome/intl/en/privacy.html"
-      -getReleased(): ?DateTimeInterface: @1328572800 {
-        date: 2012-02-07T00:00:00+00:00
+      -getReleased(): ?DateTimeInterface: @1328634643 {
+        date: 2012-02-07T17:10:43+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1645554664 {
-        date: 2022-02-22T18:31:04+00:00
+      -getUpdated(): ?DateTimeInterface: @1654187450 {
+        date: 2022-06-02T16:30:50+00:00
       }
-      -getNumberVoters(): int: 36960498
-      -getNumberReviews(): int: 864115
-      -getReviews(): array: array:4 [
+      -getNumberVoters(): int: 38824672
+      -getNumberReviews(): int: 893737
+      -getReviews(): array: array:40 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOGe8ai7cP4FaVAaYPRtiIcSPworf6t7APGHIWI2sdHbjJ0fHJAI0bjnoYPMr_27AQy3rKUvr5Xxj3NmgIk"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGe8ai7cP4FaVAaYPRtiIcSPworf6t7APGHIWI2sdHbjJ0fHJAI0bjnoYPMr_27AQy…"
-          -getUserName(): string: "Two Fisted Betty"
-          -getText(): string: "Have been a VERY long time user and absolutely love Google and everything it has to offer. It's had it's glitches but all software has it's issues fro…"
+          -getId(): string: "gp:AOqpTOH14rB-VncCI2jhw2kiT_MV5g5daUbNGTak6dySlV-wGAUL_1M-DW0K7f_Es0OEXYFOc0-SKBSWxnHsCXU"
+          -getUrl(): mixed: ""
+          -getUserName(): string: "Kendra McCool"
+          -getText(): string: "The app has been malfunctioning. It's been making my other apps crash or lag, and has been giving me random pop ups. I tried restarting my phone, upda…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s64"
-            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s64"
-            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW3jpEpXQL-PHX7dFUSGnmb0Ix7ZtNvV3w8SrarA=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgjDGLMmRMznkH9h8I95v0MQ3bDUqneFlaPYOJKdA=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgjDGLMmRMznkH9h8I95v0MQ3bDUqneFlaPYOJKdA=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgjDGLMmRMznkH9h8I95v0MQ3bDUqneFlaPYOJKdA=s0"
             -getBinaryImageContent(): string: …
           }
-          -getDate(): ?DateTimeInterface: @1645673394 {
-            date: 2022-02-24T03:29:54+00:00
+          -getDate(): ?DateTimeInterface: @1652244609 {
+            date: 2022-05-11T04:50:09+00:00
           }
-          -getScore(): int: 4
-          -getCountLikes(): int: 0
+          -getScore(): int: 1
+          -getCountLikes(): int: 10149
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getAppVersion(): ?string: "101.0.4951.61"
           -asArray(): array: …
           -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOGIgO0_ejFawLmyIyJt9YFuaauwHIsRq-bCyEEo7E41GTOqXM9STPrGmBjB_9O0ZuJgdGRhoG205Y_Dw-s"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.android.chrome&reviewId=gp%3AAOqpTOGIgO0_ejFawLmyIyJt9YFuaauwHIsRq-bCyEEo7E41GTOqXM9STPrGmBjB_9O0ZuJ…"
-          -getUserName(): string: "Renae"
-          -getText(): string: "I typically have no issues with the app, but this update seems to have broken it (though it was fine at first). For a few days now whenever I try to u…"
+          -getId(): string: "gp:AOqpTOEuvMfRNC2Zh0nA7FKeni28xcoEtoo_K872GaUrKT4UbB9To2n4ThTYyN6WZ4EcuS0Y3MqC18sKVmOv2RQ"
+          -getUrl(): mixed: ""
+          -getUserName(): string: "Ryan Volkert"
+          -getText(): string: "A bug has recently been introduced to Chrome, namely that every time I try to change the "parent folder" when creating a new bookmark folder, Chrome i…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s64"
-            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s64"
-            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GidFn_JBSyzJPZsa-usfRNWYeXEo3kEavIHjDiW6TM=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a/AATXAJyNLTx3fuRcFPRBucyduDRTDXitSxochqkvut5q=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJyNLTx3fuRcFPRBucyduDRTDXitSxochqkvut5q=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a/AATXAJyNLTx3fuRcFPRBucyduDRTDXitSxochqkvut5q=s0"
             -getBinaryImageContent(): string: …
           }
-          -getDate(): ?DateTimeInterface: @1644211105 {
-            date: 2022-02-07T05:18:25+00:00
+          -getDate(): ?DateTimeInterface: @1654346625 {
+            date: 2022-06-04T12:43:45+00:00
           }
           -getScore(): int: 1
-          -getCountLikes(): int: 1655
+          -getCountLikes(): int: 353
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getAppVersion(): ?string: "102.0.5005.78"
           -asArray(): array: …
           -jsonSerialize(): array: …
         }
@@ -185,8 +188,36 @@ array:2 [
       -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe"
       -getFullUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&hl=pt_BR&gl=br"
       -getName(): string: "Minecraft"
-      -getSummary(): ?string: "Minecraft é um jogo sobre blocos e aventuras!"
-      -getDeveloper(): Nelexa\GPlay\Model\Developer: {
+      -getDescription(): string: """
+        Explore mundos infinitos e construa desde simples casas a grandiosos castelos. Jogue no modo criativo com recursos ilimitados ou minere fundo no mundo…
+        """
+      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
+        -__toString(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
+        -getUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
+        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
+        -getBinaryImageContent(): string: …
+      }
+      -getScreenshots(): array: array:12 [
+        0 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E=s0"
+          -getBinaryImageContent(): string: …
+        }
+        1 => class Nelexa\GPlay\Model\GoogleImage {
+          -__toString(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y"
+          -getUrl(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y"
+          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y=s0"
+          -getBinaryImageContent(): string: …
+        }
+        …
+      ]
+      -getScore(): float: 4.636201
+      -getPriceText(): ?string: "R$ 37,99"
+      -isFree(): bool: false
+      -getInstallsText(): string: "10.000.000+"
+      -jsonSerialize(): array: …
+      -getDeveloper(): ?Nelexa\GPlay\Model\Developer: {
         -getId(): string: "4772240228547998649"
         -getUrl(): string: "https://play.google.com/store/apps/dev?id=4772240228547998649"
         -getName(): string: "Mojang"
@@ -205,42 +236,15 @@ array:2 [
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
-      -getIcon(): Nelexa\GPlay\Model\GoogleImage: {
-        -__toString(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
-        -getUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP"
-        -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP=s0"
-        -getBinaryImageContent(): string: …
-      }
-      -getScore(): float: 4.5828166
-      -getPriceText(): ?string: "R$ 37,99"
-      -isFree(): bool: false
-      -jsonSerialize(): array: …
-      -getDescription(): string: """
-        Explore mundos infinitos e construa desde simples casas a grandiosos castelos. Jogue no modo criativo com recursos ilimitados ou minere fundo no mundo…
-        """
-      -isAutoTranslatedDescription(): bool: false
-      -getTranslatedFromLocale(): ?string: null
+      -getDeveloperName(): mixed: "Mojang"
+      -getSummary(): string: "Minecraft é um jogo sobre blocos e aventuras!"
+      -getTranslatedFromLocale(): mixed: null
       -getCover(): ?Nelexa\GPlay\Model\GoogleImage: {
         -__toString(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
         -getUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
         -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y=s0"
         -getBinaryImageContent(): string: …
       }
-      -getScreenshots(): array: array:12 [
-        0 => class Nelexa\GPlay\Model\GoogleImage {
-          -__toString(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E"
-          -getUrl(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E"
-          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/kwKiFARq0lUM_PrvxnOitjx_oh_0Z1_foxUU2AVttbj1Xiev7EbgPrYuWauvc0N9t4E=s0"
-          -getBinaryImageContent(): string: …
-        }
-        1 => class Nelexa\GPlay\Model\GoogleImage {
-          -__toString(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y"
-          -getUrl(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y"
-          -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/f00u4e1QwQGhdNLymA-_7LwQGRmX7a4kcTeMbLRFcRSWDQOeNAcLQcQByzcFnPdX8_Y=s0"
-          -getBinaryImageContent(): string: …
-        }
-        …
-      ]
       -getCategory(): ?Nelexa\GPlay\Model\Category: {
         -getId(): string: "GAME_ARCADE"
         -getName(): string: "Arcade"
@@ -250,26 +254,28 @@ array:2 [
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
-      -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: null
-      -getVideo(): ?Nelexa\GPlay\Model\Video: {
-        -getImageUrl(): string: "https://play-lh.googleusercontent.com/yAtZnNL-9Eb5VYSsCaOC7KAsOVIJcY8mpKa0MoF-0HCL6b0OrFcBizURHywpuip-D6Y"
-        -getVideoUrl(): string: "https://www.youtube.com/embed/6Aaw7LzNQ88?ps=play&vq=large&rel=0&autohide=1&showinfo=0"
-        -getYoutubeId(): ?string: "6Aaw7LzNQ88"
+      -getCategoryFamily(): ?Nelexa\GPlay\Model\Category: {
+        -getId(): string: "GAME_SIMULATION"
+        -getName(): string: "Simulação"
+        -isGamesCategory(): bool: true
+        -isFamilyCategory(): bool: false
+        -isApplicationCategory(): bool: false
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
+      -getVideo(): ?Nelexa\GPlay\Model\Video: null
       -getRecentChanges(): ?string: """
-        Novidades na versão 1.18.12:\n
+        Novidades na versão 1.18.32:\n
         Correção de diversos erros
         """
-      -isEditorsChoice(): bool: true
-      -getInstalls(): int: 40328325
+      -isEditorsChoice(): bool: false
+      -getInstalls(): int: 42698734
       -getHistogramRating(): Nelexa\GPlay\Model\HistogramRating: {
-        -getFiveStars(): int: 3696870
-        -getFourStars(): int: 312998
-        -getThreeStars(): int: 142202
-        -getTwoStars(): int: 79491
-        -getOneStar(): int: 259418
+        -getFiveStars(): int: 237088
+        -getFourStars(): int: 66225
+        -getThreeStars(): int: 124403
+        -getTwoStars(): int: 278526
+        -getOneStar(): int: 3896259
         -asArray(): array: …
         -jsonSerialize(): array: …
       }
@@ -278,58 +284,60 @@ array:2 [
       -isContainsIAP(): bool: true
       -getOffersIAPCost(): ?string: "R$ 1,33 – R$ 179,99 por item"
       -isContainsAds(): bool: false
-      -getSize(): ?string: null
-      -getAppVersion(): ?string: "1.18.12.01"
-      -getAndroidVersion(): ?string: "5.0 ou superior"
+      -getSize(): mixed: null
+      -getAppVersion(): ?string: "1.18.32.02"
+      -getAndroidVersion(): ?string: "5.0"
       -getMinAndroidVersion(): ?string: "5.0"
-      -getContentRating(): ?string: "Classificação Livre"
+      -getContentRating(): ?string: ""
       -getPrivacyPoliceUrl(): ?string: "https://privacy.microsoft.com/en-us/privacystatement"
-      -getReleased(): ?DateTimeInterface: @1313366400 {
-        date: 2011-08-15T00:00:00+00:00
+      -getReleased(): ?DateTimeInterface: @1313475441 {
+        date: 2011-08-16T06:17:21+00:00
       }
-      -getUpdated(): ?DateTimeInterface: @1644890219 {
-        date: 2022-02-15T01:56:59+00:00
+      -getUpdated(): ?DateTimeInterface: @1651770636 {
+        date: 2022-05-05T17:10:36+00:00
       }
-      -getNumberVoters(): int: 4490990
-      -getNumberReviews(): int: 269309
-      -getReviews(): array: array:4 [
+      -getNumberVoters(): int: 4602522
+      -getNumberReviews(): int: 283192
+      -getReviews(): array: array:40 [
         0 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOFKhld3M6sJbWYOeQP_nhptO-nRWsDd5w0iB71Nk3j9bqKthoKytIojqnZz2VZIiApD4NE2o_jTCSfwXQg"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOFKhld3M6sJbWYOeQP_nhptO-nRWsDd5w0iB71Nk3j9bqKthoKytIojqnZz2VZ…"
-          -getUserName(): string: "Renald Lopes"
-          -getText(): string: "Desenvolvedores incompetentes, conseguiram acabar com o jogo nessa atualização. Não renderiza, itens não dropam, mobs invisíveis, jogador não leva dan…"
+          -getId(): string: "gp:AOqpTOGvo6tKp6yEY1gfAc--RizRY6u3QcIrPeD6WZxqPoat6eJuoODGEQmBjUBHDHbRtd-QB3oLhMs2kwTMQjA"
+          -getUrl(): mixed: ""
+          -getUserName(): string: "Brayan Buchmann"
+          -getText(): string: "O que eu preciso dizer‽ O jogo é perfeito, e obviamente muitos conhecem, então eu nem preciso elogiá-lo ou descrevê-lo, mas gostaria de reportar um pr…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgcBwx1jdNjdC_cEXDJUFIKxV0skPiSzC3rmB8C=s64"
-            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgcBwx1jdNjdC_cEXDJUFIKxV0skPiSzC3rmB8C=s64"
-            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgcBwx1jdNjdC_cEXDJUFIKxV0skPiSzC3rmB8C=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgvklYmVLcaeGXC6_CBXCHv87FVk_3nYrxIUBRK=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgvklYmVLcaeGXC6_CBXCHv87FVk_3nYrxIUBRK=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgvklYmVLcaeGXC6_CBXCHv87FVk_3nYrxIUBRK=s0"
             -getBinaryImageContent(): string: …
           }
-          -getDate(): ?DateTimeInterface: @1645796796 {
-            date: 2022-02-25T13:46:36+00:00
+          -getDate(): ?DateTimeInterface: @1654227404 {
+            date: 2022-06-03T03:36:44+00:00
           }
-          -getScore(): int: 1
-          -getCountLikes(): int: 0
+          -getScore(): int: 5
+          -getCountLikes(): int: 1253
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getAppVersion(): ?string: "1.18.32.02"
           -asArray(): array: …
           -jsonSerialize(): array: …
         }
         1 => class Nelexa\GPlay\Model\Review {
-          -getId(): string: "gp:AOqpTOGXWLBwfd5PTa_Tnp59qHst2-sOsTd2KaZGz-2AVfIaDeYJ0UT10DsD79wMM36U7qj8nMJ2yvMj7fHjhK0"
-          -getUrl(): string: "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe&reviewId=gp%3AAOqpTOGXWLBwfd5PTa_Tnp59qHst2-sOsTd2KaZGz-2AVfIaDeYJ0UT10DsD79wMM36…"
-          -getUserName(): string: "Maria Eduarda"
-          -getText(): string: "Não tenho oque falar desse jogo,gráficos excelentes, não trava quase nunca! Esse app apesar do preço, vale muito a pena, comprei ele e não me arrepend…"
+          -getId(): string: "gp:AOqpTOF1lO4-Jkss_lvWCdbhk444TR36w02v5hcnQfhqHsI3knOm031R33ex7tKq6BftxwhwZ08Zd0lRQUlI85U"
+          -getUrl(): mixed: ""
+          -getUserName(): string: "Kobayashii"
+          -getText(): string: "Mine é uns dos meus jogos favoritos, o jogo é simplesmente perfeito! Só acho que deveria ter controles melhores na tela, eu acho muito difícil jogar d…"
           -getAvatar(): Nelexa\GPlay\Model\GoogleImage: {
-            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjKPq_b1nks0ltQrgqHBuu5yssEYH3gbcWTrgccHQ=s64"
-            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjKPq_b1nks0ltQrgqHBuu5yssEYH3gbcWTrgccHQ=s64"
-            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GjKPq_b1nks0ltQrgqHBuu5yssEYH3gbcWTrgccHQ=s0"
+            -__toString(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW-9lDuXjNL3fy8cwDIiG1KB-OpEFnMwl7ap73=s64"
+            -getUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW-9lDuXjNL3fy8cwDIiG1KB-OpEFnMwl7ap73=s64"
+            -getOriginalSizeUrl(): string: "https://play-lh.googleusercontent.com/a-/AOh14GgW-9lDuXjNL3fy8cwDIiG1KB-OpEFnMwl7ap73=s0"
             -getBinaryImageContent(): string: …
           }
-          -getDate(): ?DateTimeInterface: @1645526625 {
-            date: 2022-02-22T10:43:45+00:00
+          -getDate(): ?DateTimeInterface: @1653207630 {
+            date: 2022-05-22T08:20:30+00:00
           }
-          -getScore(): int: 5
-          -getCountLikes(): int: 0
+          -getScore(): int: 3
+          -getCountLikes(): int: 4911
           -getReply(): ?Nelexa\GPlay\Model\ReplyReview: null
+          -getAppVersion(): ?string: "1.18.32.02"
           -asArray(): array: …
           -jsonSerialize(): array: …
         }

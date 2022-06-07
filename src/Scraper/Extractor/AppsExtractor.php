@@ -13,10 +13,7 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay\Scraper\Extractor;
 
-use GuzzleHttp\Psr7\Query;
-use Nelexa\GPlay\GPlayApps;
 use Nelexa\GPlay\Model\App;
-use Nelexa\GPlay\Model\Developer;
 use Nelexa\GPlay\Model\GoogleImage;
 use Nelexa\GPlay\Util\ScraperUtil;
 
@@ -34,56 +31,42 @@ class AppsExtractor
      */
     public static function extractApp(array $data, string $locale, string $country): App
     {
-        $name = $data[2];
-        $appId = $data[12][0];
-        $icon = new GoogleImage($data[1][1][0][3][2]);
-        $developer = self::extractDeveloper($data);
-        $price = $data[7][0][3][2][1][0][2] ?? null;
-        $summary = self::extractSummary($data);
-        $score = $data[6][0][2][1][1] ?? 0.0;
+        $name = $data[3];
+        $appId = $data[0][0];
+        $icon = new GoogleImage($data[1][3][2]);
+        $developerName = $data[14];
+        $installsText = $data[15];
+        $priceText = null;
+        if (isset($data[8][1][0][0], $data[8][1][0][2]) && $data[8][1][0][0] > 0) {
+            $priceText = $data[8][1][0][2];
+        }
+        $score = $data[4][1] ?? 0.0;
+        $screenshots = array_map(static function (array $item) {
+            return new GoogleImage($item[3][2]);
+        }, $data[2]);
+        $description = ScraperUtil::html2text($data[13][1] ?? '');
+        $cover = null;
+        if (isset($data[22][3][2])) {
+            $cover = new GoogleImage($data[22][3][2]);
+        } elseif (isset($data[100][1][0][3][2])) {
+            $cover = new GoogleImage($data[100][1][0][3][2]);
+        }
+//        $categoryName = $data[0][5];
 
         return App::newBuilder()
             ->setId($appId)
             ->setLocale($locale)
             ->setCountry($country)
             ->setName($name)
-            ->setSummary($summary)
-            ->setDeveloper($developer)
+            ->setDeveloperName($developerName)
+            ->setCover($cover)
             ->setIcon($icon)
+            ->setInstallsText($installsText)
             ->setScore($score)
-            ->setPriceText($price)
+            ->setPriceText($priceText)
+            ->setScreenshots($screenshots)
+            ->setDescription($description)
             ->build()
         ;
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return Developer
-     */
-    private static function extractDeveloper(array $data): Developer
-    {
-        $developerName = $data[4][0][0][0];
-        $developerPage = GPlayApps::GOOGLE_PLAY_URL . $data[4][0][0][1][4][2];
-        $developerId = Query::parse(parse_url($developerPage, \PHP_URL_QUERY))[GPlayApps::REQ_PARAM_ID];
-
-        return new Developer(
-            Developer::newBuilder()
-                ->setId($developerId)
-                ->setUrl($developerPage)
-                ->setName($developerName)
-        );
-    }
-
-    /**
-     * @param array $scriptDataInfo
-     *
-     * @return string|null
-     */
-    private static function extractSummary(array $scriptDataInfo): ?string
-    {
-        return empty($scriptDataInfo[4][1][1][1][1])
-            ? null
-            : ScraperUtil::html2text($scriptDataInfo[4][1][1][1][1]);
     }
 }

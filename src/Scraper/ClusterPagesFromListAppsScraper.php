@@ -34,36 +34,35 @@ class ClusterPagesFromListAppsScraper implements ParseHandlerInterface
      */
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): array
     {
-        $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
+        $contents = $response->getBody()->getContents();
+        $scriptData = ScraperUtil::extractScriptData($contents);
 
-        $token = null;
+        if (isset($scriptData['ds:4'][0][1])) {
+            $scriptDataInfo = $scriptData['ds:4'][0][1];
+            $token = $scriptData['ds:4'][0][3][1] ?? null;
+        } elseif (isset($scriptData['ds:3'][0][1])) {
+            $scriptDataInfo = $scriptData['ds:3'][0][1];
+            $token = $scriptData['ds:3'][0][3][1] ?? null;
+        } else {
+            return [
+                'results' => [],
+                'token' => null,
+            ];
+        }
+
         $results = [];
 
-        foreach ($scriptData as $v) {
-            if (isset($v[0][1][0][0][1], $v[0][1][0][0][3][4][2])) {
-                foreach ($v[0][1] as $a) {
-                    if (isset($a[0][1], $a[0][3][4][2])) {
-                        $results[] = new ClusterPage(
-                            trim($a[0][1]),
-                            GPlayApps::GOOGLE_PLAY_URL . $a[0][3][4][2]
-                        );
-                    }
-                }
-                $token = $v[0][3][1] ?? null;
-                break;
-            }
-
-            if (isset($v[0][1][0][20][0], $v[0][1][0][20][2][4][2])) {
-                foreach ($v[0][1] as $a) {
-                    if (isset($a[20][0], $a[20][2][4][2])) {
-                        $results[] = new ClusterPage(
-                            trim($a[20][0]),
-                            GPlayApps::GOOGLE_PLAY_URL . $a[20][2][4][2]
-                        );
-                    }
-                }
-                $token = $v[0][3][1] ?? null;
-                break;
+        foreach ($scriptDataInfo as $item) {
+            if (isset($item[21][1][0], $item[21][1][2][4][2])) {
+                $results[] = new ClusterPage(
+                    trim($item[21][1][0]),
+                    GPlayApps::GOOGLE_PLAY_URL . $item[21][1][2][4][2]
+                );
+            } elseif (isset($item[22][1][0], $item[22][1][2][4][2])) {
+                $results[] = new ClusterPage(
+                    trim($item[22][1][0]),
+                    GPlayApps::GOOGLE_PLAY_URL . $item[22][1][2][4][2]
+                );
             }
         }
 

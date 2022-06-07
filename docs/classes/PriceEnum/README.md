@@ -7,7 +7,7 @@ Contains all valid values for the "price" parameter.
 
 ## Class synopsis
 ```php
-Nelexa\GPlay\Enum\PriceEnum extends Nelexa\Enum {
+Nelexa\GPlay\Enum\PriceEnum extends Nelexa\Enum implements Stringable {
 
     /* Methods */
     public static ALL ( void ) : Nelexa\GPlay\Enum\PriceEnum
@@ -43,10 +43,10 @@ Nelexa\GPlay\Enum\PriceEnum extends Nelexa\Enum {
 ## Sample object content
 ```php
 class Nelexa\GPlay\Enum\PriceEnum {
-  -name(): string: "PAID"
-  -value(): mixed: 2
-  -ordinal(): int: 2
-  -__toString(): string: "2"
+  -name(): string: "ALL"
+  -value(): mixed: 0
+  -ordinal(): int: 0
+  -__toString(): string: "0"
 }
 ```
 

@@ -33,26 +33,11 @@ final class AppInfo extends App
     /** @var string Default currency. */
     private const DEFAULT_CURRENCY = 'USD';
 
-    /** @var string Application description. */
-    private $description;
-
-    /**
-     * Locale (language) of the original description. Google automatically translates
-     * the description of the application if the developer has not added it to the
-     * Play Console in the "Add your own translation text" section. If a translation
-     * is added, the value will be null.
-     *
-     * @var string|null locale of the original description or null
-     *
-     * @see https://support.google.com/googleplay/android-developer/answer/3125566
-     */
-    private $translatedFromLocale;
+    /** @var string|null Application summary. */
+    private $summary;
 
     /** @var GoogleImage|null Cover image. */
     private $cover;
-
-    /** @var GoogleImage[] Screenshots of the application. */
-    private $screenshots;
 
     /** @var Category|null Application category. */
     private $category;
@@ -87,9 +72,6 @@ final class AppInfo extends App
     /** @var bool Application contains ads. */
     private $containsAds;
 
-    /** @var string|null Application size, null if the size depends on the device. */
-    private $size;
-
     /** @var string|null Application version, null if the application version depends on the device. */
     private $appVersion;
 
@@ -120,6 +102,9 @@ final class AppInfo extends App
     /** @var Review[] Some useful reviews. */
     private $reviews;
 
+    /** @var \Nelexa\GPlay\Model\Developer|null Application developer */
+    private $developer;
+
     /**
      * Returns an object with detailed information about the application.
      *
@@ -137,16 +122,9 @@ final class AppInfo extends App
             );
         }
 
-        if (empty($builder->getScreenshots())) {
-            throw new \InvalidArgumentException(
-                'Screenshots of the application must contain at least one screenshot. Solution: $appBuilder->setScreenshots(...); or $appBuilder->addScreenshot(...);'
-            );
-        }
-
-        $this->description = $builder->getDescription();
-        $this->translatedFromLocale = $builder->getTranslatedFromLocale();
+        $this->summary = $builder->getSummary();
+        $this->developer = $builder->getDeveloper();
         $this->cover = $builder->getCover();
-        $this->screenshots = $builder->getScreenshots();
         $this->category = $builder->getCategory();
         $this->categoryFamily = $builder->getCategoryFamily();
         $this->privacyPoliceUrl = $builder->getPrivacyPoliceUrl();
@@ -160,7 +138,6 @@ final class AppInfo extends App
         $this->currency = $builder->getCurrency() ?? self::DEFAULT_CURRENCY;
         $this->offersIAPCost = $builder->getOffersIAPCost();
         $this->containsAds = $builder->isContainsAds();
-        $this->size = $builder->getSize();
         $this->appVersion = $builder->getAppVersion();
         $this->androidVersion = $builder->getAndroidVersion();
         $this->minAndroidVersion = $builder->getMinAndroidVersion();
@@ -173,39 +150,44 @@ final class AppInfo extends App
     }
 
     /**
-     * Returns a description of the application.
+     * Returns application developer.
      *
-     * @return string description of the application
+     * @return \Nelexa\GPlay\Model\Developer|null application developer
      */
-    public function getDescription(): string
+    public function getDeveloper(): ?Developer
     {
-        return $this->description;
+        return $this->developer;
+    }
+
+    public function getDeveloperName(): ?string
+    {
+        return $this->developer ? $this->developer->getName() : parent::getDeveloperName();
     }
 
     /**
-     * Checks if the class description is automatically translated via Google Translate.
+     * Returns a summary of the application.
      *
-     * @return bool `true` if the description was automatically translated using Google Translate and
-     *              `false` if the developer added a description for the locale in the Google Play Console
+     * @return string summary of the application
+     */
+    public function getSummary(): string
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @deprecated
      */
     public function isAutoTranslatedDescription(): bool
     {
-        return $this->translatedFromLocale !== null;
+        return false;
     }
 
     /**
-     * Returns locale (language) of the original description.
-     *
-     * Google automatically translates the description of the application if the developer
-     * has not added it to the Play Console in the "Add your own translation text" section.
-     * If a translation is added, the value will be null.
-     *
-     * @return string|null if the developer added a translation of the description, then the
-     *                     value will be `null`, otherwise the original language of the application description
+     * @deprecated
      */
     public function getTranslatedFromLocale(): ?string
     {
-        return $this->translatedFromLocale;
+        return null;
     }
 
     /**
@@ -228,24 +210,6 @@ final class AppInfo extends App
     public function getCover(): ?GoogleImage
     {
         return $this->cover;
-    }
-
-    /**
-     * Returns screenshots of the application.
-     *
-     * The array must contain at least 2 screenshots.
-     *
-     * Google Play screenshots requirements:
-     * * JPEG or 24-bit PNG (no alpha)
-     * * Minimum dimension: 320px
-     * * Maximum dimension: 3840px
-     * * The maximum dimension of the screenshot can't be more than twice as long as the minimum dimension.
-     *
-     * @return GoogleImage[] array of screenshots
-     */
-    public function getScreenshots(): array
-    {
-        return $this->screenshots;
     }
 
     /**
@@ -372,13 +336,11 @@ final class AppInfo extends App
     }
 
     /**
-     * Returns the size of the application.
-     *
-     * @return string|null application size, `null` if the size depends on the device
+     * @deprecated
      */
     public function getSize(): ?string
     {
-        return $this->size;
+        return null;
     }
 
     /**
@@ -501,7 +463,7 @@ final class AppInfo extends App
             return false;
         }
 
-        if ($otherApp->description !== $this->description) {
+        if ($otherApp->getDescription() !== $this->getDescription()) {
             return false;
         }
 
@@ -513,8 +475,8 @@ final class AppInfo extends App
             return false;
         }
         $diff = array_udiff(
-            $otherApp->screenshots,
-            $this->screenshots,
+            $otherApp->getScreenshots(),
+            $this->getScreenshots(),
             static function (GoogleImage $a, GoogleImage $b) {
                 return strcmp($a->getOriginalSizeUrl(), $b->getOriginalSizeUrl());
             }
@@ -531,15 +493,7 @@ final class AppInfo extends App
     public function asArray(): array
     {
         $array = parent::asArray();
-        $array['description'] = $this->description;
-        $array['translatedFromLocale'] = $this->translatedFromLocale;
         $array['cover'] = $this->cover !== null ? $this->cover->getUrl() : null;
-        $array['screenshots'] = array_map(
-            static function (GoogleImage $googleImage) {
-                return $googleImage->getUrl();
-            },
-            $this->screenshots
-        );
         $array['category'] = $this->category->asArray();
         $array['categoryFamily'] = $this->categoryFamily !== null ? $this->categoryFamily->asArray() : null;
         $array['video'] = $this->video !== null ? $this->video->asArray() : null;
@@ -554,7 +508,6 @@ final class AppInfo extends App
         $array['offersIAP'] = $this->isContainsIAP();
         $array['offersIAPCost'] = $this->offersIAPCost;
         $array['containsAds'] = $this->containsAds;
-        $array['size'] = $this->size;
         $array['appVersion'] = $this->appVersion;
         $array['androidVersion'] = $this->androidVersion;
         $array['minAndroidVersion'] = $this->minAndroidVersion;
