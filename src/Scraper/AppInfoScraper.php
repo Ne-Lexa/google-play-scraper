@@ -72,7 +72,10 @@ class AppInfoScraper implements ParseHandlerInterface
         $score = (float) ($appInfo[51][0][1] ?? 0);
         $numberVoters = (int) ($appInfo[51][2][1] ?? 0);
         $numberReviews = (int) ($appInfo[51][3][1] ?? 0);
-        $histogramRating = $this->extractHistogramRating($appInfo[51][1]);
+        $histogramRating = null;
+        if (isset($appInfo[51][1])) {
+            $histogramRating = $this->extractHistogramRating($appInfo[51][1]);
+        }
 
         $scriptDataPrice = $appInfo[57][0][0][0][0][1] ?? null;
         $price = $scriptDataPrice !== null ? $this->extractPrice($scriptDataPrice) : 0.0;
