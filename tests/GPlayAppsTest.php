@@ -503,15 +503,25 @@ final class GPlayAppsTest extends TestCase
     }
 
     /**
+     * @dataProvider provideSimilarApps
+     *
+     * @param int    $limit
+     * @param string $packageId
+     *
      * @throws GooglePlayException
      */
-    public function testSimilarApps(): void
+    public function testSimilarApps(int $limit, string $packageId): void
     {
-        $limit = 125;
-        $similarApps = $this->gplay->getSimilarApps('com.google.android.apps.docs.editors.docs', $limit);
+        $similarApps = $this->gplay->getSimilarApps($packageId, $limit);
         self::assertNotEmpty($similarApps);
         self::assertLessThanOrEqual($limit, \count($similarApps));
         self::assertContainsOnlyInstancesOf(App::class, $similarApps);
+    }
+
+    public function provideSimilarApps(): iterable
+    {
+        yield [125, 'com.hulu.plus'];
+        yield [125, 'com.google.android.apps.docs.editors.docs'];
     }
 
     /**
