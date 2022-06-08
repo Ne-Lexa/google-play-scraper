@@ -41,9 +41,11 @@ class AppsExtractor
             $priceText = $data[8][1][0][2];
         }
         $score = $data[4][1] ?? 0.0;
-        $screenshots = array_map(static function (array $item) {
+        $screenshots = array_values(array_map(static function (array $item): GoogleImage {
             return new GoogleImage($item[3][2]);
-        }, $data[2]);
+        }, array_filter($data[2], static function ($item): bool {
+            return isset($item[3][2]);
+        })));
         $description = ScraperUtil::html2text($data[13][1] ?? '');
         $cover = null;
         if (isset($data[22][3][2])) {
