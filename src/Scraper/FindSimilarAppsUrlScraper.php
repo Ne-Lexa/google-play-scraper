@@ -48,7 +48,7 @@ class FindSimilarAppsUrlScraper implements ParseHandlerInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): ?string
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
-        $sidebarBlocksApps = ScraperUtil::getValue($scriptData, 'ds:6.1.1');
+        $sidebarBlocksApps = ScraperUtil::getValue($scriptData, 'ds:5.1.1');
         $url = null;
 
         foreach ($sidebarBlocksApps as $blockApps) {
