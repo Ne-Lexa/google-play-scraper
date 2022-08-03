@@ -48,7 +48,7 @@ class HttpClient
 
             $defaultOptions = [
                 RequestOptions::HEADERS => [
-                    'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
+                    'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0',
                 ],
             ];
 
@@ -57,9 +57,11 @@ class HttpClient
             }
 
             $stack = HandlerStack::create();
-            $logTemplate = $config['logTemplate']
-                ?? '🌎 [{ts}] "{method} {url} HTTP/{version}" {code} "{phrase}" - {res_header_Content-Length}';
-            $stack->push(Middleware::log(new ConsoleLog(), new MessageFormatter($logTemplate)), 'logger');
+            if (PHP_SAPI === 'cli') {
+                $logTemplate = $config['logTemplate']
+                    ?? '🌎 [{ts}] "{method} {url} HTTP/{version}" {code} "{phrase}" - {res_header_Content-Length}';
+                $stack->push(Middleware::log(new ConsoleLog(), new MessageFormatter($logTemplate)), 'logger');
+            }
             $stack->push(
                 Middleware::retry(
                     static function (

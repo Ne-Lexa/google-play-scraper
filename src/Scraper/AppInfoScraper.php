@@ -106,7 +106,7 @@ class AppInfoScraper implements ParseHandlerInterface
         $updated = $this->convertDate($appInfo[145][0][1][0] ?? null);
         $recentChanges = $this->extractRecentChanges($appInfo);
 
-        $reviewsInfo = ScraperUtil::getValue($scriptData, 'ds:8.0');
+        $reviewsInfo = ScraperUtil::getValue($scriptData, 'ds:7.0');
         $reviews = $this->extractReviews(new AppId($id, $locale, $country), $reviewsInfo);
 
         return AppInfo::newBuilder()
