@@ -29,10 +29,6 @@ use Nelexa\GPlay\Model\Permission;
 use Nelexa\GPlay\Model\Review;
 use Nelexa\GPlay\Util\LocaleHelper;
 use PHPUnit\Framework\TestCase;
-use Psr\SimpleCache\CacheInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * @internal
@@ -47,26 +43,6 @@ final class GPlayAppsTest extends TestCase
     protected function setUp(): void
     {
         $this->gplay = new GPlayApps();
-    }
-
-    /**
-     * @return CacheInterface
-     *
-     * @noinspection PhpComposerExtensionStubsInspection
-     */
-    private function getCacheInterface(): CacheInterface
-    {
-        $cacheNamespace = 'gplay.scraper.v1';
-
-        if (class_exists(\Redis::class)) {
-            $psr6Cache = new RedisAdapter(RedisAdapter::createConnection('redis://localhost'), $cacheNamespace);
-        }
-
-        if (!isset($psr6Cache)) {
-            $psr6Cache = new FilesystemAdapter($cacheNamespace);
-        }
-
-        return new Psr16Cache($psr6Cache);
     }
 
     /**
@@ -492,7 +468,6 @@ final class GPlayAppsTest extends TestCase
      */
     public function testSearch(): void
     {
-        $this->gplay->setCache(null);
         $results = $this->gplay
             ->setDefaultCountry('us')
             ->search('gta', GPlayApps::UNLIMIT, PriceEnum::PAID())
@@ -573,7 +548,6 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetSellingFreeApps(?CategoryEnum $category): void
     {
-        $this->gplay->setCache($this->getCacheInterface());
         $apps = $this->gplay->getTopSellingFreeApps($category);
 
         self::assertNotEmpty($apps);
@@ -589,7 +563,6 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetSellingPaidApps(?CategoryEnum $category): void
     {
-        $this->gplay->setCache($this->getCacheInterface());
         $apps = $this->gplay->getTopSellingPaidApps($category);
 
         self::assertNotEmpty($apps);
@@ -605,7 +578,6 @@ final class GPlayAppsTest extends TestCase
      */
     public function testGetSellingGrossingApps(?CategoryEnum $category): void
     {
-        $this->gplay->setCache($this->getCacheInterface());
         $apps = $this->gplay->getTopGrossingApps($category);
         self::assertNotEmpty($apps);
         self::assertContainsOnlyInstancesOf(App::class, $apps);

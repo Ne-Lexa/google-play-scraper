@@ -47,7 +47,7 @@ class ReviewsExtractor
      *
      * @return Review
      */
-    public static function extractReview(AppId $requestApp, $reviewData): Review
+    public static function extractReview(AppId $requestApp, array $reviewData): Review
     {
         $reviewId = $reviewData[0];
 //        $reviewUrl = $requestApp->getUrl() . '&reviewId=' . urlencode($reviewId);

@@ -36,14 +36,22 @@ class ClusterAppsScraper implements ParseHandlerInterface
     public function __invoke(RequestInterface $request, ResponseInterface $response, array &$options = []): array
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
-        $scriptDataInfo = ScraperUtil::getValue($scriptData, 'ds:3.0.1.0')
-            ?? ScraperUtil::getValue($scriptData, 'ds:4.0.1.0');
+        $scriptDataInfo = null;
+
+        foreach ($scriptData as $value) {
+            if (isset($value[0][1][0][21][0])) {
+                $scriptDataInfo = $value[0][1][0][21];
+                break;
+            }
+            if (isset($value[0][1][0][22][0])) {
+                $scriptDataInfo = $value[0][1][0][22];
+                break;
+            }
+        }
 
         if ($scriptDataInfo === null) {
             return [[], null];
         }
-
-        $scriptDataInfo = $scriptDataInfo[22] ?? $scriptDataInfo[21];
 
         $query = Query::parse($request->getUri()->getQuery());
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;

@@ -106,8 +106,7 @@ class AppInfoScraper implements ParseHandlerInterface
         $updated = $this->convertDate($appInfo[145][0][1][0] ?? null);
         $recentChanges = $this->extractRecentChanges($appInfo);
 
-        $reviewsInfo = ScraperUtil::getValue($scriptData, 'ds:7.0');
-        $reviews = $this->extractReviews(new AppId($id, $locale, $country), $reviewsInfo);
+        $reviews = $this->extractReviews(new AppId($id, $locale, $country), $scriptData);
 
         return AppInfo::newBuilder()
             ->setId($id)
@@ -322,12 +321,25 @@ class AppInfoScraper implements ParseHandlerInterface
     /**
      * @param AppId $appId
      * @param array $data
+     * @param array $scripData
      *
      * @return Review[]
      */
-    private function extractReviews(AppId $appId, array $data): array
+    private function extractReviews(AppId $appId, array $scripData): array
     {
-        if (empty($data[0])) {
+        $data = null;
+        foreach ($scripData as $value) {
+            if (
+                isset($value[0][0][0])
+                && \is_string($value[0][0][0])
+                && preg_match('~^[0-9a-f]{8}-[0-9a-f]{4}-~', $value[0][0][0])
+            ) {
+                $data = $value[0];
+                break;
+            }
+        }
+
+        if ($data === null) {
             return [];
         }
 
