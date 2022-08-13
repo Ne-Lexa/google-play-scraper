@@ -496,7 +496,7 @@ final class GPlayAppsTest extends TestCase
     public function provideSimilarApps(): iterable
     {
         yield [125, 'com.hulu.plus'];
-        yield [125, 'com.google.android.apps.docs.editors.docs'];
+        yield [125, 'com.disney.disneyplus'];
     }
 
     /**
