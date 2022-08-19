@@ -49,7 +49,17 @@ class AppInfoScraper implements ParseHandlerInterface
     {
         $scriptData = ScraperUtil::extractScriptData($response->getBody()->getContents());
 
-        $appInfo = ScraperUtil::getValue($scriptData, 'ds:4.1.2');
+        $appInfo = null;
+        $editorsChoice = false;
+
+        foreach ($scriptData as $data) {
+            if (isset($data[1][2][72][0][1])) {
+                $appInfo = $data[1][2];
+            } elseif (isset($data[1][2][136][0][1][0])) {
+                $editorsChoice = (bool) $data[1][2][136][0][1][0];
+            }
+        }
+
         if (!\is_array($appInfo)) {
             throw (new GooglePlayException('Unable to get data for this application.'))->setUrl(
                 $request->getUri()->__toString()
@@ -94,7 +104,6 @@ class AppInfoScraper implements ParseHandlerInterface
             $minAndroidVersion = null;
         }
 
-        $editorsChoice = (bool) ScraperUtil::getValue($appInfo, 'ds:5.1.2.136.0.1.0');
         $privacyPoliceUrl = $appInfo[99][0][5][2] ?? '';
         $categoryFamily = $this->extractCategory($appInfo[118][0][0][0] ?? []);
         $icon = $this->extractIcon($appInfo);
