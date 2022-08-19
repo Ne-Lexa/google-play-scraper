@@ -37,13 +37,22 @@ class ClusterPagesFromListAppsScraper implements ParseHandlerInterface
         $contents = $response->getBody()->getContents();
         $scriptData = ScraperUtil::extractScriptData($contents);
 
-        if (isset($scriptData['ds:4'][0][1])) {
-            $scriptDataInfo = $scriptData['ds:4'][0][1];
-            $token = $scriptData['ds:4'][0][3][1] ?? null;
-        } elseif (isset($scriptData['ds:3'][0][1])) {
-            $scriptDataInfo = $scriptData['ds:3'][0][1];
-            $token = $scriptData['ds:3'][0][3][1] ?? null;
-        } else {
+        $scriptDataInfo = null;
+        $token = null;
+
+        foreach ($scriptData as $data) {
+            if (isset($data[0][1][0][21][0])
+                || isset($data[0][1][1][21][0])
+                || isset($data[0][1][0][22][0])
+                || isset($data[0][1][1][22][0])
+            ) {
+                $scriptDataInfo = $data[0][1];
+                $token = $data[0][3][1] ?? null;
+                break;
+            }
+        }
+
+        if (!$scriptDataInfo) {
             return [
                 'results' => [],
                 'token' => null,
