@@ -71,4 +71,47 @@ class AppsExtractor
             ->build()
         ;
     }
+
+    public static function isAppStructure(array $data): bool
+    {
+        return
+            isset(
+                $data[0][0], // package id
+                $data[1][3][2], // icon
+                $data[3], // app name
+                $data[14] // developer name
+            ) && \is_string($data[0][0])
+            && \is_string($data[1][3][2])
+            && \is_string($data[3])
+            && \is_string($data[14])
+        ;
+    }
+
+    /**
+     * @param mixed  $items
+     * @param string $locale
+     * @param string $country
+     *
+     * @return App[]
+     */
+    public static function extractApps($items, string $locale, string $country): array
+    {
+        $apps = [];
+
+        if (\is_array($items)) {
+            foreach ($items as $item) {
+                if (self::isAppStructure($item)) {
+                    $apps[] = self::extractApp($item, $locale, $country);
+                } elseif (isset($item[0]) && self::isAppStructure($item[0])) {
+                    $apps[] = self::extractApp($item[0], $locale, $country);
+                } elseif (isset($item[0][0]) && self::isAppStructure($item[0][0])) {
+                    $apps[] = self::extractApp($item[0][0], $locale, $country);
+                } elseif (isset($item[0][0][0]) && self::isAppStructure($item[0][0][0])) {
+                    $apps[] = self::extractApp($item[0][0][0], $locale, $country);
+                }
+            }
+        }
+
+        return $apps;
+    }
 }

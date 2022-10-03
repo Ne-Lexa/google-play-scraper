@@ -57,11 +57,7 @@ class ClusterAppsScraper implements ParseHandlerInterface
         $locale = $query[GPlayApps::REQ_PARAM_LOCALE] ?? GPlayApps::DEFAULT_LOCALE;
         $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
-        $apps = [];
-
-        foreach ($scriptDataInfo[0] as $data) {
-            $apps[] = AppsExtractor::extractApp(isset($data[1]) ? $data : $data[0], $locale, $country);
-        }
+        $apps = AppsExtractor::extractApps($scriptDataInfo[0], $locale, $country);
 
         $nextToken = $scriptDataInfo[1][3][1] ?? null;
 
