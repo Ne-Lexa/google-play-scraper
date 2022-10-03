@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay;
 
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\EachPromise;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Query;
@@ -21,6 +20,7 @@ use GuzzleHttp\Psr7\Request as PsrRequest;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\RequestOptions;
 use Nelexa\GPlay\Enum\CategoryEnum;
+use Nelexa\GPlay\Exception\GooglePlayException;
 use Nelexa\GPlay\HttpClient\HttpClient;
 use Nelexa\GPlay\HttpClient\Request;
 use Nelexa\GPlay\Model\Category;
@@ -1104,11 +1104,7 @@ class GPlayApps
                         }
                     }
                 }
-            } catch (RequestException $e) {
-                $response = $e->getResponse();
-                if ($response === null || $response->getStatusCode() !== 404) {
-                    throw $e;
-                }
+            } catch (GooglePlayException $e) {
             }
         }
 
