@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Nelexa\GPlay;
 
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\EachPromise;
 use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7\Query;
@@ -1093,13 +1094,20 @@ class GPlayApps
         $apps = [];
         $count = 0;
         foreach ($this->getClusterPages($category, $age) as $clusterPage) {
-            foreach ($this->getClusterApps($clusterPage->getUrl()) as $app) {
-                if (!isset($apps[$app->getId()])) {
-                    $apps[$app->getId()] = $app;
-                    ++$count;
-                    if ($count === $limit) {
-                        break 2;
+            try {
+                foreach ($this->getClusterApps($clusterPage->getUrl()) as $app) {
+                    if (!isset($apps[$app->getId()])) {
+                        $apps[$app->getId()] = $app;
+                        ++$count;
+                        if ($count === $limit) {
+                            break 2;
+                        }
                     }
+                }
+            } catch (RequestException $e) {
+                $response = $e->getResponse();
+                if ($response === null || $response->getStatusCode() !== 404) {
+                    throw $e;
                 }
             }
         }
