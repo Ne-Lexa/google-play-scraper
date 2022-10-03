@@ -57,7 +57,7 @@ class HttpClient
             }
 
             $stack = HandlerStack::create();
-            if (PHP_SAPI === 'cli') {
+            if (\PHP_SAPI === 'cli') {
                 $logTemplate = $config['logTemplate']
                     ?? '🌎 [{ts}] "{method} {url} HTTP/{version}" {code} "{phrase}" - {res_header_Content-Length}';
                 $stack->push(Middleware::log(new ConsoleLog(), new MessageFormatter($logTemplate)), 'logger');
