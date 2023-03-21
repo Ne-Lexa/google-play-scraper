@@ -47,6 +47,14 @@ class ClusterAppsScraper implements ParseHandlerInterface
                 $scriptDataInfo = $value[0][1][0][22];
                 break;
             }
+            if (isset($value[0][1][1][21][0])) {
+                $scriptDataInfo = $value[0][1][1][21];
+                break;
+            }
+            if (isset($value[0][1][1][22][0])) {
+                $scriptDataInfo = $value[0][1][1][22];
+                break;
+            }
         }
 
         if ($scriptDataInfo === null) {
