@@ -72,7 +72,7 @@ class AppInfoScraper implements ParseHandlerInterface
         $country = $query[GPlayApps::REQ_PARAM_COUNTRY] ?? GPlayApps::DEFAULT_COUNTRY;
 
         $name = $appInfo[0][0];
-        $description = ScraperUtil::html2text($appInfo[72][0][1]);
+        $description = ScraperUtil::html2text($appInfo[12][0][0][1] ?? $appInfo[72][0][1]);
         $developer = $this->extractDeveloper($appInfo);
 
         $category = $this->extractCategory($appInfo[79][0][0] ?? []);
