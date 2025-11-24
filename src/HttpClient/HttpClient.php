@@ -162,7 +162,7 @@ class HttpClient
         }
 
         return $this->client
-            ->sendAsync($request->getPsrRequest(), $request->getOptions())
+            ->sendAsync($request->getPsrRequest(), $options)
             ->then(function (ResponseInterface $response) use ($request, $cacheKey, $options) {
                 $parseResult = $request->getParseHandler()($request->getPsrRequest(), $response, $options);
                 if ($cacheKey !== null && $parseResult !== null) {

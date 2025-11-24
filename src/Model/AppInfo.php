@@ -167,9 +167,9 @@ final class AppInfo extends App
     /**
      * Returns a summary of the application.
      *
-     * @return string summary of the application
+     * @return string|null summary of the application
      */
-    public function getSummary(): string
+    public function getSummary(): ?string
     {
         return $this->summary;
     }
