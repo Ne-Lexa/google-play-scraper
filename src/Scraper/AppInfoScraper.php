@@ -110,7 +110,7 @@ class AppInfoScraper implements ParseHandlerInterface
         $cover = $this->extractCover($appInfo);
         $screenshots = $this->extractScreenshots($appInfo);
         $video = $this->extractVideo($appInfo);
-        $contentRating = $appInfo[111][1] ?? '';
+        $contentRating = $appInfo[9][0] ?? '';
         $released = $this->convertDate($appInfo[10][1][0] ?? null);
         $updated = $this->convertDate($appInfo[145][0][1][0] ?? null);
         $recentChanges = $this->extractRecentChanges($appInfo);
